@@ -3,6 +3,11 @@ JLaTeXMath Multiplatform
 
 This project is a fork of the original JLaTeXMath (http://forge.scilab.org/index.php/p/jlatexmath/), refactored to be used through different platforms, such as desktop, android and web (using GWT).
 
+Warning
+-------
+
+This project is subject to development. APIs will change. Use at own risk.
+
 Usage
 -----
 
