@@ -7,10 +7,12 @@ Usage
 -------------------
 
 Before using the API, set the platform dependent factory instance.
+
 **Android**
 ```java
 	FactoryProvider.INSTANCE = new FactoryProviderAndroid(getAssets());
 ```
+
 **Desktop**
 ```java
 	FactoryProvider.INSTANCE = new FactoryProviderDesktop();
