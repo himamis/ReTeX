@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>jlatexmath</artifactId>
+		<groupId>org.scilab.forge</groupId>
+		<version>1.0.3-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>jlatexmath-android</artifactId>
+
+	<packaging>aar</packaging>
+
+	<name>jlatexmath-android</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<android.plugin.version>4.1.0</android.plugin.version>
+	</properties>
+
+	<dependencies>
+		 <dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>5.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.scilab.forge</groupId>
+			<artifactId>jlatexmath-share</artifactId>
+			<version>1.0.3-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.simpligility.maven.plugins</groupId>
+					<artifactId>android-maven-plugin</artifactId>
+					<version>${android.plugin.version}</version>
+					<extensions>true</extensions>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.simpligility.maven.plugins</groupId>
+										<artifactId>android-maven-plugin</artifactId>
+										<versionRange>[4.0.0,)</versionRange>
+										<goals>
+											<goal>emma</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>com.simpligility.maven.plugins</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<configuration>
+					<androidManifestFile>${basedir}/AndroidManifest.xml</androidManifestFile>
+					<assetsDirectory>${basedir}/assets</assetsDirectory>
+					<resourceDirectory>${basedir}/res</resourceDirectory>
+					<nativeLibrariesDirectory>${basedir}/libs</nativeLibrariesDirectory>
+					<genDirectory>${basedir}/gen</genDirectory>
+					<sdk>
+						<platform>21</platform>
+					</sdk>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

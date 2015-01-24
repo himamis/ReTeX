@@ -1,0 +1,1 @@
+jlatexmath-multiplatform
