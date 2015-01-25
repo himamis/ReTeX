@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 
 import org.scilab.forge.jlatexmath.exception.ResourceParseException;
 import org.scilab.forge.jlatexmath.exception.XMLResourceParseException;
+import org.scilab.forge.jlatexmath.platform.Resource;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontLoader;
 
@@ -15,8 +16,11 @@ public class FontLoaderD implements FontLoader {
 	private static boolean registerFontExceptionDisplayed = false; 
 	private static boolean shouldRegisterFonts = true;
 
-	public Font loadFont(String name) throws ResourceParseException {
-		InputStream fontIn = ClassLoader.getSystemResourceAsStream(name);
+	public Font loadFont(Object fontInputStream, String name) throws ResourceParseException {
+		InputStream fontIn = (InputStream) fontInputStream;
+		if (fontIn ==  null) {
+			fontIn = (InputStream) new Resource().loadResource(name);
+		}
 		try {
             java.awt.Font f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, fontIn).deriveFont(PIXELS_PER_POINT);
 	    GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();

@@ -29,7 +29,6 @@
 
 package org.scilab.forge.jlatexmath.exception;
 
-
 /**
  * Signals that an unknown atom type constant was used.
  * 
@@ -37,7 +36,7 @@ package org.scilab.forge.jlatexmath.exception;
  */
 public class InvalidAtomTypeException extends JMathTeXException {
 
-    protected InvalidAtomTypeException(String msg) {
-	super(msg);
-    }
+	protected InvalidAtomTypeException(String msg) {
+		super(msg);
+	}
 }

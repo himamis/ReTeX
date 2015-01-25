@@ -42,7 +42,7 @@ public class CyrillicRegistration implements AlphabetRegistration {
     }
 
     public Object getPackage() {
-	return this;
+	return CyrillicRegistration.class;
     }
 
     public String getTeXFontFileName() {

@@ -28,22 +28,14 @@
 
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 
 /**
  * A box representing a rotated box.
  */
 public class OvalBox extends FramedBox {
-
-	private static final GeomFactory GEOM_FACTORY = FactoryProvider.INSTANCE
-			.getGeomFactory();
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE
-			.getGraphicsFactory();
 
 	private float shadowRule;
 
@@ -54,13 +46,11 @@ public class OvalBox extends FramedBox {
 	public void draw(Graphics2DInterface g2, float x, float y) {
 		box.draw(g2, x + space + thickness, y);
 		Stroke st = g2.getStroke();
-		g2.setStroke(GRAPHICS_FACTORY.createBasicStroke(thickness,
-				BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f));
+		g2.setStroke(graphics.createBasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
 		float th = thickness / 2;
-		float r = 0.5f * Math
-				.min(width - thickness, height + depth - thickness);
-		g2.draw(GEOM_FACTORY.createRoundRectangle2D(x + th, y - height + th,
-				width - thickness, height + depth - thickness, r, r));
+		float r = 0.5f * Math.min(width - thickness, height + depth - thickness);
+		g2.draw(geom.createRoundRectangle2D(x + th, y - height + th, width - thickness, height + depth
+				- thickness, r, r));
 		// drawDebug(g2, x, y);
 		g2.setStroke(st);
 	}

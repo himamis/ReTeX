@@ -28,17 +28,13 @@
 
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.FontAdapter;
 import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontFactory;
 
 /**
  * The string rendering is made in using Java Graphics2D.drawString.
  */
 public class JavaFontRenderingAtom extends Atom {
-
-	private static final FontFactory FONT_FACTORY = FactoryProvider.INSTANCE
-			.getFontFactory();
 
 	private String str;
 	private int type;
@@ -56,33 +52,29 @@ public class JavaFontRenderingAtom extends Atom {
 
 	public Box createBox(TeXEnvironment env) {
 		if (fontInfos == null) {
-			return new JavaFontRenderingBox(str, type,
-					DefaultTeXFont.getSizeFactor(env.getStyle()));
+			return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()));
 		} else {
 			DefaultTeXFont dtf = (DefaultTeXFont) env.getTeXFont();
 			int type = dtf.isIt ? Font.ITALIC : Font.PLAIN;
 			type = type | (dtf.isBold ? Font.BOLD : 0);
 			boolean kerning = dtf.isRoman;
 			Font font;
+			FontAdapter fontAdapter = new FontAdapter();
 			if (dtf.isSs) {
 				if (fontInfos.sansserif == null) {
-					font = FONT_FACTORY.createFont(fontInfos.serif, Font.PLAIN,
-							10);
+					font = fontAdapter.createFont(fontInfos.serif, Font.PLAIN, 10);
 				} else {
-					font = FONT_FACTORY.createFont(fontInfos.sansserif,
-							Font.PLAIN, 10);
+					font = fontAdapter.createFont(fontInfos.sansserif, Font.PLAIN, 10);
 				}
 			} else {
 				if (fontInfos.serif == null) {
-					font = FONT_FACTORY.createFont(fontInfos.sansserif,
-							Font.PLAIN, 10);
+					font = fontAdapter.createFont(fontInfos.sansserif, Font.PLAIN, 10);
 				} else {
-					font = FONT_FACTORY.createFont(fontInfos.serif, Font.PLAIN,
-							10);
+					font = fontAdapter.createFont(fontInfos.serif, Font.PLAIN, 10);
 				}
 			}
-			return new JavaFontRenderingBox(str, type,
-					DefaultTeXFont.getSizeFactor(env.getStyle()), font, kerning);
+			return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()), font,
+					kerning);
 		}
 	}
 }

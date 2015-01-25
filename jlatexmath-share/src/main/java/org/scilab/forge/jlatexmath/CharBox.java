@@ -31,54 +31,51 @@ package org.scilab.forge.jlatexmath;
 
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
-
 
 /**
  * A box representing a single character.
  */
 public class CharBox extends Box {
 
-    private final CharFont cf;
-    private final float size;
-    
-    private final char[] arr = new char[1]; 
+	private final CharFont cf;
+	private final float size;
 
-    /**
-     * Create a new CharBox that will represent the character defined by the given
-     * Char-object.
-     * 
-     * @param c a Char-object containing the character's font information.
-     */
-    public CharBox(Char c) {
-	cf = c.getCharFont();
-	size = c.getMetrics().getSize();
-	width = c.getWidth();
-	height = c.getHeight();
-	depth = c.getDepth();
-    }
-    
-    public void draw(Graphics2DInterface g2, float x, float y) {
-	drawDebug(g2, x, y);
-	g2.saveTransformation();
-        g2.translate(x, y);
-	Font font = FontInfo.getFont(cf.fontId);
-        if (size != 1) {
-	    g2.scale(size, size);
-	}
-        if (g2.getFont() != font) {
-	    g2.setFont(font);
-	}
-	arr[0] = cf.c;
-	g2.drawChars(arr, 0, 1, 0, 0);
-	g2.restoreTransformation();
-    }
-    
-    public int getLastFontId() {
-	return cf.fontId;
-    }
+	private final char[] arr = new char[1];
 
-    public String toString() {
-	return super.toString() + "=" + cf.c;
-    }
+	/**
+	 * Create a new CharBox that will represent the character defined by the given Char-object.
+	 * 
+	 * @param c a Char-object containing the character's font information.
+	 */
+	public CharBox(Char c) {
+		cf = c.getCharFont();
+		size = c.getMetrics().getSize();
+		width = c.getWidth();
+		height = c.getHeight();
+		depth = c.getDepth();
+	}
+
+	public void draw(Graphics2DInterface g2, float x, float y) {
+		drawDebug(g2, x, y);
+		g2.saveTransformation();
+		g2.translate(x, y);
+		Font font = FontInfo.getFont(cf.fontId);
+		if (size != 1) {
+			g2.scale(size, size);
+		}
+		if (g2.getFont() != font) {
+			g2.setFont(font);
+		}
+		arr[0] = cf.c;
+		g2.drawChars(arr, 0, 1, 0, 0);
+		g2.restoreTransformation();
+	}
+
+	public int getLastFontId() {
+		return cf.fontId;
+	}
+
+	public String toString() {
+		return super.toString() + "=" + cf.c;
+	}
 }

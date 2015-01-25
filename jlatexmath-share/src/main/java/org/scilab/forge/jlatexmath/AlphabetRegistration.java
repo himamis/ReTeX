@@ -28,14 +28,17 @@
 
 package org.scilab.forge.jlatexmath;
 
-public interface AlphabetRegistration {
-    
-    public static final Character.UnicodeBlock[] JLM_GREEK = new Character.UnicodeBlock[]{Character.UnicodeBlock.GREEK, Character.UnicodeBlock.GREEK_EXTENDED};
-    public static final	Character.UnicodeBlock[] JLM_CYRILLIC = new Character.UnicodeBlock[]{Character.UnicodeBlock.CYRILLIC};
-    
-    public Character.UnicodeBlock[] getUnicodeBlock();
-    
-    public Object getPackage() throws AlphabetRegistrationException;
+import org.scilab.forge.jlatexmath.exception.AlphabetRegistrationException;
 
-    public String getTeXFontFileName();
+public interface AlphabetRegistration {
+
+	public static final Character.UnicodeBlock[] JLM_GREEK = new Character.UnicodeBlock[] {
+			Character.UnicodeBlock.GREEK, Character.UnicodeBlock.GREEK_EXTENDED };
+	public static final Character.UnicodeBlock[] JLM_CYRILLIC = new Character.UnicodeBlock[] { Character.UnicodeBlock.CYRILLIC };
+
+	public Character.UnicodeBlock[] getUnicodeBlock();
+
+	public Object getPackage() throws AlphabetRegistrationException;
+
+	public String getTeXFontFileName();
 }

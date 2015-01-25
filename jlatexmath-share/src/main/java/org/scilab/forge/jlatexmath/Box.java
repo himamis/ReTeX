@@ -34,6 +34,8 @@ package org.scilab.forge.jlatexmath;
 import java.util.LinkedList;
 
 import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.Geom;
+import org.scilab.forge.jlatexmath.platform.Graphics;
 import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
@@ -42,68 +44,65 @@ import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 
 /**
- * An abstract graphical representation of a formula, that can be painted. All
- * characters, font sizes, positions are fixed. Only special Glue boxes could
- * possibly stretch or shrink. A box has 3 dimensions (width, height and depth),
- * can be composed of other child boxes that can possibly be shifted (up, down,
- * left or right). Child boxes can also be positioned outside their parent's box
+ * An abstract graphical representation of a formula, that can be painted. All characters, font
+ * sizes, positions are fixed. Only special Glue boxes could possibly stretch or shrink. A box has 3
+ * dimensions (width, height and depth), can be composed of other child boxes that can possibly be
+ * shifted (up, down, left or right). Child boxes can also be positioned outside their parent's box
  * (defined by it's dimensions).
  * <p>
- * Subclasses must implement the abstract
- * {@link #draw(Graphics2DInterface, float, float)} method (that paints the
- * box). <b> This implementation must start with calling the method
- * {@link #startDraw(Graphics2DInterface, float, float)} and end with calling
- * the method {@link #endDraw(Graphics2DInterface)} to set and restore the
- * color's that must be used for painting the box and to draw the
- * background!</b> They must also implement the abstract
- * {@link #getLastFontId()} method (the last font that will be used when this
- * box will be painted).
+ * Subclasses must implement the abstract {@link #draw(Graphics2DInterface, float, float)} method
+ * (that paints the box). <b> This implementation must start with calling the method
+ * {@link #startDraw(Graphics2DInterface, float, float)} and end with calling the method
+ * {@link #endDraw(Graphics2DInterface)} to set and restore the color's that must be used for
+ * painting the box and to draw the background!</b> They must also implement the abstract
+ * {@link #getLastFontId()} method (the last font that will be used when this box will be painted).
  */
 public abstract class Box {
-
-	private static final GeomFactory GEOM_FACTORY = FactoryProvider.INSTANCE.getGeomFactory();
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE
-			.getGraphicsFactory();
 
 	public static boolean DEBUG = false;
 
 	/**
-	 * The foreground color of the whole box. Child boxes can override this
-	 * color. If it's null and it has a parent box, the foreground color of the
-	 * parent will be used. If it has no parent, the foreground color of the
-	 * component on which it will be painted, will be used.
+	 * Factory providing platform independent implementations of forms used for drawing.
+	 */
+	protected final Geom geom;
+
+	/**
+	 * Factory providing platform independent implementations of graphics related objects.
+	 */
+	protected final Graphics graphics;
+
+	/**
+	 * The foreground color of the whole box. Child boxes can override this color. If it's null and
+	 * it has a parent box, the foreground color of the parent will be used. If it has no parent,
+	 * the foreground color of the component on which it will be painted, will be used.
 	 */
 	protected Color foreground;
 
 	/**
-	 * The background color of the whole box. Child boxes can paint a background
-	 * on top of this background. If it's null, no background will be painted.
+	 * The background color of the whole box. Child boxes can paint a background on top of this
+	 * background. If it's null, no background will be painted.
 	 */
 	protected Color background;
 
 	private Color prevColor; // used temporarily in startDraw and endDraw
 
 	/**
-	 * The width of this box, i.e. the value that will be used for further
-	 * calculations.
+	 * The width of this box, i.e. the value that will be used for further calculations.
 	 */
 	protected float width = 0;
 
 	/**
-	 * The height of this box, i.e. the value that will be used for further
-	 * calculations.
+	 * The height of this box, i.e. the value that will be used for further calculations.
 	 */
 	protected float height = 0;
 
 	/**
-	 * The depth of this box, i.e. the value that will be used for further
-	 * calculations.
+	 * The depth of this box, i.e. the value that will be used for further calculations.
 	 */
 	protected float depth = 0;
 
 	/**
-	 * The shift amount: the meaning depends on the particular kind of box (up,
-	 * down, left, right)
+	 * The shift amount: the meaning depends on the particular kind of box (up, down, left, right)
 	 */
 	protected float shift = 0;
 
@@ -120,8 +119,7 @@ public abstract class Box {
 	/**
 	 * Inserts the given box at the end of the list of child boxes.
 	 *
-	 * @param b
-	 *            the box to be inserted
+	 * @param b the box to be inserted
 	 */
 	public void add(Box b) {
 		children.add(b);
@@ -132,10 +130,8 @@ public abstract class Box {
 	/**
 	 * Inserts the given box at the given position in the list of child boxes.
 	 *
-	 * @param pos
-	 *            the position at which to insert the given box
-	 * @param b
-	 *            the box to be inserted
+	 * @param pos the position at which to insert the given box
+	 * @param b the box to be inserted
 	 */
 	public void add(int pos, Box b) {
 		children.add(pos, b);
@@ -144,25 +140,25 @@ public abstract class Box {
 	}
 
 	/**
-	 * Creates an empty box (no children) with all dimensions set to 0 and no
-	 * foreground and background color set (default values will be used: null)
+	 * Creates an empty box (no children) with all dimensions set to 0 and no foreground and
+	 * background color set (default values will be used: null)
 	 */
 	protected Box() {
 		this(null, null);
 	}
 
 	/**
-	 * Creates an empty box (no children) with all dimensions set to 0 and sets
-	 * the foreground and background color of the box.
+	 * Creates an empty box (no children) with all dimensions set to 0 and sets the foreground and
+	 * background color of the box.
 	 *
-	 * @param fg
-	 *            the foreground color
-	 * @param bg
-	 *            the background color
+	 * @param fg the foreground color
+	 * @param bg the background color
 	 */
 	protected Box(Color fg, Color bg) {
 		foreground = fg;
 		background = bg;
+		geom = new Geom();
+		graphics = new Graphics();
 	}
 
 	public void setParent(Box parent) {
@@ -224,8 +220,7 @@ public abstract class Box {
 	/**
 	 * Set the width for this box.
 	 *
-	 * @param w
-	 *            the width
+	 * @param w the width
 	 */
 	public void setWidth(float w) {
 		width = w;
@@ -234,8 +229,7 @@ public abstract class Box {
 	/**
 	 * Set the depth for this box.
 	 *
-	 * @param d
-	 *            the depth
+	 * @param d the depth
 	 */
 	public void setDepth(float d) {
 		depth = d;
@@ -244,8 +238,7 @@ public abstract class Box {
 	/**
 	 * Set the height for this box.
 	 *
-	 * @param h
-	 *            the height
+	 * @param h the height
 	 */
 	public void setHeight(float h) {
 		height = h;
@@ -254,52 +247,42 @@ public abstract class Box {
 	/**
 	 * Set the shift amount for this box.
 	 *
-	 * @param s
-	 *            the shift amount
+	 * @param s the shift amount
 	 */
 	public void setShift(float s) {
 		shift = s;
 	}
 
 	/**
-	 * Paints this box at the given coordinates using the given graphics
-	 * context.
+	 * Paints this box at the given coordinates using the given graphics context.
 	 *
-	 * @param g2
-	 *            the graphics (2D) context to use for painting
-	 * @param x
-	 *            the x-coordinate
-	 * @param y
-	 *            the y-coordinate
+	 * @param g2 the graphics (2D) context to use for painting
+	 * @param x the x-coordinate
+	 * @param y the y-coordinate
 	 */
 	public abstract void draw(Graphics2DInterface g2, float x, float y);
 
 	/**
-	 * Get the id of the font that will be used the last when this box will be
-	 * painted.
+	 * Get the id of the font that will be used the last when this box will be painted.
 	 *
 	 * @return the id of the last font that will be used.
 	 */
 	public abstract int getLastFontId();
 
 	/**
-	 * Stores the old color setting, draws the background of the box (if not
-	 * null) and sets the foreground color (if not null).
+	 * Stores the old color setting, draws the background of the box (if not null) and sets the
+	 * foreground color (if not null).
 	 *
-	 * @param g2
-	 *            the graphics (2D) context
-	 * @param x
-	 *            the x-coordinate
-	 * @param y
-	 *            the y-coordinate
+	 * @param g2 the graphics (2D) context
+	 * @param x the x-coordinate
+	 * @param y the y-coordinate
 	 */
 	protected void startDraw(Graphics2DInterface g2, float x, float y) {
 		// old color
 		prevColor = g2.getColor();
 		if (background != null) { // draw background
 			g2.setColor(background);
-			// g2.fill(new Rectangle2D.Float(x, y - height, width, height +
-			// depth));
+			// g2.fill(new Rectangle2D.Float(x, y - height, width, height + depth));
 		}
 		if (foreground == null) {
 			g2.setColor(prevColor); // old foreground color
@@ -309,39 +292,34 @@ public abstract class Box {
 		drawDebug(g2, x, y);
 	}
 
-	protected void drawDebug(Graphics2DInterface g2, float x, float y,
-			boolean showDepth) {
+	protected void drawDebug(Graphics2DInterface g2, float x, float y, boolean showDepth) {
 		if (DEBUG) {
 			Stroke st = g2.getStroke();
 			if (markForDEBUG != null) {
 				Color c = g2.getColor();
 				g2.setColor(markForDEBUG);
-				g2.fill(GEOM_FACTORY.createRectangle2D(x, y - height, width,
-						height + depth));
+				g2.fill(geom.createRectangle2D(x, y - height, width, height + depth));
 				g2.setColor(c);
 			}
-			g2.setStroke(GRAPHICS_FACTORY.createBasicStroke(
-					(float) (Math.abs(1 / g2.getTransform().getScaleX())),
-					BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f));
+			g2.setStroke(graphics.createBasicStroke(
+					(float) (Math.abs(1 / g2.getTransform().getScaleX())), BasicStroke.CAP_BUTT,
+					BasicStroke.JOIN_MITER));
 			if (width < 0) {
 				x += width;
 				width = -width;
 			}
-			g2.draw(GEOM_FACTORY.createRectangle2D(x, y - height, width, height
-					+ depth));
+			g2.draw(geom.createRectangle2D(x, y - height, width, height + depth));
 			if (showDepth) {
 				Color c = g2.getColor();
 				g2.setColor(ColorUtil.RED);
 				if (depth > 0) {
-					g2.fill(GEOM_FACTORY.createRectangle2D(x, y, width, depth));
+					g2.fill(geom.createRectangle2D(x, y, width, depth));
 					g2.setColor(c);
-					g2.draw(GEOM_FACTORY.createRectangle2D(x, y, width, depth));
+					g2.draw(geom.createRectangle2D(x, y, width, depth));
 				} else if (depth < 0) {
-					g2.fill(GEOM_FACTORY.createRectangle2D(x, y + depth, width,
-							-depth));
+					g2.fill(geom.createRectangle2D(x, y + depth, width, -depth));
 					g2.setColor(c);
-					g2.draw(GEOM_FACTORY.createRectangle2D(x, y + depth, width,
-							-depth));
+					g2.draw(geom.createRectangle2D(x, y + depth, width, -depth));
 				} else {
 					g2.setColor(c);
 				}
@@ -359,8 +337,7 @@ public abstract class Box {
 	/**
 	 * Restores the previous color setting.
 	 *
-	 * @param g2
-	 *            the graphics (2D) context
+	 * @param g2 the graphics (2D) context
 	 */
 	protected void endDraw(Graphics2DInterface g2) {
 		g2.setColor(prevColor);

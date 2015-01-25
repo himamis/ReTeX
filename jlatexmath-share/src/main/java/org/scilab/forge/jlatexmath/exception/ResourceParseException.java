@@ -33,12 +33,12 @@ package org.scilab.forge.jlatexmath.exception;
  * Signals that an error occurred while loading the necessary resources into memory.
  */
 public class ResourceParseException extends JMathTeXException {
-    
+
 	public ResourceParseException(String msg) {
-        super(msg);
-    }
-    
-    public ResourceParseException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+		super(msg);
+	}
+
+	public ResourceParseException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 }

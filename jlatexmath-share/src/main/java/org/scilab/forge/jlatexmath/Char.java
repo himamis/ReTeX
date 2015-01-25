@@ -36,51 +36,51 @@ import org.scilab.forge.jlatexmath.platform.font.Font;
  */
 public class Char {
 
-    private final char c;
-    private final Font font;
-    private final Metrics m;
-    private final int fontCode;
-    
-    public Char(char c, Font f, int fc, Metrics m) {
-	font = f;
-	fontCode = fc;
-	this.c = c;
-	this.m = m;
-    }
-    
-    public CharFont getCharFont() {
-	return new CharFont(c, fontCode);
-    }
-    
-    public char getChar() {
-	return c;
-    }
-    
-    public Font getFont() {
-	return font;
-    }
-    
-    public int getFontCode() {
-	return fontCode;
-    }
-    
-    public float getWidth() {
-	return m.getWidth();
-    }
-    
-    public float getItalic() {
-	return m.getItalic();
-    }
-    
-    public float getHeight() {
-	return m.getHeight();
-    }
-    
-    public float getDepth() {
-	return m.getDepth();
-    }
-    
-    public Metrics getMetrics() {
-	return m;
-    }
+	private final char c;
+	private final Font font;
+	private final Metrics m;
+	private final int fontCode;
+
+	public Char(char c, Font f, int fc, Metrics m) {
+		font = f;
+		fontCode = fc;
+		this.c = c;
+		this.m = m;
+	}
+
+	public CharFont getCharFont() {
+		return new CharFont(c, fontCode);
+	}
+
+	public char getChar() {
+		return c;
+	}
+
+	public Font getFont() {
+		return font;
+	}
+
+	public int getFontCode() {
+		return fontCode;
+	}
+
+	public float getWidth() {
+		return m.getWidth();
+	}
+
+	public float getItalic() {
+		return m.getItalic();
+	}
+
+	public float getHeight() {
+		return m.getHeight();
+	}
+
+	public float getDepth() {
+		return m.getDepth();
+	}
+
+	public Metrics getMetrics() {
+		return m;
+	}
 }

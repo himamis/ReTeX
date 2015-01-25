@@ -33,17 +33,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.Graphics;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 
 /**
  * An atom representing the foreground and background color of an other atom.
  */
 public class ColorAtom extends Atom implements Row {
-
-	private static final GraphicsFactory graphicsFactory = FactoryProvider.INSTANCE
-			.getGraphicsFactory();
 
 	public static Map<String, Color> Colors = new HashMap<String, Color>();
 
@@ -61,15 +57,12 @@ public class ColorAtom extends Atom implements Row {
 	}
 
 	/**
-	 * Creates a new ColorAtom that sets the given colors for the given atom.
-	 * Null for a color means: no specific color set for this atom.
+	 * Creates a new ColorAtom that sets the given colors for the given atom. Null for a color
+	 * means: no specific color set for this atom.
 	 *
-	 * @param atom
-	 *            the atom for which the given colors have to be set
-	 * @param bg
-	 *            the background color
-	 * @param c
-	 *            the foreground color
+	 * @param atom the atom for which the given colors have to be set
+	 * @param bg the background color
+	 * @param c the foreground color
 	 */
 	public ColorAtom(Atom atom, Color bg, Color c) {
 		elements = new RowAtom(atom);
@@ -78,16 +71,13 @@ public class ColorAtom extends Atom implements Row {
 	}
 
 	/**
-	 * Creates a ColorAtom that overrides the colors of the given ColorAtom if
-	 * the given colors are not null. If they're null, the old values are used.
+	 * Creates a ColorAtom that overrides the colors of the given ColorAtom if the given colors are
+	 * not null. If they're null, the old values are used.
 	 *
-	 * @param bg
-	 *            the background color
-	 * @param c
-	 *            the foreground color
-	 * @param old
-	 *            the ColorAtom for which the colorsettings should be overriden
-	 *            with the given colors.
+	 * @param bg the background color
+	 * @param c the foreground color
+	 * @param old the ColorAtom for which the colorsettings should be overriden with the given
+	 *        colors.
 	 */
 	public ColorAtom(Color bg, Color c, ColorAtom old) {
 		elements = new RowAtom(old.elements);
@@ -118,6 +108,7 @@ public class ColorAtom extends Atom implements Row {
 	}
 
 	public static Color getColor(String s) {
+		Graphics graphics = new Graphics();
 		if (s != null && s.length() != 0) {
 			s = s.trim();
 			if (s.charAt(0) == '#') {
@@ -136,21 +127,17 @@ public class ColorAtom extends Atom implements Row {
 						float g = Float.parseFloat(G);
 						float b = Float.parseFloat(B);
 
-						if (r == (int) r && g == (int) g && b == (int) b
-								&& R.indexOf('.') == -1 && G.indexOf('.') == -1
-								&& B.indexOf('.') == -1) {
+						if (r == (int) r && g == (int) g && b == (int) b && R.indexOf('.') == -1
+								&& G.indexOf('.') == -1 && B.indexOf('.') == -1) {
 							int ir = (int) Math.min(255, Math.max(0, r));
 							int ig = (int) Math.min(255, Math.max(0, g));
 							int ib = (int) Math.min(255, Math.max(0, b));
-							return graphicsFactory.createColor(ir, ig, ib);
+							return graphics.createColor(ir, ig, ib);
 						} else {
 							r = (float) Math.min(1, Math.max(0, r));
 							g = (float) Math.min(1, Math.max(0, g));
 							b = (float) Math.min(1, Math.max(0, b));
-							return graphicsFactory.createColor(
-									(int) (r * 255 + 0.5),
-									(int) (g * 255 + 0.5),
-									(int) (b * 255 + 0.5));
+							return graphics.createColor(r, g, b);
 						}
 					} catch (NumberFormatException e) {
 						return ColorUtil.BLACK;
@@ -181,12 +168,9 @@ public class ColorAtom extends Atom implements Row {
 			} else {
 				if (s.indexOf('.') != -1) {
 					try {
-						float g = (float) Math.min(1,
-								Math.max(Float.parseFloat(s), 0));
+						float g = (float) Math.min(1, Math.max(Float.parseFloat(s), 0));
 
-						return graphicsFactory.createColor(
-								(int) (g * 255 + 0.5), (int) (g * 255 + 0.5),
-								(int) (g * 255 + 0.5));
+						return graphics.createColor(g, g, g);
 					} catch (NumberFormatException e) {
 					}
 				}
@@ -270,12 +254,8 @@ public class ColorAtom extends Atom implements Row {
 		Colors.put("gray", convColor(0f, 0f, 0f, 0.50f));
 	}
 
-	private static Color convColor(final float c, final float m, final float y,
-			final float k) {
+	private static Color convColor(final float c, final float m, final float y, final float k) {
 		final float kk = 1 - k;
-		final float r = kk * (1 - c);
-		final float g = kk * (1 - m);
-		final float b = kk * (1 - y);
-		return graphicsFactory.createColor((int) (r*255+0.5), (int) (g*255+0.5), (int) (b*255+0.5));
+		return new Graphics().createColor(kk * (1 - c), kk * (1 - m), kk * (1 - y));
 	}
 }

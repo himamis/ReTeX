@@ -30,80 +30,82 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.Map;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.Graphics;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
+import org.scilab.forge.jlatexmath.platform.graphics.HasForegroundColor;
 import org.scilab.forge.jlatexmath.platform.graphics.Image;
 
 /**
  * An atom representing an atom containing a graphic.
  */
 public class GraphicsAtom extends Atom {
-	
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE.getGraphicsFactory();
-	
-    private Image image = null;
-    private int w, h;
 
-    private Atom base;
-    private boolean first = true;
-    private int interp = -1;
+	private Image image = null;
+	private Image bimage;
+	private HasForegroundColor c;
+	private int w, h;
 
-    public GraphicsAtom(String path, String option) {
-	image = GRAPHICS_FACTORY.getImage(path);
-	
-	draw();
-	buildAtom(option);
-    }
+	private Atom base;
+	private boolean first = true;
+	private int interp = -1;
 
-    protected void buildAtom(String option) {
-	base = this;
-    	Map<String, String> options = ParseOption.parseMap(option);
-	if (options.containsKey("width") || options.containsKey("height")) {
-	    base = new ResizeAtom(base, options.get("width"), options.get("height"), options.containsKey("keepaspectratio"));
-	}
-	if (options.containsKey("scale")) {
-	    double scl = Double.parseDouble(options.get("scale"));
-	    base = new ScaleAtom(base, scl, scl); 
-	}
-	if (options.containsKey("angle") || options.containsKey("origin")) {
-	    base = new RotateAtom(base, options.get("angle"), options.get("origin"));
-	}
-	if (options.containsKey("interpolation")) {
-	    String meth = options.get("interpolation");
-	    if (meth.equalsIgnoreCase("bilinear")) {
-		interp = GraphicsBox.BILINEAR;
-	    } else if (meth.equalsIgnoreCase("bicubic")) {
-		interp = GraphicsBox.BICUBIC;
-	    } else if (meth.equalsIgnoreCase("nearest_neighbor")) {
-		interp = GraphicsBox.NEAREST_NEIGHBOR;
-	    }
-	}
-    }
-	
-    public void draw() {
-	if (image != null) {
-	    w = image.getWidth();
-	    h = image.getHeight();
-	    Graphics2DInterface g2d = image.createGraphics2D();
-	    g2d.drawImage(image, 0, 0);
-	    g2d.dispose();
-	}
-    }
+	public GraphicsAtom(String path, String option) {
+		image = new Graphics().loadImage(path);
 
-    public Box createBox(TeXEnvironment env) {
-	if (image != null) {
-	    if (first) {
-		first = false;
-		return base.createBox(env);
-	    } else {
-		env.isColored = true;
-		float width = w * SpaceAtom.getFactor(TeXConstants.UNIT_PIXEL, env);
-		float height = h * SpaceAtom.getFactor(TeXConstants.UNIT_PIXEL, env);
-		return new GraphicsBox(image, width, height, env.getSize(), interp);
-	    }
+		draw();
+		buildAtom(option);
 	}
 
-	return new TeXFormula("\\text{ No such image file ! }").root.createBox(env);
-    }
+	protected void buildAtom(String option) {
+		base = this;
+		Map<String, String> options = ParseOption.parseMap(option);
+		if (options.containsKey("width") || options.containsKey("height")) {
+			base = new ResizeAtom(base, options.get("width"), options.get("height"),
+					options.containsKey("keepaspectratio"));
+		}
+		if (options.containsKey("scale")) {
+			double scl = Double.parseDouble(options.get("scale"));
+			base = new ScaleAtom(base, scl, scl);
+		}
+		if (options.containsKey("angle") || options.containsKey("origin")) {
+			base = new RotateAtom(base, options.get("angle"), options.get("origin"));
+		}
+		if (options.containsKey("interpolation")) {
+			String meth = options.get("interpolation");
+			if (meth.equalsIgnoreCase("bilinear")) {
+				interp = GraphicsBox.BILINEAR;
+			} else if (meth.equalsIgnoreCase("bicubic")) {
+				interp = GraphicsBox.BICUBIC;
+			} else if (meth.equalsIgnoreCase("nearest_neighbor")) {
+				interp = GraphicsBox.NEAREST_NEIGHBOR;
+			}
+		}
+	}
+
+	public void draw() {
+		if (image != null) {
+			w = image.getWidth();
+			h = image.getHeight();
+			bimage = new Graphics().createImage(w, h, Image.TYPE_INT_ARGB);
+			Graphics2DInterface g2d = bimage.createGraphics2D();
+			g2d.drawImage(image, 0, 0);
+			g2d.dispose();
+		}
+	}
+
+	public Box createBox(TeXEnvironment env) {
+		if (image != null) {
+			if (first) {
+				first = false;
+				return base.createBox(env);
+			} else {
+				env.isColored = true;
+				float width = w * SpaceAtom.getFactor(TeXConstants.UNIT_PIXEL, env);
+				float height = h * SpaceAtom.getFactor(TeXConstants.UNIT_PIXEL, env);
+				return new GraphicsBox(bimage, width, height, env.getSize(), interp);
+			}
+		}
+
+		return new TeXFormula("\\text{ No such image file ! }").root.createBox(env);
+	}
 }

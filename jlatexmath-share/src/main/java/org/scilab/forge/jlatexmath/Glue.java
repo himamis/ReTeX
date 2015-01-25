@@ -29,72 +29,69 @@
 
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.parser.GlueSettingsParser;
-
 /**
  * Represents glue by its 3 components. Contains the "glue rules".
  */
 public class Glue {
-	
-    // the glue components
-    private final float space;
-    private final float stretch;
-    private final float shrink;
 
-    private final String name;
+	// the glue components
+	private final float space;
+	private final float stretch;
+	private final float shrink;
 
-    // contains the different glue types
-    private static Glue[] glueTypes;
+	private final String name;
 
-    // the glue table representing the "glue rules" (as in TeX)
-    private static final int[][][] glueTable;
+	// contains the different glue types
+	private static Glue[] glueTypes;
 
-    static {
-    	GlueSettingsParser parser = FactoryProvider.INSTANCE.getParserFactory().createGlueSettingsParser();
-        glueTypes = parser.getGlueTypes();
-        glueTable = parser.createGlueTable();
-    }
+	// the glue table representing the "glue rules" (as in TeX)
+	private static final int[][][] glueTable;
 
-    public Glue(float space, float stretch, float shrink, String name) {
-        this.space = space;
-        this.stretch = stretch;
-        this.shrink = shrink;
-        this.name = name;
-    }
+	static {
+		GlueSettingsParser parser = new GlueSettingsParser();
+		glueTypes = parser.getGlueTypes();
+		glueTable = parser.createGlueTable();
+	}
 
-    /**
-     * Name of this glue object.
-     */
-    public String getName () {
-        return this.name;
-    }
+	public Glue(float space, float stretch, float shrink, String name) {
+		this.space = space;
+		this.stretch = stretch;
+		this.shrink = shrink;
+		this.name = name;
+	}
 
-    /**
-     * Creates a box representing the glue type according to the "glue rules" based
-     * on the atom types between which the glue must be inserted.
-     *
-     * @param lType left atom type
-     * @param rType right atom type
-     * @param env the TeXEnvironment
-     * @return a box containing representing the glue
-     */
-    public static Box get(int lType, int rType, TeXEnvironment env) {
-        // types > INNER are considered of type ORD for glue calculations
-        int l = (lType > TeXConstants.TYPE_INNER ? TeXConstants.TYPE_ORDINARY : lType);
-        int r = (rType > TeXConstants.TYPE_INNER ? TeXConstants.TYPE_ORDINARY : rType);
+	/**
+	 * Name of this glue object.
+	 */
+	public String getName() {
+		return this.name;
+	}
 
-        // search right glue-type in "glue-table"
-        int glueType = glueTable[l][r][env.getStyle() / 2];
+	/**
+	 * Creates a box representing the glue type according to the "glue rules" based on the atom
+	 * types between which the glue must be inserted.
+	 *
+	 * @param lType left atom type
+	 * @param rType right atom type
+	 * @param env the TeXEnvironment
+	 * @return a box containing representing the glue
+	 */
+	public static Box get(int lType, int rType, TeXEnvironment env) {
+		// types > INNER are considered of type ORD for glue calculations
+		int l = (lType > TeXConstants.TYPE_INNER ? TeXConstants.TYPE_ORDINARY : lType);
+		int r = (rType > TeXConstants.TYPE_INNER ? TeXConstants.TYPE_ORDINARY : rType);
 
-        return glueTypes[glueType].createBox(env);
-    }
+		// search right glue-type in "glue-table"
+		int glueType = glueTable[l][r][env.getStyle() / 2];
 
-    private Box createBox(TeXEnvironment env) {
-        TeXFont tf = env.getTeXFont();
-        // use "quad" from a font marked as an "mu font"
-        float quad = tf.getQuad(env.getStyle(), tf.getMuFontId());
+		return glueTypes[glueType].createBox(env);
+	}
 
-        return new GlueBox((space / 18.0f) * quad, (stretch / 18.0f) * quad, (shrink / 18.0f) * quad);
-    }
+	private Box createBox(TeXEnvironment env) {
+		TeXFont tf = env.getTeXFont();
+		// use "quad" from a font marked as an "mu font"
+		float quad = tf.getQuad(env.getStyle(), tf.getMuFontId());
+
+		return new GlueBox((space / 18.0f) * quad, (stretch / 18.0f) * quad, (shrink / 18.0f) * quad);
+	}
 }

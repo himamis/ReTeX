@@ -36,19 +36,19 @@ import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
  */
 public class GlueBox extends Box {
 
-    protected float stretch = 0, shrink = 0;
+	protected float stretch = 0, shrink = 0;
 
-    public GlueBox(float space, float stretch, float shrink) {
-        this.width = space;
-        this.stretch = stretch;
-        this.shrink = shrink;
-    }
+	public GlueBox(float space, float stretch, float shrink) {
+		this.width = space;
+		this.stretch = stretch;
+		this.shrink = shrink;
+	}
 
-    public void draw(Graphics2DInterface g2, float x, float y) {
-        // no visible effect
-    }
+	public void draw(Graphics2DInterface g2, float x, float y) {
+		// no visible effect
+	}
 
-    public int getLastFontId() {
-        return TeXFont.NO_FONT;
-    }
+	public int getLastFontId() {
+		return TeXFont.NO_FONT;
+	}
 }

@@ -28,23 +28,15 @@
 
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 
 /**
  * A box representing a rotated box.
  */
 public class FramedBox extends Box {
-
-	private static final GeomFactory GEOM_FACTORY = FactoryProvider.INSTANCE
-			.getGeomFactory();
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE
-			.getGraphicsFactory();
 
 	protected Box box;
 	protected float thickness;
@@ -70,25 +62,24 @@ public class FramedBox extends Box {
 
 	public void draw(Graphics2DInterface g2, float x, float y) {
 		Stroke st = g2.getStroke();
-		g2.setStroke(GRAPHICS_FACTORY.createBasicStroke(thickness,
-				BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f));
+		g2.setStroke(graphics.createBasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
 		float th = thickness / 2;
 		if (bg != null) {
 			Color prev = g2.getColor();
 			g2.setColor(bg);
-			g2.fill(GEOM_FACTORY.createRectangle2D(x + th, y - height + th,
-					width - thickness, height + depth - thickness));
+			g2.fill(geom.createRectangle2D(x + th, y - height + th, width - thickness, height + depth
+					- thickness));
 			g2.setColor(prev);
 		}
 		if (line != null) {
 			Color prev = g2.getColor();
 			g2.setColor(line);
-			g2.draw(GEOM_FACTORY.createRectangle2D(x + th, y - height + th,
-					width - thickness, height + depth - thickness));
+			g2.draw(geom.createRectangle2D(x + th, y - height + th, width - thickness, height + depth
+					- thickness));
 			g2.setColor(prev);
 		} else {
-			g2.draw(GEOM_FACTORY.createRectangle2D(x + th, y - height + th,
-					width - thickness, height + depth - thickness));
+			g2.draw(geom.createRectangle2D(x + th, y - height + th, width - thickness, height + depth
+					- thickness));
 		}
 		// drawDebug(g2, x, y);
 		g2.setStroke(st);

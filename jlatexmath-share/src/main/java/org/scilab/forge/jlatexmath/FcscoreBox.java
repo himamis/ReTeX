@@ -28,12 +28,9 @@
 
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
 import org.scilab.forge.jlatexmath.platform.geom.Line2D;
 import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
@@ -41,65 +38,63 @@ import org.scilab.forge.jlatexmath.platform.graphics.Transform;
  * A box representing glue.
  */
 public class FcscoreBox extends Box {
-	
-	private static final GeomFactory GEOM_FACTORY = FactoryProvider.INSTANCE.getGeomFactory();
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE.getGraphicsFactory();
 
-    private int N;
-    private boolean strike;
-    private float space;
-    private float thickness;
- 
-    public FcscoreBox(int N, float h, float thickness, float space, boolean strike) {
-	this.N = N;
-	this.width = N * (thickness + space) + 2 * space;
-	this.height = h;
-	this.depth = 0;
-	this.strike = strike;
-	this.space = space;
-	this.thickness = thickness;
-    }
+	private int N;
+	private boolean strike;
+	private float space;
+	private float thickness;
 
-    public void draw(Graphics2DInterface g2, float x, float y) {
-	Transform transf = g2.getTransform();
-	g2.saveTransformation();
-	Stroke oldStroke = g2.getStroke();
-
-	final double sx = transf.getScaleX();
-	final double sy = transf.getScaleY();
-	double s = 1;
-	if (sx == sy) {
-	    // There are rounding problems due to scale factor: lines could have different
-	    // spacing... 
-	    // So the increment (space+thickness) is done in using integer.
-	    s = sx;
-	    g2.scale(1 / sx, 1 / sy);
+	public FcscoreBox(int N, float h, float thickness, float space, boolean strike) {
+		this.N = N;
+		this.width = N * (thickness + space) + 2 * space;
+		this.height = h;
+		this.depth = 0;
+		this.strike = strike;
+		this.space = space;
+		this.thickness = thickness;
 	}
 
-	g2.setStroke(GRAPHICS_FACTORY.createBasicStroke((float) (s * thickness), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f));
-	float th = thickness / 2.f;
-	final Line2D line = GEOM_FACTORY.createLine2D(0, 0, 0, 0);
-	float xx = x + space;
-	xx = (float) (xx * s + (space / 2.f) * s);
-	final int inc = (int) Math.round((space + thickness) * s);
+	public void draw(Graphics2DInterface g2, float x, float y) {
+		Transform transf = g2.getTransform();
+		g2.saveTransformation();
+		Stroke oldStroke = g2.getStroke();
 
-	for (int i = 0; i < N; i++) {
-	    line.setLine(xx + th * s, (y - height) * s, xx + th * s, y * s);
-	    g2.draw(line);
-	    xx += inc;
+		final double sx = transf.getScaleX();
+		final double sy = transf.getScaleY();
+		double s = 1;
+		if (sx == sy) {
+			// There are rounding problems due to scale factor: lines could have different
+			// spacing...
+			// So the increment (space+thickness) is done in using integer.
+			s = sx;
+			g2.scale(1 / sx, 1 / sy);
+		}
+
+		g2.setStroke(graphics.createBasicStroke((float) (s * thickness), BasicStroke.CAP_BUTT,
+				BasicStroke.JOIN_MITER));
+		float th = thickness / 2.f;
+		final Line2D line = geom.createLine2D();
+		float xx = x + space;
+		xx = (float) (xx * s + (space / 2.f) * s);
+		final int inc = (int) Math.round((space + thickness) * s);
+
+		for (int i = 0; i < N; i++) {
+			line.setLine(xx + th * s, (y - height) * s, xx + th * s, y * s);
+			g2.draw(line);
+			xx += inc;
+		}
+
+		if (strike) {
+
+			line.setLine((x + space) * s, (y - height / 2.f) * s, xx - s * space / 2, (y - height / 2.f) * s);
+			g2.draw(line);
+		}
+
+		g2.restoreTransformation();
+		g2.setStroke(oldStroke);
 	}
 
-	if (strike) {
-	    
-	    line.setLine((x + space) * s, (y - height / 2.f) * s, xx - s * space / 2, (y - height / 2.f) * s);
-	    g2.draw(line);
+	public int getLastFontId() {
+		return TeXFont.NO_FONT;
 	}
-	
-	g2.restoreTransformation();
-	g2.setStroke(oldStroke);
-    }
-
-    public int getLastFontId() {
-        return TeXFont.NO_FONT;
-    }
 }

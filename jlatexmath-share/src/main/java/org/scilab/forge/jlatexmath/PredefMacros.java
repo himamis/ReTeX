@@ -32,10 +32,10 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.exception.ParseException;
+import org.scilab.forge.jlatexmath.platform.Graphics;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 
 /**
  * This class contains the most of basic commands of LaTeX, they're activated in
@@ -43,9 +43,10 @@ import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
  **/
 public class PredefMacros {
 	
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE.getGraphicsFactory();
+	private static final Graphics graphics;
 
     static {
+    	graphics = new Graphics();
         NewEnvironmentMacro.addNewEnvironment("array", "\\array@@env{#1}{", "}", 1);
         NewEnvironmentMacro.addNewEnvironment("tabular", "\\array@@env{#1}{", "}", 1);
         NewEnvironmentMacro.addNewEnvironment("matrix", "\\matrix@@env{", "}", 0);
@@ -686,19 +687,19 @@ public class PredefMacros {
     public static final Atom nolimits_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = tp.getLastAtom();
         at.type_limits = TeXConstants.SCRIPT_NOLIMITS;
-        return at.createClone();
+        return at.clone();
     }
 
     public static final Atom limits_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = tp.getLastAtom();
         at.type_limits = TeXConstants.SCRIPT_LIMITS;
-        return at.createClone();
+        return at.clone();
     }
 
     public static final Atom normal_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = tp.getLastAtom();
         at.type_limits = TeXConstants.SCRIPT_NORMAL;
-        return at.createClone();
+        return at.clone();
     }
 
     public static final Atom left_macro(final TeXParser tp, final String[] args) throws ParseException {
@@ -1080,7 +1081,7 @@ public class PredefMacros {
         TeXFormula tf = new TeXFormula("\\mathbb{G}\\mathsf{e}");
         tf.add(new GeoGebraLogoAtom());
         tf.add("\\mathsf{Gebra}");
-        return new ColorAtom(tf.root, null, GRAPHICS_FACTORY.createColor(102, 102, 102));
+        return new ColorAtom(tf.root, null, graphics.createColor(102, 102, 102));
     }
 
     public static final Atom hphantom_macro(final TeXParser tp, final String[] args) throws ParseException {
@@ -1276,7 +1277,7 @@ public class PredefMacros {
         Color color = null;
         if ("gray".equals(args[2])) {
             float f = Float.parseFloat(args[3]);
-            color = GRAPHICS_FACTORY.createColor(Math.round(f * 255), Math.round(f * 255), Math.round(f * 255));
+            color = graphics.createColor(f, f, f);
         } else if ("rgb".equals(args[2])) {
             StringTokenizer stok = new StringTokenizer(args[3], ";,");
             if (stok.countTokens() != 3)
@@ -1284,7 +1285,7 @@ public class PredefMacros {
             float r = Float.parseFloat(stok.nextToken().trim());
             float g = Float.parseFloat(stok.nextToken().trim());
             float b = Float.parseFloat(stok.nextToken().trim());
-            color = GRAPHICS_FACTORY.createColor(Math.round(r * 255), Math.round(g * 255), Math.round(b * 255));
+            color = graphics.createColor(r, g, b);
         } else if ("cmyk".equals(args[2])) {
             StringTokenizer stok = new StringTokenizer(args[3], ",;");
             if (stok.countTokens() != 4)
@@ -1293,10 +1294,7 @@ public class PredefMacros {
             for (int i = 0; i < 4; i++)
                 cmyk[i] = Float.parseFloat(stok.nextToken().trim());
             float k = 1 - cmyk[3];
-            float r = k * (1 - cmyk[0]);
-            float g = k * (1 - cmyk[1]);
-            float b = k * (1 - cmyk[2]);
-            color = GRAPHICS_FACTORY.createColor(Math.round(r * 255), Math.round(g * 255), Math.round(b * 255));
+            color = graphics.createColor(k * (1 - cmyk[0]), k * (1 - cmyk[1]), k * (1 - cmyk[2]));
         } else
             throw new ParseException("The color model is incorrect !");
 
@@ -1721,19 +1719,19 @@ public class PredefMacros {
     }
 
     public static final Atom int_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Atom integral = SymbolAtom.get("int").createClone();
+        Atom integral = SymbolAtom.get("int").clone();
         integral.type_limits = TeXConstants.SCRIPT_NOLIMITS;
         return integral;
     }
 
     public static final Atom oint_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Atom integral = SymbolAtom.get("oint").createClone();
+        Atom integral = SymbolAtom.get("oint").clone();
         integral.type_limits = TeXConstants.SCRIPT_NOLIMITS;
         return integral;
     }
 
     public static final Atom iint_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Atom integral = SymbolAtom.get("int").createClone();
+        Atom integral = SymbolAtom.get("int").clone();
         integral.type_limits = TeXConstants.SCRIPT_NOLIMITS;
         RowAtom ra = new RowAtom(integral);
         ra.add(new SpaceAtom(TeXConstants.UNIT_MU, -6f, 0f, 0f));
@@ -1743,7 +1741,7 @@ public class PredefMacros {
     }
 
     public static final Atom iiint_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Atom integral = SymbolAtom.get("int").createClone();
+        Atom integral = SymbolAtom.get("int").clone();
         integral.type_limits = TeXConstants.SCRIPT_NOLIMITS;
         RowAtom ra = new RowAtom(integral);
         ra.add(new SpaceAtom(TeXConstants.UNIT_MU, -6f, 0f, 0f));
@@ -1755,7 +1753,7 @@ public class PredefMacros {
     }
 
     public static final Atom iiiint_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Atom integral = SymbolAtom.get("int").createClone();
+        Atom integral = SymbolAtom.get("int").clone();
         integral.type_limits = TeXConstants.SCRIPT_NOLIMITS;
         RowAtom ra = new RowAtom(integral);
         ra.add(new SpaceAtom(TeXConstants.UNIT_MU, -6f, 0f, 0f));
@@ -1769,7 +1767,7 @@ public class PredefMacros {
     }
 
     public static final Atom idotsint_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Atom integral = SymbolAtom.get("int").createClone();
+        Atom integral = SymbolAtom.get("int").clone();
         integral.type_limits = TeXConstants.SCRIPT_NOLIMITS;
         RowAtom ra = new RowAtom(integral);
         ra.add(new SpaceAtom(TeXConstants.UNIT_MU, -1f, 0f, 0f));
@@ -1785,13 +1783,13 @@ public class PredefMacros {
     }
 
     public static final Atom lmoustache_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Atom at = new BigDelimiterAtom((SymbolAtom) SymbolAtom.get("lmoustache").createClone(), 1);
+        Atom at = new BigDelimiterAtom((SymbolAtom) SymbolAtom.get("lmoustache").clone(), 1);
         at.type = TeXConstants.TYPE_OPENING;
         return at;
     }
 
     public static final Atom rmoustache_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Atom at = new BigDelimiterAtom((SymbolAtom) SymbolAtom.get("rmoustache").createClone(), 1);
+        Atom at = new BigDelimiterAtom((SymbolAtom) SymbolAtom.get("rmoustache").clone(), 1);
         at.type = TeXConstants.TYPE_CLOSING;
         return at;
     }

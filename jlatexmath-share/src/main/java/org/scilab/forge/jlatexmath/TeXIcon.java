@@ -32,18 +32,17 @@
 
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.HasForegroundColor;
 import org.scilab.forge.jlatexmath.platform.graphics.Icon;
 import org.scilab.forge.jlatexmath.platform.graphics.Insets;
 import org.scilab.forge.jlatexmath.platform.graphics.RenderingHints;
 import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
+
 /**
- * An {@link org.scilab.forge.jlatexmath.platform.graphics.Icon} implementation that will paint the TeXFormula
+ * An {@link javax.swing.Icon} implementation that will paint the TeXFormula
  * that created it.
  * <p>
  * This class cannot be instantiated directly. It can be constructed from a
@@ -52,10 +51,8 @@ import org.scilab.forge.jlatexmath.platform.graphics.Transform;
  * @author Kurt Vermeulen
  */
 public class TeXIcon implements Icon {
-	
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE.getGraphicsFactory();
 
-    private static final Color defaultColor = GRAPHICS_FACTORY.createColor(0, 0, 0);
+    private static final Color defaultColor = ColorUtil.BLACK;
 
     public static float defaultSize = -1;
     public static float magFactor = 0;
@@ -228,7 +225,7 @@ public class TeXIcon implements Icon {
      */
     public void paintIcon(HasForegroundColor c, Graphics2DInterface g2, int x, int y) {
         // copy graphics settings
-    	// TODO Implement get renderingHints
+    	// TODO implement getRenderingHints
         //RenderingHints oldHints = g2.getRenderingHints();
         g2.saveTransformation();
         Color oldColor = g2.getColor();

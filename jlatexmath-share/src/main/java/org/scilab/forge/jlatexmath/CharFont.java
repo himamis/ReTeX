@@ -34,17 +34,17 @@ package org.scilab.forge.jlatexmath;
  */
 public class CharFont {
 
-    public char c;
-    public int fontId;
-    public int boldFontId;
-    
-    public CharFont(char ch, int f) {
-	this(ch, f, f);
-    }
-    
-    public CharFont(char ch, int f, int bf) {
-	c = ch;
-	fontId = f;
-	boldFontId = bf;
-    }
+	public char c;
+	public int fontId;
+	public int boldFontId;
+
+	public CharFont(char ch, int f) {
+		this(ch, f, f);
+	}
+
+	public CharFont(char ch, int f, int bf) {
+		c = ch;
+		fontId = f;
+		boldFontId = bf;
+	}
 }

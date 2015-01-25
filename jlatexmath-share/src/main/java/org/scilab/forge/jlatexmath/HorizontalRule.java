@@ -29,8 +29,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
@@ -38,9 +36,6 @@ import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
  * A box representing a horizontal line.
  */
 public class HorizontalRule extends Box {
-
-	private static final GeomFactory GEOM_FACTORY = FactoryProvider.INSTANCE
-			.getGeomFactory();
 
 	private Color color = null;
 	private float speShift = 0;;
@@ -51,8 +46,7 @@ public class HorizontalRule extends Box {
 		shift = s;
 	}
 
-	public HorizontalRule(float thickness, float width, float s,
-			boolean trueShift) {
+	public HorizontalRule(float thickness, float width, float s, boolean trueShift) {
 		height = thickness;
 		this.width = width;
 		if (trueShift) {
@@ -76,11 +70,9 @@ public class HorizontalRule extends Box {
 			g2.setColor(color);
 
 		if (speShift == 0) {
-			g2.fill(GEOM_FACTORY
-					.createRectangle2D(x, y - height, width, height));
+			g2.fill(geom.createRectangle2D(x, y - height, width, height));
 		} else {
-			g2.fill(GEOM_FACTORY.createRectangle2D(x, y - height + speShift,
-					width, height));
+			g2.fill(geom.createRectangle2D(x, y - height + speShift, width, height));
 		}
 		g2.setColor(old);
 	}

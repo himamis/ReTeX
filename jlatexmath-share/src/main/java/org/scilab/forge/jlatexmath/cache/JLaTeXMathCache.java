@@ -35,300 +35,318 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.exception.ParseException;
+import org.scilab.forge.jlatexmath.platform.Graphics;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.Image;
 import org.scilab.forge.jlatexmath.platform.graphics.Insets;
 import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
 /**
  * Class to cache generated image from formulas
+ * 
  * @author Calixte DENIZET
  */
 public final class JLaTeXMathCache {
-	
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE.getGraphicsFactory();
 
-    private static final Transform identity = GRAPHICS_FACTORY.createTransform();
-    private static ConcurrentMap<CachedTeXFormula, SoftReference<CachedImage>> cache = new ConcurrentHashMap<CachedTeXFormula, SoftReference<CachedImage>>(128);
-    private static int max = Integer.MAX_VALUE;
-    private static ReferenceQueue queue = new ReferenceQueue();
+	private static final Transform identity = new Graphics().createTransform();
+	private static ConcurrentMap<CachedTeXFormula, SoftReference<CachedImage>> cache = new ConcurrentHashMap<CachedTeXFormula, SoftReference<CachedImage>>(
+			128);
+	private static int max = Integer.MAX_VALUE;
+	private static ReferenceQueue queue = new ReferenceQueue();
 
-    private JLaTeXMathCache() { }
+	private JLaTeXMathCache() {
+	}
 
-    /**
-     * Set max size. Take care the cache will be reinitialized
-     * @param max the max size
-     */
-    public static void setMaxCachedObjects(int max) {
-        JLaTeXMathCache.max = Math.max(max, 1);
-        cache.clear();
-        cache = new ConcurrentHashMap<CachedTeXFormula, SoftReference<CachedImage>>(JLaTeXMathCache.max);
-    }
+	/**
+	 * Set max size. Take care the cache will be reinitialized
+	 * 
+	 * @param max the max size
+	 */
+	public static void setMaxCachedObjects(int max) {
+		JLaTeXMathCache.max = Math.max(max, 1);
+		cache.clear();
+		cache = new ConcurrentHashMap<CachedTeXFormula, SoftReference<CachedImage>>(JLaTeXMathCache.max);
+	}
 
-    /**
-     * @param f a formula
-     * @param style a style like TeXConstants.STYLE_DISPLAY
-     * @param size the size of font
-     * @param inset the inset to add on the top, bottom, left and right
-     * @return an array of length 3 containing width, height and depth
-     */
-    public static int[] getCachedTeXFormulaDimensions(String f, int style, int type, int size, int inset, Color fgcolor) throws ParseException  {
-        return getCachedTeXFormulaDimensions(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
-    }
+	/**
+	 * @param f a formula
+	 * @param style a style like TeXConstants.STYLE_DISPLAY
+	 * @param size the size of font
+	 * @param inset the inset to add on the top, bottom, left and right
+	 * @return an array of length 3 containing width, height and depth
+	 */
+	public static int[] getCachedTeXFormulaDimensions(String f, int style, int type, int size, int inset,
+			Color fgcolor) throws ParseException {
+		return getCachedTeXFormulaDimensions(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
+	}
 
-    public static int[] getCachedTeXFormulaDimensions(String f, int style, int size, int inset) throws ParseException  {
-        return getCachedTeXFormulaDimensions(f, style, 0, size, inset, null);
-    }
+	public static int[] getCachedTeXFormulaDimensions(String f, int style, int size, int inset)
+			throws ParseException {
+		return getCachedTeXFormulaDimensions(f, style, 0, size, inset, null);
+	}
 
-    /**
-     * @param o an Object to identify the image in the cache
-     * @return an array of length 3 containing width, height and depth
-     */
-    public static int[] getCachedTeXFormulaDimensions(Object o) throws ParseException  {
-        if (o == null || !(o instanceof CachedTeXFormula)) {
-            return new int[]{0, 0, 0};
-        }
-        CachedTeXFormula cached = (CachedTeXFormula) o;
-        SoftReference<CachedImage> img = cache.get(cached);
-        if (img == null || img.get() == null) {
-            img = makeImage(cached);
-        }
+	/**
+	 * @param o an Object to identify the image in the cache
+	 * @return an array of length 3 containing width, height and depth
+	 */
+	public static int[] getCachedTeXFormulaDimensions(Object o) throws ParseException {
+		if (o == null || !(o instanceof CachedTeXFormula)) {
+			return new int[] { 0, 0, 0 };
+		}
+		CachedTeXFormula cached = (CachedTeXFormula) o;
+		SoftReference<CachedImage> img = cache.get(cached);
+		if (img == null || img.get() == null) {
+			img = makeImage(cached);
+		}
 
-        return new int[]{cached.width, cached.height, cached.depth};
-    }
+		return new int[] { cached.width, cached.height, cached.depth };
+	}
 
-    /**
-     * Get a cached formula
-     * @param f a formula
-     * @param style a style like TeXConstants.STYLE_DISPLAY
-     * @param size the size of font
-     * @param inset the inset to add on the top, bottom, left and right
-     * @return the key in the map
-     */
-    public static Object getCachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor) throws ParseException  {
-        CachedTeXFormula cached = new CachedTeXFormula(f, style, type, size, inset, fgcolor);
-        SoftReference<CachedImage> img = cache.get(cached);
-        if (img == null || img.get() == null) {
-            img = makeImage(cached);
-        }
+	/**
+	 * Get a cached formula
+	 * 
+	 * @param f a formula
+	 * @param style a style like TeXConstants.STYLE_DISPLAY
+	 * @param size the size of font
+	 * @param inset the inset to add on the top, bottom, left and right
+	 * @return the key in the map
+	 */
+	public static Object getCachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor)
+			throws ParseException {
+		CachedTeXFormula cached = new CachedTeXFormula(f, style, type, size, inset, fgcolor);
+		SoftReference<CachedImage> img = cache.get(cached);
+		if (img == null || img.get() == null) {
+			img = makeImage(cached);
+		}
 
-        return cached;
-    }
+		return cached;
+	}
 
-    public static Object getCachedTeXFormula(String f, int style, int size, int inset) throws ParseException  {
-        return getCachedTeXFormula(f, style, 0, size, inset, null);
-    }
+	public static Object getCachedTeXFormula(String f, int style, int size, int inset) throws ParseException {
+		return getCachedTeXFormula(f, style, 0, size, inset, null);
+	}
 
-    /**
-     * Clear the cache
-     */
-    public static void clearCache() {
-        cache.clear();
-    }
+	/**
+	 * Clear the cache
+	 */
+	public static void clearCache() {
+		cache.clear();
+	}
 
-    /**
-     * Remove a formula from the cache
-     * @param f a formula
-     * @param style a style like TeXConstants.STYLE_DISPLAY
-     * @param size the size of font
-     * @param inset the inset to add on the top, bottom, left and right
-     */
-    public static void removeCachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor) throws ParseException  {
-        cache.remove(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
-    }
+	/**
+	 * Remove a formula from the cache
+	 * 
+	 * @param f a formula
+	 * @param style a style like TeXConstants.STYLE_DISPLAY
+	 * @param size the size of font
+	 * @param inset the inset to add on the top, bottom, left and right
+	 */
+	public static void removeCachedTeXFormula(String f, int style, int type, int size, int inset,
+			Color fgcolor) throws ParseException {
+		cache.remove(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
+	}
 
-    public static void removeCachedTeXFormula(String f, int style, int size, int inset) throws ParseException  {
-        removeCachedTeXFormula(f, style, 0, size, inset, null);
-    }
+	public static void removeCachedTeXFormula(String f, int style, int size, int inset) throws ParseException {
+		removeCachedTeXFormula(f, style, 0, size, inset, null);
+	}
 
-    /**
-     * Remove a formula from the cache. Take care, remove the Object o, invalidate it !
-     * @param o an Object to identify the image in the cache
-     */
-    public static void removeCachedTeXFormula(Object o) throws ParseException  {
-        if (o != null && o instanceof CachedTeXFormula) {
-            cache.remove((CachedTeXFormula) o);
-        }
-    }
+	/**
+	 * Remove a formula from the cache. Take care, remove the Object o, invalidate it !
+	 * 
+	 * @param o an Object to identify the image in the cache
+	 */
+	public static void removeCachedTeXFormula(Object o) throws ParseException {
+		if (o != null && o instanceof CachedTeXFormula) {
+			cache.remove((CachedTeXFormula) o);
+		}
+	}
 
-    /**
-     * Paint a cached formula
-     * @param f a formula
-     * @param style a style like TeXConstants.STYLE_DISPLAY
-     * @param size the size of font
-     * @param inset the inset to add on the top, bottom, left and right
-     * @return the key in the map
-     */
-    public static Object paintCachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor, Graphics2DInterface g) throws ParseException  {
-        return paintCachedTeXFormula(new CachedTeXFormula(f, style, type, size, inset, fgcolor), g);
-    }
+	/**
+	 * Paint a cached formula
+	 * 
+	 * @param f a formula
+	 * @param style a style like TeXConstants.STYLE_DISPLAY
+	 * @param size the size of font
+	 * @param inset the inset to add on the top, bottom, left and right
+	 * @return the key in the map
+	 */
+	public static Object paintCachedTeXFormula(String f, int style, int type, int size, int inset,
+			Color fgcolor, Graphics2DInterface g) throws ParseException {
+		return paintCachedTeXFormula(new CachedTeXFormula(f, style, type, size, inset, fgcolor), g);
+	}
 
-    public static Object paintCachedTeXFormula(String f, int style, int size, int inset, Graphics2DInterface g) throws ParseException  {
-        return paintCachedTeXFormula(f, style, 0, size, inset, null, g);
-    }
+	public static Object paintCachedTeXFormula(String f, int style, int size, int inset, Graphics2DInterface g)
+			throws ParseException {
+		return paintCachedTeXFormula(f, style, 0, size, inset, null, g);
+	}
 
-    /**
-     * Paint a cached formula
-     * @param o an Object to identify the image in the cache
-     * @param g the graphics where to paint the image
-     * @return the key in the map
-     */
-    public static Object paintCachedTeXFormula(Object o, Graphics2DInterface g) throws ParseException  {
-        if (o == null || !(o instanceof CachedTeXFormula)) {
-            return null;
-        }
-        CachedTeXFormula cached = (CachedTeXFormula) o;
-        SoftReference<CachedImage> img = cache.get(cached);
-        if (img == null || img.get() == null) {
-            img = makeImage(cached);
-        }
-        g.drawImage(img.get().image, identity);
+	/**
+	 * Paint a cached formula
+	 * 
+	 * @param o an Object to identify the image in the cache
+	 * @param g the graphics where to paint the image
+	 * @return the key in the map
+	 */
+	public static Object paintCachedTeXFormula(Object o, Graphics2DInterface g) throws ParseException {
+		if (o == null || !(o instanceof CachedTeXFormula)) {
+			return null;
+		}
+		CachedTeXFormula cached = (CachedTeXFormula) o;
+		SoftReference<CachedImage> img = cache.get(cached);
+		if (img == null || img.get() == null) {
+			img = makeImage(cached);
+		}
+		g.drawImage(img.get().image, identity);
 
-        return cached;
-    }
+		return cached;
+	}
 
-    /**
-     * Get a cached formula
-     * @param f a formula
-     * @param style a style like TeXConstants.STYLE_DISPLAY
-     * @param size the size of font
-     * @param inset the inset to add on the top, bottom, left and right
-     * @return the cached image
-     */
-    public static Image getCachedTeXFormulaImage(String f, int style, int type, int size, int inset, Color fgcolor) throws ParseException {
-        return getCachedTeXFormulaImage(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
-    }
+	/**
+	 * Get a cached formula
+	 * 
+	 * @param f a formula
+	 * @param style a style like TeXConstants.STYLE_DISPLAY
+	 * @param size the size of font
+	 * @param inset the inset to add on the top, bottom, left and right
+	 * @return the cached image
+	 */
+	public static Image getCachedTeXFormulaImage(String f, int style, int type, int size, int inset,
+			Color fgcolor) throws ParseException {
+		return getCachedTeXFormulaImage(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
+	}
 
-    public static Image getCachedTeXFormulaImage(String f, int style, int size, int inset) throws ParseException {
-        return getCachedTeXFormulaImage(f, style, 0, size, inset, null);
-    }
+	public static Image getCachedTeXFormulaImage(String f, int style, int size, int inset)
+			throws ParseException {
+		return getCachedTeXFormulaImage(f, style, 0, size, inset, null);
+	}
 
-    /**
-     * Get a cached formula
-     * @param o an Object to identify the image in the cache
-     * @return the cached image
-     */
-    public static Image getCachedTeXFormulaImage(Object o) throws ParseException {
-        if (o == null || !(o instanceof CachedTeXFormula)) {
-            return null;
-        }
-        CachedTeXFormula cached = (CachedTeXFormula) o;
-        SoftReference<CachedImage> img = cache.get(cached);
-        if (img == null || img.get() == null) {
-            img = makeImage(cached);
-        }
+	/**
+	 * Get a cached formula
+	 * 
+	 * @param o an Object to identify the image in the cache
+	 * @return the cached image
+	 */
+	public static Image getCachedTeXFormulaImage(Object o) throws ParseException {
+		if (o == null || !(o instanceof CachedTeXFormula)) {
+			return null;
+		}
+		CachedTeXFormula cached = (CachedTeXFormula) o;
+		SoftReference<CachedImage> img = cache.get(cached);
+		if (img == null || img.get() == null) {
+			img = makeImage(cached);
+		}
 
-        return img.get().image;
-    }
+		return img.get().image;
+	}
 
-    private static SoftReference<CachedImage> makeImage(CachedTeXFormula cached) throws ParseException {
-        TeXFormula formula = new TeXFormula(cached.f);
-        TeXIcon icon = formula.createTeXIcon(cached.style, cached.size, cached.type, cached.fgcolor);
-        icon.setInsets(new Insets(cached.inset, cached.inset, cached.inset, cached.inset));
-        Image image = GRAPHICS_FACTORY.createImage(icon.getIconWidth(), icon.getIconHeight(), Image.TYPE_INT_ARGB);
-        Graphics2DInterface g2 = image.createGraphics2D();
-        icon.paintIcon(null, g2, 0, 0);
-        g2.dispose();
-        cached.setDimensions(icon.getIconWidth(), icon.getIconHeight(), icon.getIconDepth());
-        SoftReference<CachedImage> img = new SoftReference<CachedImage>(new CachedImage(image, cached), queue);
+	private static SoftReference<CachedImage> makeImage(CachedTeXFormula cached) throws ParseException {
+		TeXFormula formula = new TeXFormula(cached.f);
+		TeXIcon icon = formula.createTeXIcon(cached.style, cached.size, cached.type, cached.fgcolor);
+		icon.setInsets(new Insets(cached.inset, cached.inset, cached.inset, cached.inset));
+		Image image = new Graphics().createImage(icon.getIconWidth(), icon.getIconHeight(),
+				Image.TYPE_INT_ARGB);
+		Graphics2DInterface g2 = image.createGraphics2D();
+		icon.paintIcon(null, g2, 0, 0);
+		g2.dispose();
+		cached.setDimensions(icon.getIconWidth(), icon.getIconHeight(), icon.getIconDepth());
+		SoftReference<CachedImage> img = new SoftReference<CachedImage>(new CachedImage(image, cached), queue);
 
-        if (cache.size() >= max) {
-            Reference soft;
-            while ((soft = queue.poll()) != null) {
-                CachedImage ci = (CachedImage) soft.get();
-                if (ci != null) {
-                    cache.remove(ci.cachedTf);
-                }
-            }
-            Iterator<CachedTeXFormula> iter = cache.keySet().iterator();
-            if (iter.hasNext()) {
-                CachedTeXFormula c = iter.next();
-                SoftReference<CachedImage> cachedImage = cache.get(c);
-                if (cachedImage != null) {
-                    cachedImage.clear();
-                }
-                cache.remove(c);
-            }
-        }
-        cache.put(cached, img);
+		if (cache.size() >= max) {
+			Reference soft;
+			while ((soft = queue.poll()) != null) {
+				CachedImage ci = (CachedImage) soft.get();
+				if (ci != null) {
+					cache.remove(ci.cachedTf);
+				}
+			}
+			Iterator<CachedTeXFormula> iter = cache.keySet().iterator();
+			if (iter.hasNext()) {
+				CachedTeXFormula c = iter.next();
+				SoftReference<CachedImage> cachedImage = cache.get(c);
+				if (cachedImage != null) {
+					cachedImage.clear();
+				}
+				cache.remove(c);
+			}
+		}
+		cache.put(cached, img);
 
-        return img;
-    }
+		return img;
+	}
 
-    private static class CachedImage {
+	private static class CachedImage {
 
-        Image image;
-        CachedTeXFormula cachedTf;
+		Image image;
+		CachedTeXFormula cachedTf;
 
-        CachedImage(Image image, CachedTeXFormula cachedTf) {
-            this.image = image;
-            this.cachedTf = cachedTf;
-        }
-    }
+		CachedImage(Image image, CachedTeXFormula cachedTf) {
+			this.image = image;
+			this.cachedTf = cachedTf;
+		}
+	}
 
-    private static class CachedTeXFormula {
+	private static class CachedTeXFormula {
 
-        String f;
-        int style;
-        int type;
-        int size;
-        int inset;
-        int width = -1;
-        int height;
-        int depth;
-        Color fgcolor;
+		String f;
+		int style;
+		int type;
+		int size;
+		int inset;
+		int width = -1;
+		int height;
+		int depth;
+		Color fgcolor;
 
-        CachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor) {
-            this.f = f;
-            this.style = style;
-            this.type = type;
-            this.size = size;
-            this.inset = inset;
-            this.fgcolor = fgcolor;
-        }
+		CachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor) {
+			this.f = f;
+			this.style = style;
+			this.type = type;
+			this.size = size;
+			this.inset = inset;
+			this.fgcolor = fgcolor;
+		}
 
-        void setDimensions(int width, int height, int depth) {
-            this.width = width;
-            this.height = height;
-            this.depth = depth;
-        }
+		void setDimensions(int width, int height, int depth) {
+			this.width = width;
+			this.height = height;
+			this.depth = depth;
+		}
 
-        /**
-         * {@inheritDoc}
-         */
-        public boolean equals(Object o) {
-            if (o != null && o instanceof CachedTeXFormula) {
-                CachedTeXFormula c = (CachedTeXFormula) o;
-                boolean b = (c.f.equals(f) && c.style == style && c.type == type && c.size == size && c.inset == inset && c.fgcolor.equals(fgcolor));
-                if (b) {
-                    if (c.width == -1) {
-                        c.width = width;
-                        c.height = height;
-                        c.depth = depth;
-                    } else if (width == -1) {
-                        width = c.width;
-                        height = c.height;
-                        depth = c.depth;
-                    }
-                }
+		/**
+		 * {@inheritDoc}
+		 */
+		public boolean equals(Object o) {
+			if (o != null && o instanceof CachedTeXFormula) {
+				CachedTeXFormula c = (CachedTeXFormula) o;
+				boolean b = (c.f.equals(f) && c.style == style && c.type == type && c.size == size
+						&& c.inset == inset && c.fgcolor.equals(fgcolor));
+				if (b) {
+					if (c.width == -1) {
+						c.width = width;
+						c.height = height;
+						c.depth = depth;
+					} else if (width == -1) {
+						width = c.width;
+						height = c.height;
+						depth = c.depth;
+					}
+				}
 
-                return b;
-            }
+				return b;
+			}
 
-            return false;
-        }
+			return false;
+		}
 
-        /**
-         * {@inheritDoc}
-         */
-        public int hashCode() {
-            return f.hashCode();
-        }
-    }
+		/**
+		 * {@inheritDoc}
+		 */
+		public int hashCode() {
+			return f.hashCode();
+		}
+	}
 }

@@ -29,7 +29,7 @@
 
 package org.scilab.forge.jlatexmath.exception;
 
-import org.scilab.forge.jlatexmath.platform.parser.TeXSymbolParser;
+import org.scilab.forge.jlatexmath.DefaultTeXFontParser;
 
 /**
  * Signals that an unknown symbol was used.
@@ -38,9 +38,9 @@ import org.scilab.forge.jlatexmath.platform.parser.TeXSymbolParser;
  */
 public class SymbolNotFoundException extends JMathTeXException {
 
-    public SymbolNotFoundException(String name) {
-	super("There's no symbol with the name '" + name + "' defined in '"
-	      + TeXSymbolParser.RESOURCE_NAME + "'!");
-    }
-    
+	public SymbolNotFoundException(String name) {
+		super("There's no symbol with the name '" + name + "' defined in '"
+				+ DefaultTeXFontParser.RESOURCE_NAME + "'!");
+	}
+
 }

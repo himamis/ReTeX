@@ -29,15 +29,15 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a boxed base atom. 
+ * An atom representing a boxed base atom.
  */
 public class OvalAtom extends FBoxAtom {
 
-    public OvalAtom(Atom base) {
-	super(base);
-    }
-    
-    public Box createBox(TeXEnvironment env) {
-	return new OvalBox((FramedBox) super.createBox(env));
-    }
+	public OvalAtom(Atom base) {
+		super(base);
+	}
+
+	public Box createBox(TeXEnvironment env) {
+		return new OvalBox((FramedBox) super.createBox(env));
+	}
 }

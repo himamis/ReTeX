@@ -29,37 +29,38 @@
 package org.scilab.forge.jlatexmath;
 
 import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
+import org.scilab.forge.jlatexmath.exception.AlphabetRegistrationException;
 import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 
 public class WebStartAlphabetRegistration implements AlphabetRegistration {
-    
-    private Character.UnicodeBlock[] blocks;
-    private AlphabetRegistration reg;
 
-    private WebStartAlphabetRegistration(Character.UnicodeBlock[] blocks) {
-	this.blocks = blocks;
-    }
-    
-    public static void register(Character.UnicodeBlock[] blocks) {
-	DefaultTeXFont.registerAlphabet(new WebStartAlphabetRegistration(blocks));
-    } 
+	private Character.UnicodeBlock[] blocks;
+	private AlphabetRegistration reg;
 
-    public Character.UnicodeBlock[] getUnicodeBlock() {
-	return blocks;
-    }
-    
-    public Object getPackage() throws AlphabetRegistrationException {
-	if (blocks == JLM_GREEK) {
-	    reg = new GreekRegistration();
-	} else if (blocks == JLM_CYRILLIC) {
-	    reg = new CyrillicRegistration();
-	} else {
-	    throw new AlphabetRegistrationException("Invalid Unicode Block");
+	private WebStartAlphabetRegistration(Character.UnicodeBlock[] blocks) {
+		this.blocks = blocks;
 	}
-	return reg;
-    }
 
-    public String getTeXFontFileName() {
-	return reg.getTeXFontFileName();
-    }
+	public static void register(Character.UnicodeBlock[] blocks) {
+		DefaultTeXFont.registerAlphabet(new WebStartAlphabetRegistration(blocks));
+	}
+
+	public Character.UnicodeBlock[] getUnicodeBlock() {
+		return blocks;
+	}
+
+	public Object getPackage() throws AlphabetRegistrationException {
+		if (blocks == JLM_GREEK) {
+			reg = new GreekRegistration();
+		} else if (blocks == JLM_CYRILLIC) {
+			reg = new CyrillicRegistration();
+		} else {
+			throw new AlphabetRegistrationException("Invalid Unicode Block");
+		}
+		return reg;
+	}
+
+	public String getTeXFontFileName() {
+		return reg.getTeXFontFileName();
+	}
 }

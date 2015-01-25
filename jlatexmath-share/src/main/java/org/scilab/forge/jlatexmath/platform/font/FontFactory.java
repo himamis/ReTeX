@@ -1,7 +1,5 @@
 package org.scilab.forge.jlatexmath.platform.font;
 
-import org.scilab.forge.jlatexmath.platform.parser.TeXFontParser;
-
 public abstract class FontFactory {
 	
 	public abstract Font createFont(String name, int style, int size);

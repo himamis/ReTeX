@@ -29,8 +29,7 @@
 
 package org.scilab.forge.jlatexmath.exception;
 
-import org.scilab.forge.jlatexmath.platform.parser.TeXFontParser;
-
+import org.scilab.forge.jlatexmath.DefaultTeXFontParser;
 
 /**
  * Signals a missing symbol mapping.
@@ -39,9 +38,9 @@ import org.scilab.forge.jlatexmath.platform.parser.TeXFontParser;
  */
 public class SymbolMappingNotFoundException extends JMathTeXException {
 
-    public SymbolMappingNotFoundException(String symbolName) {
-	super("No mapping found for the symbol '" + symbolName + "'! "
-	      + "Insert a <" + TeXFontParser.SYMBOL_MAPPING_EL
-	      + ">-element in '" + TeXFontParser.RESOURCE_NAME + "'.");
-    }
+	public SymbolMappingNotFoundException(String symbolName) {
+		super("No mapping found for the symbol '" + symbolName + "'! " + "Insert a <"
+				+ DefaultTeXFontParser.SYMBOL_MAPPING_EL + ">-element in '"
+				+ DefaultTeXFontParser.RESOURCE_NAME + "'.");
+	}
 }

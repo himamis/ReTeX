@@ -31,60 +31,59 @@ package org.scilab.forge.jlatexmath;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 import org.scilab.forge.jlatexmath.platform.graphics.Image;
 import org.scilab.forge.jlatexmath.platform.graphics.RenderingHints;
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
 /**
  * A box representing a box containing a graphics.
  */
 public class GraphicsBox extends Box {
-	
-    public final static int BILINEAR = 0;
-    public final static int NEAREST_NEIGHBOR = 1;
-    public final static int BICUBIC = 2;
 
-    private Image image;
-    private float scl;
-    private int interp;
+	public final static int BILINEAR = 0;
+	public final static int NEAREST_NEIGHBOR = 1;
+	public final static int BICUBIC = 2;
 
-    public GraphicsBox(Image image, float width, float height, float size, int interpolation) {
-	this.image = image;
-	this.width = width;
-	this.height = height;
-	this.scl = 1 / size;
-	depth = 0;
-	shift = 0;
-	switch (interpolation) {
-	case BILINEAR :
-	    interp = RenderingHints.VALUE_INTERPOLATION_BILINEAR;
-	    break;
-	case NEAREST_NEIGHBOR :
-	    interp = RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR;
-	    break;
-	case BICUBIC :
-	    interp = RenderingHints.VALUE_INTERPOLATION_BICUBIC;
-	    break;
-	default :
-	    interp = -1;
+	private Image image;
+	private float scl;
+	private int interp;
+
+	public GraphicsBox(Image image, float width, float height, float size, int interpolation) {
+		this.image = image;
+		this.width = width;
+		this.height = height;
+		this.scl = 1 / size;
+		depth = 0;
+		shift = 0;
+		switch (interpolation) {
+		case BILINEAR:
+			interp = RenderingHints.VALUE_INTERPOLATION_BILINEAR;
+			break;
+		case NEAREST_NEIGHBOR:
+			interp = RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR;
+			break;
+		case BICUBIC:
+			interp = RenderingHints.VALUE_INTERPOLATION_BICUBIC;
+			break;
+		default:
+			interp = -1;
+		}
 	}
-    }
-   
-    public void draw(Graphics2DInterface g2, float x, float y) {
-	g2.saveTransformation();
-	int oldKey = -1;
-	if (interp != -1) {
-	    oldKey = g2.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
-	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, interp);
+
+	public void draw(Graphics2DInterface g2, float x, float y) {
+		g2.saveTransformation();
+		int oldKey = -1;
+		if (interp != -1) {
+			oldKey = g2.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
+			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, interp);
+		}
+		g2.translate(x, y - height);
+		g2.scale(scl, scl);
+		g2.drawImage(image, 0, 0);
+		g2.restoreTransformation();
+		if (oldKey != -1) {
+			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, oldKey);
+		}
 	}
-	g2.translate(x, y - height);
-	g2.scale(scl, scl);
-	g2.drawImage(image, 0, 0);
-	g2.restoreTransformation();
-	if (oldKey != -1) {
-	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, oldKey);
+
+	public int getLastFontId() {
+		return 0;
 	}
-    }
-    
-    public int getLastFontId() {
-	return 0;
-    }
 }

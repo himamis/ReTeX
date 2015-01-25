@@ -29,7 +29,7 @@
 
 package org.scilab.forge.jlatexmath.exception;
 
-import org.scilab.forge.jlatexmath.platform.parser.TeXFontParser;
+import org.scilab.forge.jlatexmath.DefaultTeXFontParser;
 
 /**
  * Signals a missing text style mapping.
@@ -37,10 +37,10 @@ import org.scilab.forge.jlatexmath.platform.parser.TeXFontParser;
  * @author Kurt Vermeulen
  */
 public class TextStyleMappingNotFoundException extends JMathTeXException {
-    
-    public TextStyleMappingNotFoundException(String styleName) {
-	super("No mapping found for the text style '" + styleName + "'! "
-	      + "Insert a <" + TeXFontParser.STYLE_MAPPING_EL
-	      + ">-element in '" + TeXFontParser.RESOURCE_NAME + "'.");
-    }
+
+	public TextStyleMappingNotFoundException(String styleName) {
+		super("No mapping found for the text style '" + styleName + "'! " + "Insert a <"
+				+ DefaultTeXFontParser.STYLE_MAPPING_EL + ">-element in '"
+				+ DefaultTeXFontParser.RESOURCE_NAME + "'.");
+	}
 }

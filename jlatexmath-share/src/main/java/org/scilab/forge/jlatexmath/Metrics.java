@@ -34,37 +34,37 @@ package org.scilab.forge.jlatexmath;
  */
 public class Metrics {
 
-    private final float w;
-    private final float h;
-    private final float d;
-    private final float i;
-    private final float s;
-    
-    public Metrics(float w, float h, float d, float i, float factor, float size) {
-	this.w = w * factor;
-	this.h = h * factor;
-	this.d = d * factor;
-	this.i = i * factor;
-	this.s = size;
-    }
+	private final float w;
+	private final float h;
+	private final float d;
+	private final float i;
+	private final float s;
 
-    public float getWidth() {
-	return w;
-    }
+	public Metrics(float w, float h, float d, float i, float factor, float size) {
+		this.w = w * factor;
+		this.h = h * factor;
+		this.d = d * factor;
+		this.i = i * factor;
+		this.s = size;
+	}
 
-    public float getHeight() {
-	return h;
-    }
+	public float getWidth() {
+		return w;
+	}
 
-    public float getDepth() {
-	return d;
-    }
+	public float getHeight() {
+		return h;
+	}
 
-    public float getItalic() {
-	return i;
-    }
-    
-    public float getSize() {
-	return s;
-    }
+	public float getDepth() {
+		return d;
+	}
+
+	public float getItalic() {
+		return i;
+	}
+
+	public float getSize() {
+		return s;
+	}
 }

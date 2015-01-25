@@ -29,7 +29,6 @@
 
 package org.scilab.forge.jlatexmath.exception;
 
-
 /**
  * Signals that an invalid TeXFormula was used.
  * 
@@ -37,7 +36,7 @@ package org.scilab.forge.jlatexmath.exception;
  */
 public class InvalidTeXFormulaException extends JMathTeXException {
 
-    public InvalidTeXFormulaException(String msg) {
-	super(msg);
-    }
+	public InvalidTeXFormulaException(String msg) {
+		super(msg);
+	}
 }

@@ -29,7 +29,6 @@
 
 package org.scilab.forge.jlatexmath.exception;
 
-
 /**
  * Signals that an unknown delimiter type constant was used.
  * 
@@ -37,9 +36,8 @@ package org.scilab.forge.jlatexmath.exception;
  */
 public class InvalidDelimiterTypeException extends JMathTeXException {
 
-    protected InvalidDelimiterTypeException() {
-	super(
-	      "The delimiter type was not valid! "
-	      + "Use one of the delimiter type constants from the class 'TeXConstants'.");
-    }
+	protected InvalidDelimiterTypeException() {
+		super("The delimiter type was not valid! "
+				+ "Use one of the delimiter type constants from the class 'TeXConstants'.");
+	}
 }

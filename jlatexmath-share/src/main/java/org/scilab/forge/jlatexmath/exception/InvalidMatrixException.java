@@ -29,7 +29,6 @@
 
 package org.scilab.forge.jlatexmath.exception;
 
-
 /**
  * Signals a problem of dimensions in the matrix.
  *
@@ -37,7 +36,7 @@ package org.scilab.forge.jlatexmath.exception;
  */
 public class InvalidMatrixException extends JMathTeXException {
 
-   protected InvalidMatrixException(String msg) {
-      super(msg);
-   }
+	protected InvalidMatrixException(String msg) {
+		super(msg);
+	}
 }

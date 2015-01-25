@@ -31,83 +31,80 @@ package org.scilab.forge.jlatexmath;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.FontAdapter;
+import org.scilab.forge.jlatexmath.platform.Graphics;
 import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontFactory;
 import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
-import org.scilab.forge.jlatexmath.platform.font.TextAttributeProvider;
 import org.scilab.forge.jlatexmath.platform.font.TextLayout;
 import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
 
 /**
  * A box representing a scaled box.
  */
 public class JavaFontRenderingBox extends Box {
-	
-	private static final GraphicsFactory GRAPHICS_FACTORY = FactoryProvider.INSTANCE.getGraphicsFactory();
-	private static final FontFactory FONT_FACTORY = FactoryProvider.INSTANCE.getFontFactory();
 
-    private static final Graphics2DInterface TEMPGRAPHIC = GRAPHICS_FACTORY.createImage(1, 1, Image.TYPE_INT_ARGB).createGraphics2D();
+	private static final Graphics2DInterface TEMPGRAPHIC;
 
-    private static Font font = FONT_FACTORY.createFont("Serif", Font.PLAIN, 10);
+	private static Font font;
 
-    private String str;
-    private TextLayout text;
-    private float size;
-    private static TextAttribute KERNING;
-    private static Integer KERNING_ON;
-    private static TextAttribute LIGATURES;
-    private static Integer LIGATURES_ON;
+	private String str;
+	private TextLayout text;
+	private float size;
+	private static TextAttribute KERNING;
+	private static Integer KERNING_ON;
+	private static TextAttribute LIGATURES;
+	private static Integer LIGATURES_ON;
 
-    static {
-    	TextAttributeProvider textAttributeProvider = FONT_FACTORY.createTextAttributeProvider();
-        try { // to avoid problems with Java 1.5
-            KERNING = textAttributeProvider.getTextAttribute("KERNING");
-            KERNING_ON = textAttributeProvider.getTextAttributeValue("KERNING_ON");
-            LIGATURES = textAttributeProvider.getTextAttribute("LIGATURES");
-            LIGATURES_ON = textAttributeProvider.getTextAttributeValue("LIGATURES_ON");
-        } catch (Exception e) { }
-    }
+	static {
+		TEMPGRAPHIC = new Graphics().createImage(1, 1).createGraphics2D();
+		font = new FontAdapter().createFont("Serif", Font.PLAIN, 10);
+		try { // to avoid problems with Java 1.5
+			KERNING = (TextAttribute) (TextAttribute.class.getField("KERNING").get(TextAttribute.class));
+			KERNING_ON = (Integer) (TextAttribute.class.getField("KERNING_ON").get(TextAttribute.class));
+			LIGATURES = (TextAttribute) (TextAttribute.class.getField("LIGATURES").get(TextAttribute.class));
+			LIGATURES_ON = (Integer) (TextAttribute.class.getField("LIGATURES_ON").get(TextAttribute.class));
+		} catch (Exception e) {
+		}
+	}
 
-    public JavaFontRenderingBox(String str, int type, float size, Font f, boolean kerning) {
-        this.str = str;
-        this.size = size;
+	public JavaFontRenderingBox(String str, int type, float size, Font f, boolean kerning) {
+		this.str = str;
+		this.size = size;
 
-        if (kerning && KERNING != null) {
-            Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>();
-            map.put(KERNING, KERNING_ON);
-            map.put(LIGATURES, LIGATURES_ON);
-            f = f.deriveFont(map);
-        }
+		if (kerning && KERNING != null) {
+			Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>();
+			map.put(KERNING, KERNING_ON);
+			map.put(LIGATURES, LIGATURES_ON);
+			f = f.deriveFont(map);
+		}
 
-        this.text = FONT_FACTORY.createTextLayout(str, f.deriveFont(type), TEMPGRAPHIC.getFontRenderContext());
-        Rectangle2D rect = text.getBounds();
-        this.height = (float) (-rect.getY() * size / 10);
-        this.depth = (float) (rect.getHeight() * size / 10) - this.height;
-        this.width = (float) ((rect.getWidth() + rect.getX() + 0.4f) * size / 10);
-    }
+		this.text = new FontAdapter().createTextLayout(str, f.deriveFont(type),
+				TEMPGRAPHIC.getFontRenderContext());
+		Rectangle2D rect = text.getBounds();
+		this.height = (float) (-rect.getY() * size / 10);
+		this.depth = (float) (rect.getHeight() * size / 10) - this.height;
+		this.width = (float) ((rect.getWidth() + rect.getX() + 0.4f) * size / 10);
+	}
 
-    public JavaFontRenderingBox(String str, int type, float size) {
-        this(str, type, size, font, true);
-    }
+	public JavaFontRenderingBox(String str, int type, float size) {
+		this(str, type, size, font, true);
+	}
 
-    public static void setFont(String name) {
-        font = FONT_FACTORY.createFont(name, Font.PLAIN, 10);
-    }
+	public static void setFont(String name) {
+		font = new FontAdapter().createFont(name, Font.PLAIN, 10);
+	}
 
-    public void draw(Graphics2DInterface g2, float x, float y) {
-        drawDebug(g2, x, y);
-        g2.translate(x, y);
-        g2.scale(0.1 * size, 0.1 * size);
-        text.draw(g2, 0, 0);
-        g2.scale(10 / size, 10 / size);
-        g2.translate(-x, -y);
-    }
+	public void draw(Graphics2DInterface g2, float x, float y) {
+		drawDebug(g2, x, y);
+		g2.translate(x, y);
+		g2.scale(0.1 * size, 0.1 * size);
+		text.draw(g2, 0, 0);
+		g2.scale(10 / size, 10 / size);
+		g2.translate(-x, -y);
+	}
 
-    public int getLastFontId() {
-        return 0;
-    }
+	public int getLastFontId() {
+		return 0;
+	}
 }

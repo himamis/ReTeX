@@ -31,7 +31,7 @@ package org.scilab.forge.jlatexmath.exception;
 
 public class FontAlreadyLoadedException extends XMLResourceParseException {
 
-    public FontAlreadyLoadedException(String msg) {
-        super(msg);
-    }
+	public FontAlreadyLoadedException(String msg) {
+		super(msg);
+	}
 }
