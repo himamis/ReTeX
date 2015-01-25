@@ -22,7 +22,7 @@ import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 import org.scilab.forge.jlatexmath.platform.graphics.Image;
 import org.scilab.forge.jlatexmath.platform.graphics.Insets;
 
-public class ExampleTest {
+public class BasicTest {
 
 	@BeforeClass
 	public static void setFactory() {
@@ -30,7 +30,7 @@ public class ExampleTest {
 	}
 
 	@Test
-	public void Example1() {
+	public void basicExample1() {
 		String latex = "\\begin{array}{lr}\\mbox{\\textcolor{Blue}{Russian}}&\\mbox{\\textcolor{Melon}{Greek}}\\\\";
 		latex += "\\mbox{" + "привет мир".toUpperCase() + "}&\\mbox{" + "γειά κόσμο".toUpperCase() + "}\\\\";
 		latex += "\\mbox{привет мир}&\\mbox{γειά κόσμο}\\\\";
@@ -48,7 +48,7 @@ public class ExampleTest {
 		latex += "\\mbox{\\textcolor{Turquoise}{Bielorussian}}&\\mbox{\\textcolor{LimeGreen}{Ukrainian}}\\\\";
 		latex += "\\mbox{прывітаньне Свет}&\\mbox{привіт світ}\\\\";
 		latex += "\\end{array}";
-		doTest(latex, "Example1");
+		doTest(latex, "Basic/Example1");
 	}
 	
 	private void doTest(String latex, String exampleName) {
