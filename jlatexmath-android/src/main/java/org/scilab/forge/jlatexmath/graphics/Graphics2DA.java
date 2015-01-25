@@ -1,5 +1,6 @@
 package org.scilab.forge.jlatexmath.graphics;
 
+import org.scilab.forge.jlatexmath.ColorUtil;
 import org.scilab.forge.jlatexmath.font.FontA;
 import org.scilab.forge.jlatexmath.font.FontRenderContextA;
 import org.scilab.forge.jlatexmath.geom.Line2DA;
@@ -55,6 +56,8 @@ public class Graphics2DA implements Graphics2DInterface {
 		mScaleStack = new ScaleStack();
 
 		mFont = new FontA("Serif", Font.PLAIN, 10);
+		
+		mColor = (ColorA) ColorUtil.BLACK;
 	}
 
 	public Graphics2DA(Canvas canvas) {

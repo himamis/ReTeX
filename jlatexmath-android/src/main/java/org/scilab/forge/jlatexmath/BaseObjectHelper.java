@@ -7,9 +7,9 @@ public class BaseObjectHelper {
 	public static String getPath(Object base, String name) {
 		String ret = null;
 		if (base == CyrillicRegistration.class) {
-			ret = "cyrillic/fonts/" + name;
+			ret = "cyrillic/" + name;
 		} else if (base == GreekRegistration.class) {
-			ret = "greek/fonts/" + name;
+			ret = "greek/" + name;
 		} else {
 			ret = name;
 		}

@@ -7,8 +7,7 @@ public class ParserFactoryAndroid extends ParserFactory {
 
 	@Override
 	public Parser createParser() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ParserA();
 	}
 
 }
