@@ -1,4 +1,4 @@
 <module>
+  <source path="jlatexmath"/>
   <inherits name="com.google.gwt.core.Core" />
-  <inherits name="com.google.gwt.user.UserAgent" />
 </module>
