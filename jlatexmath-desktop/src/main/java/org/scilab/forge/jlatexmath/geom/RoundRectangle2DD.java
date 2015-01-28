@@ -20,4 +20,8 @@ public class RoundRectangle2DD extends RoundRectangle2D.Float implements org.sci
 	public Object getNativeObject() {
 		return this;
 	}
+
+	public void setRoundRectangle(double x, double y, double w, double h, double arcw, double arch) {
+		setRoundRect(x, y, w, h, arcw, arch);
+	}
 }

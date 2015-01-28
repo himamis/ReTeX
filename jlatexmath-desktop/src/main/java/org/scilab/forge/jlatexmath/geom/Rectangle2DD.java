@@ -16,4 +16,7 @@ public class Rectangle2DD extends Rectangle2D.Float implements org.scilab.forge.
 		return this;
 	}
 
+	public void setRectangle(double x, double y, double width, double height) {
+		setRect(x, y, width, height);
+	}
 }

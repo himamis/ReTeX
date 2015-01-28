@@ -46,5 +46,4 @@ public class Rectangle2DA implements Rectangle2D {
 	public double getHeight() {
 		return mRect.height();
 	}
-
 }

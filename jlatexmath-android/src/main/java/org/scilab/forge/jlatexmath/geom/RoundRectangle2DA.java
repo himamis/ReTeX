@@ -38,4 +38,9 @@ public class RoundRectangle2DA implements RoundRectangle2D {
 		return rect;
 	}
 
+	public void setRoundRectangle(double x, double y, double w, double h, double arcw, double arch) {
+		setRectangle(x, y, w, h);
+		this.arcw = arcw;
+		this.arch = arch;
+	}
 }
