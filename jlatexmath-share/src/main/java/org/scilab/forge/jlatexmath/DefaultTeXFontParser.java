@@ -356,12 +356,12 @@ public class DefaultTeXFontParser {
 	}
 
 	public static Font createFont(String name) throws ResourceParseException {
-		return createFont(new Resource().loadResource(DefaultTeXFontParser.class, name), name);
+		return createFont(null, name);
 	}
 
-	public static Font createFont(Object fontIn, String name) throws ResourceParseException {
+	public static Font createFont(Object base, String name) throws ResourceParseException {
 		FontAdapter fontAdapter = new FontAdapter();
-		return fontAdapter.loadFont(fontIn, name);
+		return fontAdapter.loadFont(base, name);
 	}
 
 	public Map<String, CharFont> parseSymbolMappings() throws ResourceParseException {

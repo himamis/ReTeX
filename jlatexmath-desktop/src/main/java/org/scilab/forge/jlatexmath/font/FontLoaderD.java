@@ -16,11 +16,9 @@ public class FontLoaderD implements FontLoader {
 	private static boolean registerFontExceptionDisplayed = false; 
 	private static boolean shouldRegisterFonts = true;
 
-	public Font loadFont(Object fontInputStream, String name) throws ResourceParseException {
-		InputStream fontIn = (InputStream) fontInputStream;
-		if (fontIn ==  null) {
-			fontIn = (InputStream) new Resource().loadResource(name);
-		}
+	public Font loadFont(Object base, String name) throws ResourceParseException {
+		
+		InputStream fontIn = (InputStream) new Resource().loadResource(base, name);
 		try {
             java.awt.Font f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, fontIn).deriveFont(PIXELS_PER_POINT);
 	    GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
