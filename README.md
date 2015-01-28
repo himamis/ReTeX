@@ -28,3 +28,12 @@ Before using the API, set the platform dependent factory instance.
 *Coming soon...*
 
 For details of the original API please see http://forge.scilab.org/index.php/p/jlatexmath/.
+
+
+Screenshots
+-----------
+![Alt text](/../others/screenshots/example1.PNG?raw=true "Example 1")
+
+![Alt text](/../others/screenshots/example2.PNG?raw=true "Example 2")
+
+![Alt text](/../others/screenshots/example3.png?raw=true "Example 3")
