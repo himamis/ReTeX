@@ -29,6 +29,7 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
 import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
@@ -38,12 +39,16 @@ import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 public class HorizontalRule extends Box {
 
 	private Color color = null;
-	private float speShift = 0;;
+	private float speShift = 0;
+
+	private Rectangle2D rectangle;
 
 	public HorizontalRule(float thickness, float width, float s) {
 		height = thickness;
 		this.width = width;
 		shift = s;
+
+		rectangle = geom.createRectangle2D(0, 0, 0, 0);
 	}
 
 	public HorizontalRule(float thickness, float width, float s, boolean trueShift) {
@@ -55,6 +60,8 @@ public class HorizontalRule extends Box {
 			shift = 0;
 			speShift = s;
 		}
+
+		rectangle = geom.createRectangle2D(0, 0, 0, 0);
 	}
 
 	public HorizontalRule(float thickness, float width, float s, Color c) {
@@ -62,6 +69,8 @@ public class HorizontalRule extends Box {
 		this.width = width;
 		color = c;
 		shift = s;
+
+		rectangle = geom.createRectangle2D(0, 0, 0, 0);
 	}
 
 	public void draw(Graphics2DInterface g2, float x, float y) {
@@ -70,10 +79,11 @@ public class HorizontalRule extends Box {
 			g2.setColor(color);
 
 		if (speShift == 0) {
-			g2.fill(geom.createRectangle2D(x, y - height, width, height));
+			rectangle.setRectangle(x, y - height, width, height);
 		} else {
-			g2.fill(geom.createRectangle2D(x, y - height + speShift, width, height));
+			rectangle.setRectangle(x, y - height + speShift, width, height);
 		}
+		g2.fill(rectangle);
 		g2.setColor(old);
 	}
 

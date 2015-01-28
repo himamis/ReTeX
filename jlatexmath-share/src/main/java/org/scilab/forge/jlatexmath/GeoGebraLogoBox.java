@@ -42,7 +42,6 @@ public class GeoGebraLogoBox extends Box {
 	private static Color blue;
 
 	private final BasicStroke st;
-	private final BasicStroke stC;
 
 	public GeoGebraLogoBox(float w, float h) {
 		this.depth = 0;
@@ -52,7 +51,6 @@ public class GeoGebraLogoBox extends Box {
 		gray = graphics.createColor(102, 102, 102);
 		blue = graphics.createColor(153, 153, 255);
 		st = graphics.createBasicStroke(3.79999995f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 4f);
-		stC = graphics.createBasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 4f);
 	}
 
 	public void draw(Graphics2DInterface g2, float x, float y) {
