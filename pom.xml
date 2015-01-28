@@ -10,6 +10,7 @@
 		<module>jlatexmath-share</module>
 		<module>jlatexmath-desktop</module>
 		<module>jlatexmath-android</module>
+		<module>jlatexmath-gwt</module>
 	</modules>
 
 	<build>
