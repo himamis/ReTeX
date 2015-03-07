@@ -18,4 +18,7 @@ public class ColorD extends Color implements org.scilab.forge.jlatexmath.platfor
 		return this;
 	}
 
+	public int getColor() {
+		return getRGB();
+	}
 }
