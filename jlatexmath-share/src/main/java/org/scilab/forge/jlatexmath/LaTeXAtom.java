@@ -28,6 +28,8 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.character.Character;
+
 /**
  * An atom representing whitespace. The dimension values can be set using different unit types.
  */

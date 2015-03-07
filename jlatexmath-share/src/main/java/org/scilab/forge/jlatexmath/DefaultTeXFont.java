@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.scilab.forge.jlatexmath.character.Character;
 import org.scilab.forge.jlatexmath.exception.AlphabetRegistrationException;
 import org.scilab.forge.jlatexmath.exception.FontAlreadyLoadedException;
 import org.scilab.forge.jlatexmath.exception.ResourceParseException;

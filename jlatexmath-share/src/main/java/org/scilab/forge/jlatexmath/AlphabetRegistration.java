@@ -28,6 +28,7 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.character.Character;
 import org.scilab.forge.jlatexmath.exception.AlphabetRegistrationException;
 
 public interface AlphabetRegistration {

@@ -31,6 +31,7 @@ package org.scilab.forge.jlatexmath;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import org.scilab.forge.jlatexmath.character.Character;
 import org.scilab.forge.jlatexmath.exception.AlphabetRegistrationException;
 
 public class URLAlphabetRegistration implements AlphabetRegistration {
@@ -58,7 +59,7 @@ public class URLAlphabetRegistration implements AlphabetRegistration {
 		URL urls[] = { url };
 		language = language.toLowerCase();
 		String name = "org.scilab.forge.jlatexmath." + language + "."
-				+ Character.toString(Character.toUpperCase(language.charAt(0)))
+				+ Character.toString(java.lang.Character.toUpperCase(language.charAt(0)))
 				+ language.substring(1, language.length()) + "Registration";
 
 		try {

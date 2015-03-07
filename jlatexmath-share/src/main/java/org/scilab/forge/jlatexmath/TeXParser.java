@@ -31,6 +31,7 @@ package org.scilab.forge.jlatexmath;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.scilab.forge.jlatexmath.character.Character;
 import org.scilab.forge.jlatexmath.exception.FormulaNotFoundException;
 import org.scilab.forge.jlatexmath.exception.ParseException;
 import org.scilab.forge.jlatexmath.exception.SymbolNotFoundException;
@@ -1447,7 +1448,7 @@ public class TeXParser {
 			int len = com.length();
 			while (pos < len) {
 				c = com.charAt(pos);
-				if (!Character.isLetter(c) && (atIsLetter == 0 || c != '@'))
+				if (!java.lang.Character.isLetter(c) && (atIsLetter == 0 || c != '@'))
 					break;
 				pos++;
 			}
@@ -1455,7 +1456,7 @@ public class TeXParser {
 			return false;
 		}
 
-		return Character.isLetter(c);
+		return java.lang.Character.isLetter(c);
 	}
 
 	/**
@@ -1466,7 +1467,7 @@ public class TeXParser {
 	 * @return the validity of the name
 	 */
 	public final boolean isValidCharacterInCommand(char ch) {
-		return Character.isLetter(ch) || (atIsLetter != 0 && ch == '@');
+		return java.lang.Character.isLetter(ch) || (atIsLetter != 0 && ch == '@');
 	}
 
 	private final void skipWhiteSpace() {

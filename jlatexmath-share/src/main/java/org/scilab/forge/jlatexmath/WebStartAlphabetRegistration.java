@@ -28,6 +28,7 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.character.Character;
 import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 import org.scilab.forge.jlatexmath.exception.AlphabetRegistrationException;
 import org.scilab.forge.jlatexmath.greek.GreekRegistration;

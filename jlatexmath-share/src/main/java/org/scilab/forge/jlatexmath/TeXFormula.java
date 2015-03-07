@@ -36,11 +36,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.scilab.forge.jlatexmath.character.Character;
+import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 import org.scilab.forge.jlatexmath.exception.FormulaNotFoundException;
 import org.scilab.forge.jlatexmath.exception.InvalidAtomTypeException;
 import org.scilab.forge.jlatexmath.exception.InvalidUnitException;
 import org.scilab.forge.jlatexmath.exception.ParseException;
 import org.scilab.forge.jlatexmath.exception.ResourceParseException;
+import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 import org.scilab.forge.jlatexmath.platform.Graphics;
 import org.scilab.forge.jlatexmath.platform.Resource;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
@@ -122,10 +125,12 @@ public class TeXFormula {
 		parser.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
 
 		try {
-			DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName(
-					"org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration").newInstance());
-			DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName(
-					"org.scilab.forge.jlatexmath.greek.GreekRegistration").newInstance());
+			//DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName(
+			//		"org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration").newInstance());
+			//DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName(
+			//		"org.scilab.forge.jlatexmath.greek.GreekRegistration").newInstance());
+			DefaultTeXFont.registerAlphabet(new CyrillicRegistration());
+			DefaultTeXFont.registerAlphabet(new GreekRegistration());
 		} catch (Exception e) {
 		}
 
@@ -155,21 +160,6 @@ public class TeXFormula {
 		}
 
 		return infos;
-	}
-
-	public static void registerExternalFont(Character.UnicodeBlock block, String sansserif, String serif) {
-		if (sansserif == null && serif == null) {
-			externalFontMap.remove(block);
-			return;
-		}
-		externalFontMap.put(block, new FontInfos(sansserif, serif));
-		if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-			predefinedTeXFormulas.clear();
-		}
-	}
-
-	public static void registerExternalFont(Character.UnicodeBlock block, String fontName) {
-		registerExternalFont(block, fontName, fontName);
 	}
 
 	/**
