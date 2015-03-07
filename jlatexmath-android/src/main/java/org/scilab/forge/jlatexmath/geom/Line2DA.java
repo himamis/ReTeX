@@ -27,4 +27,20 @@ public class Line2DA implements Line2D {
 	public PointF getEndPoint() {
 		return end;
 	}
+
+	public double getX1() {
+		return start.x;
+	}
+
+	public double getY1() {
+		return start.y;
+	}
+
+	public double getX2() {
+		return end.x;
+	}
+
+	public double getY2() {
+		return end.y;
+	}
 }
