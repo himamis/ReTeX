@@ -53,22 +53,9 @@
     </dependency>
   </dependencies>
 
+
+
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>gwt-maven-plugin</artifactId>
-        <version>2.7.0</version>
-        <configuration>
-          <compileSourcesArtifacts>
-            <compileSourcesArtifact>org.scilab.forge:jlatexmath-share</compileSourcesArtifact>
-          </compileSourcesArtifacts>
-        </configuration>
-      </plugin>
-    </plugins>
-    <!-- Output classes directly into the webapp, so that IDEs and "mvn process-classes" 
-      update them in DevMode -->
-    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
     <!-- Include java files for gwt deployment -->
     <resources>
       <resource>
@@ -82,5 +69,27 @@
         <directory>src/main/resources</directory>
       </resource>
     </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>2.7.0</version>
+        <configuration>
+          <compileSourcesArtifacts>
+            <compileSourcesArtifact>org.scilab.forge:jlatexmath-share</compileSourcesArtifact>
+          </compileSourcesArtifacts>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <!-- Output classes directly into the webapp, so that IDEs and "mvn process-classes" 
+      update them in DevMode -->
+    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
   </build>
 </project>
