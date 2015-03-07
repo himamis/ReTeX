@@ -29,9 +29,9 @@
 package org.scilab.forge.jlatexmath;
 
 import java.util.HashMap;
-import java.util.regex.Matcher;
 
 import org.scilab.forge.jlatexmath.exception.ParseException;
+import org.scilab.forge.jlatexmath.regex.RegexUtil;
 
 public class NewCommandMacro {
 
@@ -79,16 +79,16 @@ public class NewCommandMacro {
 
 		if (args[nbargs + 1] != null) {
 			dec = 1;
-			rep = Matcher.quoteReplacement(args[nbargs + 1]);
+			rep = RegexUtil.quoteReplacement(args[nbargs + 1]);
 			code = code.replaceAll("#1", rep);
 		} else if (macroreplacement.get(args[0]) != null) {
 			dec = 1;
-			rep = Matcher.quoteReplacement(macroreplacement.get(args[0]));
+			rep = RegexUtil.quoteReplacement(macroreplacement.get(args[0]));
 			code = code.replaceAll("#1", rep);
 		}
 
 		for (int i = 1; i <= nbargs; i++) {
-			rep = Matcher.quoteReplacement(args[i]);
+			rep = RegexUtil.quoteReplacement(args[i]);
 			code = code.replaceAll("#" + (i + dec), rep);
 		}
 
