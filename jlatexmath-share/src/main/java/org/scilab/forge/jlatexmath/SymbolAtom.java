@@ -31,11 +31,9 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.BitSet;
 import java.util.Map;
 
 import org.scilab.forge.jlatexmath.exception.InvalidSymbolTypeException;
-import org.scilab.forge.jlatexmath.exception.ResourceParseException;
 import org.scilab.forge.jlatexmath.exception.SymbolMappingNotFoundException;
 import org.scilab.forge.jlatexmath.exception.SymbolNotFoundException;
 import org.scilab.forge.jlatexmath.platform.Resource;
@@ -73,12 +71,12 @@ public class SymbolAtom extends CharSymbol {
 		setValidSymbolType(TeXConstants.TYPE_PUNCTUATION);
 		setValidSymbolType(TeXConstants.TYPE_ACCENT);
 	}
-	
-	static void setValidSymbolType(int type) {
+
+	private static void setValidSymbolType(int type) {
 		validSymbolTypes |= (1 << type);
 	}
 
-	static boolean isValidSymbolType(int type) {
+	private static boolean isValidSymbolType(int type) {
 		return ((validSymbolTypes >> type) & 1) == 1;
 	}
 

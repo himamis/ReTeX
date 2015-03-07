@@ -31,9 +31,7 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.BitSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 
 import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
@@ -53,30 +51,38 @@ public class RowAtom extends Atom implements Row {
 	private Dummy previousAtom = null;
 
 	// set of atom types that make a previous bin atom change to ord
-	private static BitSet binSet;
+	private static int binSet;
 
 	// set of atom types that can possibly need a kern or, together with the
 	// previous atom, be replaced by a ligature
-	private static BitSet ligKernSet;
+	private static int ligKernSet;
 
 	static {
 		// fill binSet
-		binSet = new BitSet(16);
-		binSet.set(TeXConstants.TYPE_BINARY_OPERATOR);
-		binSet.set(TeXConstants.TYPE_BIG_OPERATOR);
-		binSet.set(TeXConstants.TYPE_RELATION);
-		binSet.set(TeXConstants.TYPE_OPENING);
-		binSet.set(TeXConstants.TYPE_PUNCTUATION);
+		binSet = 0;
+		setBit(binSet, TeXConstants.TYPE_BINARY_OPERATOR);
+		setBit(binSet, TeXConstants.TYPE_BIG_OPERATOR);
+		setBit(binSet, TeXConstants.TYPE_RELATION);
+		setBit(binSet, TeXConstants.TYPE_OPENING);
+		setBit(binSet, TeXConstants.TYPE_PUNCTUATION);
 
 		// fill ligKernSet
-		ligKernSet = new BitSet(16);
-		ligKernSet.set(TeXConstants.TYPE_ORDINARY);
-		ligKernSet.set(TeXConstants.TYPE_BIG_OPERATOR);
-		ligKernSet.set(TeXConstants.TYPE_BINARY_OPERATOR);
-		ligKernSet.set(TeXConstants.TYPE_RELATION);
-		ligKernSet.set(TeXConstants.TYPE_OPENING);
-		ligKernSet.set(TeXConstants.TYPE_CLOSING);
-		ligKernSet.set(TeXConstants.TYPE_PUNCTUATION);
+		ligKernSet = 0;
+		setBit(ligKernSet, TeXConstants.TYPE_ORDINARY);
+		setBit(ligKernSet, TeXConstants.TYPE_BIG_OPERATOR);
+		setBit(ligKernSet, TeXConstants.TYPE_BINARY_OPERATOR);
+		setBit(ligKernSet, TeXConstants.TYPE_RELATION);
+		setBit(ligKernSet, TeXConstants.TYPE_OPENING);
+		setBit(ligKernSet, TeXConstants.TYPE_CLOSING);
+		setBit(ligKernSet, TeXConstants.TYPE_PUNCTUATION);
+	}
+
+	private static void setBit(int bitset, int type) {
+		bitset |= (1 << type);
+	}
+
+	private static boolean isBitSet(int bitset, int type) {
+		return ((bitset >> type) & 1) == 1;
 	}
 
 	protected RowAtom() {
@@ -115,7 +121,7 @@ public class RowAtom extends Atom implements Row {
 	private void changeToOrd(Dummy cur, Dummy prev, Atom next) {
 		int type = cur.getLeftType();
 		if (type == TeXConstants.TYPE_BINARY_OPERATOR
-				&& ((prev == null || binSet.get(prev.getRightType())) || next == null)) {
+				&& ((prev == null || isBitSet(binSet, prev.getRightType())) || next == null)) {
 			cur.setType(TeXConstants.TYPE_ORDINARY);
 		} else if (next != null && cur.getRightType() == TeXConstants.TYPE_BINARY_OPERATOR) {
 			int nextType = next.getLeftType();
@@ -179,7 +185,7 @@ public class RowAtom extends Atom implements Row {
 			while (it.hasNext() && atom.getRightType() == TeXConstants.TYPE_ORDINARY && atom.isCharSymbol()) {
 				Atom next = it.next();
 				position++;
-				if (next instanceof CharSymbol && ligKernSet.get(next.getLeftType())) {
+				if (next instanceof CharSymbol && isBitSet(ligKernSet, next.getLeftType())) {
 					atom.markAsTextSymbol();
 					CharFont l = atom.getCharFont(tf), r = ((CharSymbol) next).getCharFont(tf);
 					CharFont lig = tf.getLigature(l, r);
