@@ -28,7 +28,7 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.scilab.forge.jlatexmath.platform.FontAdapter;
@@ -45,6 +45,7 @@ import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 public class JavaFontRenderingBox extends Box {
 
 	private static final Graphics2DInterface TEMPGRAPHIC;
+	private static final FontAdapter fontAdapter;
 
 	private static Font font;
 
@@ -58,12 +59,14 @@ public class JavaFontRenderingBox extends Box {
 
 	static {
 		TEMPGRAPHIC = new Graphics().createImage(1, 1).createGraphics2D();
-		font = new FontAdapter().createFont("Serif", Font.PLAIN, 10);
+		fontAdapter = new FontAdapter();
+		font = fontAdapter.createFont("Serif", Font.PLAIN, 10);
+
 		try { // to avoid problems with Java 1.5
-			KERNING = (TextAttribute) (TextAttribute.class.getField("KERNING").get(TextAttribute.class));
-			KERNING_ON = (Integer) (TextAttribute.class.getField("KERNING_ON").get(TextAttribute.class));
-			LIGATURES = (TextAttribute) (TextAttribute.class.getField("LIGATURES").get(TextAttribute.class));
-			LIGATURES_ON = (Integer) (TextAttribute.class.getField("LIGATURES_ON").get(TextAttribute.class));
+			KERNING = fontAdapter.getTextAttribute("KERNING");
+			KERNING_ON = fontAdapter.getTextAttributeValue("KERNING_ON");
+			LIGATURES = fontAdapter.getTextAttribute("LIGATURES");
+			LIGATURES_ON = fontAdapter.getTextAttributeValue("LIGATURES_ON");
 		} catch (Exception e) {
 		}
 	}
@@ -73,14 +76,13 @@ public class JavaFontRenderingBox extends Box {
 		this.size = size;
 
 		if (kerning && KERNING != null) {
-			Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>();
+			Map<TextAttribute, Object> map = new HashMap<TextAttribute, Object>();
 			map.put(KERNING, KERNING_ON);
 			map.put(LIGATURES, LIGATURES_ON);
 			f = f.deriveFont(map);
 		}
 
-		this.text = new FontAdapter().createTextLayout(str, f.deriveFont(type),
-				TEMPGRAPHIC.getFontRenderContext());
+		this.text = fontAdapter.createTextLayout(str, f.deriveFont(type), TEMPGRAPHIC.getFontRenderContext());
 		Rectangle2D rect = text.getBounds();
 		this.height = (float) (-rect.getY() * size / 10);
 		this.depth = (float) (rect.getHeight() * size / 10) - this.height;
@@ -92,7 +94,7 @@ public class JavaFontRenderingBox extends Box {
 	}
 
 	public static void setFont(String name) {
-		font = new FontAdapter().createFont(name, Font.PLAIN, 10);
+		font = fontAdapter.createFont(name, Font.PLAIN, 10);
 	}
 
 	public void draw(Graphics2DInterface g2, float x, float y) {
