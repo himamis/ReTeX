@@ -30,7 +30,6 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Parse command options, e.g. \includegraphics[width=1cm,height=2in,keepaspectratio]{...}
@@ -42,9 +41,10 @@ public final class ParseOption {
 		if (options == null || options.length() == 0) {
 			return map;
 		}
-		StringTokenizer tokens = new StringTokenizer(options, ",");
-		while (tokens.hasMoreTokens()) {
-			String tok = tokens.nextToken().trim();
+
+		String[] tokens = options.split(",");
+		for (int i = 0; i < tokens.length; i++) {
+			String tok = tokens[i].trim();
 			String[] optarg = tok.split("=");
 			if (optarg != null) {
 				if (optarg.length == 2) {

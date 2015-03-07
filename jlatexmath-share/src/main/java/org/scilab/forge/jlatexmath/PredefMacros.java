@@ -29,7 +29,6 @@
 package org.scilab.forge.jlatexmath;
 
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.scilab.forge.jlatexmath.character.Character;
 import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;

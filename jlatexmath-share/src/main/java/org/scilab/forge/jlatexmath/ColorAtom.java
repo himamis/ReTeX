@@ -31,7 +31,6 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.scilab.forge.jlatexmath.platform.Graphics;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
@@ -114,14 +113,14 @@ public class ColorAtom extends Atom implements Row {
 			if (s.charAt(0) == '#') {
 				return ColorUtil.decode(s);
 			} else if (s.indexOf(',') != -1) {
-				StringTokenizer toks = new StringTokenizer(s, ";,");
-				int n = toks.countTokens();
+				String[] toks = s.split(";|,");
+				int n = toks.length;
 				if (n == 3) {
 					// RGB model
 					try {
-						String R = toks.nextToken().trim();
-						String G = toks.nextToken().trim();
-						String B = toks.nextToken().trim();
+						String R = toks[0].trim();
+						String G = toks[1].trim();
+						String B = toks[2].trim();
 
 						float r = Float.parseFloat(R);
 						float g = Float.parseFloat(G);
@@ -145,10 +144,10 @@ public class ColorAtom extends Atom implements Row {
 				} else if (n == 4) {
 					// CMYK model
 					try {
-						float c = Float.parseFloat(toks.nextToken().trim());
-						float m = Float.parseFloat(toks.nextToken().trim());
-						float y = Float.parseFloat(toks.nextToken().trim());
-						float k = Float.parseFloat(toks.nextToken().trim());
+						float c = Float.parseFloat(toks[0].trim());
+						float m = Float.parseFloat(toks[1].trim());
+						float y = Float.parseFloat(toks[2].trim());
+						float k = Float.parseFloat(toks[3].trim());
 
 						c = (float) Math.min(1, Math.max(0, c));
 						m = (float) Math.min(1, Math.max(0, m));
