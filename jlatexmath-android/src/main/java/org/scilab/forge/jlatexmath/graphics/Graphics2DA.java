@@ -219,7 +219,10 @@ public class Graphics2DA implements Graphics2DInterface {
 	}
 
 	public void rotate(double theta) {
-		mCanvas.rotate((float) theta);
+		// theta is in radians
+		// change to degrees
+		float degrees = (float) Math.toDegrees(theta);
+		mCanvas.rotate(degrees);
 	}
 
 	public void drawImage(Image image, int x, int y) {
