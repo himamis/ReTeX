@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
+  <inherits name="com.google.gwt.xml.XML" />
   <inherits name="org.scilab.forge.JLaTeXMath" />
   <source path="jlatexmath" />
 </module>
