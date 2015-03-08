@@ -9,6 +9,7 @@ import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
 import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
 import org.scilab.forge.jlatexmath.platform.parser.ParserFactory;
 import org.scilab.forge.jlatexmath.platform.resources.ResourceLoaderFactory;
+import org.scilab.forge.jlatexmath.resources.ResourceLoaderFactoryGWT;
 
 public class FactoryProviderGWT extends FactoryProvider {
 
@@ -35,8 +36,7 @@ public class FactoryProviderGWT extends FactoryProvider {
 
 	@Override
 	protected ResourceLoaderFactory createResourceLoaderFactory() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ResourceLoaderFactoryGWT();
 	}
 
 }
