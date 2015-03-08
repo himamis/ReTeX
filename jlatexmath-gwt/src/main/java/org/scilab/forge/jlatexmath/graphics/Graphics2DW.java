@@ -41,20 +41,18 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public Transform getTransform() {
-		// TODO Auto-generated method stub
+		// TODO: Matrix object to keep track of changes
 		return null;
 	}
 
 	@Override
 	public void saveTransformation() {
-		// TODO Auto-generated method stub
-
+		context.save();
 	}
 
 	@Override
 	public void restoreTransformation() {
-		// TODO Auto-generated method stub
-
+		context.restore();
 	}
 
 	@Override
@@ -119,26 +117,24 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public void translate(double x, double y) {
-		// TODO Auto-generated method stub
-
+		context.translate(x, y);
 	}
 
 	@Override
 	public void scale(double x, double y) {
-		// TODO Auto-generated method stub
-
+		context.scale(x, y);
 	}
 
 	@Override
 	public void rotate(double theta, double x, double y) {
-		// TODO Auto-generated method stub
-
+		translate(x, y);
+		rotate(theta);
+		translate(-x, -y);
 	}
 
 	@Override
 	public void rotate(double theta) {
-		// TODO Auto-generated method stub
-
+		context.rotate(theta);
 	}
 
 	@Override
@@ -173,8 +169,7 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		// NO-OP
 	}
 
 }
