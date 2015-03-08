@@ -1,5 +1,6 @@
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.geom.GeomFactoryGWT;
 import org.scilab.forge.jlatexmath.platform.FactoryProvider;
 import org.scilab.forge.jlatexmath.platform.font.FontFactory;
 import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
@@ -11,8 +12,7 @@ public class FactoryProviderGWT extends FactoryProvider {
 
 	@Override
 	protected GeomFactory createGeomFactory() {
-		// TODO Auto-generated method stub
-		return null;
+		return new GeomFactoryGWT();
 	}
 
 	@Override
