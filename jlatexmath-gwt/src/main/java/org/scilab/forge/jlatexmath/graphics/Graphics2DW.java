@@ -17,26 +17,47 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	private Context2d context;
 
+	private BasicStrokeW basicStroke;
+	private ColorW color;
+
+	public Graphics2DW() {
+		initBasicStroke();
+		initColor();
+	}
+
+	private void initBasicStroke() {
+		basicStroke = new BasicStrokeW((float) context.getLineWidth(), context.getLineJoin(),
+				context.getLineCap(), (float) context.getMiterLimit());
+	}
+
+	private void initColor() {
+		color = new ColorW(0, 0, 0);
+		context.setStrokeStyle(color.getCssColor());
+	}
+
 	@Override
 	public void setStroke(Stroke stroke) {
-		// TODO Auto-generated method stub
+		basicStroke = (BasicStrokeW) stroke;
+		context.setLineCap(basicStroke.getJSLineCap());
+		context.setLineJoin(basicStroke.getJSLineJoin());
+		context.setLineWidth(basicStroke.getWidth());
+		context.setMiterLimit(basicStroke.getMiterLimit());
 	}
 
 	@Override
 	public Stroke getStroke() {
-		// TODO Auto-generated method stub
-		return null;
+		return basicStroke;
 	}
 
 	@Override
 	public void setColor(Color color) {
-		// TODO Auto-generated method stub
+		this.color = (ColorW) color;
+		context.setStrokeStyle(this.color.getCssColor());
 	}
 
 	@Override
 	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return color;
 	}
 
 	@Override
