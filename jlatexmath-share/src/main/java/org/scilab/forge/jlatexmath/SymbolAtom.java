@@ -53,7 +53,7 @@ public class SymbolAtom extends CharSymbol {
 	public static Map<String, SymbolAtom> symbols;
 
 	// contains all the possible valid symbol types
-	private static int validSymbolTypes;
+	private static BitSet validSymbolTypes;
 
 	private char unicode;
 
@@ -61,27 +61,19 @@ public class SymbolAtom extends CharSymbol {
 		symbols = new TeXSymbolParser().readSymbols();
 
 		// set valid symbol types
-		validSymbolTypes = 0;
-		setValidSymbolType(TeXConstants.TYPE_ORDINARY);
-		setValidSymbolType(TeXConstants.TYPE_BIG_OPERATOR);
-		setValidSymbolType(TeXConstants.TYPE_BINARY_OPERATOR);
-		setValidSymbolType(TeXConstants.TYPE_RELATION);
-		setValidSymbolType(TeXConstants.TYPE_OPENING);
-		setValidSymbolType(TeXConstants.TYPE_CLOSING);
-		setValidSymbolType(TeXConstants.TYPE_PUNCTUATION);
-		setValidSymbolType(TeXConstants.TYPE_ACCENT);
-	}
-
-	private static void setValidSymbolType(int type) {
-		validSymbolTypes |= (1 << type);
-	}
-
-	private static boolean isValidSymbolType(int type) {
-		return ((validSymbolTypes >> type) & 1) == 1;
+		validSymbolTypes = new BitSet();
+		validSymbolTypes.setBit(TeXConstants.TYPE_ORDINARY);
+		validSymbolTypes.setBit(TeXConstants.TYPE_BIG_OPERATOR);
+		validSymbolTypes.setBit(TeXConstants.TYPE_BINARY_OPERATOR);
+		validSymbolTypes.setBit(TeXConstants.TYPE_RELATION);
+		validSymbolTypes.setBit(TeXConstants.TYPE_OPENING);
+		validSymbolTypes.setBit(TeXConstants.TYPE_CLOSING);
+		validSymbolTypes.setBit(TeXConstants.TYPE_PUNCTUATION);
+		validSymbolTypes.setBit(TeXConstants.TYPE_ACCENT);
 	}
 
 	public SymbolAtom(SymbolAtom s, int type) throws InvalidSymbolTypeException {
-		if (!isValidSymbolType(type))
+		if (!validSymbolTypes.getBit(type))
 			throw new InvalidSymbolTypeException("The symbol type was not valid! "
 					+ "Use one of the symbol type constants from the class 'TeXConstants'.");
 		name = s.name;

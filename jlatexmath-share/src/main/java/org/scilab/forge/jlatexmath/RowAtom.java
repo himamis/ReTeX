@@ -51,38 +51,30 @@ public class RowAtom extends Atom implements Row {
 	private Dummy previousAtom = null;
 
 	// set of atom types that make a previous bin atom change to ord
-	private static int binSet;
+	private static BitSet binSet;
 
 	// set of atom types that can possibly need a kern or, together with the
 	// previous atom, be replaced by a ligature
-	private static int ligKernSet;
+	private static BitSet ligKernSet;
 
 	static {
 		// fill binSet
-		binSet = 0;
-		setBit(binSet, TeXConstants.TYPE_BINARY_OPERATOR);
-		setBit(binSet, TeXConstants.TYPE_BIG_OPERATOR);
-		setBit(binSet, TeXConstants.TYPE_RELATION);
-		setBit(binSet, TeXConstants.TYPE_OPENING);
-		setBit(binSet, TeXConstants.TYPE_PUNCTUATION);
+		binSet = new BitSet();
+		binSet.setBit(TeXConstants.TYPE_BINARY_OPERATOR);
+		binSet.setBit(TeXConstants.TYPE_BIG_OPERATOR);
+		binSet.setBit(TeXConstants.TYPE_RELATION);
+		binSet.setBit(TeXConstants.TYPE_OPENING);
+		binSet.setBit(TeXConstants.TYPE_PUNCTUATION);
 
 		// fill ligKernSet
-		ligKernSet = 0;
-		setBit(ligKernSet, TeXConstants.TYPE_ORDINARY);
-		setBit(ligKernSet, TeXConstants.TYPE_BIG_OPERATOR);
-		setBit(ligKernSet, TeXConstants.TYPE_BINARY_OPERATOR);
-		setBit(ligKernSet, TeXConstants.TYPE_RELATION);
-		setBit(ligKernSet, TeXConstants.TYPE_OPENING);
-		setBit(ligKernSet, TeXConstants.TYPE_CLOSING);
-		setBit(ligKernSet, TeXConstants.TYPE_PUNCTUATION);
-	}
-
-	private static void setBit(int bitset, int type) {
-		bitset |= (1 << type);
-	}
-
-	private static boolean isBitSet(int bitset, int type) {
-		return ((bitset >> type) & 1) == 1;
+		ligKernSet = new BitSet();
+		ligKernSet.setBit(TeXConstants.TYPE_ORDINARY);
+		ligKernSet.setBit(TeXConstants.TYPE_BIG_OPERATOR);
+		ligKernSet.setBit(TeXConstants.TYPE_BINARY_OPERATOR);
+		ligKernSet.setBit(TeXConstants.TYPE_RELATION);
+		ligKernSet.setBit(TeXConstants.TYPE_OPENING);
+		ligKernSet.setBit(TeXConstants.TYPE_CLOSING);
+		ligKernSet.setBit(TeXConstants.TYPE_PUNCTUATION);
 	}
 
 	protected RowAtom() {
@@ -121,7 +113,7 @@ public class RowAtom extends Atom implements Row {
 	private void changeToOrd(Dummy cur, Dummy prev, Atom next) {
 		int type = cur.getLeftType();
 		if (type == TeXConstants.TYPE_BINARY_OPERATOR
-				&& ((prev == null || isBitSet(binSet, prev.getRightType())) || next == null)) {
+				&& ((prev == null || binSet.getBit(prev.getRightType())) || next == null)) {
 			cur.setType(TeXConstants.TYPE_ORDINARY);
 		} else if (next != null && cur.getRightType() == TeXConstants.TYPE_BINARY_OPERATOR) {
 			int nextType = next.getLeftType();
@@ -185,7 +177,7 @@ public class RowAtom extends Atom implements Row {
 			while (it.hasNext() && atom.getRightType() == TeXConstants.TYPE_ORDINARY && atom.isCharSymbol()) {
 				Atom next = it.next();
 				position++;
-				if (next instanceof CharSymbol && isBitSet(ligKernSet, next.getLeftType())) {
+				if (next instanceof CharSymbol && ligKernSet.getBit(next.getLeftType())) {
 					atom.markAsTextSymbol();
 					CharFont l = atom.getCharFont(tf), r = ((CharSymbol) next).getCharFont(tf);
 					CharFont lig = tf.getLigature(l, r);
