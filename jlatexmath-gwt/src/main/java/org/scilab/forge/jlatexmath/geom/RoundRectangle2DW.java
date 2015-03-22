@@ -64,13 +64,6 @@ public class RoundRectangle2DW implements RoundRectangle2D {
 	}
 
 	@Override
-	public Object getNativeObject() {
-		// TODO Remove this
-		return null;
-	}
-
-
-	@Override
 	public void setRoundRectangle(double x, double y, double width, double height, double arcW, double arcH) {
 		this.x = x;
 		this.y = y;

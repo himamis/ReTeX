@@ -6,16 +6,12 @@ public class BasicStrokeD extends BasicStroke implements
 		org.scilab.forge.jlatexmath.platform.graphics.BasicStroke {
 
 	public BasicStrokeD(BasicStroke basicStroke) {
-		this(basicStroke.getLineWidth(), basicStroke.getEndCap(), basicStroke
-				.getLineJoin(), basicStroke.getMiterLimit());
+		this(basicStroke.getLineWidth(), basicStroke.getEndCap(), basicStroke.getLineJoin(), basicStroke
+				.getMiterLimit());
 	}
 
 	public BasicStrokeD(float width, int cap, int join, float miterlimit) {
 		super(width, cap, join, miterlimit);
-	}
-
-	public Object getNativeObject() {
-		return this;
 	}
 
 }

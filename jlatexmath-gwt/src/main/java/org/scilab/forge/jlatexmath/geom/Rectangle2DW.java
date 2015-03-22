@@ -46,12 +46,6 @@ public class Rectangle2DW implements Rectangle2D {
 	}
 
 	@Override
-	public Object getNativeObject() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void setRectangle(double x, double y, double width, double height) {
 		this.x = x;
 		this.y = y;

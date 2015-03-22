@@ -22,7 +22,7 @@ public class FontA implements Font {
 		mSize = size;
 	}
 
-	public Object getNativeObject() {
+	public Typeface getTypeface() {
 		return mTypeface;
 	}
 	

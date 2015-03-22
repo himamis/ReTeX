@@ -6,19 +6,19 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 
 public class Rectangle2DA implements Rectangle2D {
-	
+
 	private RectF mRect;
-	
+
 	public Rectangle2DA(Rect rect) {
 		mRect = new RectF();
 		mRect.set(rect);
 	}
-	
+
 	public Rectangle2DA(double x, double y, double w, double h) {
 		mRect = new RectF();
 		setRectangle(x, y, w, h);
 	}
-	
+
 	public void setRectangle(double x, double y, double w, double h) {
 		float left = (float) x;
 		float top = (float) y;
@@ -27,7 +27,7 @@ public class Rectangle2DA implements Rectangle2D {
 		mRect.set(left, top, right, bottom);
 	}
 
-	public Object getNativeObject() {
+	public RectF getRectF() {
 		return mRect;
 	}
 

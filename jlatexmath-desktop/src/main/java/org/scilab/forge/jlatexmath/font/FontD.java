@@ -26,18 +26,16 @@ public class FontD implements Font {
 		return new FontD(impl.deriveFont(convertMap(map)));
 	}
 
-	public Object getNativeObject() {
+	public java.awt.Font getFont() {
 		return impl;
 	}
 
 	private static Map<java.awt.font.TextAttribute, Object> helper = new HashMap<java.awt.font.TextAttribute, Object>();
 
-	private static Map<java.awt.font.TextAttribute, Object> convertMap(
-			Map<TextAttribute, Object> map) {
+	private static Map<java.awt.font.TextAttribute, Object> convertMap(Map<TextAttribute, Object> map) {
 		helper.clear();
 		for (TextAttribute key : map.keySet()) {
-			helper.put((java.awt.font.TextAttribute) key.getNativeObject(),
-					map.get(key));
+			helper.put(((TextAttributeD) key).getTextAttribute(), map.get(key));
 		}
 		return helper;
 	}

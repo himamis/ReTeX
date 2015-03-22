@@ -1,8 +1,6 @@
 package org.scilab.forge.jlatexmath.platform.graphics;
 
-import org.scilab.forge.jlatexmath.platform.NativeObject;
-
-public interface BasicStroke extends NativeObject, Stroke {
+public interface BasicStroke extends Stroke {
 
 	/**
 	 * Joins path segments by extending their outside edges until they meet.

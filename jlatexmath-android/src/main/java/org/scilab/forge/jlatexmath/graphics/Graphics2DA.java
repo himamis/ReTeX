@@ -4,6 +4,8 @@ import org.scilab.forge.jlatexmath.ColorUtil;
 import org.scilab.forge.jlatexmath.font.FontA;
 import org.scilab.forge.jlatexmath.font.FontRenderContextA;
 import org.scilab.forge.jlatexmath.geom.Line2DA;
+import org.scilab.forge.jlatexmath.geom.Rectangle2DA;
+import org.scilab.forge.jlatexmath.geom.RoundRectangle2DA;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
 import org.scilab.forge.jlatexmath.platform.geom.Line2D;
@@ -24,7 +26,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.view.View;
 
 @SuppressLint("NewApi")
@@ -56,7 +57,7 @@ public class Graphics2DA implements Graphics2DInterface {
 		mScaleStack = new ScaleStack();
 
 		mFont = new FontA("Serif", Font.PLAIN, 10);
-		
+
 		mColor = (ColorA) ColorUtil.BLACK;
 	}
 
@@ -91,9 +92,8 @@ public class Graphics2DA implements Graphics2DInterface {
 	}
 
 	public Stroke getStroke() {
-		return new BasicStrokeA(mDrawPaint.getStrokeWidth(),
-				mDrawPaint.getStrokeMiter(), mDrawPaint.getStrokeCap(),
-				mDrawPaint.getStrokeJoin());
+		return new BasicStrokeA(mDrawPaint.getStrokeWidth(), mDrawPaint.getStrokeMiter(),
+				mDrawPaint.getStrokeCap(), mDrawPaint.getStrokeJoin());
 	}
 
 	public void setColor(Color color) {
@@ -123,16 +123,15 @@ public class Graphics2DA implements Graphics2DInterface {
 
 	public void setFont(Font font) {
 		mFont = (FontA) font;
-		mDrawPaint.setTypeface((Typeface) mFont.getNativeObject());
+		mDrawPaint.setTypeface(mFont.getTypeface());
 		mDrawPaint.setTextSize(mScaleStack.scaleFontSize(mFont.getSize()));
 	}
 
 	public void fillRect(int x, int y, int width, int height) {
 		beforeFill();
 
-		mCanvas.drawRect(mScaleStack.scaleX(x), mScaleStack.scaleY(y),
-				mScaleStack.scaleX(x + width), mScaleStack.scaleY(y + height),
-				mDrawPaint);
+		mCanvas.drawRect(mScaleStack.scaleX(x), mScaleStack.scaleY(y), mScaleStack.scaleX(x + width),
+				mScaleStack.scaleY(y + height), mDrawPaint);
 
 		afterFill();
 	}
@@ -146,18 +145,17 @@ public class Graphics2DA implements Graphics2DInterface {
 	}
 
 	public void draw(Rectangle2D rectangle) {
-		RectF rect = (RectF) rectangle.getNativeObject();
+		RectF rect = ((Rectangle2DA) rectangle).getRectF();
 		RectF copy = new RectF(rect);
 
 		mCanvas.drawRect(mScaleStack.scaleRectF(copy), mDrawPaint);
 	}
 
 	public void draw(RoundRectangle2D rectangle) {
-		RectF rect = (RectF) rectangle.getNativeObject();
+		RectF rect = ((RoundRectangle2DA) rectangle).getRectF();
 		RectF copy = new RectF(rect);
 
-		mCanvas.drawRoundRect(mScaleStack.scaleRectF(copy),
-				mScaleStack.scaleX((float) rectangle.getArcW()),
+		mCanvas.drawRoundRect(mScaleStack.scaleRectF(copy), mScaleStack.scaleX((float) rectangle.getArcW()),
 				mScaleStack.scaleY((float) rectangle.getArcH()), mDrawPaint);
 	}
 
@@ -166,36 +164,30 @@ public class Graphics2DA implements Graphics2DInterface {
 		PointF start = impl.getStartPoint();
 		PointF end = impl.getEndPoint();
 
-		mCanvas.drawLine(mScaleStack.scaleX(start.x),
-				mScaleStack.scaleY(start.y), mScaleStack.scaleX(end.x),
+		mCanvas.drawLine(mScaleStack.scaleX(start.x), mScaleStack.scaleY(start.y), mScaleStack.scaleX(end.x),
 				mScaleStack.scaleY(end.y), mDrawPaint);
 	}
 
 	public void drawChars(char[] data, int offset, int length, int x, int y) {
 		beforeFill();
-		
+
 		mDrawPaint.setTextSize(mScaleStack.scaleFontSize(mFont.getSize()));
-		mCanvas.drawText(data, offset, length, mScaleStack.scaleX(x),
-				mScaleStack.scaleY(y), mDrawPaint);
-		
+		mCanvas.drawText(data, offset, length, mScaleStack.scaleX(x), mScaleStack.scaleY(y), mDrawPaint);
+
 		afterFill();
 	}
 
 	public void drawString(String text, int x, int y, Paint paint) {
-		mCanvas.drawText(text, mScaleStack.scaleX(x), mScaleStack.scaleY(y),
-				paint);
+		mCanvas.drawText(text, mScaleStack.scaleX(x), mScaleStack.scaleY(y), paint);
 	}
 
-	public void drawArc(int x, int y, int width, int height, int startAngle,
-			int arcAngle) {
+	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
 		RectF oval = new RectF(x, y, (x + width), (y + height));
-		
-		mCanvas.drawArc(mScaleStack.scaleRectF(oval), startAngle, arcAngle,
-				false, mDrawPaint);
+
+		mCanvas.drawArc(mScaleStack.scaleRectF(oval), startAngle, arcAngle, false, mDrawPaint);
 	}
 
-	public void fillArc(int x, int y, int width, int height, int startAngle,
-			int arcAngle) {
+	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
 		beforeFill();
 
 		drawArc(x, y, width, height, startAngle, arcAngle);
@@ -204,8 +196,7 @@ public class Graphics2DA implements Graphics2DInterface {
 	}
 
 	public void translate(double x, double y) {
-		mCanvas.translate(mScaleStack.scaleX((float) x),
-				mScaleStack.scaleY((float) y));
+		mCanvas.translate(mScaleStack.scaleX((float) x), mScaleStack.scaleY((float) y));
 	}
 
 	public void scale(double x, double y) {
@@ -229,17 +220,16 @@ public class Graphics2DA implements Graphics2DInterface {
 		ImageA imageA = (ImageA) image;
 		Bitmap bitmap = imageA.getBitmap();
 
-		mCanvas.drawBitmap(mScaleStack.scaleBitmap(bitmap),
-				mScaleStack.scaleX(x), mScaleStack.scaleY(y), mDrawPaint);
+		mCanvas.drawBitmap(mScaleStack.scaleBitmap(bitmap), mScaleStack.scaleX(x), mScaleStack.scaleY(y),
+				mDrawPaint);
 
 	}
 
 	public void drawImage(Image image, Transform transform) {
 		ImageA imageA = (ImageA) image;
 		Bitmap bitmap = imageA.getBitmap();
-		
-		mCanvas.drawBitmap(mScaleStack.scaleBitmap(bitmap), (Matrix) transform,
-				mDrawPaint);
+
+		mCanvas.drawBitmap(mScaleStack.scaleBitmap(bitmap), (Matrix) transform, mDrawPaint);
 	}
 
 	public FontRenderContext getFontRenderContext() {
@@ -248,8 +238,7 @@ public class Graphics2DA implements Graphics2DInterface {
 	}
 
 	public void setRenderingHint(int key, int value) {
-		if (key == RenderingHints.KEY_ANTIALIASING
-				&& value == RenderingHints.VALUE_ANTIALIAS_ON) {
+		if (key == RenderingHints.KEY_ANTIALIASING && value == RenderingHints.VALUE_ANTIALIAS_ON) {
 			mDrawPaint.setAntiAlias(true);
 		} else {
 			// No other rendering hint is supported

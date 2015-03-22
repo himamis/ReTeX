@@ -6,15 +6,15 @@ import android.graphics.RectF;
 
 public class RoundRectangle2DA implements RoundRectangle2D {
 
-	private RectF rect;
-	private double arcw;
-	private double arch;
+	private RectF mRect;
+	private double mArcw;
+	private double mArch;
 
 	public RoundRectangle2DA(double x, double y, double w, double h, double arcw, double arch) {
-		rect = new RectF();
+		mRect = new RectF();
 		setRectangle(x, y, w, h);
-		this.arcw = arcw;
-		this.arch = arch;
+		mArcw = arcw;
+		mArch = arch;
 	}
 
 	public void setRectangle(double x, double y, double w, double h) {
@@ -22,41 +22,41 @@ public class RoundRectangle2DA implements RoundRectangle2D {
 		float top = (float) y;
 		float right = left + (float) w;
 		float bottom = top + (float) h;
-		rect.set(left, top, right, bottom);
+		mRect.set(left, top, right, bottom);
 	}
 
 	public double getArcW() {
-		return arcw;
+		return mArcw;
 	}
 
 	public double getArcH() {
-		return arch;
+		return mArch;
 	}
 
 	public double getX() {
-		return rect.left;
+		return mRect.left;
 	}
 
 	public double getY() {
-		return rect.top;
+		return mRect.top;
 	}
 
 	public double getWidth() {
-		return rect.right - rect.left;
+		return mRect.right - mRect.left;
 	}
 
 	public double getHeight() {
-		return rect.bottom - rect.top;
+		return mRect.bottom - mRect.top;
 	}
 
-	public Object getNativeObject() {
-		return rect;
+	public RectF getRectF() {
+		return mRect;
 	}
 
 	public void setRoundRectangle(double x, double y, double w, double h, double arcw, double arch) {
 		setRectangle(x, y, w, h);
-		this.arcw = arcw;
-		this.arch = arch;
+		mArcw = arcw;
+		mArch = arch;
 	}
 
 }

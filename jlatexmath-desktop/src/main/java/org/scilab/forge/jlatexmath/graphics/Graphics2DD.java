@@ -32,7 +32,7 @@ public class Graphics2DD implements Graphics2DInterface {
 	}
 
 	public void setStroke(Stroke stroke) {
-		impl.setStroke((java.awt.Stroke) stroke.getNativeObject());
+		impl.setStroke((java.awt.Stroke) stroke);
 	}
 
 	public Stroke getStroke() {

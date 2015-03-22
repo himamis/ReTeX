@@ -2,9 +2,7 @@ package org.scilab.forge.jlatexmath.platform.font;
 
 import java.util.Map;
 
-import org.scilab.forge.jlatexmath.platform.NativeObject;
-
-public interface Font extends NativeObject {
+public interface Font {
 
 	/**
 	 * The plain style constant.

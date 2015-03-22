@@ -16,7 +16,7 @@ public class StrokeD implements Stroke, java.awt.Stroke {
 		return impl.createStrokedShape(p);
 	}
 
-	public Object getNativeObject() {
+	public java.awt.Stroke getStroke() {
 		return impl;
 	}
 }
