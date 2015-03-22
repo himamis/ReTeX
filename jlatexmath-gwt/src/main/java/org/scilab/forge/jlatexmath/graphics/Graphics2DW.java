@@ -11,10 +11,12 @@ import org.scilab.forge.jlatexmath.platform.graphics.Image;
 import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
+import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 public class Graphics2DW implements Graphics2DInterface {
 
+	private Canvas canvas;
 	private Context2d context;
 
 	private BasicStrokeW basicStroke;
@@ -22,7 +24,9 @@ public class Graphics2DW implements Graphics2DInterface {
 	private TransformW transform;
 	private TransformW savedTransform;
 
-	public Graphics2DW() {
+	public Graphics2DW(Canvas canvas) {
+		this.canvas = canvas;
+		context = canvas.getContext2d();
 		initBasicStroke();
 		initColor();
 		initTransform();

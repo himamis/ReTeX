@@ -20,21 +20,17 @@ public class GraphicsFactoryGWT extends GraphicsFactory {
 
 	@Override
 	public Image createImage(int width, int height, int type) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ImageW(width, height, type);
 	}
 
 	@Override
 	public Image getImage(String path) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ImageW(path);
 	}
 
 	@Override
 	public Transform createTransform() {
 		return new TransformW();
 	}
-	
-	
 
 }
