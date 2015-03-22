@@ -19,10 +19,13 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	private BasicStrokeW basicStroke;
 	private ColorW color;
+	private TransformW transform;
+	private TransformW savedTransform;
 
 	public Graphics2DW() {
 		initBasicStroke();
 		initColor();
+		initTransform();
 	}
 
 	private void initBasicStroke() {
@@ -33,6 +36,11 @@ public class Graphics2DW implements Graphics2DInterface {
 	private void initColor() {
 		color = new ColorW(0, 0, 0);
 		context.setStrokeStyle(color.getCssColor());
+	}
+
+	private void initTransform() {
+		transform = new TransformW();
+		savedTransform = transform.createClone();
 	}
 
 	@Override
@@ -62,18 +70,19 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public Transform getTransform() {
-		// TODO: Matrix object to keep track of changes
-		return null;
+		return transform.createClone();
 	}
 
 	@Override
 	public void saveTransformation() {
 		context.save();
+		savedTransform = transform.createClone();
 	}
 
 	@Override
 	public void restoreTransformation() {
 		context.restore();
+		transform = savedTransform.createClone();
 	}
 
 	@Override
@@ -156,11 +165,13 @@ public class Graphics2DW implements Graphics2DInterface {
 	@Override
 	public void translate(double x, double y) {
 		context.translate(x, y);
+		transform.translate(x, y);
 	}
 
 	@Override
 	public void scale(double x, double y) {
 		context.scale(x, y);
+		transform.scale(x, y);
 	}
 
 	@Override
@@ -173,6 +184,7 @@ public class Graphics2DW implements Graphics2DInterface {
 	@Override
 	public void rotate(double theta) {
 		context.rotate(theta);
+		transform.rotate(theta);
 	}
 
 	@Override

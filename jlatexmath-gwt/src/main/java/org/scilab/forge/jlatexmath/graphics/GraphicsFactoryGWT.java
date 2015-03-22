@@ -15,8 +15,7 @@ public class GraphicsFactoryGWT extends GraphicsFactory {
 
 	@Override
 	public Color createColor(int red, int green, int blue) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ColorW(red, green, blue);
 	}
 
 	@Override
@@ -33,8 +32,7 @@ public class GraphicsFactoryGWT extends GraphicsFactory {
 
 	@Override
 	public Transform createTransform() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TransformW();
 	}
 	
 	
