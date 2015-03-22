@@ -122,7 +122,8 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public void drawChars(char[] data, int offset, int length, int x, int y) {
-
+		String string = String.valueOf(data, offset, length);
+		context.fillText(string, x, y);
 	}
 
 	@Override
