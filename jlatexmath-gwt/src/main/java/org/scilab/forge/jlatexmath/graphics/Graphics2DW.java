@@ -111,7 +111,12 @@ public class Graphics2DW implements Graphics2DInterface {
 		double h = rectangle.getHeight();
 		double arcW = rectangle.getArcW();
 		double arcH = rectangle.getArcH();
-		// TODO: source http://www.spaceroots.org/documents/ellipse/
+		if (Math.abs(arcW - arcH) < 0.01) {
+			// TODO draw using the normal API
+		} else {
+			// TODO source http://www.spaceroots.org/documents/ellipse/
+			throw new UnsupportedOperationException("ArcW and ArcH must be equal.");
+		}
 	}
 
 	@Override
@@ -128,13 +133,24 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
-		// TODO: source http://www.spaceroots.org/documents/ellipse/
+		doArcPath(x, y, width, height, startAngle, arcAngle);
+		context.stroke();
 	}
 
 	@Override
 	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
-		// TODO Auto-generated method stub
+		doArcPath(x, y, width, height, startAngle, arcAngle);
+		context.fill();
+	}
 
+	private void doArcPath(int x, int y, int width, int height, int startAngle, int arcAngle) {
+		context.save();
+		context.beginPath();
+
+		context.translate(x, y);
+		context.scale(width, height);
+		context.arc(1, 1, 1, startAngle, arcAngle);
+		context.restore();
 	}
 
 	@Override
