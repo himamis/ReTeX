@@ -40,7 +40,7 @@ public class Graphics2DD implements Graphics2DInterface {
 	}
 
 	public void setColor(Color color) {
-		impl.setColor((java.awt.Color) color.getNativeObject());
+		impl.setColor((java.awt.Color) color);
 	}
 
 	public Color getColor() {
@@ -84,13 +84,11 @@ public class Graphics2DD implements Graphics2DInterface {
 
 	}
 
-	public void drawArc(int x, int y, int width, int height, int startAngle,
-			int arcAngle) {
+	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
 		impl.drawArc(x, y, width, height, startAngle, arcAngle);
 	}
 
-	public void fillArc(int x, int y, int width, int height, int startAngle,
-			int arcAngle) {
+	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
 		impl.fillArc(x, y, width, height, startAngle, arcAngle);
 	}
 
@@ -115,8 +113,7 @@ public class Graphics2DD implements Graphics2DInterface {
 	}
 
 	public void drawImage(Image image, Transform transform) {
-		impl.drawImage((java.awt.Image) image, (AffineTransform) transform,
-				null);
+		impl.drawImage((java.awt.Image) image, (AffineTransform) transform, null);
 	}
 
 	public FontRenderContext getFontRenderContext() {
@@ -176,7 +173,7 @@ public class Graphics2DD implements Graphics2DInterface {
 	}
 
 	private AffineTransform savedTransformation;
-	
+
 	public void saveTransformation() {
 		savedTransformation = impl.getTransform();
 	}
