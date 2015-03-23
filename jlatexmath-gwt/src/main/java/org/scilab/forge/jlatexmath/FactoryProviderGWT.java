@@ -1,5 +1,6 @@
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.font.FontFactoryGWT;
 import org.scilab.forge.jlatexmath.geom.GeomFactoryGWT;
 import org.scilab.forge.jlatexmath.graphics.GraphicsFactoryGWT;
 import org.scilab.forge.jlatexmath.parser.ParserFactoryGWT;
@@ -20,8 +21,7 @@ public class FactoryProviderGWT extends FactoryProvider {
 
 	@Override
 	protected FontFactory createFontFactory() {
-		// TODO Auto-generated method stub
-		return null;
+		return new FontFactoryGWT();
 	}
 
 	@Override

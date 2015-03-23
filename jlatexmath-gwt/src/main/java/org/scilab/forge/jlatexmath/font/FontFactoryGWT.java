@@ -11,26 +11,22 @@ public class FontFactoryGWT extends FontFactory {
 
 	@Override
 	public Font createFont(String name, int style, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		return new FontW(name, style, size);
 	}
 
 	@Override
 	public TextLayout createTextLayout(String string, Font font, FontRenderContext fontRenderContext) {
-		// TODO Auto-generated method stub
-		return null;
+		return new TextLayoutW(string, font, fontRenderContext);
 	}
 
 	@Override
 	public TextAttributeProvider createTextAttributeProvider() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TextAttributeProviderW();
 	}
 
 	@Override
 	public FontLoader createFontLoader() {
-		// TODO Auto-generated method stub
-		return null;
+		return new FontLoaderW();
 	}
 
 }
