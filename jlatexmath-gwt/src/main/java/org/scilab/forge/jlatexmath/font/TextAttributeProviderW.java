@@ -7,13 +7,11 @@ public class TextAttributeProviderW implements TextAttributeProvider {
 
 	@Override
 	public TextAttribute getTextAttribute(String name) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Integer getTextAttributeValue(String name) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
