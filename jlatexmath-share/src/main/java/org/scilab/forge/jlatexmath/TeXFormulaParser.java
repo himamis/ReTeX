@@ -75,7 +75,8 @@ public class TeXFormulaParser {
 				Object[] argValues = getArgumentValues(args);
 				// invoke method
 				try {
-					TeXFormula.class.getMethod(methodName, argClasses).invoke((TeXFormula) object, argValues);
+					throw new UnsupportedOperationException("Not implemented yet.");
+					//TeXFormula.class.getMethod(methodName, argClasses).invoke((TeXFormula) object, argValues);
 				} catch (Exception e) {
 					throw new XMLResourceParseException("Error invoking the method '" + methodName
 							+ "' on the temporary TeXFormula '" + objectName
@@ -104,9 +105,10 @@ public class TeXFormulaParser {
 			// String code = "TeXFormula.predefinedTeXFormulasAsString.put(\"%s\", \"%s\");";
 			// System.out.println(String.format(code, formulaName, argValues[0]));
 			try {
-				TeXFormula f = TeXFormula.class.getConstructor(argClasses).newInstance(argValues);
+				throw new UnsupportedOperationException("Not implemented");
+				//TeXFormula f = TeXFormula.class.getConstructor(argClasses).newInstance(argValues);
 				// succesfully created, so add to "temporary formula's"-hashtable
-				tempFormulas.put(name, f);
+				//tempFormulas.put(name, f);
 			} catch (Exception e) {
 				throw new XMLResourceParseException("Error creating the temporary TeXFormula '" + name
 						+ "' while constructing the predefined TeXFormula '" + formulaName + "'!\n"
@@ -127,20 +129,19 @@ public class TeXFormulaParser {
 			// parse arguments
 			NodeList args = el.getElementsByTagName("Argument");
 			// get argument classes and values
-			Class[] argClasses = getArgumentClasses(args);
+			Class<?>[] argClasses = getArgumentClasses(args);
 			Object[] argValues = getArgumentValues(args);
 			// create TeXFormula object
 			try {
-				MacroInfo f = MacroInfo.class.getConstructor(argClasses).newInstance(argValues);
+				throw new UnsupportedOperationException("Not implemented");
+				//MacroInfo f = MacroInfo.class.getConstructor(argClasses).newInstance(argValues);
 				// succesfully created, so add to "temporary formula's"-hashtable
-				tempCommands.put(name, f);
+				//tempCommands.put(name, f);
 			} catch (IllegalArgumentException e) {
 				String err = "IllegalArgumentException:\n";
-				err += "ClassLoader to load this class (TeXFormulaParser): "
-						+ this.getClass().getClassLoader() + "\n";
+				err += "ClassLoader to load this class (TeXFormulaParser): " + this.getClass() + "\n";
 				for (Class cl : argClasses) {
-					err += "Created class: " + cl + " loaded with the ClassLoader: " + cl.getClassLoader()
-							+ "\n";
+					err += "Created class: " + cl + " loaded with the ClassLoader: " + cl + "\n";
 				}
 				for (Object obj : argValues) {
 					err += "Created object: " + obj + "\n";
@@ -289,7 +290,7 @@ public class TeXFormulaParser {
 			checkNullValue(value, type);
 			try {
 				// get constant value (if present)
-				int constant = TeXConstants.class.getDeclaredField(value).getInt(null);
+				int constant = TeXConstants.CONSTANTS_MAP.get(value);
 				// return constant integer value
 				return Integer.valueOf(constant);
 			} catch (Exception e) {
@@ -309,7 +310,7 @@ public class TeXFormulaParser {
 			checkNullValue(value, type);
 			try {
 				// return Color constant (if present)
-				return ColorUtil.class.getDeclaredField(value).get(null);
+				return ColorUtil.COLOR_CONSTANTS.get(value);
 			} catch (Exception e) {
 				throw new XMLResourceParseException(PredefinedTeXFormulaParser.RESOURCE_NAME, "Argument",
 						ARG_VAL_ATTR, "has an unknown color constant name as value : '" + value + "'!", e);
@@ -406,7 +407,7 @@ public class TeXFormulaParser {
 	}
 
 	private static Class[] getArgumentClasses(NodeList args) throws ResourceParseException {
-		Class[] res = new Class[args.getLength()];
+		Class<?>[] res = new Class[args.getLength()];
 		int i = 0;
 		for (int j = 0; j < args.getLength(); j++) {
 			Element arg = args.item(j).castToElement();
@@ -418,7 +419,7 @@ public class TeXFormulaParser {
 				throw new XMLResourceParseException(PredefinedTeXFormulaParser.RESOURCE_NAME, "Argument",
 						"type", "has an invalid class name value!");
 			} else {
-				res[i] = (Class) cl;
+				res[i] = (Class<?>) cl;
 			}
 			i++;
 		}

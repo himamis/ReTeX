@@ -25,6 +25,8 @@
 
 package org.scilab.forge.jlatexmath.graphics;
 
+import java.awt.geom.NoninvertibleTransformException;
+
 import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
 public class TransformW implements Transform {
@@ -957,7 +959,7 @@ public class TransformW implements Transform {
 	 * statement.
 	 */
 	private void stateError() {
-		throw new InternalError("missing case in transform state switch");
+		throw new IllegalStateException("missing case in transform state switch");
 	}
 
 	/**

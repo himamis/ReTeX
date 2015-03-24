@@ -1,5 +1,8 @@
 package org.scilab.forge.jlatexmath;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.scilab.forge.jlatexmath.platform.FactoryProvider;
 import org.scilab.forge.jlatexmath.platform.graphics.Color;
 import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
@@ -16,6 +19,19 @@ public abstract class ColorUtil {
 	public static final Color CYAN = GRAPHICS_FACTORY.createColor(0, 255, 255);
 	public static final Color MAGENTA = GRAPHICS_FACTORY.createColor(255, 0, 255);
 	public static final Color YELLOW = GRAPHICS_FACTORY.createColor(255, 255, 0);
+	
+	public static final Map<String, Color> COLOR_CONSTANTS = new HashMap<String, Color>();
+	
+	static {
+		COLOR_CONSTANTS.put("RED", RED);
+		COLOR_CONSTANTS.put("BLACK", BLACK);
+		COLOR_CONSTANTS.put("WHITE", WHITE);
+		COLOR_CONSTANTS.put("BLUE", BLUE);
+		COLOR_CONSTANTS.put("GREEN", GREEN);
+		COLOR_CONSTANTS.put("CYAN", CYAN);
+		COLOR_CONSTANTS.put("MAGENTA", MAGENTA);
+		COLOR_CONSTANTS.put("YELLOW", YELLOW);
+	}
 
 	public static Color decode(String string) throws NumberFormatException {
 		Integer intval = Integer.decode(string);
