@@ -25,7 +25,7 @@ public class GraphicsFactoryGWT extends GraphicsFactory {
 
 	@Override
 	public Image getImage(String path) {
-		return new ImageW(path);
+		throw new UnsupportedOperationException("Cannot load image from a path");
 	}
 
 	@Override
