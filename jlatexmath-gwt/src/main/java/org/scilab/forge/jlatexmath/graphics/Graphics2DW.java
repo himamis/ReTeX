@@ -55,6 +55,10 @@ public class Graphics2DW implements Graphics2DInterface {
 		font = new FontW(context.getFont(), Font.PLAIN, 12);
 	}
 
+	public Context2d getContext() {
+		return context;
+	}
+
 	@Override
 	public void setStroke(Stroke stroke) {
 		basicStroke = (BasicStrokeW) stroke;
@@ -98,7 +102,7 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	@Override
-	public Font getFont() {
+	public FontW getFont() {
 		return font;
 	}
 
@@ -168,7 +172,11 @@ public class Graphics2DW implements Graphics2DInterface {
 	@Override
 	public void drawChars(char[] data, int offset, int length, int x, int y) {
 		String string = String.valueOf(data, offset, length);
-		context.fillText(string, x, y);
+		drawText(string, x, y);
+	}
+
+	public void drawText(String text, int x, int y) {
+		context.fillText(text, x, y);
 	}
 
 	@Override
@@ -243,7 +251,7 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public FontRenderContext getFontRenderContext() {
-		return new FontRenderContextW();
+		return new FontRenderContextW(this);
 	}
 
 	@Override
