@@ -20,7 +20,10 @@ public class ElementW extends NodeW implements Element {
 
 	@Override
 	public String getAttribute(String name) {
-		return element.getAttribute(name);
+		// make sure attritbute is not null
+		String attr = element.getAttribute(name);
+		attr = (attr == null ? "" : attr);
+		return attr;
 	}
 
 	@Override
