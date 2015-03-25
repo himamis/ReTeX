@@ -18,7 +18,6 @@ import com.google.gwt.dom.client.CanvasElement;
 
 public class Graphics2DW implements Graphics2DInterface {
 
-	private Canvas canvas;
 	private Context2d context;
 
 	private BasicStrokeW basicStroke;
@@ -29,7 +28,6 @@ public class Graphics2DW implements Graphics2DInterface {
 	private TransformW savedTransform;
 
 	public Graphics2DW(Canvas canvas) {
-		this.canvas = canvas;
 		context = canvas.getContext2d();
 		initBasicStroke();
 		initColor();
@@ -136,12 +134,29 @@ public class Graphics2DW implements Graphics2DInterface {
 		double arcW = rectangle.getArcW();
 		double arcH = rectangle.getArcH();
 		if (Math.abs(arcW - arcH) < 0.01) {
-			// TODO draw using the normal API
+			double radius = arcW / 2.0;
+			drawRoundRectangle(x, y, w, h, radius);
 		} else {
-			// TODO source http://www.spaceroots.org/documents/ellipse/
 			throw new UnsupportedOperationException(
 					"ArcW and ArcH must be equal.");
 		}
+	}
+
+	private void drawRoundRectangle(double x, double y, double width,
+			double height, double radius) {
+		context.beginPath();
+		context.moveTo(x + radius, y);
+		context.lineTo(x + width - radius, y);
+		context.quadraticCurveTo(x + width, y, x + width, y + radius);
+		context.lineTo(x + width, y + height - radius);
+		context.quadraticCurveTo(x + width, y + height, x + width - radius, y
+				+ height);
+		context.lineTo(x + radius, y + height);
+		context.quadraticCurveTo(x, y + height, x, y + height - radius);
+		context.lineTo(x, y + radius);
+		context.quadraticCurveTo(x, y, x + radius, y);
+		context.closePath();
+		context.stroke();
 	}
 
 	@Override
@@ -222,20 +237,18 @@ public class Graphics2DW implements Graphics2DInterface {
 				transform.getShearY(), transform.getScaleY(),
 				transform.getTranslateX(), transform.getTranslateY());
 		drawImage(image, 0, 0);
-		
+
 		context.restore();
 	}
 
 	@Override
 	public FontRenderContext getFontRenderContext() {
-		// TODO Auto-generated method stub
-		return null;
+		return new FontRenderContextW();
 	}
 
 	@Override
 	public void setRenderingHint(int key, int value) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
