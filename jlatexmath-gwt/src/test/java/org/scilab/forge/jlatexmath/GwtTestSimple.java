@@ -6,7 +6,9 @@ import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 import org.scilab.forge.jlatexmath.platform.graphics.Image;
 import org.scilab.forge.jlatexmath.platform.graphics.Insets;
 
-public class GwtTestSimple extends com.google.gwt.junit.client.GWTTestCase {
+import com.google.gwt.junit.client.GWTTestCase;
+
+public class GwtTestSimple extends GWTTestCase {
 
 	public void testSetupTeXIcon() {
 		FactoryProvider.INSTANCE = new FactoryProviderGWT();
