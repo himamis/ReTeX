@@ -33,8 +33,8 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	private void initBasicStroke() {
-		basicStroke = new BasicStrokeW((float) context.getLineWidth(), context.getLineJoin(),
-				context.getLineCap(), (float) context.getMiterLimit());
+		basicStroke = new BasicStrokeW((float) context.getLineWidth(), context.getLineCap(),
+				context.getLineJoin(), (float) context.getMiterLimit());
 	}
 
 	private void initColor() {
