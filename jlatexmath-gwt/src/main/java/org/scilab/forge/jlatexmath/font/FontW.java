@@ -39,4 +39,24 @@ public class FontW implements Font {
 		return size;
 	}
 
+	public String getCssFontString() {
+		String font = "";
+		font += getStyleString() + " ";
+		font += size + "px ";
+		font += name;
+		return font;
+	}
+
+	private String getStyleString() {
+		switch (style) {
+		case PLAIN:
+			return "normal";
+		case ITALIC:
+			return "italic";
+		case BOLD:
+			return "bold";
+		default:
+			return "normal";
+		}
+	}
 }

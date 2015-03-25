@@ -1,5 +1,6 @@
 package org.scilab.forge.jlatexmath.graphics;
 
+import org.scilab.forge.jlatexmath.font.FontW;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
 import org.scilab.forge.jlatexmath.platform.geom.Line2D;
@@ -13,6 +14,7 @@ import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.dom.client.CanvasElement;
 
 public class Graphics2DW implements Graphics2DInterface {
 
@@ -21,6 +23,8 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	private BasicStrokeW basicStroke;
 	private ColorW color;
+	private FontW font;
+
 	private TransformW transform;
 	private TransformW savedTransform;
 
@@ -30,11 +34,13 @@ public class Graphics2DW implements Graphics2DInterface {
 		initBasicStroke();
 		initColor();
 		initTransform();
+		initFont();
 	}
 
 	private void initBasicStroke() {
-		basicStroke = new BasicStrokeW((float) context.getLineWidth(), context.getLineCap(),
-				context.getLineJoin(), (float) context.getMiterLimit());
+		basicStroke = new BasicStrokeW((float) context.getLineWidth(),
+				context.getLineCap(), context.getLineJoin(),
+				(float) context.getMiterLimit());
 	}
 
 	private void initColor() {
@@ -45,6 +51,10 @@ public class Graphics2DW implements Graphics2DInterface {
 	private void initTransform() {
 		transform = new TransformW();
 		savedTransform = transform.createClone();
+	}
+
+	private void initFont() {
+		font = new FontW(context.getFont(), Font.PLAIN, 12);
 	}
 
 	@Override
@@ -91,14 +101,13 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public Font getFont() {
-		// TODO Auto-generated method stub
-		return null;
+		return font;
 	}
 
 	@Override
 	public void setFont(Font font) {
-		// TODO Auto-generated method stub
-
+		this.font = (FontW) font;
+		context.setFont(this.font.getCssFontString());
 	}
 
 	@Override
@@ -108,12 +117,14 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public void fill(Rectangle2D rectangle) {
-		context.fillRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+		context.fillRect(rectangle.getX(), rectangle.getY(),
+				rectangle.getWidth(), rectangle.getHeight());
 	}
 
 	@Override
 	public void draw(Rectangle2D rectangle) {
-		context.rect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+		context.rect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
+				rectangle.getHeight());
 	}
 
 	@Override
@@ -128,7 +139,8 @@ public class Graphics2DW implements Graphics2DInterface {
 			// TODO draw using the normal API
 		} else {
 			// TODO source http://www.spaceroots.org/documents/ellipse/
-			throw new UnsupportedOperationException("ArcW and ArcH must be equal.");
+			throw new UnsupportedOperationException(
+					"ArcW and ArcH must be equal.");
 		}
 	}
 
@@ -145,18 +157,21 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	@Override
-	public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+	public void drawArc(int x, int y, int width, int height, int startAngle,
+			int arcAngle) {
 		doArcPath(x, y, width, height, startAngle, arcAngle);
 		context.stroke();
 	}
 
 	@Override
-	public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+	public void fillArc(int x, int y, int width, int height, int startAngle,
+			int arcAngle) {
 		doArcPath(x, y, width, height, startAngle, arcAngle);
 		context.fill();
 	}
 
-	private void doArcPath(int x, int y, int width, int height, int startAngle, int arcAngle) {
+	private void doArcPath(int x, int y, int width, int height, int startAngle,
+			int arcAngle) {
 		context.save();
 		context.beginPath();
 
@@ -193,14 +208,22 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public void drawImage(Image image, int x, int y) {
-		// TODO Auto-generated method stub
-
+		ImageW impl = (ImageW) image;
+		Canvas imageCanvas = impl.getCanvas();
+		CanvasElement canvasElement = imageCanvas.getCanvasElement();
+		context.drawImage(canvasElement, x, y);
 	}
 
 	@Override
 	public void drawImage(Image image, Transform transform) {
-		// TODO Auto-generated method stub
+		context.save();
 
+		context.transform(transform.getScaleX(), transform.getShearX(),
+				transform.getShearY(), transform.getScaleY(),
+				transform.getTranslateX(), transform.getTranslateY());
+		drawImage(image, 0, 0);
+		
+		context.restore();
 	}
 
 	@Override

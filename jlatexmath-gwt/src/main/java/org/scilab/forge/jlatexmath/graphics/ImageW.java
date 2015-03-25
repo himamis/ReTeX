@@ -34,4 +34,7 @@ public class ImageW implements Image {
 		return new Graphics2DW(canvas);
 	}
 
+	public Canvas getCanvas() {
+		return canvas;
+	}
 }
