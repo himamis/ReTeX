@@ -21,8 +21,8 @@ public class BasicStrokeW implements BasicStroke {
 
 	public BasicStrokeW(float width, String cap, String join, float miterLimit) {
 		this.width = width;
-		this.cap = getLineCap(LineCap.valueOf(cap));
-		this.join = getLineJoin(LineJoin.valueOf(join));
+		this.cap = getLineCap(LineCap.valueOf(cap.toUpperCase()));
+		this.join = getLineJoin(LineJoin.valueOf(join.toUpperCase()));
 		this.miterLimit = miterLimit;
 	}
 
