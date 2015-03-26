@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg"
+><metadata
+></metadata
+><defs
+><font horiz-adv-x="500"
+><font-face font-family="jlm_special" units-per-em="1000" ascent="698" descent="-15"
+></font-face
+><missing-glyph horiz-adv-x="500" d="M33 0V666H298V0H33ZM66 33H265V633H66V33Z"
+></missing-glyph
+><glyph unicode="E" horiz-adv-x="705" d="M0 371q1 5 18 43q5 14 9 15q3 1 19 1H84q18 0 21 3q2 2 4 12q1 2 4 11t5 14q13 36 36 70q44 67 114.5 108T419 697q118 11 223 -54q20 -12 45 -34q13 -11 15 -16q1 -3 -5 -17Q678 533 678 532q-26 34 -71 62q-67 42 -145 45q-63 2 -123 -22.5T235 546Q189 497 167 430H636L619 388l-9 -16l-11 -1H574H484H154l1 -60H587L569 269l-8 -16l-11 -1H528H450H167q22 -67 68 -116Q293 75 375 53t162 3q58 18 104 57q6 5 18 17.5T679 149V91q0 -21 -2 -25q-1 -3 -8 -8q-3 -2 -8.5 -6T652 46Q618 22 578 7Q489 -26 393 -10.5T223 65q-61 51 -93 119q-11 22 -18 43q-6 21 -7 22q-3 3 -9 3H78H0l17 41l9 16l20 2H95v60H0Z"
+></glyph
+><glyph unicode="e" d="M149 390H369L342 349H147q-1 -20 -1 -33t1 -30H302L276 245H150Q161 140 207 78.5T323 17q44 0 86.5 26.5T477 114V80Q448 36 399.5 11T296 -14q-89 0 -153.5 70T59 245H-16l27 41H54q-1 13 -1 37q0 16 1 26H-16l27 41H58q17 125 83.5 204T296 673q52 0 105 -35q13 -8 17 -8q16 0 25 44h18L477 451H460q-9 65 -29 105q-21 41 -56 65.5T303 646q-43 0 -77.5 -32.5T172 523Q157 474 149 390Z"
+></glyph
+><glyph unicode="m" d="M149 390H369L342 349H147q-1 -20 -1 -33t1 -30H302L276 245H150Q161 140 207 78.5T323 17q44 0 86.5 26.5T477 114V80Q448 36 399.5 11T296 -14q-89 0 -153.5 70T59 245H-16l27 41H54q-1 13 -1 37q0 16 1 26H-16l27 41H58q17 125 83.5 204T296 673q52 0 105 -35q13 -8 17 -8q16 0 25 44h18L477 451H460q-9 65 -29 105q-21 41 -56 65.5T303 646q-43 0 -77.5 -32.5T172 523Q157 474 149 390Z"
+></glyph
+></font
+></defs
+><g style="font-family: &quot;jlm_special&quot;; font-size:50;fill:black"
+><text x="20" y="50"
+>!&quot;#$%&amp;&#39;()*+,-./0123456789:;&#229;&lt;&gt;?</text
+><text x="20" y="100"
+>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_</text
+><text x="20" y="150"
+>` abcdefghijklmnopqrstuvwxyz|{}~</text
+></g
+></svg
+>
