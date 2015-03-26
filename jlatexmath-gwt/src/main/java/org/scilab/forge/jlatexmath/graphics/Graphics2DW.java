@@ -15,6 +15,7 @@ import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.CanvasElement;
+import com.google.gwt.user.client.Timer;
 
 public class Graphics2DW implements Graphics2DInterface {
 
@@ -53,6 +54,7 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	private void initFont() {
 		font = new FontW(context.getFont(), Font.PLAIN, 12);
+		font.setLoaded(true);
 	}
 
 	public Context2d getContext() {
@@ -85,7 +87,7 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	@Override
-	public Transform getTransform() {
+	public TransformW getTransform() {
 		return transform.createClone();
 	}
 
@@ -175,10 +177,54 @@ public class Graphics2DW implements Graphics2DInterface {
 		drawText(string, x, y);
 	}
 
-	public void drawText(String text, int x, int y) {
-		context.fillText(text, x, y);
+	private static class FontTimer extends Timer {
+
+		private Graphics2DW graphics;
+		private String text;
+		private int x;
+		private int y;
+
+		private TransformW transform;
+		private FontW font;
+
+		public FontTimer(Graphics2DW graphics, String text, int x, int y) {
+			super();
+			this.graphics = graphics;
+			this.text = text;
+			this.x = x;
+			this.y = y;
+
+			transform = graphics.getTransform();
+			font = graphics.getFont();
+
+		}
+
+		@Override
+		public void run() {
+			if (font.isLoaded()) {
+				FontW oldFont = graphics.getFont();
+				
+				graphics.save();
+				graphics.setFont(font);
+				graphics.setTransform(transform);
+				graphics.fillTextInternal(text, x, y);
+				graphics.restore();
+
+				graphics.setFont(oldFont);
+				cancel();
+			}
+		}
+
 	}
 
+	public void drawText(String text, int x, int y) {
+		new FontTimer(this, text, x, y).scheduleRepeating(30);
+	}
+
+	protected void fillTextInternal(String text, int x, int y) {
+		context.fillText(text, x, y);
+	}
+	
 	@Override
 	public void drawArc(int x, int y, int width, int height, int startAngle,
 			int arcAngle) {
@@ -241,12 +287,51 @@ public class Graphics2DW implements Graphics2DInterface {
 	public void drawImage(Image image, Transform transform) {
 		context.save();
 
-		context.transform(transform.getScaleX(), transform.getShearX(),
-				transform.getShearY(), transform.getScaleY(),
-				transform.getTranslateX(), transform.getTranslateY());
+		transform((TransformW) transform);
 		drawImage(image, 0, 0);
 
 		context.restore();
+	}
+	
+	/**
+	 * Saves the context's state.
+	 */
+	protected void save() {
+		context.save();
+	}
+
+	/**
+	 * Restores the context's state.
+	 */
+	protected void restore() {
+		context.restore();
+	}
+
+	/**
+	 * Applies the transformation matrix to the context. Please ensure one call
+	 * to graphics.save() before this method and graphics.restore() after this
+	 * method.
+	 * 
+	 * @param transform
+	 *            transformation matrix
+	 */
+	protected void transform(TransformW transform) {
+		context.transform(transform.getScaleX(), transform.getShearX(),
+				transform.getShearY(), transform.getScaleY(),
+				transform.getTranslateX(), transform.getTranslateY());
+	}
+
+	/**
+	 * Sets the transformation matrix. Please ensure one call to graphics.save()
+	 * before this method and graphics.restore() after this method.
+	 * 
+	 * @param transform
+	 *            transformation matrix
+	 */
+	protected void setTransform(TransformW transform) {
+		context.setTransform(transform.getScaleX(), transform.getShearX(),
+				transform.getShearY(), transform.getScaleY(),
+				transform.getTranslateX(), transform.getTranslateY());
 	}
 
 	@Override

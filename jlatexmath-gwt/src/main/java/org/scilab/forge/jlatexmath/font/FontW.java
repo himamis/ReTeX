@@ -11,6 +11,8 @@ public class FontW implements Font {
 	private int style;
 	private int size;
 
+	private boolean isLoaded;
+
 	public FontW(String name, int style, int size) {
 		this.name = name;
 		this.style = style;
@@ -58,5 +60,22 @@ public class FontW implements Font {
 		default:
 			return "normal";
 		}
+	}
+
+	/**
+	 * @return true if the font has been loaded to the browser
+	 */
+	public boolean isLoaded() {
+		return isLoaded;
+	}
+
+	/**
+	 * Sets the font to loaded. Set this to true, when it's certain that the
+	 * font has been loaded into the browser.
+	 * 
+	 * @param loaded
+	 */
+	public void setLoaded(boolean loaded) {
+		isLoaded = loaded;
 	}
 }
