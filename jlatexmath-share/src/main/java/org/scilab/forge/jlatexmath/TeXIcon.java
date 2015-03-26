@@ -38,7 +38,6 @@ import org.scilab.forge.jlatexmath.platform.graphics.HasForegroundColor;
 import org.scilab.forge.jlatexmath.platform.graphics.Icon;
 import org.scilab.forge.jlatexmath.platform.graphics.Insets;
 import org.scilab.forge.jlatexmath.platform.graphics.RenderingHints;
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
 
 /**

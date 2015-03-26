@@ -79,6 +79,7 @@ public class Graphics2DW implements Graphics2DInterface {
 	public void setColor(Color color) {
 		this.color = (ColorW) color;
 		context.setStrokeStyle(this.color.getCssColor());
+		context.setFillStyle(this.color.getCssColor());
 	}
 
 	@Override
@@ -218,11 +219,12 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	public void drawText(String text, int x, int y) {
-		new FontTimer(this, text, x, y).scheduleRepeating(30);
+		//new FontTimer(this, text, x, y).scheduleRepeating(30);
+		fillTextInternal(text, x, y);
 	}
 
 	protected void fillTextInternal(String text, int x, int y) {
-		context.fillText(text, x, y);
+		context.fillText(text, x, y + font.getSize());
 	}
 	
 	@Override

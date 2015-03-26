@@ -15,6 +15,8 @@ public class ImageW implements Image {
 		canvas = Canvas.createIfSupported();
 		canvas.setWidth(width + "px");
 		canvas.setHeight(height + "px");
+		canvas.setCoordinateSpaceHeight(height);
+		canvas.setCoordinateSpaceWidth(width);
 		this.width = width;
 		this.height = height;
 	}
