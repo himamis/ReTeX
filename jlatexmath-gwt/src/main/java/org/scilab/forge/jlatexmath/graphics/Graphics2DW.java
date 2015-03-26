@@ -1,5 +1,7 @@
 package org.scilab.forge.jlatexmath.graphics;
 
+import java.util.LinkedList;
+
 import org.scilab.forge.jlatexmath.font.FontW;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
@@ -26,7 +28,8 @@ public class Graphics2DW implements Graphics2DInterface {
 	private FontW font;
 
 	private TransformW transform;
-	private TransformW savedTransform;
+
+	private LinkedList<TransformW> transformationStack;
 
 	public Graphics2DW(Canvas canvas) {
 		context = canvas.getContext2d();
@@ -49,7 +52,8 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	private void initTransform() {
 		transform = new TransformW();
-		savedTransform = transform.createClone();
+		transformationStack = new LinkedList<TransformW>();
+		transformationStack.add(transform.createClone());
 	}
 
 	private void initFont() {
@@ -83,7 +87,7 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	@Override
-	public Color getColor() {
+	public ColorW getColor() {
 		return color;
 	}
 
@@ -95,13 +99,19 @@ public class Graphics2DW implements Graphics2DInterface {
 	@Override
 	public void saveTransformation() {
 		context.save();
-		savedTransform = transform.createClone();
+		transformationStack.add(transform.createClone());
 	}
 
 	@Override
 	public void restoreTransformation() {
 		context.restore();
-		transform = savedTransform.createClone();
+		transform = transformationStack.pollLast();
+
+		// these values are also restored on context.restore()
+		// so we have to re-set them
+		setFont(font);
+		setColor(color);
+		setStroke(basicStroke);
 	}
 
 	@Override
@@ -187,6 +197,7 @@ public class Graphics2DW implements Graphics2DInterface {
 
 		private TransformW transform;
 		private FontW font;
+		private ColorW color;
 
 		public FontTimer(Graphics2DW graphics, String text, int x, int y) {
 			super();
@@ -197,6 +208,7 @@ public class Graphics2DW implements Graphics2DInterface {
 
 			transform = graphics.getTransform();
 			font = graphics.getFont();
+			color = graphics.getColor();
 
 		}
 
@@ -204,14 +216,17 @@ public class Graphics2DW implements Graphics2DInterface {
 		public void run() {
 			if (font.isLoaded()) {
 				FontW oldFont = graphics.getFont();
-				
+				ColorW oldColor = graphics.getColor();
+
 				graphics.save();
 				graphics.setFont(font);
+				graphics.setColor(color);
 				graphics.setTransform(transform);
 				graphics.fillTextInternal(text, x, y);
 				graphics.restore();
 
 				graphics.setFont(oldFont);
+				graphics.setColor(oldColor);
 				cancel();
 			}
 		}
@@ -219,14 +234,14 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	public void drawText(String text, int x, int y) {
-		//new FontTimer(this, text, x, y).scheduleRepeating(30);
-		fillTextInternal(text, x, y);
+		new FontTimer(this, text, x, y).scheduleRepeating(30);
+		//fillTextInternal(text, x, y);
 	}
 
 	protected void fillTextInternal(String text, int x, int y) {
-		context.fillText(text, x, y + font.getSize());
+		context.fillText(text, x, y);
 	}
-	
+
 	@Override
 	public void drawArc(int x, int y, int width, int height, int startAngle,
 			int arcAngle) {
@@ -294,7 +309,7 @@ public class Graphics2DW implements Graphics2DInterface {
 
 		context.restore();
 	}
-	
+
 	/**
 	 * Saves the context's state.
 	 */
