@@ -1,46 +1,52 @@
 package org.scilab.forge.jlatexmath.font;
 
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.scilab.forge.jlatexmath.exception.ResourceParseException;
+import org.scilab.forge.jlatexmath.font.WebFontLoader.FontStatusListener;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontLoader;
-import org.scilab.forge.jlatexmath.resources.css.CssResources;
-import org.scilab.forge.jlatexmath.resources.js.JsResources;
 
-import com.google.gwt.core.client.ScriptInjector;
+public class FontLoaderW implements FontLoader, FontStatusListener {
 
-public class FontLoaderW implements FontLoader {
+	private static final Logger logger = Logger.getLogger("FontLoader");
 
-	private boolean resourcesInjected = false;
+	private WebFontLoader webFontLoader;
+
+	private HashMap<String, FontW> fonts;
+
+	public FontLoaderW() {
+		webFontLoader = new WebFontLoader();
+		fonts = new HashMap<String, FontW>();
+		webFontLoader.addFontStatusListener(this);
+	}
 
 	@Override
 	public Font loadFont(Object fontInt, String name)
 			throws ResourceParseException {
-		ensureResourcesInjected();
-		// keep reference to all the fonts loaded
-		// WebFont - ensure that this class is listening to the onfontactive
-		// events
-		// WebFont - start loading of custom font-family
-		// return object with font name
-
-		// onfontactive event - set the fontactive boolean in font object to
-		// true
-		// TODO Auto-generated method stub
 		FontW font = new FontW("serif", Font.PLAIN,
 				Math.round(PIXELS_PER_POINT));
-		font.setLoaded(true);
+		fonts.put(name, font);
+
+		webFontLoader.loadFont(name);
 		return font;
 	}
 
-	private void ensureResourcesInjected() {
-		if (!resourcesInjected) {
-			injectResources();
-			resourcesInjected = true;
-		}
+	@Override
+	public void onFontLoading(String familyName, String fvd) {
+		logger.log(Level.INFO, "Font " + familyName + " is loading.");
 	}
 
-	private void injectResources() {
-		CssResources.INSTANCE.fontFaceDeclarations().ensureInjected();
-		ScriptInjector.fromString(
-				JsResources.INSTANCE.webFontLoaderJS().getText()).inject();
+	@Override
+	public void onFontActive(String familyName, String fvd) {
+		logger.log(Level.INFO, "Font " + familyName + " is active.");
 	}
+
+	@Override
+	public void onFontInactive(String familyName, String fvd) {
+		logger.log(Level.SEVERE, "Font " + familyName + " is inactive.");
+	}
+
 }
