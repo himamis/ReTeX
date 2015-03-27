@@ -1,1 +1,11 @@
-@font-face {\n\t\tfont-family: 'my-font-name';\n\t\tsrc: url('my-font-url.eot');\n\t\tsrc: url('my-font-url.eot?#iefix') format('embedded-opentype'),\n\t\turl('my-font-url.svg#my-font-name') format('svg'),\n\t\turl('my-font-url.woff') format('woff'),\n\t\turl('my-font-url.ttf') format('truetype');\n\t\tfont-weight: normal;\n\t\tfont-style: normal;\n\t}\n\n
+@font-face {
+		font-family: 'my-font-name';
+		src: url('my-font-url.eot');
+		src: url('my-font-url.eot?#iefix') format('embedded-opentype'),
+		url('my-font-url.svg#my-font-name') format('svg'),
+		url('my-font-url.woff') format('woff'),
+		url('my-font-url.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+	}
+ 

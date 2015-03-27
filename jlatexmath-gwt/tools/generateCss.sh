@@ -5,7 +5,8 @@
 cd ..
 baseFolder=`pwd`
 toolsFolder=$baseFolder/tools
-fontsFolder=$baseFolder/src/main/resources/org/scilab/forge/jlatexmath/font
+publicFolder=$baseFolder/src/main/resources/org/scilab/forge/jlatexmath/public
+outputFolder=$baseFolder/src/main/resources/org/scilab/forge/jlatexmath/resources/css
 
 # Load the css template for @font-face declaration
 # my-font-name -> name of the font
@@ -15,19 +16,15 @@ fontFaceTemplate=`cat fontFaceTemplate.css`;
 fontFaceHeader=`cat fontFaceCssHeader.css`;
 
 # output filename
-outputFilename="font-face-declarations.css";
+outputFilename=$outputFolder/font-face-declarations.css;
 
 # Go to the font resources directory
-cd $fontsFolder
+cd $publicFolder
 
-echo -e $fontFaceHeader > $outputFilename;
+echo "$fontFaceHeader" > $outputFilename;
 
-for fontFolder in `find . -type f -name '*.woff' | sed -r 's|/[^/]+$||' | sort | uniq`;do
-    echo $fontFolder
-    for fontName in `ls $fontFolder | cut -d"." -f1 | sort | uniq`;do
-        # echo $CSSSTRING | sed -e 's/my-font-name/'$fontName'/g' >> $CSSFILENAME
-    	
-    	echo $fontName
-    done
+for font in `find . -type f -name '*.ttf' | rev | cut -d"." -f2- | rev | cut -c3-`;do
+	fontUrl=$font
+	fontName=`basename $font`
+	echo "$fontFaceTemplate" | sed -e 's@my-font-name@'$fontName'@g' -e 's@my-font-url@'$fontUrl'@g' >> $outputFilename
 done
-
