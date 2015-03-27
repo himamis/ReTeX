@@ -3,7 +3,6 @@ package org.scilab.forge.jlatexmath.resources.css;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
-import com.google.gwt.resources.client.ClientBundle.Source;
 
 public interface CssResources extends ClientBundle {
 

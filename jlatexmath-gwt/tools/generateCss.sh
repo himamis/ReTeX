@@ -26,5 +26,6 @@ echo "$fontFaceHeader" > $outputFilename;
 for font in `find . -type f -name '*.ttf' | rev | cut -d"." -f2- | rev | cut -c3-`;do
 	fontUrl=$font
 	fontName=`basename $font`
+	fontName=`echo $fontName | sed -e 's@_@-@g'`
 	echo "$fontFaceTemplate" | sed -e 's@my-font-name@'$fontName'@g' -e 's@my-font-url@'$fontUrl'@g' >> $outputFilename
 done

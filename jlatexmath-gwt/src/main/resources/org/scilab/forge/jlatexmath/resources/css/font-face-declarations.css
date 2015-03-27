@@ -1,508 +1,508 @@
-/** This file was created with generateCss.sh script */
+/** This file was created with the tools/generateCss.sh script */
  
  
 @font-face {
-		font-family: 'jlm_wnbx10';
-		src: url('font/cyrillic/fonts/jlm_wnbx10.eot');
-		src: url('font/cyrillic/fonts/jlm_wnbx10.eot?#iefix') format('embedded-opentype'),
-		url('font/cyrillic/fonts/jlm_wnbx10.svg#jlm_wnbx10') format('svg'),
-		url('font/cyrillic/fonts/jlm_wnbx10.woff') format('woff'),
-		url('font/cyrillic/fonts/jlm_wnbx10.ttf') format('truetype');
+		font-family: "jlm-wnbx10";
+		src: url("font/cyrillic/fonts/jlm_wnbx10.eot");
+		src: url("font/cyrillic/fonts/jlm_wnbx10.eot?#iefix") format("embedded-opentype"),
+		url("font/cyrillic/fonts/jlm_wnbx10.svg#jlm-wnbx10") format("svg"),
+		url("font/cyrillic/fonts/jlm_wnbx10.woff") format("woff"),
+		url("font/cyrillic/fonts/jlm_wnbx10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_wnbxti10';
-		src: url('font/cyrillic/fonts/jlm_wnbxti10.eot');
-		src: url('font/cyrillic/fonts/jlm_wnbxti10.eot?#iefix') format('embedded-opentype'),
-		url('font/cyrillic/fonts/jlm_wnbxti10.svg#jlm_wnbxti10') format('svg'),
-		url('font/cyrillic/fonts/jlm_wnbxti10.woff') format('woff'),
-		url('font/cyrillic/fonts/jlm_wnbxti10.ttf') format('truetype');
+		font-family: "jlm-wnbxti10";
+		src: url("font/cyrillic/fonts/jlm_wnbxti10.eot");
+		src: url("font/cyrillic/fonts/jlm_wnbxti10.eot?#iefix") format("embedded-opentype"),
+		url("font/cyrillic/fonts/jlm_wnbxti10.svg#jlm-wnbxti10") format("svg"),
+		url("font/cyrillic/fonts/jlm_wnbxti10.woff") format("woff"),
+		url("font/cyrillic/fonts/jlm_wnbxti10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_wnr10';
-		src: url('font/cyrillic/fonts/jlm_wnr10.eot');
-		src: url('font/cyrillic/fonts/jlm_wnr10.eot?#iefix') format('embedded-opentype'),
-		url('font/cyrillic/fonts/jlm_wnr10.svg#jlm_wnr10') format('svg'),
-		url('font/cyrillic/fonts/jlm_wnr10.woff') format('woff'),
-		url('font/cyrillic/fonts/jlm_wnr10.ttf') format('truetype');
+		font-family: "jlm-wnr10";
+		src: url("font/cyrillic/fonts/jlm_wnr10.eot");
+		src: url("font/cyrillic/fonts/jlm_wnr10.eot?#iefix") format("embedded-opentype"),
+		url("font/cyrillic/fonts/jlm_wnr10.svg#jlm-wnr10") format("svg"),
+		url("font/cyrillic/fonts/jlm_wnr10.woff") format("woff"),
+		url("font/cyrillic/fonts/jlm_wnr10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_wnss10';
-		src: url('font/cyrillic/fonts/jlm_wnss10.eot');
-		src: url('font/cyrillic/fonts/jlm_wnss10.eot?#iefix') format('embedded-opentype'),
-		url('font/cyrillic/fonts/jlm_wnss10.svg#jlm_wnss10') format('svg'),
-		url('font/cyrillic/fonts/jlm_wnss10.woff') format('woff'),
-		url('font/cyrillic/fonts/jlm_wnss10.ttf') format('truetype');
+		font-family: "jlm-wnss10";
+		src: url("font/cyrillic/fonts/jlm_wnss10.eot");
+		src: url("font/cyrillic/fonts/jlm_wnss10.eot?#iefix") format("embedded-opentype"),
+		url("font/cyrillic/fonts/jlm_wnss10.svg#jlm-wnss10") format("svg"),
+		url("font/cyrillic/fonts/jlm_wnss10.woff") format("woff"),
+		url("font/cyrillic/fonts/jlm_wnss10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_wnssbx10';
-		src: url('font/cyrillic/fonts/jlm_wnssbx10.eot');
-		src: url('font/cyrillic/fonts/jlm_wnssbx10.eot?#iefix') format('embedded-opentype'),
-		url('font/cyrillic/fonts/jlm_wnssbx10.svg#jlm_wnssbx10') format('svg'),
-		url('font/cyrillic/fonts/jlm_wnssbx10.woff') format('woff'),
-		url('font/cyrillic/fonts/jlm_wnssbx10.ttf') format('truetype');
+		font-family: "jlm-wnssbx10";
+		src: url("font/cyrillic/fonts/jlm_wnssbx10.eot");
+		src: url("font/cyrillic/fonts/jlm_wnssbx10.eot?#iefix") format("embedded-opentype"),
+		url("font/cyrillic/fonts/jlm_wnssbx10.svg#jlm-wnssbx10") format("svg"),
+		url("font/cyrillic/fonts/jlm_wnssbx10.woff") format("woff"),
+		url("font/cyrillic/fonts/jlm_wnssbx10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_wnssi10';
-		src: url('font/cyrillic/fonts/jlm_wnssi10.eot');
-		src: url('font/cyrillic/fonts/jlm_wnssi10.eot?#iefix') format('embedded-opentype'),
-		url('font/cyrillic/fonts/jlm_wnssi10.svg#jlm_wnssi10') format('svg'),
-		url('font/cyrillic/fonts/jlm_wnssi10.woff') format('woff'),
-		url('font/cyrillic/fonts/jlm_wnssi10.ttf') format('truetype');
+		font-family: "jlm-wnssi10";
+		src: url("font/cyrillic/fonts/jlm_wnssi10.eot");
+		src: url("font/cyrillic/fonts/jlm_wnssi10.eot?#iefix") format("embedded-opentype"),
+		url("font/cyrillic/fonts/jlm_wnssi10.svg#jlm-wnssi10") format("svg"),
+		url("font/cyrillic/fonts/jlm_wnssi10.woff") format("woff"),
+		url("font/cyrillic/fonts/jlm_wnssi10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_wnti10';
-		src: url('font/cyrillic/fonts/jlm_wnti10.eot');
-		src: url('font/cyrillic/fonts/jlm_wnti10.eot?#iefix') format('embedded-opentype'),
-		url('font/cyrillic/fonts/jlm_wnti10.svg#jlm_wnti10') format('svg'),
-		url('font/cyrillic/fonts/jlm_wnti10.woff') format('woff'),
-		url('font/cyrillic/fonts/jlm_wnti10.ttf') format('truetype');
+		font-family: "jlm-wnti10";
+		src: url("font/cyrillic/fonts/jlm_wnti10.eot");
+		src: url("font/cyrillic/fonts/jlm_wnti10.eot?#iefix") format("embedded-opentype"),
+		url("font/cyrillic/fonts/jlm_wnti10.svg#jlm-wnti10") format("svg"),
+		url("font/cyrillic/fonts/jlm_wnti10.woff") format("woff"),
+		url("font/cyrillic/fonts/jlm_wnti10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_wntt10';
-		src: url('font/cyrillic/fonts/jlm_wntt10.eot');
-		src: url('font/cyrillic/fonts/jlm_wntt10.eot?#iefix') format('embedded-opentype'),
-		url('font/cyrillic/fonts/jlm_wntt10.svg#jlm_wntt10') format('svg'),
-		url('font/cyrillic/fonts/jlm_wntt10.woff') format('woff'),
-		url('font/cyrillic/fonts/jlm_wntt10.ttf') format('truetype');
+		font-family: "jlm-wntt10";
+		src: url("font/cyrillic/fonts/jlm_wntt10.eot");
+		src: url("font/cyrillic/fonts/jlm_wntt10.eot?#iefix") format("embedded-opentype"),
+		url("font/cyrillic/fonts/jlm_wntt10.svg#jlm-wntt10") format("svg"),
+		url("font/cyrillic/fonts/jlm_wntt10.woff") format("woff"),
+		url("font/cyrillic/fonts/jlm_wntt10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmex10';
-		src: url('font/fonts/base/jlm_cmex10.eot');
-		src: url('font/fonts/base/jlm_cmex10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/base/jlm_cmex10.svg#jlm_cmex10') format('svg'),
-		url('font/fonts/base/jlm_cmex10.woff') format('woff'),
-		url('font/fonts/base/jlm_cmex10.ttf') format('truetype');
+		font-family: "jlm-cmex10";
+		src: url("font/fonts/base/jlm_cmex10.eot");
+		src: url("font/fonts/base/jlm_cmex10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/base/jlm_cmex10.svg#jlm-cmex10") format("svg"),
+		url("font/fonts/base/jlm_cmex10.woff") format("woff"),
+		url("font/fonts/base/jlm_cmex10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmmi10';
-		src: url('font/fonts/base/jlm_cmmi10.eot');
-		src: url('font/fonts/base/jlm_cmmi10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/base/jlm_cmmi10.svg#jlm_cmmi10') format('svg'),
-		url('font/fonts/base/jlm_cmmi10.woff') format('woff'),
-		url('font/fonts/base/jlm_cmmi10.ttf') format('truetype');
+		font-family: "jlm-cmmi10";
+		src: url("font/fonts/base/jlm_cmmi10.eot");
+		src: url("font/fonts/base/jlm_cmmi10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/base/jlm_cmmi10.svg#jlm-cmmi10") format("svg"),
+		url("font/fonts/base/jlm_cmmi10.woff") format("woff"),
+		url("font/fonts/base/jlm_cmmi10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmmib10';
-		src: url('font/fonts/base/jlm_cmmib10.eot');
-		src: url('font/fonts/base/jlm_cmmib10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/base/jlm_cmmib10.svg#jlm_cmmib10') format('svg'),
-		url('font/fonts/base/jlm_cmmib10.woff') format('woff'),
-		url('font/fonts/base/jlm_cmmib10.ttf') format('truetype');
+		font-family: "jlm-cmmib10";
+		src: url("font/fonts/base/jlm_cmmib10.eot");
+		src: url("font/fonts/base/jlm_cmmib10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/base/jlm_cmmib10.svg#jlm-cmmib10") format("svg"),
+		url("font/fonts/base/jlm_cmmib10.woff") format("woff"),
+		url("font/fonts/base/jlm_cmmib10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_eufb10';
-		src: url('font/fonts/euler/jlm_eufb10.eot');
-		src: url('font/fonts/euler/jlm_eufb10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/euler/jlm_eufb10.svg#jlm_eufb10') format('svg'),
-		url('font/fonts/euler/jlm_eufb10.woff') format('woff'),
-		url('font/fonts/euler/jlm_eufb10.ttf') format('truetype');
+		font-family: "jlm-eufb10";
+		src: url("font/fonts/euler/jlm_eufb10.eot");
+		src: url("font/fonts/euler/jlm_eufb10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/euler/jlm_eufb10.svg#jlm-eufb10") format("svg"),
+		url("font/fonts/euler/jlm_eufb10.woff") format("woff"),
+		url("font/fonts/euler/jlm_eufb10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_eufm10';
-		src: url('font/fonts/euler/jlm_eufm10.eot');
-		src: url('font/fonts/euler/jlm_eufm10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/euler/jlm_eufm10.svg#jlm_eufm10') format('svg'),
-		url('font/fonts/euler/jlm_eufm10.woff') format('woff'),
-		url('font/fonts/euler/jlm_eufm10.ttf') format('truetype');
+		font-family: "jlm-eufm10";
+		src: url("font/fonts/euler/jlm_eufm10.eot");
+		src: url("font/fonts/euler/jlm_eufm10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/euler/jlm_eufm10.svg#jlm-eufm10") format("svg"),
+		url("font/fonts/euler/jlm_eufm10.woff") format("woff"),
+		url("font/fonts/euler/jlm_eufm10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmr10';
-		src: url('font/fonts/latin/jlm_cmr10.eot');
-		src: url('font/fonts/latin/jlm_cmr10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_cmr10.svg#jlm_cmr10') format('svg'),
-		url('font/fonts/latin/jlm_cmr10.woff') format('woff'),
-		url('font/fonts/latin/jlm_cmr10.ttf') format('truetype');
+		font-family: "jlm-cmr10";
+		src: url("font/fonts/latin/jlm_cmr10.eot");
+		src: url("font/fonts/latin/jlm_cmr10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_cmr10.svg#jlm-cmr10") format("svg"),
+		url("font/fonts/latin/jlm_cmr10.woff") format("woff"),
+		url("font/fonts/latin/jlm_cmr10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmbi10';
-		src: url('font/fonts/latin/jlm_jlmbi10.eot');
-		src: url('font/fonts/latin/jlm_jlmbi10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmbi10.svg#jlm_jlmbi10') format('svg'),
-		url('font/fonts/latin/jlm_jlmbi10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmbi10.ttf') format('truetype');
+		font-family: "jlm-jlmbi10";
+		src: url("font/fonts/latin/jlm_jlmbi10.eot");
+		src: url("font/fonts/latin/jlm_jlmbi10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmbi10.svg#jlm-jlmbi10") format("svg"),
+		url("font/fonts/latin/jlm_jlmbi10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmbi10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmbx10';
-		src: url('font/fonts/latin/jlm_jlmbx10.eot');
-		src: url('font/fonts/latin/jlm_jlmbx10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmbx10.svg#jlm_jlmbx10') format('svg'),
-		url('font/fonts/latin/jlm_jlmbx10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmbx10.ttf') format('truetype');
+		font-family: "jlm-jlmbx10";
+		src: url("font/fonts/latin/jlm_jlmbx10.eot");
+		src: url("font/fonts/latin/jlm_jlmbx10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmbx10.svg#jlm-jlmbx10") format("svg"),
+		url("font/fonts/latin/jlm_jlmbx10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmbx10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmi10';
-		src: url('font/fonts/latin/jlm_jlmi10.eot');
-		src: url('font/fonts/latin/jlm_jlmi10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmi10.svg#jlm_jlmi10') format('svg'),
-		url('font/fonts/latin/jlm_jlmi10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmi10.ttf') format('truetype');
+		font-family: "jlm-jlmi10";
+		src: url("font/fonts/latin/jlm_jlmi10.eot");
+		src: url("font/fonts/latin/jlm_jlmi10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmi10.svg#jlm-jlmi10") format("svg"),
+		url("font/fonts/latin/jlm_jlmi10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmi10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmr10';
-		src: url('font/fonts/latin/jlm_jlmr10.eot');
-		src: url('font/fonts/latin/jlm_jlmr10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmr10.svg#jlm_jlmr10') format('svg'),
-		url('font/fonts/latin/jlm_jlmr10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmr10.ttf') format('truetype');
+		font-family: "jlm-jlmr10";
+		src: url("font/fonts/latin/jlm_jlmr10.eot");
+		src: url("font/fonts/latin/jlm_jlmr10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmr10.svg#jlm-jlmr10") format("svg"),
+		url("font/fonts/latin/jlm_jlmr10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmr10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmsb10';
-		src: url('font/fonts/latin/jlm_jlmsb10.eot');
-		src: url('font/fonts/latin/jlm_jlmsb10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmsb10.svg#jlm_jlmsb10') format('svg'),
-		url('font/fonts/latin/jlm_jlmsb10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmsb10.ttf') format('truetype');
+		font-family: "jlm-jlmsb10";
+		src: url("font/fonts/latin/jlm_jlmsb10.eot");
+		src: url("font/fonts/latin/jlm_jlmsb10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmsb10.svg#jlm-jlmsb10") format("svg"),
+		url("font/fonts/latin/jlm_jlmsb10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmsb10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmsbi10';
-		src: url('font/fonts/latin/jlm_jlmsbi10.eot');
-		src: url('font/fonts/latin/jlm_jlmsbi10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmsbi10.svg#jlm_jlmsbi10') format('svg'),
-		url('font/fonts/latin/jlm_jlmsbi10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmsbi10.ttf') format('truetype');
+		font-family: "jlm-jlmsbi10";
+		src: url("font/fonts/latin/jlm_jlmsbi10.eot");
+		src: url("font/fonts/latin/jlm_jlmsbi10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmsbi10.svg#jlm-jlmsbi10") format("svg"),
+		url("font/fonts/latin/jlm_jlmsbi10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmsbi10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmsi10';
-		src: url('font/fonts/latin/jlm_jlmsi10.eot');
-		src: url('font/fonts/latin/jlm_jlmsi10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmsi10.svg#jlm_jlmsi10') format('svg'),
-		url('font/fonts/latin/jlm_jlmsi10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmsi10.ttf') format('truetype');
+		font-family: "jlm-jlmsi10";
+		src: url("font/fonts/latin/jlm_jlmsi10.eot");
+		src: url("font/fonts/latin/jlm_jlmsi10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmsi10.svg#jlm-jlmsi10") format("svg"),
+		url("font/fonts/latin/jlm_jlmsi10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmsi10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmss10';
-		src: url('font/fonts/latin/jlm_jlmss10.eot');
-		src: url('font/fonts/latin/jlm_jlmss10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmss10.svg#jlm_jlmss10') format('svg'),
-		url('font/fonts/latin/jlm_jlmss10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmss10.ttf') format('truetype');
+		font-family: "jlm-jlmss10";
+		src: url("font/fonts/latin/jlm_jlmss10.eot");
+		src: url("font/fonts/latin/jlm_jlmss10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmss10.svg#jlm-jlmss10") format("svg"),
+		url("font/fonts/latin/jlm_jlmss10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmss10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_jlmtt10';
-		src: url('font/fonts/latin/jlm_jlmtt10.eot');
-		src: url('font/fonts/latin/jlm_jlmtt10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/jlm_jlmtt10.svg#jlm_jlmtt10') format('svg'),
-		url('font/fonts/latin/jlm_jlmtt10.woff') format('woff'),
-		url('font/fonts/latin/jlm_jlmtt10.ttf') format('truetype');
+		font-family: "jlm-jlmtt10";
+		src: url("font/fonts/latin/jlm_jlmtt10.eot");
+		src: url("font/fonts/latin/jlm_jlmtt10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/jlm_jlmtt10.svg#jlm-jlmtt10") format("svg"),
+		url("font/fonts/latin/jlm_jlmtt10.woff") format("woff"),
+		url("font/fonts/latin/jlm_jlmtt10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmbx10';
-		src: url('font/fonts/latin/optional/jlm_cmbx10.eot');
-		src: url('font/fonts/latin/optional/jlm_cmbx10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/optional/jlm_cmbx10.svg#jlm_cmbx10') format('svg'),
-		url('font/fonts/latin/optional/jlm_cmbx10.woff') format('woff'),
-		url('font/fonts/latin/optional/jlm_cmbx10.ttf') format('truetype');
+		font-family: "jlm-cmbx10";
+		src: url("font/fonts/latin/optional/jlm_cmbx10.eot");
+		src: url("font/fonts/latin/optional/jlm_cmbx10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/optional/jlm_cmbx10.svg#jlm-cmbx10") format("svg"),
+		url("font/fonts/latin/optional/jlm_cmbx10.woff") format("woff"),
+		url("font/fonts/latin/optional/jlm_cmbx10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmbxti10';
-		src: url('font/fonts/latin/optional/jlm_cmbxti10.eot');
-		src: url('font/fonts/latin/optional/jlm_cmbxti10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/optional/jlm_cmbxti10.svg#jlm_cmbxti10') format('svg'),
-		url('font/fonts/latin/optional/jlm_cmbxti10.woff') format('woff'),
-		url('font/fonts/latin/optional/jlm_cmbxti10.ttf') format('truetype');
+		font-family: "jlm-cmbxti10";
+		src: url("font/fonts/latin/optional/jlm_cmbxti10.eot");
+		src: url("font/fonts/latin/optional/jlm_cmbxti10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/optional/jlm_cmbxti10.svg#jlm-cmbxti10") format("svg"),
+		url("font/fonts/latin/optional/jlm_cmbxti10.woff") format("woff"),
+		url("font/fonts/latin/optional/jlm_cmbxti10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmss10';
-		src: url('font/fonts/latin/optional/jlm_cmss10.eot');
-		src: url('font/fonts/latin/optional/jlm_cmss10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/optional/jlm_cmss10.svg#jlm_cmss10') format('svg'),
-		url('font/fonts/latin/optional/jlm_cmss10.woff') format('woff'),
-		url('font/fonts/latin/optional/jlm_cmss10.ttf') format('truetype');
+		font-family: "jlm-cmss10";
+		src: url("font/fonts/latin/optional/jlm_cmss10.eot");
+		src: url("font/fonts/latin/optional/jlm_cmss10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/optional/jlm_cmss10.svg#jlm-cmss10") format("svg"),
+		url("font/fonts/latin/optional/jlm_cmss10.woff") format("woff"),
+		url("font/fonts/latin/optional/jlm_cmss10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmssbx10';
-		src: url('font/fonts/latin/optional/jlm_cmssbx10.eot');
-		src: url('font/fonts/latin/optional/jlm_cmssbx10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/optional/jlm_cmssbx10.svg#jlm_cmssbx10') format('svg'),
-		url('font/fonts/latin/optional/jlm_cmssbx10.woff') format('woff'),
-		url('font/fonts/latin/optional/jlm_cmssbx10.ttf') format('truetype');
+		font-family: "jlm-cmssbx10";
+		src: url("font/fonts/latin/optional/jlm_cmssbx10.eot");
+		src: url("font/fonts/latin/optional/jlm_cmssbx10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/optional/jlm_cmssbx10.svg#jlm-cmssbx10") format("svg"),
+		url("font/fonts/latin/optional/jlm_cmssbx10.woff") format("woff"),
+		url("font/fonts/latin/optional/jlm_cmssbx10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmssi10';
-		src: url('font/fonts/latin/optional/jlm_cmssi10.eot');
-		src: url('font/fonts/latin/optional/jlm_cmssi10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/optional/jlm_cmssi10.svg#jlm_cmssi10') format('svg'),
-		url('font/fonts/latin/optional/jlm_cmssi10.woff') format('woff'),
-		url('font/fonts/latin/optional/jlm_cmssi10.ttf') format('truetype');
+		font-family: "jlm-cmssi10";
+		src: url("font/fonts/latin/optional/jlm_cmssi10.eot");
+		src: url("font/fonts/latin/optional/jlm_cmssi10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/optional/jlm_cmssi10.svg#jlm-cmssi10") format("svg"),
+		url("font/fonts/latin/optional/jlm_cmssi10.woff") format("woff"),
+		url("font/fonts/latin/optional/jlm_cmssi10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmti10';
-		src: url('font/fonts/latin/optional/jlm_cmti10.eot');
-		src: url('font/fonts/latin/optional/jlm_cmti10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/optional/jlm_cmti10.svg#jlm_cmti10') format('svg'),
-		url('font/fonts/latin/optional/jlm_cmti10.woff') format('woff'),
-		url('font/fonts/latin/optional/jlm_cmti10.ttf') format('truetype');
+		font-family: "jlm-cmti10";
+		src: url("font/fonts/latin/optional/jlm_cmti10.eot");
+		src: url("font/fonts/latin/optional/jlm_cmti10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/optional/jlm_cmti10.svg#jlm-cmti10") format("svg"),
+		url("font/fonts/latin/optional/jlm_cmti10.woff") format("woff"),
+		url("font/fonts/latin/optional/jlm_cmti10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmtt10';
-		src: url('font/fonts/latin/optional/jlm_cmtt10.eot');
-		src: url('font/fonts/latin/optional/jlm_cmtt10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/latin/optional/jlm_cmtt10.svg#jlm_cmtt10') format('svg'),
-		url('font/fonts/latin/optional/jlm_cmtt10.woff') format('woff'),
-		url('font/fonts/latin/optional/jlm_cmtt10.ttf') format('truetype');
+		font-family: "jlm-cmtt10";
+		src: url("font/fonts/latin/optional/jlm_cmtt10.eot");
+		src: url("font/fonts/latin/optional/jlm_cmtt10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/latin/optional/jlm_cmtt10.svg#jlm-cmtt10") format("svg"),
+		url("font/fonts/latin/optional/jlm_cmtt10.woff") format("woff"),
+		url("font/fonts/latin/optional/jlm_cmtt10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmbsy10';
-		src: url('font/fonts/maths/jlm_cmbsy10.eot');
-		src: url('font/fonts/maths/jlm_cmbsy10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/maths/jlm_cmbsy10.svg#jlm_cmbsy10') format('svg'),
-		url('font/fonts/maths/jlm_cmbsy10.woff') format('woff'),
-		url('font/fonts/maths/jlm_cmbsy10.ttf') format('truetype');
+		font-family: "jlm-cmbsy10";
+		src: url("font/fonts/maths/jlm_cmbsy10.eot");
+		src: url("font/fonts/maths/jlm_cmbsy10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/maths/jlm_cmbsy10.svg#jlm-cmbsy10") format("svg"),
+		url("font/fonts/maths/jlm_cmbsy10.woff") format("woff"),
+		url("font/fonts/maths/jlm_cmbsy10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_cmsy10';
-		src: url('font/fonts/maths/jlm_cmsy10.eot');
-		src: url('font/fonts/maths/jlm_cmsy10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/maths/jlm_cmsy10.svg#jlm_cmsy10') format('svg'),
-		url('font/fonts/maths/jlm_cmsy10.woff') format('woff'),
-		url('font/fonts/maths/jlm_cmsy10.ttf') format('truetype');
+		font-family: "jlm-cmsy10";
+		src: url("font/fonts/maths/jlm_cmsy10.eot");
+		src: url("font/fonts/maths/jlm_cmsy10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/maths/jlm_cmsy10.svg#jlm-cmsy10") format("svg"),
+		url("font/fonts/maths/jlm_cmsy10.woff") format("woff"),
+		url("font/fonts/maths/jlm_cmsy10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_msam10';
-		src: url('font/fonts/maths/jlm_msam10.eot');
-		src: url('font/fonts/maths/jlm_msam10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/maths/jlm_msam10.svg#jlm_msam10') format('svg'),
-		url('font/fonts/maths/jlm_msam10.woff') format('woff'),
-		url('font/fonts/maths/jlm_msam10.ttf') format('truetype');
+		font-family: "jlm-msam10";
+		src: url("font/fonts/maths/jlm_msam10.eot");
+		src: url("font/fonts/maths/jlm_msam10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/maths/jlm_msam10.svg#jlm-msam10") format("svg"),
+		url("font/fonts/maths/jlm_msam10.woff") format("woff"),
+		url("font/fonts/maths/jlm_msam10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_msbm10';
-		src: url('font/fonts/maths/jlm_msbm10.eot');
-		src: url('font/fonts/maths/jlm_msbm10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/maths/jlm_msbm10.svg#jlm_msbm10') format('svg'),
-		url('font/fonts/maths/jlm_msbm10.woff') format('woff'),
-		url('font/fonts/maths/jlm_msbm10.ttf') format('truetype');
+		font-family: "jlm-msbm10";
+		src: url("font/fonts/maths/jlm_msbm10.eot");
+		src: url("font/fonts/maths/jlm_msbm10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/maths/jlm_msbm10.svg#jlm-msbm10") format("svg"),
+		url("font/fonts/maths/jlm_msbm10.woff") format("woff"),
+		url("font/fonts/maths/jlm_msbm10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_rsfs10';
-		src: url('font/fonts/maths/jlm_rsfs10.eot');
-		src: url('font/fonts/maths/jlm_rsfs10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/maths/jlm_rsfs10.svg#jlm_rsfs10') format('svg'),
-		url('font/fonts/maths/jlm_rsfs10.woff') format('woff'),
-		url('font/fonts/maths/jlm_rsfs10.ttf') format('truetype');
+		font-family: "jlm-rsfs10";
+		src: url("font/fonts/maths/jlm_rsfs10.eot");
+		src: url("font/fonts/maths/jlm_rsfs10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/maths/jlm_rsfs10.svg#jlm-rsfs10") format("svg"),
+		url("font/fonts/maths/jlm_rsfs10.woff") format("woff"),
+		url("font/fonts/maths/jlm_rsfs10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_special';
-		src: url('font/fonts/maths/jlm_special.eot');
-		src: url('font/fonts/maths/jlm_special.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/maths/jlm_special.svg#jlm_special') format('svg'),
-		url('font/fonts/maths/jlm_special.woff') format('woff'),
-		url('font/fonts/maths/jlm_special.ttf') format('truetype');
+		font-family: "jlm-special";
+		src: url("font/fonts/maths/jlm_special.eot");
+		src: url("font/fonts/maths/jlm_special.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/maths/jlm_special.svg#jlm-special") format("svg"),
+		url("font/fonts/maths/jlm_special.woff") format("woff"),
+		url("font/fonts/maths/jlm_special.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_stmary10';
-		src: url('font/fonts/maths/jlm_stmary10.eot');
-		src: url('font/fonts/maths/jlm_stmary10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/maths/jlm_stmary10.svg#jlm_stmary10') format('svg'),
-		url('font/fonts/maths/jlm_stmary10.woff') format('woff'),
-		url('font/fonts/maths/jlm_stmary10.ttf') format('truetype');
+		font-family: "jlm-stmary10";
+		src: url("font/fonts/maths/jlm_stmary10.eot");
+		src: url("font/fonts/maths/jlm_stmary10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/maths/jlm_stmary10.svg#jlm-stmary10") format("svg"),
+		url("font/fonts/maths/jlm_stmary10.woff") format("woff"),
+		url("font/fonts/maths/jlm_stmary10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_dsrom10';
-		src: url('font/fonts/maths/optional/jlm_dsrom10.eot');
-		src: url('font/fonts/maths/optional/jlm_dsrom10.eot?#iefix') format('embedded-opentype'),
-		url('font/fonts/maths/optional/jlm_dsrom10.svg#jlm_dsrom10') format('svg'),
-		url('font/fonts/maths/optional/jlm_dsrom10.woff') format('woff'),
-		url('font/fonts/maths/optional/jlm_dsrom10.ttf') format('truetype');
+		font-family: "jlm-dsrom10";
+		src: url("font/fonts/maths/optional/jlm_dsrom10.eot");
+		src: url("font/fonts/maths/optional/jlm_dsrom10.eot?#iefix") format("embedded-opentype"),
+		url("font/fonts/maths/optional/jlm_dsrom10.svg#jlm-dsrom10") format("svg"),
+		url("font/fonts/maths/optional/jlm_dsrom10.woff") format("woff"),
+		url("font/fonts/maths/optional/jlm_dsrom10.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_fcmbipg';
-		src: url('font/greek/fonts/jlm_fcmbipg.eot');
-		src: url('font/greek/fonts/jlm_fcmbipg.eot?#iefix') format('embedded-opentype'),
-		url('font/greek/fonts/jlm_fcmbipg.svg#jlm_fcmbipg') format('svg'),
-		url('font/greek/fonts/jlm_fcmbipg.woff') format('woff'),
-		url('font/greek/fonts/jlm_fcmbipg.ttf') format('truetype');
+		font-family: "jlm-fcmbipg";
+		src: url("font/greek/fonts/jlm_fcmbipg.eot");
+		src: url("font/greek/fonts/jlm_fcmbipg.eot?#iefix") format("embedded-opentype"),
+		url("font/greek/fonts/jlm_fcmbipg.svg#jlm-fcmbipg") format("svg"),
+		url("font/greek/fonts/jlm_fcmbipg.woff") format("woff"),
+		url("font/greek/fonts/jlm_fcmbipg.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_fcmbpg';
-		src: url('font/greek/fonts/jlm_fcmbpg.eot');
-		src: url('font/greek/fonts/jlm_fcmbpg.eot?#iefix') format('embedded-opentype'),
-		url('font/greek/fonts/jlm_fcmbpg.svg#jlm_fcmbpg') format('svg'),
-		url('font/greek/fonts/jlm_fcmbpg.woff') format('woff'),
-		url('font/greek/fonts/jlm_fcmbpg.ttf') format('truetype');
+		font-family: "jlm-fcmbpg";
+		src: url("font/greek/fonts/jlm_fcmbpg.eot");
+		src: url("font/greek/fonts/jlm_fcmbpg.eot?#iefix") format("embedded-opentype"),
+		url("font/greek/fonts/jlm_fcmbpg.svg#jlm-fcmbpg") format("svg"),
+		url("font/greek/fonts/jlm_fcmbpg.woff") format("woff"),
+		url("font/greek/fonts/jlm_fcmbpg.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_fcmripg';
-		src: url('font/greek/fonts/jlm_fcmripg.eot');
-		src: url('font/greek/fonts/jlm_fcmripg.eot?#iefix') format('embedded-opentype'),
-		url('font/greek/fonts/jlm_fcmripg.svg#jlm_fcmripg') format('svg'),
-		url('font/greek/fonts/jlm_fcmripg.woff') format('woff'),
-		url('font/greek/fonts/jlm_fcmripg.ttf') format('truetype');
+		font-family: "jlm-fcmripg";
+		src: url("font/greek/fonts/jlm_fcmripg.eot");
+		src: url("font/greek/fonts/jlm_fcmripg.eot?#iefix") format("embedded-opentype"),
+		url("font/greek/fonts/jlm_fcmripg.svg#jlm-fcmripg") format("svg"),
+		url("font/greek/fonts/jlm_fcmripg.woff") format("woff"),
+		url("font/greek/fonts/jlm_fcmripg.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_fcmrpg';
-		src: url('font/greek/fonts/jlm_fcmrpg.eot');
-		src: url('font/greek/fonts/jlm_fcmrpg.eot?#iefix') format('embedded-opentype'),
-		url('font/greek/fonts/jlm_fcmrpg.svg#jlm_fcmrpg') format('svg'),
-		url('font/greek/fonts/jlm_fcmrpg.woff') format('woff'),
-		url('font/greek/fonts/jlm_fcmrpg.ttf') format('truetype');
+		font-family: "jlm-fcmrpg";
+		src: url("font/greek/fonts/jlm_fcmrpg.eot");
+		src: url("font/greek/fonts/jlm_fcmrpg.eot?#iefix") format("embedded-opentype"),
+		url("font/greek/fonts/jlm_fcmrpg.svg#jlm-fcmrpg") format("svg"),
+		url("font/greek/fonts/jlm_fcmrpg.woff") format("woff"),
+		url("font/greek/fonts/jlm_fcmrpg.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_fcsbpg';
-		src: url('font/greek/fonts/jlm_fcsbpg.eot');
-		src: url('font/greek/fonts/jlm_fcsbpg.eot?#iefix') format('embedded-opentype'),
-		url('font/greek/fonts/jlm_fcsbpg.svg#jlm_fcsbpg') format('svg'),
-		url('font/greek/fonts/jlm_fcsbpg.woff') format('woff'),
-		url('font/greek/fonts/jlm_fcsbpg.ttf') format('truetype');
+		font-family: "jlm-fcsbpg";
+		src: url("font/greek/fonts/jlm_fcsbpg.eot");
+		src: url("font/greek/fonts/jlm_fcsbpg.eot?#iefix") format("embedded-opentype"),
+		url("font/greek/fonts/jlm_fcsbpg.svg#jlm-fcsbpg") format("svg"),
+		url("font/greek/fonts/jlm_fcsbpg.woff") format("woff"),
+		url("font/greek/fonts/jlm_fcsbpg.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_fcsropg';
-		src: url('font/greek/fonts/jlm_fcsropg.eot');
-		src: url('font/greek/fonts/jlm_fcsropg.eot?#iefix') format('embedded-opentype'),
-		url('font/greek/fonts/jlm_fcsropg.svg#jlm_fcsropg') format('svg'),
-		url('font/greek/fonts/jlm_fcsropg.woff') format('woff'),
-		url('font/greek/fonts/jlm_fcsropg.ttf') format('truetype');
+		font-family: "jlm-fcsropg";
+		src: url("font/greek/fonts/jlm_fcsropg.eot");
+		src: url("font/greek/fonts/jlm_fcsropg.eot?#iefix") format("embedded-opentype"),
+		url("font/greek/fonts/jlm_fcsropg.svg#jlm-fcsropg") format("svg"),
+		url("font/greek/fonts/jlm_fcsropg.woff") format("woff"),
+		url("font/greek/fonts/jlm_fcsropg.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_fcsrpg';
-		src: url('font/greek/fonts/jlm_fcsrpg.eot');
-		src: url('font/greek/fonts/jlm_fcsrpg.eot?#iefix') format('embedded-opentype'),
-		url('font/greek/fonts/jlm_fcsrpg.svg#jlm_fcsrpg') format('svg'),
-		url('font/greek/fonts/jlm_fcsrpg.woff') format('woff'),
-		url('font/greek/fonts/jlm_fcsrpg.ttf') format('truetype');
+		font-family: "jlm-fcsrpg";
+		src: url("font/greek/fonts/jlm_fcsrpg.eot");
+		src: url("font/greek/fonts/jlm_fcsrpg.eot?#iefix") format("embedded-opentype"),
+		url("font/greek/fonts/jlm_fcsrpg.svg#jlm-fcsrpg") format("svg"),
+		url("font/greek/fonts/jlm_fcsrpg.woff") format("woff"),
+		url("font/greek/fonts/jlm_fcsrpg.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}
  
 @font-face {
-		font-family: 'jlm_fctrpg';
-		src: url('font/greek/fonts/jlm_fctrpg.eot');
-		src: url('font/greek/fonts/jlm_fctrpg.eot?#iefix') format('embedded-opentype'),
-		url('font/greek/fonts/jlm_fctrpg.svg#jlm_fctrpg') format('svg'),
-		url('font/greek/fonts/jlm_fctrpg.woff') format('woff'),
-		url('font/greek/fonts/jlm_fctrpg.ttf') format('truetype');
+		font-family: "jlm-fctrpg";
+		src: url("font/greek/fonts/jlm_fctrpg.eot");
+		src: url("font/greek/fonts/jlm_fctrpg.eot?#iefix") format("embedded-opentype"),
+		url("font/greek/fonts/jlm_fctrpg.svg#jlm-fctrpg") format("svg"),
+		url("font/greek/fonts/jlm_fctrpg.woff") format("woff"),
+		url("font/greek/fonts/jlm_fctrpg.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 	}

@@ -2,8 +2,13 @@
 <module>
   <inherits name="com.google.gwt.xml.XML" />
   <inherits name="com.google.gwt.resources.Resources" />
+
   <inherits name="com.google.gwt.logging.Logging" />
+  <set-property name="gwt.logging.logLevel" value="SEVERE" />
+
   <inherits name="org.scilab.forge.JLaTeXMath" />
+
+
 
   <source path="jlatexmath" />
   <public path="jlatexmath/public" />

@@ -1,17 +1,15 @@
 package org.scilab.forge.jlatexmath.font;
 
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.scilab.forge.jlatexmath.exception.ResourceParseException;
 import org.scilab.forge.jlatexmath.font.WebFontLoader.FontStatusListener;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontLoader;
 
-public class FontLoaderW implements FontLoader, FontStatusListener {
+import com.google.gwt.core.client.GWT;
 
-	private static final Logger logger = Logger.getLogger("FontLoader");
+public class FontLoaderW implements FontLoader, FontStatusListener {
 
 	private WebFontLoader webFontLoader;
 
@@ -36,17 +34,18 @@ public class FontLoaderW implements FontLoader, FontStatusListener {
 
 	@Override
 	public void onFontLoading(String familyName, String fvd) {
-		logger.log(Level.INFO, "Font " + familyName + " is loading.");
+		GWT.log("Font " + familyName + " is loading.");
 	}
 
 	@Override
 	public void onFontActive(String familyName, String fvd) {
-		logger.log(Level.INFO, "Font " + familyName + " is active.");
+		GWT.log("Font " + familyName + " is active.");
+		fonts.get(familyName).setLoaded(true);
 	}
 
 	@Override
 	public void onFontInactive(String familyName, String fvd) {
-		logger.log(Level.SEVERE, "Font " + familyName + " is inactive.");
+		GWT.log("Font " + familyName + " is inactive.");
 	}
 
 }
