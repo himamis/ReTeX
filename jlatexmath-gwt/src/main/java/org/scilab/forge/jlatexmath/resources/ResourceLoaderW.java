@@ -4,13 +4,11 @@ import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 import org.scilab.forge.jlatexmath.exception.ResourceParseException;
 import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 import org.scilab.forge.jlatexmath.platform.resources.ResourceLoader;
-
-import com.google.gwt.core.shared.GWT;
+import org.scilab.forge.jlatexmath.resources.xml.XmlResources;
 
 public class ResourceLoaderW implements ResourceLoader {
 
-	private static final XmlResources XML_RESOURCES = GWT
-			.create(XmlResources.class);
+	private static final XmlResources XML_RESOURCES = XmlResources.INSTANCE;
 
 	@Override
 	public Object loadResource(Object base, String path)

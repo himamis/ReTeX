@@ -1,9 +1,13 @@
-package org.scilab.forge.jlatexmath.resources;
+package org.scilab.forge.jlatexmath.resources.xml;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 public interface XmlResources extends ClientBundle {
+
+	public static final XmlResources INSTANCE = GWT.create(XmlResources.class);
+
 	/*
 	 * This interface was generated based on the available source xml at that
 	 * time. Please regenerate this if you add/delete/rename xmls.
