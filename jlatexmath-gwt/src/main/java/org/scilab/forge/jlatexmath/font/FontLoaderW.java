@@ -15,7 +15,7 @@ public class FontLoaderW implements FontLoader {
 	private Opentype webFontLoader;
 	private FontStatusListener listener;
 
-	private HashMap<String, FontW> fonts = new HashMap<String, FontW>();
+	private static final HashMap<String, FontW> fonts = new HashMap<String, FontW>();
 
 	public FontLoaderW() {
 		webFontLoader = Opentype.INSTANCE;
