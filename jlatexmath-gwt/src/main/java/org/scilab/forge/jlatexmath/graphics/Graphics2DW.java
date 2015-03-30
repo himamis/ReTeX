@@ -3,6 +3,7 @@ package org.scilab.forge.jlatexmath.graphics;
 import java.util.LinkedList;
 
 import org.scilab.forge.jlatexmath.font.FontW;
+import org.scilab.forge.jlatexmath.font.opentype.OpentypeFont;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
 import org.scilab.forge.jlatexmath.platform.geom.Line2D;
@@ -58,7 +59,6 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	private void initFont() {
 		font = new FontW(context.getFont(), Font.PLAIN, 12);
-		font.setLoaded(true);
 	}
 
 	public Context2d getContext() {
@@ -184,6 +184,9 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public void drawChars(char[] data, int offset, int length, int x, int y) {
+		if (length > 1) {
+			throw new UnsupportedOperationException("Cannot draw multiple chars");
+		}
 		String string = String.valueOf(data, offset, length);
 		drawText(string, x, y);
 	}
@@ -234,12 +237,16 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	public void drawText(String text, int x, int y) {
-		new FontTimer(this, text, x, y).scheduleRepeating(30);
-		//fillTextInternal(text, x, y);
+		if (!font.isLoaded()) {
+			new FontTimer(this, text, x, y).scheduleRepeating(30);
+		} else {
+			fillTextInternal(text, x, y);
+		}
 	}
 
 	protected void fillTextInternal(String text, int x, int y) {
-		context.fillText(text, x, y);
+		OpentypeFont otFont = font.getImplementation();
+		otFont.drawGlyph(text, x, y, font.getSize(), context);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package org.scilab.forge.jlatexmath.font;
 
 import java.util.Map;
 
+import org.scilab.forge.jlatexmath.font.opentype.OpentypeFont;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
 
@@ -11,7 +12,7 @@ public class FontW implements Font {
 	private int style;
 	private int size;
 
-	private boolean isLoaded;
+	private OpentypeFont implementation;
 
 	public FontW(String name, int style, int size) {
 		this.name = name;
@@ -66,16 +67,14 @@ public class FontW implements Font {
 	 * @return true if the font has been loaded to the browser
 	 */
 	public boolean isLoaded() {
-		return isLoaded;
+		return implementation != null;
 	}
 
-	/**
-	 * Sets the font to loaded. Set this to true, when it's certain that the
-	 * font has been loaded into the browser.
-	 * 
-	 * @param loaded
-	 */
-	public void setLoaded(boolean loaded) {
-		isLoaded = loaded;
+	public void setImplementation(OpentypeFont impl) {
+		implementation = impl;
+	}
+
+	public OpentypeFont getImplementation() {
+		return implementation;
 	}
 }

@@ -24,6 +24,7 @@ public class TextLayoutW implements TextLayout {
 
 	@Override
 	public Rectangle2D getBounds() {
+		// improve this part with opentype.js
 		double width = fontRenderContext.measureTextWith(string, font);
 		double height = font.getSize();
 		return new Rectangle2DW(0, 0, width, height);

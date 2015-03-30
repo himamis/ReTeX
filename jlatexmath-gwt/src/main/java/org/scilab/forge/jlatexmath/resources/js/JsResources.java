@@ -8,7 +8,7 @@ public interface JsResources extends ClientBundle {
 
 	public static final JsResources INSTANCE = GWT.create(JsResources.class);
 
-	@Source("web-font-loader.js")
-	public TextResource webFontLoaderJS();
+	@Source("opentype.min.js")
+	public TextResource opentypeJs();
 
 }
