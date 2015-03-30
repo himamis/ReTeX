@@ -124,6 +124,8 @@ public class Graphics2DW implements Graphics2DInterface {
 		this.font = (FontW) font;
 		context.setFont(this.font.getCssFontString());
 	}
+	
+	// Consider http://jsfiddle.net/9bMPD/357/ for rectangles!!
 
 	@Override
 	public void fillRect(int x, int y, int width, int height) {
@@ -178,8 +180,10 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	@Override
 	public void draw(Line2D line) {
+		context.beginPath();
 		context.moveTo(line.getX1(), line.getY1());
 		context.lineTo(line.getX2(), line.getY2());
+		context.stroke();
 	}
 
 	@Override
