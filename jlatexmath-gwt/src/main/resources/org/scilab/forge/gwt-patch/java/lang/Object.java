@@ -84,10 +84,27 @@ public class Object {
   }
 
   protected Object clone() throws CloneNotSupportedException {
-    throw new CloneNotSupportedException("GWT does not provide a default " +
-        "implementation of Object.clone(). Subtypes may provide their own " +
-        "implementation.");
+	if (!(this instanceof Cloneable)) {
+	  throw new CloneNotSupportedException("Clone interface not implemented");
+	}
+    return nativeClone();
   }
+ 
+  // please see https://code.google.com/p/google-web-toolkit/issues/detail?id=1843
+  protected native Object nativeClone() /*-{
+    var r = {};
+    
+    // prevents to use same hash code
+    @com.google.gwt.core.client.impl.Impl::getHashCode(Ljava/lang/Object;)(r);
+    
+    var o = this;
+    for(var i in o){
+      if(!(i in r)){
+        r[i]=o[i];
+      }
+    }
+    return r;
+  }-*/;
 
   /**
    * Never called; here for JRE compatibility.
