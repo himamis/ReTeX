@@ -1,5 +1,7 @@
 package org.scilab.forge.jlatexmath.font;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.scilab.forge.jlatexmath.font.opentype.OpentypeFont;
@@ -7,6 +9,12 @@ import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
 
 public class FontW implements Font {
+	
+	public static interface FontLoadedListener {
+		public void onFontLoaded(FontW font);
+	}
+
+	public List<FontLoadedListener> listeners;
 
 	private String name;
 	private int style;
@@ -18,6 +26,7 @@ public class FontW implements Font {
 		this.name = name;
 		this.style = style;
 		this.size = size;
+		listeners = new ArrayList<FontW.FontLoadedListener>();
 	}
 
 	@Override
@@ -76,5 +85,23 @@ public class FontW implements Font {
 
 	public OpentypeFont getImplementation() {
 		return implementation;
+	}
+
+	public boolean containsListener(FontLoadedListener listener) {
+		return listeners.contains(listener);
+	}
+
+	public void addFontListener(FontLoadedListener listener) {
+		listeners.add(listener);
+	}
+
+	public void removeFontListener(FontLoadedListener listener) {
+		listeners.remove(listener);
+	}
+
+	public void fireFontLoadedEvent() {
+		for (FontLoadedListener listener : listeners) {
+			listener.onFontLoaded(this);
+		}
 	}
 }

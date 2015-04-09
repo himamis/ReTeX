@@ -2,13 +2,11 @@
 <module>
   <inherits name="com.google.gwt.xml.XML" />
   <inherits name="com.google.gwt.resources.Resources" />
-
   <inherits name="com.google.gwt.logging.Logging" />
-  <set-property name="gwt.logging.logLevel" value="SEVERE" />
-
   <inherits name="org.scilab.forge.JLaTeXMath" />
+  <inherits name="org.timepedia.exporter.Exporter"/>
 
-
+  <set-property name="export" value="yes"/>
 
   <source path="jlatexmath" />
   <public path="jlatexmath/public" />

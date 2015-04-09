@@ -32,6 +32,7 @@ public class FontStatusListener implements OpentypeFontStatusListener {
 		OpentypeFont otFont = new OpentypeFont(font);
 		fontW.setImplementation(otFont);
 		fonts.remove(familyName);
+		fontW.fireFontLoadedEvent();
 	}
 
 	@Override

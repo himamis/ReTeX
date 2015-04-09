@@ -1,8 +1,12 @@
 package org.scilab.forge.jlatexmath.graphics;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.scilab.forge.jlatexmath.font.FontW;
+import org.scilab.forge.jlatexmath.font.FontW.FontLoadedListener;
 import org.scilab.forge.jlatexmath.font.opentype.OpentypeFont;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
@@ -18,9 +22,8 @@ import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.user.client.Timer;
 
-public class Graphics2DW implements Graphics2DInterface {
+public class Graphics2DW implements Graphics2DInterface, FontLoadedListener {
 
 	private Context2d context;
 
@@ -124,7 +127,7 @@ public class Graphics2DW implements Graphics2DInterface {
 		this.font = (FontW) font;
 		context.setFont(this.font.getCssFontString());
 	}
-	
+
 	// Consider http://jsfiddle.net/9bMPD/357/ for rectangles!!
 
 	@Override
@@ -189,14 +192,14 @@ public class Graphics2DW implements Graphics2DInterface {
 	@Override
 	public void drawChars(char[] data, int offset, int length, int x, int y) {
 		if (length > 1) {
-			throw new UnsupportedOperationException("Cannot draw multiple chars");
+			throw new UnsupportedOperationException(
+					"Cannot draw multiple chars");
 		}
 		String string = String.valueOf(data, offset, length);
 		drawText(string, x, y);
 	}
 
-	private static class FontTimer extends Timer {
-
+	private static class FontDrawContext {
 		private Graphics2DW graphics;
 		private String text;
 		private int x;
@@ -206,8 +209,7 @@ public class Graphics2DW implements Graphics2DInterface {
 		private FontW font;
 		private ColorW color;
 
-		public FontTimer(Graphics2DW graphics, String text, int x, int y) {
-			super();
+		public FontDrawContext(Graphics2DW graphics, String text, int x, int y) {
 			this.graphics = graphics;
 			this.text = text;
 			this.x = x;
@@ -216,35 +218,50 @@ public class Graphics2DW implements Graphics2DInterface {
 			transform = graphics.getTransform();
 			font = graphics.getFont();
 			color = graphics.getColor();
-
 		}
 
-		@Override
-		public void run() {
-			if (font.isLoaded()) {
-				FontW oldFont = graphics.getFont();
-				ColorW oldColor = graphics.getColor();
+		public void doDraw() {
+			FontW oldFont = graphics.getFont();
+			ColorW oldColor = graphics.getColor();
 
-				graphics.save();
-				graphics.setFont(font);
-				graphics.setColor(color);
-				graphics.setTransform(transform);
-				graphics.fillTextInternal(text, x, y);
-				graphics.restore();
+			graphics.save();
+			graphics.setFont(font);
+			graphics.setColor(color);
+			graphics.setTransform(transform);
+			graphics.fillTextInternal(text, x, y);
+			graphics.restore();
 
-				graphics.setFont(oldFont);
-				graphics.setColor(oldColor);
-				cancel();
-			}
+			graphics.setFont(oldFont);
+			graphics.setColor(oldColor);
 		}
 
 	}
-
+	
+	private HashMap<String, List<FontDrawContext>> fdcs = new HashMap<String, List<FontDrawContext>>();
+	
 	public void drawText(String text, int x, int y) {
 		if (!font.isLoaded()) {
-			new FontTimer(this, text, x, y).scheduleRepeating(30);
+			FontDrawContext fdc = new FontDrawContext(this, text, x, y);
+			List<FontDrawContext> fdcList = fdcs.get(font.getName());
+			if (fdcList == null) {
+				fdcList = new ArrayList<Graphics2DW.FontDrawContext>();
+				fdcs.put(font.getName(), fdcList);
+			}
+			fdcList.add(fdc);
+			if (!font.containsListener(this)) {
+				font.addFontListener(this);
+			}
 		} else {
 			fillTextInternal(text, x, y);
+		}
+	}
+
+	@Override
+	public void onFontLoaded(FontW font) {
+		font.removeFontListener(this);
+		List<FontDrawContext> fdcList = fdcs.remove(font.getName());
+		for (FontDrawContext fdc : fdcList) {
+			fdc.doDraw();
 		}
 	}
 
