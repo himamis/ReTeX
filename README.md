@@ -19,8 +19,9 @@ Before using the API, set the platform dependent factory instance.
 ```
 
 **GWT**
-
-*Coming soon...*
+```java
+	FactoryProvider.INSTANCE = new FactoryProviderGWT();
+```
 
 For details of the original API please see http://forge.scilab.org/index.php/p/jlatexmath/.
 
