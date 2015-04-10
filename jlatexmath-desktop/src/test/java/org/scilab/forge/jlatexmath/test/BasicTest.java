@@ -29,7 +29,7 @@ public class BasicTest {
 		FactoryProvider.INSTANCE = new FactoryProviderDesktop();
 	}
 
-	@Test
+	//@Test
 	public void basicExample1() {
 		String latex = "\\begin{array}{lr}\\mbox{\\textcolor{Blue}{Russian}}&\\mbox{\\textcolor{Melon}{Greek}}\\\\";
 		latex += "\\mbox{" + "привет мир".toUpperCase() + "}&\\mbox{" + "γειά κόσμο".toUpperCase() + "}\\\\";
@@ -66,7 +66,7 @@ public class BasicTest {
 		
 		doTest(latex, "Basic/Example2");
 	}
-	
+
 	private void doTest(String latex, String exampleName) {
 		TeXIcon icon = createTeXIcon(latex);
 		Image image = createImage(icon);
