@@ -6,7 +6,8 @@
   <inherits name="org.scilab.forge.JLaTeXMath" />
   <inherits name="org.timepedia.exporter.Exporter"/>
 
-  <set-property name="export" value="yes"/>
+  <entry-point class='org.scilab.forge.jlatexmath.CreateLibrary' />
+
 
   <source path="jlatexmath" />
   <public path="jlatexmath/public" />

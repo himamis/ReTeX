@@ -34,13 +34,17 @@ public class Graphics2DW implements Graphics2DInterface, FontLoadedListener {
 	private TransformW transform;
 
 	private LinkedList<TransformW> transformationStack;
-
-	public Graphics2DW(Canvas canvas) {
-		context = canvas.getContext2d();
+	
+	public Graphics2DW(Context2d context) {
+		this.context = context;
 		initBasicStroke();
 		initColor();
 		initTransform();
 		initFont();
+	}
+
+	public Graphics2DW(Canvas canvas) {
+		this(canvas.getContext2d());
 	}
 
 	private void initBasicStroke() {
