@@ -12,6 +12,7 @@ repositories {
     mavenCentral()
 }
 
+apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
 
 dependencies {
