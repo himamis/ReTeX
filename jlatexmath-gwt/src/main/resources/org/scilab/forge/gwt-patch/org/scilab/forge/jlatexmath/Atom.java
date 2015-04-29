@@ -29,9 +29,10 @@
 
 /* Modified by Calixte Denizet */
 
-import com.google.gwt.core.client.impl.Impl;
 
 package org.scilab.forge.jlatexmath;
+import com.google.gwt.core.client.impl.Impl;
+
 
 /**
  * An abstract superclass for all logical mathematical constructions that can be
