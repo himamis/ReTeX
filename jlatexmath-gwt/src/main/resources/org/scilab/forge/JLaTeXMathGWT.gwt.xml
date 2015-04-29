@@ -4,7 +4,6 @@
   <inherits name="com.google.gwt.resources.Resources" />
   <inherits name="com.google.gwt.logging.Logging" />
   <inherits name="org.scilab.forge.JLaTeXMath" />
-  <inherits name="org.timepedia.exporter.Exporter"/>
 
   <entry-point class='org.scilab.forge.jlatexmath.CreateLibrary' />
 
