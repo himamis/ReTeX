@@ -23,6 +23,8 @@ public class OpentypeFont {
 		var that = this;
 		var font = that.@org.scilab.forge.jlatexmath.font.opentype.OpentypeFont::impl;
 		var glyph = font.charToGlyph(c);
-		glyph.draw(ctx, x, y, size);
+		var path = glyph.getPath(x, y, size);
+		path.fill = ctx.fillStyle
+		path.draw(ctx);
 	}-*/;
 }
