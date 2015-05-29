@@ -404,4 +404,7 @@ public class Graphics2DW implements Graphics2DInterface, FontLoadedListener {
 		// NO-OP
 	}
 
+	public boolean hasUnprocessedCharDrawingRequests() {
+		return fdcs.size() > 0;
+	}
 }
