@@ -13,12 +13,7 @@ public class JlmLib {
 	private StringBuilder initString;
 
 	public JlmLib() {
-		GWT.log("creating init string");
 		initString = new StringBuilder();
-		GWT.log("init string created");
-		if (initString == null) {
-			GWT.log("this shouldn't happen");
-		}
 	}
 
 	public void initWith(String string) {
@@ -28,9 +23,6 @@ public class JlmLib {
 	public void drawLatex(final Context2d ctx, final String latex,
 			final float size, final int style, final int x, final int y,
 			final String fgColorString, final JavaScriptObject callback) {
-		if (initString == null) {
-			GWT.log("wha?");
-		}
 		if (initString.length() > 0) {
 			new TeXFormula(initString.toString());
 			initString.setLength(0);
