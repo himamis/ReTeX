@@ -152,6 +152,7 @@ public class Graphics2DW implements Graphics2DInterface {
 	public void draw(Rectangle2D rectangle) {
 		context.rect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
 				rectangle.getHeight());
+		context.stroke();
 	}
 
 	@Override
