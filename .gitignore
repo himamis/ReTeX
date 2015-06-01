@@ -1,7 +1,9 @@
-*/.settings/
-*/.project
-*/.gradle/
-*/build/
+*.settings/
+*.project
+*.gradle/
+*build/
 
-*/bin
+*bin
 /
+
+*local.properties
