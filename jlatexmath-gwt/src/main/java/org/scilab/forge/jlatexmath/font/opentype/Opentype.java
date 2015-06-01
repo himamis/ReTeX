@@ -29,6 +29,7 @@ public class Opentype implements FontLoaderWrapper {
 
 	private List<OpentypeFontStatusListener> listeners;
 	private Map<String, FontContainer> fonts;
+	private String fontBaseUrl = GWT.getModuleBaseURL();
 
 	private Opentype() {
 		ScriptInjector.fromString(JsResources.INSTANCE.opentypeJs().getText())
@@ -59,16 +60,16 @@ public class Opentype implements FontLoaderWrapper {
 			listener.onFontError(error, familyName);
 		}
 	}
-	
+
 	private boolean fontEntryExists(String familyName) {
 		return fonts.get(familyName) != null;
 	}
-	
+
 	private void createFontEntry(String familyName) {
 		FontContainer fontContainer = new FontContainer(null);
 		fonts.put(familyName, fontContainer);
 	}
-	
+
 	boolean fontIsLoading(String familyName) {
 		FontContainer fontContainer = fonts.get(familyName);
 		return fontContainer != null && fontContainer.fontIsLoading;
@@ -78,22 +79,22 @@ public class Opentype implements FontLoaderWrapper {
 		FontContainer fontContainer = fonts.get(familyName);
 		return fontContainer != null && !fontContainer.fontIsLoading;
 	}
-	
+
 	OpentypeFontWrapper getFont(String familyName) {
 		return fonts.get(familyName).font;
 	}
-	
+
 	private void setFontIsLoaded(String familyName, JavaScriptObject font) {
 		FontContainer fontContainer = fonts.get(familyName);
 		fontContainer.font = new OpentypeFontWrapper(font);
 		fontContainer.fontIsLoading = false;
 	}
-	
+
 	private void loadFont(String path, String familyName) {
 		// font does not exist
 		if (!fontEntryExists(familyName)) {
 			createFontEntry(familyName);
-			nativeLoadFont(GWT.getModuleBaseURL() + path, familyName);
+			nativeLoadFont(fontBaseUrl + path, familyName);
 		} else if (fontIsLoading(familyName)) {
 			// do nothing, wait for the font to be loaded
 		} else if (fontIsLoaded(familyName)) {
@@ -115,10 +116,21 @@ public class Opentype implements FontLoaderWrapper {
 							}
 						});
 	}-*/;
-	
+
 	@Override
-	public FontW createNativeFont(String pathName, String fontName, int style, int size) {
+	public FontW createNativeFont(String pathName, String fontName, int style,
+			int size) {
 		loadFont(pathName, fontName);
 		return new OpentypeFont(fontName, style, size);
+	}
+
+	/**
+	 * Sets the base URL from where the fonts are loaded.
+	 * 
+	 * @param url
+	 *            base URL
+	 */
+	public void setFontBaseUrl(String url) {
+		fontBaseUrl = url;
 	}
 }
