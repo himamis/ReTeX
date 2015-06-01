@@ -14,7 +14,7 @@ public class FontFactoryGWT extends FontFactory {
 
 	@Override
 	public Font createFont(String name, int style, int size) {
-		return fontLoaderWrapper.createNativeFont("", name, style, size);
+		return new DefaultFont(name, style, size);
 	}
 
 	@Override
