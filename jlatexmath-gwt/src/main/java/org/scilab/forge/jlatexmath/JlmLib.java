@@ -6,7 +6,6 @@ import org.scilab.forge.jlatexmath.platform.graphics.HasForegroundColor;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.shared.GWT;
 
 public class JlmLib {
 
@@ -20,7 +19,7 @@ public class JlmLib {
 		initString.append(initString);
 	}
 
-	public void drawLatex(final Context2d ctx, final String latex,
+	public int[] drawLatex(final Context2d ctx, final String latex,
 			final float size, final int style, final int x, final int y,
 			final String fgColorString, final JavaScriptObject callback) {
 		if (initString.length() > 0) {
@@ -42,6 +41,7 @@ public class JlmLib {
 				return fgColor;
 			}
 		}, g2, x, y);
+		return new int[] { icon.getIconWidth(), icon.getIconHeight() };
 	}
 
 	private static native void callJavascriptCallback(JavaScriptObject cb) /*-{
@@ -55,8 +55,6 @@ public class JlmLib {
 		TeXFormula formula = new TeXFormula(latex);
 		TeXIcon icon = formula.new TeXIconBuilder().setStyle(style)
 				.setSize(size).build();
-
-		// icon.setInsets(new Insets(5, 5, 5, 5));
 		return icon;
 	}
 

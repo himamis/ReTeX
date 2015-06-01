@@ -22,7 +22,7 @@ public class CreateLibrary implements EntryPoint {
 		});
 		$wnd.jlmlib.drawLatex = $entry(function(ctx, latex, size, style, x, y,
 				fgColor, cb) {
-			library.@org.scilab.forge.jlatexmath.JlmLib::drawLatex(Lcom/google/gwt/canvas/dom/client/Context2d;Ljava/lang/String;FIIILjava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(ctx, latex, size, style, x, y, fgColor, cb);
+			return library.@org.scilab.forge.jlatexmath.JlmLib::drawLatex(Lcom/google/gwt/canvas/dom/client/Context2d;Ljava/lang/String;FIIILjava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(ctx, latex, size, style, x, y, fgColor, cb);
 		});
 	}-*/;
 
