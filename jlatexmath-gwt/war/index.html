@@ -16,7 +16,7 @@
           var y = 5;                                                    // y coordinate
           var style = 0;                                                // one of 0 (display), 2 (text), 4 (script), 6 (script-script?)
           var fgColor = '#FF0000';                                      // foreground color (the color of the text) defined as a hex number
-          jlmlib.drawLatex(ctx, latexString, size, x, y, style, fgColor);
+          jlmlib.drawLatex(ctx, latexString, size, x, y, style, fgColor, function() {console.log(id)});
         }
         var drawAll = function() {
         	for(var i = 1; i < 5; i++) {
