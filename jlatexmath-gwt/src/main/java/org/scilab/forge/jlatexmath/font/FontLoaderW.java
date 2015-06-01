@@ -1,25 +1,17 @@
 package org.scilab.forge.jlatexmath.font;
 
-import java.util.HashMap;
-
 import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 import org.scilab.forge.jlatexmath.exception.ResourceParseException;
-import org.scilab.forge.jlatexmath.font.opentype.FontStatusListener;
-import org.scilab.forge.jlatexmath.font.opentype.Opentype;
 import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontLoader;
 
 public class FontLoaderW implements FontLoader {
 
-	private Opentype webFontLoader;
-	private FontStatusListener listener;
-
-	private static final HashMap<String, FontW> fonts = new HashMap<String, FontW>();
-
-	public FontLoaderW() {
-		webFontLoader = Opentype.INSTANCE;
-		listener = FontStatusListener.INSTANCE;
+	private FontLoaderWrapper fontLoaderWrapper;
+	
+	public FontLoaderW(FontLoaderWrapper fontLoaderWrapper) {
+		this.fontLoaderWrapper = fontLoaderWrapper;
 	}
 
 	@Override
@@ -27,13 +19,7 @@ public class FontLoaderW implements FontLoader {
 			throws ResourceParseException {
 		String fontName = extractFileName(name);
 		String pathName = getPrefix(fontInt) + name;
-		FontW font = null;
-		if ((font = fonts.get(pathName)) == null) {
-			font = new FontW(fontName, Font.PLAIN, Math.round(PIXELS_PER_POINT));
-			listener.addFont(fontName, font);
-			fonts.put(pathName, font);
-			webFontLoader.loadFont(pathName, fontName);
-		}
+		AsyncLoadedFont font = fontLoaderWrapper.createNativeFont(pathName, fontName, Font.PLAIN, Math.round(PIXELS_PER_POINT));
 		return font;
 	}
 
@@ -43,9 +29,10 @@ public class FontLoaderW implements FontLoader {
 
 		int dotPos = filePathName.lastIndexOf('.');
 		int slashPos = filePathName.lastIndexOf('\\');
-		if (slashPos == -1)
+		if (slashPos == -1) {
 			slashPos = filePathName.lastIndexOf('/');
-
+		}
+		slashPos = slashPos > -1 ? slashPos : 0; 
 		if (dotPos > slashPos) {
 			return filePathName.substring(slashPos > 0 ? slashPos + 1 : 0,
 					dotPos);

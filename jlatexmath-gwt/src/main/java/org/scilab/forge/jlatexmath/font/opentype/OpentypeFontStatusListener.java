@@ -13,7 +13,7 @@ public interface OpentypeFontStatusListener {
 	 * @param familyName
 	 *            name of the font
 	 */
-	public void onFontLoaded(JavaScriptObject font, String familyName);
+	public void onFontLoaded(OpentypeFontWrapper font, String familyName);
 
 	/**
 	 * Called when the loading of the font fails.

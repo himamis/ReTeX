@@ -1,32 +1,56 @@
 package org.scilab.forge.jlatexmath.font.opentype;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.scilab.forge.jlatexmath.font.FontLoaderWrapper;
+import org.scilab.forge.jlatexmath.font.FontW;
 import org.scilab.forge.jlatexmath.resources.js.JsResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.ScriptInjector;
 
-public class Opentype {
+public class Opentype implements FontLoaderWrapper {
 
 	public static final Opentype INSTANCE = new Opentype();
+
+	private static class FontContainer {
+		public OpentypeFontWrapper font;
+		public boolean fontIsLoading;
+
+		public FontContainer(OpentypeFontWrapper font) {
+			this.font = font;
+			this.fontIsLoading = true;
+		}
+	}
+
+	private List<OpentypeFontStatusListener> listeners;
+	private Map<String, FontContainer> fonts;
 
 	private Opentype() {
 		ScriptInjector.fromString(JsResources.INSTANCE.opentypeJs().getText())
 				.setRemoveTag(false).inject();
+		listeners = new ArrayList<OpentypeFontStatusListener>();
+		fonts = new HashMap<String, FontContainer>();
 	}
-
-	private List<OpentypeFontStatusListener> listeners = new ArrayList<OpentypeFontStatusListener>();
 
 	public void addListener(OpentypeFontStatusListener listener) {
-		listeners.add(listener);
+		if (!listeners.contains(listener)) {
+			listeners.add(listener);
+		}
 	}
 
-	private void fireFontActiveEvent(JavaScriptObject font, String familyName) {
+	public void removeListener(OpentypeFontStatusListener listener) {
+		listeners.remove(listener);
+	}
+
+	private void fireFontActiveEvent(String familyName) {
+		OpentypeFontWrapper fontWrapper = fonts.get(familyName).font;
 		for (OpentypeFontStatusListener listener : listeners) {
-			listener.onFontLoaded(font, familyName);
+			listener.onFontLoaded(fontWrapper, familyName);
 		}
 	}
 
@@ -35,9 +59,46 @@ public class Opentype {
 			listener.onFontError(error, familyName);
 		}
 	}
+	
+	private boolean fontEntryExists(String familyName) {
+		return fonts.get(familyName) != null;
+	}
+	
+	private void createFontEntry(String familyName) {
+		FontContainer fontContainer = new FontContainer(null);
+		fonts.put(familyName, fontContainer);
+	}
+	
+	boolean fontIsLoading(String familyName) {
+		FontContainer fontContainer = fonts.get(familyName);
+		return fontContainer != null && fontContainer.fontIsLoading;
+	}
 
-	public void loadFont(String path, String familyName) {
-		nativeLoadFont(GWT.getModuleBaseURL() + path, familyName);
+	boolean fontIsLoaded(String familyName) {
+		FontContainer fontContainer = fonts.get(familyName);
+		return fontContainer != null && !fontContainer.fontIsLoading;
+	}
+	
+	OpentypeFontWrapper getFont(String familyName) {
+		return fonts.get(familyName).font;
+	}
+	
+	private void setFontIsLoaded(String familyName, JavaScriptObject font) {
+		FontContainer fontContainer = fonts.get(familyName);
+		fontContainer.font = new OpentypeFontWrapper(font);
+		fontContainer.fontIsLoading = false;
+	}
+	
+	private void loadFont(String path, String familyName) {
+		// font does not exist
+		if (!fontEntryExists(familyName)) {
+			createFontEntry(familyName);
+			nativeLoadFont(GWT.getModuleBaseURL() + path, familyName);
+		} else if (fontIsLoading(familyName)) {
+			// do nothing, wait for the font to be loaded
+		} else if (fontIsLoaded(familyName)) {
+			fireFontActiveEvent(familyName);
+		}
 	}
 
 	private native void nativeLoadFont(String path, String familyName) /*-{
@@ -49,8 +110,15 @@ public class Opentype {
 							if (err) {
 								that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::fireFontInactiveEvent(Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;)(err, familyName);
 							} else {
-								that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::fireFontActiveEvent(Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;)(font, font.familyName);
+								that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::setFontIsLoaded(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(font.familyName, font);
+								that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::fireFontActiveEvent(Ljava/lang/String;)(font.familyName);
 							}
 						});
 	}-*/;
+	
+	@Override
+	public FontW createNativeFont(String pathName, String fontName, int style, int size) {
+		loadFont(pathName, fontName);
+		return new OpentypeFont(fontName, style, size);
+	}
 }

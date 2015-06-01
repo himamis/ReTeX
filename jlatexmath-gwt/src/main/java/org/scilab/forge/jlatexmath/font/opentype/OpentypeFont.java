@@ -1,30 +1,79 @@
 package org.scilab.forge.jlatexmath.font.opentype;
 
-import com.google.gwt.canvas.dom.client.Context2d;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.scilab.forge.jlatexmath.font.FontW;
+import org.scilab.forge.jlatexmath.font.FontWrapper;
+import org.scilab.forge.jlatexmath.platform.font.Font;
+
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.shared.GWT;
 
-public class OpentypeFont {
+public class OpentypeFont extends FontW implements OpentypeFontStatusListener {
 
-	private JavaScriptObject impl;
+	private Opentype opentype = Opentype.INSTANCE;
+	private List<FontLoadCallback> fontLoadCallbacks;
 
-	public OpentypeFont(JavaScriptObject impl) {
-		this.impl = impl;
+	public OpentypeFont(String name, int style, int size) {
+		super(name, style, size);
+		fontLoadCallbacks = new ArrayList<FontLoadCallback>();
 	}
 
-	/**
-	 * Draws the first glyph from the string.
-	 * @param c string
-	 * @param x x
-	 * @param y y
-	 * @param size font size
-	 * @param ctx context
-	 */
-	public native void drawGlyph(String c, int x, int y, int size, Context2d ctx) /*-{
-		var that = this;
-		var font = that.@org.scilab.forge.jlatexmath.font.opentype.OpentypeFont::impl;
-		var glyph = font.charToGlyph(c);
-		var path = glyph.getPath(x, y, size);
-		path.fill = ctx.fillStyle
-		path.draw(ctx);
-	}-*/;
+	@Override
+	public Font deriveFont(int type) {
+		return new OpentypeFont(name, type, size);
+	}
+
+	@Override
+	public boolean isLoaded() {
+		return opentype.fontIsLoaded(name);
+	}
+
+	@Override
+	public void addFontLoadedCallback(FontLoadCallback callback) {
+		if (opentype.fontIsLoaded(name)) {
+			callback.onFontLoaded(this);
+		} else {
+			fontLoadCallbacks.add(callback);
+			opentype.addListener(this);
+		}
+	}
+
+	@Override
+	public FontWrapper getFontWrapper() {
+		return opentype.getFont(name);
+	}
+
+	@Override
+	public void onFontLoaded(OpentypeFontWrapper font, String familyName) {
+		if (!familyName.equals(name)) {
+			// not interested
+			return;
+		}
+		GWT.log("Font " + name + " loaded");
+		opentype.removeListener(this);
+		for (FontLoadCallback fontLoadCallback : fontLoadCallbacks) {
+			fontLoadCallback.onFontLoaded(this);
+		}
+		fontLoadCallbacks.clear();
+		fontLoadCallbacks = null;
+	}
+
+	@Override
+	public void onFontError(JavaScriptObject error, String familyName) {
+		if (!familyName.equals(name)) {
+			// not interested
+			return;
+		}
+		GWT.log("Font " + name + " error");
+		GWT.log(error.toString());
+		opentype.removeListener(this);
+		for (FontLoadCallback fontLoadCallback : fontLoadCallbacks) {
+			fontLoadCallback.onFontError(this);
+		}
+		fontLoadCallbacks.clear();
+		fontLoadCallbacks = null;
+	}
+
 }

@@ -24,6 +24,7 @@ dependencies {
 	compile project(':jlatexmath-share')
 	compile files(project(':jlatexmath-share').sourceSets.main.java.srcDirs)
 	compile 'com.google.gwt:gwt-dev:2.7.0'
+	compile 'com.google.gwt:gwt-user:2.7.0'
 	testCompile 'com.google.gwt:gwt-user:2.7.0'
 	testCompile 'junit:junit:4.12'
 }

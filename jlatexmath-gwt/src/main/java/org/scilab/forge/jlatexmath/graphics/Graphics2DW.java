@@ -1,13 +1,14 @@
 package org.scilab.forge.jlatexmath.graphics;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.scilab.forge.jlatexmath.font.AsyncLoadedFont;
+import org.scilab.forge.jlatexmath.font.AsyncLoadedFont.FontLoadCallback;
+import org.scilab.forge.jlatexmath.font.DefaultFont;
 import org.scilab.forge.jlatexmath.font.FontW;
-import org.scilab.forge.jlatexmath.font.FontW.FontLoadedListener;
-import org.scilab.forge.jlatexmath.font.opentype.OpentypeFont;
+import org.scilab.forge.jlatexmath.font.FontWrapper;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
 import org.scilab.forge.jlatexmath.platform.geom.Line2D;
@@ -23,7 +24,7 @@ import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.CanvasElement;
 
-public class Graphics2DW implements Graphics2DInterface, FontLoadedListener {
+public class Graphics2DW implements Graphics2DInterface {
 
 	private Context2d context;
 
@@ -34,7 +35,7 @@ public class Graphics2DW implements Graphics2DInterface, FontLoadedListener {
 	private TransformW transform;
 
 	private LinkedList<TransformW> transformationStack;
-	
+
 	public Graphics2DW(Context2d context) {
 		this.context = context;
 		initBasicStroke();
@@ -65,7 +66,7 @@ public class Graphics2DW implements Graphics2DInterface, FontLoadedListener {
 	}
 
 	private void initFont() {
-		font = new FontW(context.getFont(), Font.PLAIN, 12);
+		font = new DefaultFont(context.getFont(), Font.PLAIN, 12);
 	}
 
 	public Context2d getContext() {
@@ -240,38 +241,33 @@ public class Graphics2DW implements Graphics2DInterface, FontLoadedListener {
 		}
 
 	}
-	
+
 	private HashMap<String, List<FontDrawContext>> fdcs = new HashMap<String, List<FontDrawContext>>();
-	
+
 	public void drawText(String text, int x, int y) {
 		if (!font.isLoaded()) {
-			FontDrawContext fdc = new FontDrawContext(this, text, x, y);
-			List<FontDrawContext> fdcList = fdcs.get(font.getName());
-			if (fdcList == null) {
-				fdcList = new ArrayList<Graphics2DW.FontDrawContext>();
-				fdcs.put(font.getName(), fdcList);
-			}
-			fdcList.add(fdc);
-			if (!font.containsListener(this)) {
-				font.addFontListener(this);
-			}
+			final FontDrawContext fdc = new FontDrawContext(this, text, x, y);
+			font.addFontLoadedCallback(new FontLoadCallback() {
+
+				@Override
+				public void onFontLoaded(AsyncLoadedFont font) {
+					fdc.doDraw();
+				}
+
+				@Override
+				public void onFontError(AsyncLoadedFont font) {
+					// TODO Auto-generated method stub
+
+				}
+			});
 		} else {
 			fillTextInternal(text, x, y);
 		}
 	}
 
-	@Override
-	public void onFontLoaded(FontW font) {
-		font.removeFontListener(this);
-		List<FontDrawContext> fdcList = fdcs.remove(font.getName());
-		for (FontDrawContext fdc : fdcList) {
-			fdc.doDraw();
-		}
-	}
-
 	protected void fillTextInternal(String text, int x, int y) {
-		OpentypeFont otFont = font.getImplementation();
-		otFont.drawGlyph(text, x, y, font.getSize(), context);
+		FontWrapper fontWrapper = font.getFontWrapper();
+		fontWrapper.drawGlyph(text, x, y, font.getSize(), context);
 	}
 
 	@Override

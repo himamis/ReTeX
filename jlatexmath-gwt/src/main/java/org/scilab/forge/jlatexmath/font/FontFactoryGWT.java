@@ -1,5 +1,6 @@
 package org.scilab.forge.jlatexmath.font;
 
+import org.scilab.forge.jlatexmath.font.opentype.Opentype;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 import org.scilab.forge.jlatexmath.platform.font.FontFactory;
 import org.scilab.forge.jlatexmath.platform.font.FontLoader;
@@ -8,10 +9,12 @@ import org.scilab.forge.jlatexmath.platform.font.TextAttributeProvider;
 import org.scilab.forge.jlatexmath.platform.font.TextLayout;
 
 public class FontFactoryGWT extends FontFactory {
+	
+	private FontLoaderWrapper fontLoaderWrapper = Opentype.INSTANCE;
 
 	@Override
 	public Font createFont(String name, int style, int size) {
-		return new FontW(name, style, size);
+		return fontLoaderWrapper.createNativeFont("", name, style, size);
 	}
 
 	@Override
@@ -26,7 +29,7 @@ public class FontFactoryGWT extends FontFactory {
 
 	@Override
 	public FontLoader createFontLoader() {
-		return new FontLoaderW();
+		return new FontLoaderW(fontLoaderWrapper);
 	}
 
 }
