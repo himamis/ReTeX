@@ -11,7 +11,7 @@ repositories {
 	mavenCentral()
 }
 
-apply plugin: 'gwt-compiler'
+apply plugin: 'gwt'
 apply plugin: 'java'
 
 gwt {
@@ -21,10 +21,11 @@ gwt {
 
 
 dependencies {
-	compile files(project(':jlatexmath-share').sourceSets.main.allSource.srcDirs)
+	compile project(':jlatexmath-share')
+	compile files(project(':jlatexmath-share').sourceSets.main.java.srcDirs)
 	compile 'com.google.gwt:gwt-dev:2.7.0'
-	compile 'com.google.gwt:gwt-user:2.7.0'
-
+	testCompile 'com.google.gwt:gwt-user:2.7.0'
+	testCompile 'junit:junit:4.12'
 }
 
 task runSuperDev(type: JavaExec, dependsOn: 'jar') {
@@ -54,4 +55,11 @@ task jarAll(type: Jar) {
 task jarSources(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
     from sourceSets.main.allSource 
+}
+
+// exclude from the eclipse classpath the java files in the resources dir
+eclipse.classpath.file { 
+	whenMerged { classpath ->
+		classpath.entries.find { entry -> entry.kind == 'src' && entry.path == 'src/main/resources' }.excludes = ['**/*.java']
+	}
 }
