@@ -1,7 +1,1 @@
-target/
-gwt-UnitCache
-.project
-.settings
-.classpath
-build/
 war/jlatexmath
