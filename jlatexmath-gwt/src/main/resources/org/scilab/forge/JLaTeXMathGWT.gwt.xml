@@ -11,4 +11,6 @@
   <public path="jlatexmath/public" />
   
   <collapse-all-properties />
+  <!-- Single Script Linker -->
+  <add-linker name="sso" />
 </module>
