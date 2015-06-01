@@ -9,7 +9,7 @@ import org.scilab.forge.jlatexmath.platform.font.FontLoader;
 public class FontLoaderW implements FontLoader {
 
 	private FontLoaderWrapper fontLoaderWrapper;
-	
+
 	public FontLoaderW(FontLoaderWrapper fontLoaderWrapper) {
 		this.fontLoaderWrapper = fontLoaderWrapper;
 	}
@@ -19,7 +19,8 @@ public class FontLoaderW implements FontLoader {
 			throws ResourceParseException {
 		String fontName = extractFileName(name);
 		String pathName = getPrefix(fontInt) + name;
-		AsyncLoadedFont font = fontLoaderWrapper.createNativeFont(pathName, fontName, Font.PLAIN, Math.round(PIXELS_PER_POINT));
+		AsyncLoadedFont font = fontLoaderWrapper.createNativeFont(pathName,
+				fontName, Font.PLAIN, Math.round(PIXELS_PER_POINT));
 		return font;
 	}
 
@@ -32,7 +33,7 @@ public class FontLoaderW implements FontLoader {
 		if (slashPos == -1) {
 			slashPos = filePathName.lastIndexOf('/');
 		}
-		slashPos = slashPos > -1 ? slashPos : 0; 
+		slashPos = slashPos > -1 ? slashPos : 0;
 		if (dotPos > slashPos) {
 			return filePathName.substring(slashPos > 0 ? slashPos + 1 : 0,
 					dotPos);
