@@ -1,8 +1,1 @@
-.settings/
-target/
-bin/
-gen/
-.project
-.classpath
-/target/
-build/
+gen
