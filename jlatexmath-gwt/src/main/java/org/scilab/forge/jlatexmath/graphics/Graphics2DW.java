@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.scilab.forge.jlatexmath.DrawingFinishedCallback;
 import org.scilab.forge.jlatexmath.font.AsyncLoadedFont;
 import org.scilab.forge.jlatexmath.font.AsyncLoadedFont.FontLoadCallback;
 import org.scilab.forge.jlatexmath.font.DefaultFont;
@@ -22,6 +23,7 @@ import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.CanvasElement;
 
 public class Graphics2DW implements Graphics2DInterface {
@@ -35,6 +37,8 @@ public class Graphics2DW implements Graphics2DInterface {
 	private TransformW transform;
 
 	private LinkedList<TransformW> transformationStack;
+	
+	private DrawingFinishedCallback drawingFinishedCallback;
 
 	public Graphics2DW(Context2d context) {
 		this.context = context;
@@ -242,26 +246,65 @@ public class Graphics2DW implements Graphics2DInterface {
 
 	}
 
-	private HashMap<String, List<FontDrawContext>> fdcs = new HashMap<String, List<FontDrawContext>>();
+	private int charDrawingRequests = 0;
 
 	public void drawText(String text, int x, int y) {
 		if (!font.isLoaded()) {
 			final FontDrawContext fdc = new FontDrawContext(this, text, x, y);
+
+			// Javascript callback is needed after the drawing has finished.
+			// This would be straightforward in a synchronous library, but that
+			// is not the case here.
+			// This is the only asynchronous part in the JLaTeXMath API. (for
+			// now)
+			// A drawing request is created everytime a font is needed and is
+			// not loaded.
+			// The drawing request is executed after the font has been loaded.
+			// Count all the drawing requests which will be processed after the
+			// main drawing process has finished. After that in all the font
+			// callbacks (error or loaded) check if there are any requests
+			// waiting to be executed. If there aren't any, drawing has finished.
+
+			charDrawingRequests += 1;
 			font.addFontLoadedCallback(new FontLoadCallback() {
 
 				@Override
 				public void onFontLoaded(AsyncLoadedFont font) {
 					fdc.doDraw();
+					charDrawingRequests -= 1;
+					maybeNotifyDrawingFinishedCallback();
 				}
 
 				@Override
 				public void onFontError(AsyncLoadedFont font) {
-					// TODO Auto-generated method stub
-
+					GWT.log("Error loading font " + font);
+					charDrawingRequests -= 1;
+					maybeNotifyDrawingFinishedCallback();
 				}
 			});
+
 		} else {
 			fillTextInternal(text, x, y);
+		}
+	}
+	
+	public void setDrawingFinishedCallback(DrawingFinishedCallback drawingFinishedCallback) {
+		this.drawingFinishedCallback = drawingFinishedCallback;
+	}
+	
+	private void maybeNotifyDrawingFinishedCallback() {
+		if (!hasUnprocessedCharDrawingRequests()) {
+			notifyDrawingFinishedCallback();
+		}
+	}
+	
+	private boolean hasUnprocessedCharDrawingRequests() {
+		return charDrawingRequests > 0;
+	}
+	
+	private void notifyDrawingFinishedCallback() {
+		if (drawingFinishedCallback != null) {
+			drawingFinishedCallback.onDrawingFinished();
 		}
 	}
 
@@ -400,7 +443,4 @@ public class Graphics2DW implements Graphics2DInterface {
 		// NO-OP
 	}
 
-	public boolean hasUnprocessedCharDrawingRequests() {
-		return fdcs.size() > 0;
-	}
 }
