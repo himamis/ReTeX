@@ -9,4 +9,6 @@
 
   <source path="jlatexmath" />
   <public path="jlatexmath/public" />
+  
+  <collapse-all-properties />
 </module>
