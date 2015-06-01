@@ -6,23 +6,23 @@
     <script type="text/javascript" language="javascript" src="jlatexmath/jlatexmath.nocache.js"></script>
     <script>
         var drawLatex = function(id) {
+        
           var canvas = document.getElementById('latex'+id)
 
           // jlmlib.drawLatex(...) params
           var ctx = canvas.getContext('2d');                            // Context 2d of canvas
-          if (id == 2) {
-          	var latexString = "\\epsilon"
-          } else {
-          	var latexString = "\\textcolor{blue}{HelloWorld}\\sqrt{"+id+"}";   // Latex string
-          }
+          var latexString = "\\textcolor{blue}{HelloWorld}\\sqrt{"+id+"}";   // Latex string
           var size = 40;                                                // size of the latex
           var x = 5;                                                    // x coordinate
           var y = 5;                                                    // y coordinate
           var style = 0;                                                // one of 0 (display), 2 (text), 4 (script), 6 (script-script?)
           var fgColor = '#FF0000';                                      // foreground color (the color of the text) defined as a hex number
-          var coords = jlmlib.drawLatex(ctx, latexString, size, x, y, style, fgColor, function() {console.log(id)});
+          var cb = function() {console.log(id)}							// function called when everything has been drawn
+          
+          var coords = jlmlib.drawLatex(ctx, latexString, size, x, y, style, fgColor, cb);
           console.log(latexString + ' -- size: width = ' + coords[0] + ' height = ' + coords[1]);
         }
+        
         var drawAll = function() {
         	jlmlib.initWith("\\DeclareMathOperator{\\sech}{sech} ");
         	jlmlib.initWith("\\DeclareMathOperator{\\csch}{csch} ");
