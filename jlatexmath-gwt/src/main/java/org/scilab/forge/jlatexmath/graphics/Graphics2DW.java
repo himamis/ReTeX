@@ -1,8 +1,6 @@
 package org.scilab.forge.jlatexmath.graphics;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.scilab.forge.jlatexmath.DrawingFinishedCallback;
 import org.scilab.forge.jlatexmath.font.AsyncLoadedFont;
