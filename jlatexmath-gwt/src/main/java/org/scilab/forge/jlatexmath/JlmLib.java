@@ -16,7 +16,7 @@ public class JlmLib {
 	}
 
 	public void initWith(String string) {
-		initString.append(initString);
+		initString.append(string);
 	}
 
 	public int[] drawLatex(final Context2d ctx, final String latex,
