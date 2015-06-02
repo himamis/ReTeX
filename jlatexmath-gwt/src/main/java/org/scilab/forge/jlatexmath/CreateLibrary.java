@@ -24,8 +24,8 @@ public class CreateLibrary implements EntryPoint {
 			library.@org.scilab.forge.jlatexmath.JlmLib::initWith(Ljava/lang/String;)(str);
 		});
 		$wnd.jlmlib.drawLatex = $entry(function(ctx, latex, size, style, x, y,
-				fgColor, cb) {
-			return library.@org.scilab.forge.jlatexmath.JlmLib::drawLatex(Lcom/google/gwt/canvas/dom/client/Context2d;Ljava/lang/String;FIIILjava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(ctx, latex, size, style, x, y, fgColor, cb);
+				fgColor, bgColor, cb) {
+			return library.@org.scilab.forge.jlatexmath.JlmLib::drawLatex(Lcom/google/gwt/canvas/dom/client/Context2d;Ljava/lang/String;FIIILjava/lang/String;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(ctx, latex, size, style, x, y, fgColor, bgColor, cb);
 		});
 		$wnd.jlmlib.setFontBaseUrl = $entry(function(url) {
 			opentype.@org.scilab.forge.jlatexmath.font.opentype.Opentype::setFontBaseUrl(Ljava/lang/String;)(url);

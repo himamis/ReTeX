@@ -21,19 +21,35 @@ public class JlmLib {
 
 	public int[] drawLatex(final Context2d ctx, final String latex,
 			final float size, final int style, final int x, final int y,
-			final String fgColorString, final JavaScriptObject callback) {
+			final String fgColorString, final String bgColorString,
+			final JavaScriptObject callback) {
+		
+		// init jlm with the given string
 		if (initString.length() > 0) {
 			new TeXFormula(initString.toString());
 			initString.setLength(0);
 		}
+		
+		// create icon and graphics objects
 		TeXIcon icon = createIcon(latex, size, style);
 		Graphics2DW g2 = new Graphics2DW(ctx);
+		
+		// fill the background color
+		if (bgColorString != null && !bgColorString.equals("")) {
+			final Color bgColor = ColorUtil.decode(bgColorString);
+			g2.setColor(bgColor);
+			g2.fillRect(x, y, x + icon.getIconWidth(), y + icon.getIconHeight());
+		}
+		
+		// set the callback
 		g2.setDrawingFinishedCallback(new DrawingFinishedCallback() {
 			@Override
 			public void onDrawingFinished() {
 				callJavascriptCallback(callback);
 			}
 		});
+		
+		// paint the icon
 		final Color fgColor = ColorUtil.decode(fgColorString);
 		icon.paintIcon(new HasForegroundColor() {
 			@Override
@@ -41,6 +57,8 @@ public class JlmLib {
 				return fgColor;
 			}
 		}, g2, x, y);
+		
+		// return {width, height}
 		return new int[] { icon.getIconWidth(), icon.getIconHeight() };
 	}
 
