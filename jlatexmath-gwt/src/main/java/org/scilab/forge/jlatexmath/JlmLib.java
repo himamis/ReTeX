@@ -38,7 +38,7 @@ public class JlmLib {
 		if (bgColorString != null && !bgColorString.equals("")) {
 			final Color bgColor = ColorUtil.decode(bgColorString);
 			g2.setColor(bgColor);
-			g2.fillRect(x, y, x + icon.getIconWidth(), y + icon.getIconHeight());
+			g2.fillRect(x, y, icon.getIconWidth(), icon.getIconHeight());
 		}
 		
 		// set the callback
