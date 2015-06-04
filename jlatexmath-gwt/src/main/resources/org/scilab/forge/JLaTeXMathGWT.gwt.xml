@@ -5,12 +5,6 @@
   <inherits name="com.google.gwt.logging.Logging" />
   <inherits name="org.scilab.forge.JLaTeXMath" />
 
-  <entry-point class='org.scilab.forge.jlatexmath.CreateLibrary' />
-
   <source path="jlatexmath" />
   <public path="jlatexmath/public" />
-  
-  <collapse-all-properties />
-  <!-- Single Script Linker -->
-  <add-linker name="sso" />
 </module>

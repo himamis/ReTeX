@@ -14,9 +14,17 @@ repositories {
 apply plugin: 'gwt'
 apply plugin: 'java'
 
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
 gwt {
 	gwtVersion '2.7.0'
-	modules 'org.scilab.forge.JLaTeXMathGWT'
+	// only compilable module
+	modules 'org.scilab.forge.JLaTeXMathGWTExportedLibrary'
+	devModules 'org.scilab.forge.JLaTeXMathGWTDev'
+	/*compiler {
+        style = de.richsource.gradle.plugins.gwt.Style.DETAILED;
+	}*/
 }
 
 
