@@ -293,7 +293,7 @@ public class Graphics2DW implements Graphics2DInterface {
 		this.drawingFinishedCallback = drawingFinishedCallback;
 	}
 	
-	private void maybeNotifyDrawingFinishedCallback() {
+	public void maybeNotifyDrawingFinishedCallback() {
 		if (!hasUnprocessedCharDrawingRequests()) {
 			notifyDrawingFinishedCallback();
 		}

@@ -57,6 +57,7 @@ public class JlmLib {
 				return fgColor;
 			}
 		}, g2, x, y);
+		g2.maybeNotifyDrawingFinishedCallback();
 		
 		// return {width, height}
 		return new int[] { icon.getIconWidth(), icon.getIconHeight() };
