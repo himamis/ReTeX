@@ -9,6 +9,7 @@ import org.scilab.forge.jlatexmath.font.DefaultFont;
 import org.scilab.forge.jlatexmath.font.FontW;
 import org.scilab.forge.jlatexmath.font.FontWrapper;
 import org.scilab.forge.jlatexmath.platform.font.Font;
+import org.scilab.forge.jlatexmath.platform.font.FontLoader;
 import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
 import org.scilab.forge.jlatexmath.platform.geom.Line2D;
 import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
@@ -68,7 +69,8 @@ public class Graphics2DW implements Graphics2DInterface {
 	}
 
 	private void initFont() {
-		font = new DefaultFont(context.getFont(), Font.PLAIN, 12);
+		font = new DefaultFont(context.getFont(), Font.PLAIN,
+				Math.round(FontLoader.PIXELS_PER_POINT));
 	}
 
 	public Context2d getContext() {
