@@ -23,7 +23,17 @@ public class OpentypeFontWrapper implements FontWrapper {
 		var font = that.@org.scilab.forge.jlatexmath.font.opentype.OpentypeFontWrapper::impl;
 		var glyph = font.charToGlyph(c);
 		var path = glyph.getPath(x, y, size);
-		path.fill = ctx.fillStyle
+
+		path.fill = ctx.fillStyle;
+		path.stroke = null;
+		path.strokeWidth = 1;
+
+		// reset the path before to ensure that the previous drawing don't interfere
+		ctx.beginPath();
+
 		path.draw(ctx);
+
+		// reset the path so that the following stroke, fill calls don't redraw
+		ctx.beginPath();
 	}-*/;
 }
