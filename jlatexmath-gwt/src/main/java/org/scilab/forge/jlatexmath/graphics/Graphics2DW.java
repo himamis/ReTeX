@@ -233,11 +233,12 @@ public class Graphics2DW implements Graphics2DInterface {
 		public void doDraw() {
 			FontW oldFont = graphics.getFont();
 			ColorW oldColor = graphics.getColor();
-
+			
 			graphics.save();
 			graphics.setFont(font);
 			graphics.setColor(color);
-			graphics.setTransform(transform);
+			graphics.transform(transform);
+			// graphics.setTransform(transform);
 			graphics.fillTextInternal(text, x, y);
 			graphics.restore();
 
