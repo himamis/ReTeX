@@ -10,16 +10,25 @@
           var canvas = document.getElementById('latex'+id)
 
           // jlmlib.drawLatex(...) params
-          var ctx = canvas.getContext('2d');                            // Context 2d of canvas
-          var latexString = "\\textcolor{blue}{HelloWorld}\\sqrt{"+id+"}";   // Latex string
-          var size = 40;                                                // size of the latex
-          var x = 5;                                                    // x coordinate
-          var y = 5;                                                    // y coordinate
-          var style = 0;                                                // one of 0 (display), 2 (text), 4 (script), 6 (script-script?)
-          var fgColor = '#FF0000';                                      // foreground color (the color of the text) defined as a hex number
-          var cb = function() {console.log(id)}							// function called when everything has been drawn
+          var opts = {
+            context : canvas.getContext('2d'),
+            latex : "\\textcolor{blue}{HelloWorld}\\sqrt{"+id+"}",
+            size : 40,
+            x : 5,
+            y : 10,
+            type : jlmlib.BOLD | jlmlib.ITALIC,
+            foregroundColor : '#FF0000',
+            backgroundColor : '#00FF00',
+            callback : function() { console.log('callback') },
+            insets : {
+              top : 40,
+              bottom : 5,
+              left : 20,
+              right : 5
+            }
+          }
           
-          var coords = jlmlib.drawLatex(ctx, latexString, size, x, y, style, fgColor, cb);
+          var coords = jlmlib.drawLatex(opts);
           console.log(latexString + ' -- size: width = ' + coords[0] + ' height = ' + coords[1]);
         }
         
