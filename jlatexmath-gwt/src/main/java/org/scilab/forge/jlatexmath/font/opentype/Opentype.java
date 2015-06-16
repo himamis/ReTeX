@@ -1,6 +1,7 @@
 package org.scilab.forge.jlatexmath.font.opentype;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,13 @@ public class Opentype implements FontLoaderWrapper {
 
 	private void fireFontActiveEvent(String familyName) {
 		OpentypeFontWrapper fontWrapper = fonts.get(familyName).font;
-		for (OpentypeFontStatusListener listener : listeners) {
+		
+		// a copy of the listeners is needed, because listeners are being removed 
+		// from the list throughout the iteration.
+		// see OpentypeFont::onFontLoaded(..)
+		List<OpentypeFontStatusListener> copyList = new ArrayList<>(listeners);
+		
+		for (OpentypeFontStatusListener listener : copyList) {
 			listener.onFontLoaded(fontWrapper, familyName);
 		}
 	}
