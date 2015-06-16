@@ -55,7 +55,7 @@ public class Opentype implements FontLoaderWrapper {
 		// a copy of the listeners is needed, because listeners are being removed 
 		// from the list throughout the iteration.
 		// see OpentypeFont::onFontLoaded(..)
-		List<OpentypeFontStatusListener> copyList = new ArrayList<>(listeners);
+		List<OpentypeFontStatusListener> copyList = new ArrayList<OpentypeFontStatusListener>(listeners);
 		
 		for (OpentypeFontStatusListener listener : copyList) {
 			listener.onFontLoaded(fontWrapper, familyName);
