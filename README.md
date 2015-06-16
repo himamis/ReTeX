@@ -3,8 +3,44 @@ JLaTeXMath Multiplatform
 
 This project is a fork of the original JLaTeXMath (http://forge.scilab.org/index.php/p/jlatexmath/), refactored to be used through different platforms, such as desktop, android and web (using GWT).
 
-Usage
------
+##Include in your project
+###Using gradle
+####Desktop
+```groovy
+dependencies {
+    compile project(':jlatexmath-desktop) 
+}
+```
+####Android
+```groovy
+dependencies {
+    compile project(':jlatexmath-android) // for android API 7 and up
+}
+```
+####GWT Webapp
+```groovy
+dependencies {
+    compile project(':jlatexmath-gwt'),
+        project(':jlatexmath-share'),
+        files(project(':jlatexmath-gwt').sourceSets.main.allSource.srcDirs),
+        files(project(':jlatexmath-share').sourceSets.main.java.srcDirs)
+}
+```
+{AppName}.gwt.xml
+```xml
+<module>
+    ...
+    <inherits name='org.scilab.forge.JLaTeXMathGWT'/>
+    ...
+</module>
+```
+
+Or compile the project with
+`$ ./gradlew :jlatexmath-gwt:compileGwt`
+and include the output from `jlatexmath-gwt/build/gwt/out/jlatexmath`
+
+
+##Usage
 
 Before using the API, set the platform dependent factory instance.
 
