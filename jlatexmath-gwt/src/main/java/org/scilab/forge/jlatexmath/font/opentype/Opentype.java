@@ -133,7 +133,6 @@ public class Opentype implements FontLoaderWrapper {
 		var that = this;
 		var base64EncodedData = $wnd.__JLM_GWT_FONTS__[familyName];
 		var decodedArrayBuffer = that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::base64ToArrayBuffer(Ljava/lang/String;)(base64EncodedData)
-		$wnd.console.log(opentype);
 		var font = opentype.parse(decodedArrayBuffer);
 		if (!font.supported) {
 			that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::fireFontInactiveEvent(Ljava/lang/Object;Ljava/lang/String;)("Parse error: font not supported", familyName);
