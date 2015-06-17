@@ -103,7 +103,6 @@ public class Opentype implements FontLoaderWrapper {
 		// font does not exist
 		if (!fontEntryExists(familyName)) {
 			createFontEntry(familyName);
-			// nativeLoadFont(fontBaseUrl + path, familyName);
 			loadJavascriptFont(fontBaseUrl + path, familyName);
 		} else if (fontIsLoading(familyName)) {
 			// do nothing, wait for the font to be loaded
@@ -153,21 +152,6 @@ public class Opentype implements FontLoaderWrapper {
 			bytes[i] = binaryString.charCodeAt(i);
 		}
 		return bytes.buffer;
-	}-*/;
-
-	private native void nativeLoadFont(String path, String familyName) /*-{
-		var that = this;
-		opentype
-				.load(
-						path,
-						function(err, font) {
-							if (err) {
-								that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::fireFontInactiveEvent(Ljava/lang/Object;Ljava/lang/String;)(err, familyName);
-							} else {
-								that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::setFontIsLoaded(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(font.familyName, font);
-								that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::fireFontActiveEvent(Ljava/lang/String;)(font.familyName);
-							}
-						});
 	}-*/;
 
 	@Override
