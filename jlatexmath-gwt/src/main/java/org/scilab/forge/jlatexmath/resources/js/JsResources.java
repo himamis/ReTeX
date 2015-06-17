@@ -10,5 +10,8 @@ public interface JsResources extends ClientBundle {
 
 	@Source("opentype.min.js")
 	public TextResource opentypeJs();
+	
+	@Source("base64.min.js")
+	public TextResource base64Js();
 
 }

@@ -2,7 +2,6 @@ package org.scilab.forge.jlatexmath.graphics;
 
 import java.util.LinkedList;
 
-import org.scilab.forge.jlatexmath.ConsoleLogger;
 import org.scilab.forge.jlatexmath.DrawingFinishedCallback;
 import org.scilab.forge.jlatexmath.font.AsyncLoadedFont;
 import org.scilab.forge.jlatexmath.font.AsyncLoadedFont.FontLoadCallback;

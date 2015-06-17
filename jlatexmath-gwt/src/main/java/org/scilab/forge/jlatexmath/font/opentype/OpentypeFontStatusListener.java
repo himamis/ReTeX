@@ -1,7 +1,5 @@
 package org.scilab.forge.jlatexmath.font.opentype;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 public interface OpentypeFontStatusListener {
 
 	/**
@@ -20,5 +18,5 @@ public interface OpentypeFontStatusListener {
 	 * 
 	 * @param error
 	 */
-	public void onFontError(JavaScriptObject error, String familyName);
+	public void onFontError(Object error, String familyName);
 }

@@ -7,7 +7,6 @@ import org.scilab.forge.jlatexmath.font.FontW;
 import org.scilab.forge.jlatexmath.font.FontWrapper;
 import org.scilab.forge.jlatexmath.platform.font.Font;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.shared.GWT;
 
 public class OpentypeFont extends FontW implements OpentypeFontStatusListener {
@@ -61,7 +60,7 @@ public class OpentypeFont extends FontW implements OpentypeFontStatusListener {
 	}
 
 	@Override
-	public void onFontError(JavaScriptObject error, String familyName) {
+	public void onFontError(Object error, String familyName) {
 		if (!familyName.equals(name)) {
 			// not interested
 			return;
