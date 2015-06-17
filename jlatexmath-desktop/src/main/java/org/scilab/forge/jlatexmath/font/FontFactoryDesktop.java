@@ -18,7 +18,7 @@ public class FontFactoryDesktop extends FontFactory {
 	public TextLayout createTextLayout(String string, Font font,
 			FontRenderContext fontRenderContext) {
 		return new TextLayoutD(string, ((FontD) font).impl,
-				(java.awt.font.FontRenderContext) fontRenderContext);
+				((FontRenderContextD) fontRenderContext).impl);
 	}
 
 	@Override
