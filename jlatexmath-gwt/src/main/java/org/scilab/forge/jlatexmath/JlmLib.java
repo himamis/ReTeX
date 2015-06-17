@@ -7,6 +7,8 @@ import org.scilab.forge.jlatexmath.platform.graphics.Insets;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.json.client.JSONNumber;
+import com.google.gwt.json.client.JSONObject;
 
 public class JlmLib {
 
@@ -20,7 +22,7 @@ public class JlmLib {
 		initString.append(string);
 	}
 
-	public int[] drawLatex(final Context2d ctx, final String latex,
+	public JavaScriptObject drawLatex(final Context2d ctx, final String latex,
 			final float size, final int type, final int x, final int y,
 			final int topInset, final int leftInset, final int bottomInset,
 			final int rightInset, final String fgColorString,
@@ -61,7 +63,7 @@ public class JlmLib {
 		g2.maybeNotifyDrawingFinishedCallback();
 
 		// return {width, height}
-		return new int[] { icon.getIconWidth(), icon.getIconHeight() };
+		return createReturnValue(icon);
 	}
 
 	private static native void callJavascriptCallback(JavaScriptObject cb) /*-{
@@ -77,6 +79,14 @@ public class JlmLib {
 				.setSize(size).build();
 		icon.setInsets(insets);
 		return icon;
+	}
+	
+	private static JavaScriptObject createReturnValue(TeXIcon icon) {
+		JSONObject object = new JSONObject();
+		object.put("width", new JSONNumber(icon.getIconWidth()));
+		object.put("height", new JSONNumber(icon.getIconHeight()));
+		object.put("baseline", new JSONNumber(icon.getBaseLine()));
+		return object.getJavaScriptObject();
 	}
 
 }

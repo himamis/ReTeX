@@ -8,34 +8,44 @@
         var drawLatex = function(id) {
         
           var canvas = document.getElementById('latex'+id)
+          var context = canvas.getContext('2d');
 
           // jlmlib.drawLatex(...) params
           var opts = {
             context : canvas.getContext('2d'),
             latex : "\\textcolor{blue}{HelloWorld}\\sqrt{"+id+"}",
             size : 40,
-            x : 5,
-            y : 10,
+            x : 0,
+            y : 0,
             type : jlmlib.BOLD | jlmlib.ITALIC,
             foregroundColor : '#FF0000',
             backgroundColor : '#00FF00',
             callback : function() { console.log('callback') },
             insets : {
-              top : 40,
+              top : 20,
               bottom : 5,
-              left : 20,
-              right : 5
+              left : 10,
+              right : 7
             }
           }
           
-          var coords = jlmlib.drawLatex(opts);
-          console.log(latexString + ' -- size: width = ' + coords[0] + ' height = ' + coords[1]);
+          var ret = jlmlib.drawLatex(opts);
+          var bsline = ret.height * ret.baseline;
+          var bsline2 = ret.height - bsline;
+          
+          context.beginPath();
+		  context.moveTo(0, bsline);
+		  context.lineTo(300, bsline);
+		  context.strokeStyle = '#ff0000';
+		  context.stroke();
+          
+          console.log(ret);
         }
         
         var drawAll = function() {
         	jlmlib.initWith("\\DeclareMathOperator{\\sech}{sech} ");
         	jlmlib.initWith("\\DeclareMathOperator{\\csch}{csch} ");
-        	jlmlib.setFontBaseUrl("http://web.geogebra.org/5.0/web/");
+        	//jlmlib.setFontBaseUrl("http://web.geogebra.org/5.0/web/");
         	for(var i = 1; i < 5; i++) {
         		drawLatex(i);
         	}
