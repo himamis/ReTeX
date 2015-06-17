@@ -31,7 +31,8 @@
           
           var ret = jlmlib.drawLatex(opts);
           var bsline = ret.height * ret.baseline;
-          var bsline2 = ret.height - bsline;
+          var width = ret.width,
+          	  height = ret.height;
           
           context.beginPath();
 		  context.moveTo(0, bsline);
