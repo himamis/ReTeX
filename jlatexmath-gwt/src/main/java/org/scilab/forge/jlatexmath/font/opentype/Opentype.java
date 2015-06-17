@@ -35,10 +35,6 @@ public class Opentype implements FontLoaderWrapper {
 	private Opentype() {
 		ScriptInjector.fromString(JsResources.INSTANCE.opentypeJs().getText())
 				.setRemoveTag(false).inject();
-		/*
-		 * ScriptInjector.fromString(JsResources.INSTANCE.base64Js().getText())
-		 * .setRemoveTag(false).inject();
-		 */
 		listeners = new ArrayList<OpentypeFontStatusListener>();
 		fonts = new HashMap<String, FontContainer>();
 	}
