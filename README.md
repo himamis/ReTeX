@@ -35,15 +35,7 @@ dependencies {
 </module>
 ```
 ####Web application
-Compile the project with
-```
-$ ./gradlew :jlatexmath-gwt:compileGwt
-```
-and include the output from `jlatexmath-gwt/build/gwt/out/jlatexmath`
-OR
-Grab the folder from `jlatexmath-gwt\dist`
-
-For examples please see `jlatexmath-gwt\war`
+Grab the folder from `jlatexmath-gwt/dist`. For examples please see `jlatexmath-gwt/war`
 ##Usage
 
 Before using the API, set the platform dependent factory instance.
@@ -58,13 +50,20 @@ Before using the API, set the platform dependent factory instance.
 	FactoryProvider.INSTANCE = new FactoryProviderDesktop();
 ```
 
-**GWT**
+**GWT Web application**
 ```java
 	FactoryProvider.INSTANCE = new FactoryProviderGWT();
 ```
-
+</br>
 For details of the original API please see http://forge.scilab.org/index.php/p/jlatexmath/.
+</br></br>
 
+**Web application**
+```
+    jlmlib.drawLatex(options)
+```
+
+For parameters, please see `jlatexmath-gwt/war/index.html`
 
 Screenshots
 -----------
