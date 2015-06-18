@@ -17,7 +17,7 @@ dependencies {
     compile project(':jlatexmath-android) // for android API 7 and up
 }
 ```
-####GWT Webapp
+####GWT Web application
 ```groovy
 dependencies {
     compile project(':jlatexmath-gwt'),
@@ -34,12 +34,16 @@ dependencies {
     ...
 </module>
 ```
-
-Or compile the project with
-`$ ./gradlew :jlatexmath-gwt:compileGwt`
+####Web application
+Compile the project with
+```
+$ ./gradlew :jlatexmath-gwt:compileGwt
+```
 and include the output from `jlatexmath-gwt/build/gwt/out/jlatexmath`
+OR
+Grab the folder from `jlatexmath-gwt\dist`
 
-
+For examples please see `jlatexmath-gwt\war`
 ##Usage
 
 Before using the API, set the platform dependent factory instance.
