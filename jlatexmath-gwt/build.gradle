@@ -94,6 +94,11 @@ task dist(type: Copy, dependsOn: cleanDist) {
 	}
 }
 
+task zipDist(type: Zip, dependsOn: dist) {
+	from 'dist/jlatexmath'
+	destinationDir file('dist/')
+}
+
 def deleteDir(dir) {
 	if (dir.isDirectory()) {
         String[] children = dir.list();
