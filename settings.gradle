@@ -1,1 +1,2 @@
 include 'jlatexmath-share', 'jlatexmath-desktop', 'jlatexmath-android', 'jlatexmath-gwt'
+include 'mirai'
