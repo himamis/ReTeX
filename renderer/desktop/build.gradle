@@ -8,6 +8,8 @@ sourceCompatibility = 1.5
 targetCompatibility = 1.5
 
 dependencies {
-	compile project(':editor:share')
+	compile project(':renderer:share')
 	testCompile 'junit:junit:4.11'
 }
+
+eclipse.project.name = 'renderer-desktop'

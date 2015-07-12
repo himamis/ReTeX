@@ -73,6 +73,8 @@ eclipse.classpath.file {
 	}
 }
 
+eclipse.project.name = 'renderer-web'
+
 task cleanDist(type: Delete) {
 	delete 'dist'
 }

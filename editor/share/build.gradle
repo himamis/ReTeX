@@ -11,3 +11,5 @@ dependencies {
 	compile project(':renderer:share')
 	compile 'org.jdom:jdom:1.1.3'
 }
+
+eclipse.project.name = 'editor-share'
