@@ -46,7 +46,6 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 
 import cz.natur.cuni.mirai.math.algebra.TeXSerializer;
 import cz.natur.cuni.mirai.math.controller.MathInputController;
-import cz.natur.cuni.mirai.math.editor.swt.ToolbarFolder;
 import cz.natur.cuni.mirai.math.model.MathFormula;
 import cz.natur.cuni.mirai.math.model.MathSequence;
 
@@ -100,17 +99,6 @@ public class JMathField extends JLabel {
 	};
 
 	private MathInputController controller = new MathInputController() {
-		public void setToolbarVisible(int index) {
-			if (ToolbarFolder.getInstance() != null) {
-				ToolbarFolder.getInstance().setToolbarVisible(index, this,
-						getLocationOnScreen().x + getHeight(),
-						getLocationOnScreen().y + getHeight());
-			} else if (JToolbarFolder.getInstance() != null) {
-				JToolbarFolder.getInstance().setToolbarVisible(index, this,
-						getLocationOnScreen().x + getHeight(),
-						getLocationOnScreen().y + getHeight());
-			}
-		}
 
 		public void update() {
 			JMathField.this.update(currentField, currentOffset);
@@ -163,9 +151,9 @@ public class JMathField extends JLabel {
 				setSize(dim.width, dim.height);
 				getParent().doLayout();
 				if (currentField != null) {
-					if (getParent() instanceof JMathWorkbook) {
+					/*if (getParent() instanceof JMathWorkbook) {
 						((JMathWorkbook) getParent()).sizeContainer();
-					}
+					}*/
 				}
 			}
 			repaint();

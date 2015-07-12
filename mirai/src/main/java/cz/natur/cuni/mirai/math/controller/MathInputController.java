@@ -62,25 +62,11 @@ abstract public class MathInputController extends MathController {
 			newCharacter((MetaCharacter)meta);
 		}
 		update();
-		setToolbarVisible(-1);
 	}
 
 	public void keyPressed(int keyCode, int modifiers) {
 
 		switch(keyCode) {
-
-			case KeyEvent.VK_F1:
-				setToolbarVisible(0);
-				break;
-			case KeyEvent.VK_F2:
-				setToolbarVisible(1);
-				break;
-			case KeyEvent.VK_F3:
-				setToolbarVisible(2);
-				break;
-			case KeyEvent.VK_F4:
-				setToolbarVisible(3);
-				break;
 
 			case KeyEvent.VK_ESCAPE:
 				escSymbol();
@@ -106,7 +92,5 @@ abstract public class MathInputController extends MathController {
 		}
 	}
 	
-	abstract public void setToolbarVisible(int index);
-
 	abstract public void update();
 }
