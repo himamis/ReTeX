@@ -10,7 +10,7 @@ public interface MathField {
 	
 	void setTeXIcon(TeXIcon icon);
 
-	void requestFocus();
+	void requestViewFocus();
 	
 	void setFocusListener(FocusListener focusListener);
 	

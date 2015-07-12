@@ -39,21 +39,21 @@ import cz.natur.cuni.mirai.math.model.MathFormula;
 import cz.natur.cuni.mirai.math.model.MathFunction;
 import cz.natur.cuni.mirai.math.model.MathSequence;
 
-/** 
+/**
  * This class represents controller and interprets input.
  *
  * Four editor modes are present:
  *  a) Input mode = core editing
  *  b) Operator toolbar = operators
- *  c) Symbol toolbar = Greek letters 
+ *  c) Symbol toolbar = Greek letters
  *  d) Function toolbar = functions
- * 
+ *
  * @author Bea Petrovicova
  */
 public abstract class MathController extends MathContext {
 
 	private final char functionOpenKey = '('; // probably universal
-	private final char functionCloseKey = ')'; 
+	private final char functionCloseKey = ')';
 	private final char delimiterKey = ';';
 	private final char apostropheKey = '"';
 
@@ -73,7 +73,7 @@ public abstract class MathController extends MathContext {
 		arrayCloseKey = formula.getMetaModel().getArray().getCloseKey();
 		matrixCloseKey = formula.getMetaModel().getMatrix().getCloseKey();
 		nextFieldKey = formula.getMetaModel().getArray().getFieldKey();
-		nextRowKey = formula.getMetaModel().getMatrix().getRowKey();		
+		nextRowKey = formula.getMetaModel().getMatrix().getRowKey();
 	}
 
 	/** Insert array. */
@@ -138,24 +138,24 @@ public abstract class MathController extends MathContext {
 			// add braces
 			MathBraces braces = new MathBraces(formula, classif);
 			currentField.addArgument(currentOffset, braces);
-	
+
 			// add sequence
 			MathSequence field = new MathSequence(formula);
 			braces.setArgument(0, field);
-	
+
 			// set current
 			currentField = field;
 			currentOffset = 0;
 		}
 	}
 
-	/** Insert function by name. 
+	/** Insert function by name.
 	 * @param type function */
 	public void newFunction(String name) {
 		newFunction(name, 0);
 	}
 
-	/** Insert function by name. 
+	/** Insert function by name.
 	 * @param type function */
 	public void newFunction(String name, int initial) {
 
@@ -163,8 +163,8 @@ public abstract class MathController extends MathContext {
 		if( "^".equals(name) && currentOffset>0) {
 			if(currentField.getArgument(currentOffset-1) instanceof MathFunction) {
 				MathFunction function = (MathFunction)currentField.getArgument(currentOffset-1);
-				if("sqrt".equals(function.getName()) || 
-				   "nthroot".equals(function.getName()) || 
+				if("sqrt".equals(function.getName()) ||
+				   "nthroot".equals(function.getName()) ||
 				   "frac".equals(function.getName())) {
 
 					currentField.delArgument(currentOffset-1);
@@ -246,7 +246,7 @@ public abstract class MathController extends MathContext {
 			MathFunction function = (MathFunction)currentField.getArgument(currentOffset);
 			if("_".equals(function.getName()) && "^".equals(script)) {
 				currentOffset++;
-			}			
+			}
 		}
 		newFunction(script);
 	}
@@ -273,7 +273,7 @@ public abstract class MathController extends MathContext {
 
 	/** Insert field. */
 	public void endField(char ch) {
-		
+
 		// first array specific ...
 		if(currentField.getParent() instanceof MathArray) {
 			MathArray parent = (MathArray)currentField.getParent();
@@ -316,11 +316,11 @@ public abstract class MathController extends MathContext {
 				currentOffset = 0;
 
 			// if ']' '}' typed at the end of last field ... move out of array
-			} else if((ch == arrayCloseKey && parent.isArray()) || 
+			} else if((ch == arrayCloseKey && parent.isArray()) ||
 					  (ch == matrixCloseKey && parent.isMatrix()) &&
 					parent.size() == currentField.getParentIndex()+1 &&
 					currentOffset == currentField.size()) {
-	
+
 				currentOffset = parent.getParentIndex()+1;
 				currentField = (MathSequence)parent.getParent();
 			}
@@ -328,37 +328,37 @@ public abstract class MathController extends MathContext {
 		// now functions, braces, apostrophes ...
 		} else if(currentField.getParent()!=null) {
 			MathContainer parent = (MathContainer)currentField.getParent();
-			
+
 			// if ',' typed at the end of intermediate field of function ... move to next field
 			if(ch == nextFieldKey && currentOffset == currentField.size() &&
 				parent instanceof MathFunction &&
 				parent.size() > currentField.getParentIndex()+1) {
-	
+
 				currentField = (MathSequence)parent.getArgument(currentField.getParentIndex()+1);
 				currentOffset = 0;
-	
-			// if ')' typed at the end of last field of function ... move after closing character 
+
+			// if ')' typed at the end of last field of function ... move after closing character
 			} else if(ch == functionCloseKey && currentOffset == currentField.size() &&
 					parent instanceof MathFunction &&
 					parent.size() == currentField.getParentIndex()+1) {
-	
+
 				currentOffset = parent.getParentIndex()+1;
 				currentField = (MathSequence)parent.getParent();
-	
-			// if ')' typed at the end of last field of braces ... move after closing character 
+
+			// if ')' typed at the end of last field of braces ... move after closing character
 			} else if(ch == functionCloseKey && currentOffset == currentField.size() &&
 					parent instanceof MathBraces &&
 					parent.size() == currentField.getParentIndex()+1 &&
 					((MathBraces)parent).getClassif() == MathBraces.REGULAR) {
-	
+
 				currentOffset = parent.getParentIndex()+1;
 				currentField = (MathSequence)parent.getParent();
-	
+
 			// if apostrophe typed at the end of apostrophes ... move after closing character
-			} else if(ch == apostropheKey && currentOffset == currentField.size() && 
-					parent instanceof MathBraces && 
+			} else if(ch == apostropheKey && currentOffset == currentField.size() &&
+					parent instanceof MathBraces &&
 					((MathBraces)parent).getClassif() == MathBraces.APOSTROPHES) {
-	
+
 				currentOffset = parent.getParentIndex()+1;
 				currentField = (MathSequence)parent.getParent();
 			}
@@ -368,7 +368,7 @@ public abstract class MathController extends MathContext {
 			// if ';' typed and at the top level ... insert delimiter char
 			if(ch== delimiterKey) {
 				newCharacter(ch);
-				update();	
+				update();
 			}
 		}
 	}
@@ -430,7 +430,7 @@ public abstract class MathController extends MathContext {
 				}
 			}
 
-		// if parent are empty braces 
+		// if parent are empty braces
 		} else if(currentField.getParent() instanceof MathBraces &&
 				currentField.size() == 0) {
 
@@ -446,9 +446,9 @@ public abstract class MathController extends MathContext {
 			delContaner(parent, parent.getArgument(0));
 
 		// if parent is 1DArray or Vector and cursor is at the beginning of intermediate the field
-		} else if(currentField.getParent() instanceof MathArray && 
+		} else if(currentField.getParent() instanceof MathArray &&
 				(((MathArray)currentField.getParent()).is1DArray() ||
-				((MathArray)currentField.getParent()).isVector()) && 
+				((MathArray)currentField.getParent()).isVector()) &&
 				currentField.getParentIndex() > 0) {
 
 			int index = currentField.getParentIndex();
@@ -493,7 +493,7 @@ public abstract class MathController extends MathContext {
 			}
 
 		// if parent are empty braces
-		} else if(currentField.getParent() instanceof MathBraces && 
+		} else if(currentField.getParent() instanceof MathBraces &&
 				currentField.size()==0) {
 			MathBraces parent = (MathBraces)currentField.getParent();
 			int size = parent.getArgument(0).size();
@@ -512,9 +512,9 @@ public abstract class MathController extends MathContext {
 			currentOffset += size;
 
 		// if parent is 1DArray or Vector and cursor is at the end of the field
-		} else if(currentField.getParent() instanceof MathArray && 
+		} else if(currentField.getParent() instanceof MathArray &&
 				(((MathArray)currentField.getParent()).is1DArray() ||
-				((MathArray)currentField.getParent()).isVector()) && 
+				((MathArray)currentField.getParent()).isVector()) &&
 				currentField.getParentIndex()+1 < currentField.getParent().size()) {
 
 			int index = currentField.getParentIndex();
@@ -568,7 +568,7 @@ public abstract class MathController extends MathContext {
 			}
 			currentField = parent;
 			currentOffset = offset;
-		} 
+		}
 	}
 
 	private void passArgument(MathContainer container) {
@@ -638,7 +638,7 @@ public abstract class MathController extends MathContext {
 				break;
 			}
 			offset--;
-			buffer.insert(0, character.getName());				
+			buffer.insert(0, character.getName());
 		}
 		return buffer.toString();
 	}
@@ -655,13 +655,13 @@ public abstract class MathController extends MathContext {
 			length--;
 		}
 	}
-	
+
 	public void keyTyped(char ch) {
-		if(ch==nextFieldKey || ch==nextRowKey || 
+		if(ch==nextFieldKey || ch==nextRowKey ||
 		   ch==arrayCloseKey || ch==matrixCloseKey ||
 		   ch==functionCloseKey || ch==delimiterKey ||
 		   // apostrophes are only case where opening and closing character are the same
-		   (ch==apostropheKey && currentField.getParent() instanceof MathBraces && 
+		   (ch==apostropheKey && currentField.getParent() instanceof MathBraces &&
 			((MathBraces)currentField.getParent()).getClassif() == MathBraces.APOSTROPHES)) {
 			endField(ch);
 			update();

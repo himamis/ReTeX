@@ -15,12 +15,8 @@ public class Test {
 	}
 
 	public static void main(String[] args) {
-		String engine = "octave";
-		MetaModel metaModel = new MetaModel(engine + ".xml");
-		MathFormula mathFormula = MathFormula.newFormula(metaModel);
-
 		MathFieldD mathField = new MathFieldD();
-		mathField.mathFieldInternal.setFormula(mathFormula);
+		
 		JFrame frame = new JFrame();
 
 		frame.getContentPane().add(mathField);

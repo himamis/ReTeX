@@ -67,7 +67,7 @@ public class MathFieldInternal {
 	private ClickListener clickListener = new ClickListener() {
 
 		public void onClick() {
-			mathField.requestFocus();
+			mathField.requestViewFocus();
 
 		}
 	};
@@ -88,7 +88,7 @@ public class MathFieldInternal {
 		}
 
 		public void onKeyTyped(KeyEvent e) {
-			char ch = e.getKeyChar();
+			char ch = e.getUnicodeKeyChar();
 			// System.out.println("key_typed: "+ch+", "+modifiers);
 			controller.keyTyped(ch);
 		}

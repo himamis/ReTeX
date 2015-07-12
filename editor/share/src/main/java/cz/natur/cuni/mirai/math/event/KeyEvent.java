@@ -49,29 +49,21 @@ public class KeyEvent {
 
 	/**
 	 * Constant for the non-numpad <b>left</b> arrow key.
-	 * 
-	 * @see #VK_KP_LEFT
 	 */
 	public static final int VK_LEFT = 0x25;
 
 	/**
 	 * Constant for the non-numpad <b>up</b> arrow key.
-	 * 
-	 * @see #VK_KP_UP
 	 */
 	public static final int VK_UP = 0x26;
 
 	/**
 	 * Constant for the non-numpad <b>right</b> arrow key.
-	 * 
-	 * @see #VK_KP_RIGHT
 	 */
 	public static final int VK_RIGHT = 0x27;
 
 	/**
 	 * Constant for the non-numpad <b>down</b> arrow key.
-	 * 
-	 * @see #VK_KP_DOWN
 	 */
 	public static final int VK_DOWN = 0x28;
 
@@ -187,7 +179,7 @@ public class KeyEvent {
 
 	private int keyCode;
 	private int keyModifiers;
-	private char keyChar;
+	private char unicodeKeyChar;
 
 	public KeyEvent(int keyCode) {
 		this(keyCode, 0);
@@ -197,14 +189,10 @@ public class KeyEvent {
 		this(keyCode, keyModifiers, '\0');
 	}
 	
-	public KeyEvent(char keyChar) {
-		this(0, 0, keyChar);
-	}
-	
-	public KeyEvent(int keyCode, int keyModifiers, char charCode) {
+	public KeyEvent(int keyCode, int keyModifiers, char unicodeKeyChar) {
 		this.keyCode = keyCode;
 		this.keyModifiers = keyModifiers;
-		this.keyChar = charCode;
+		this.unicodeKeyChar = unicodeKeyChar;
 	}
 
 	public int getKeyCode() {
@@ -215,7 +203,7 @@ public class KeyEvent {
 		return keyModifiers;
 	}
 	
-	public char getKeyChar() {
-		return keyChar;
+	public char getUnicodeKeyChar() {
+		return unicodeKeyChar;
 	}
 }
