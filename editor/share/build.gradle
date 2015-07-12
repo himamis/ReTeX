@@ -8,6 +8,6 @@ sourceCompatibility = 1.5
 targetCompatibility = 1.5
 
 dependencies {
-	compile project(':jlatexmath-share')
+	compile project(':renderer:share')
 	compile 'org.jdom:jdom:1.1.3'
 }

@@ -5,8 +5,8 @@ sourceCompatibility = 1.5
 targetCompatibility = 1.5
 
 dependencies {
-	compile project(':jlatexmath-desktop')
-	compile project(':mirai')
+	compile project(':renderer:desktop')
+	compile project(':editor:share')
 }
 
 mainClassName = 'cz.natur.cuni.mirai.math.desktop.Test'

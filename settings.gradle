@@ -1,2 +1,2 @@
-include 'jlatexmath-share', 'jlatexmath-desktop', 'jlatexmath-android', 'jlatexmath-gwt'
-include 'mirai', 'mirai-desktop'
+include 'renderer:share', 'renderer:desktop', 'renderer:android', 'renderer:web'
+include 'editor:share', 'editor:desktop'
