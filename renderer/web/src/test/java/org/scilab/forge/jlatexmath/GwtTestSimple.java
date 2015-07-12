@@ -1,7 +1,5 @@
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.graphics.ImageW;
-
 import com.google.gwt.junit.client.GWTTestCase;
 import com.himamis.retex.renderer.share.ColorUtil;
 import com.himamis.retex.renderer.share.TeXConstants;
@@ -11,6 +9,8 @@ import com.himamis.retex.renderer.share.platform.FactoryProvider;
 import com.himamis.retex.renderer.share.platform.graphics.Graphics2DInterface;
 import com.himamis.retex.renderer.share.platform.graphics.Image;
 import com.himamis.retex.renderer.share.platform.graphics.Insets;
+import com.himamis.retex.renderer.web.FactoryProviderGWT;
+import com.himamis.retex.renderer.web.graphics.ImageW;
 
 public class GwtTestSimple extends GWTTestCase {
 
@@ -39,7 +39,7 @@ public class GwtTestSimple extends GWTTestCase {
 
 	@Override
 	public String getModuleName() {
-		return "org.scilab.forge.JLaTeXMathGWT";
+		return "com.himamis.retex.renderer.web.JLaTeXMathGWT";
 	}
 
 }
