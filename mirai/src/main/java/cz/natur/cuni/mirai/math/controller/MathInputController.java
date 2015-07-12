@@ -27,11 +27,10 @@
  */
 package cz.natur.cuni.mirai.math.controller;
 
-import java.awt.event.KeyEvent;
-
+import cz.natur.cuni.mirai.math.event.KeyEvent;
+import cz.natur.cuni.mirai.math.meta.MetaCharacter;
 import cz.natur.cuni.mirai.math.meta.MetaComponent;
 import cz.natur.cuni.mirai.math.meta.MetaFunction;
-import cz.natur.cuni.mirai.math.meta.MetaCharacter;
 import cz.natur.cuni.mirai.math.model.MathCharacter;
 import cz.natur.cuni.mirai.math.model.MathFormula;
 
@@ -49,48 +48,61 @@ abstract public class MathInputController extends MathController {
 	}
 
 	public void toolbarInput(MetaComponent meta) {
-		if(meta instanceof MetaCharacter) {
-			currentField.addArgument(currentOffset, new MathCharacter(formula, (MetaCharacter)meta));
+		if (meta instanceof MetaCharacter) {
+			currentField.addArgument(currentOffset, new MathCharacter(formula,
+					(MetaCharacter) meta));
 			currentOffset++;
-		} else if(meta instanceof MetaFunction) {
-			if("^".equals(meta.getName()) || "_".equals(meta.getName())) {
+		} else if (meta instanceof MetaFunction) {
+			if ("^".equals(meta.getName()) || "_".equals(meta.getName())) {
 				newScript(meta.getName());
 			} else {
-				newFunction(meta.getName());				
+				newFunction(meta.getName());
 			}
-		} else if(meta instanceof MetaCharacter) {
-			newCharacter((MetaCharacter)meta);
+		} else if (meta instanceof MetaCharacter) {
+			newCharacter((MetaCharacter) meta);
 		}
 		update();
 	}
 
 	public void keyPressed(int keyCode, int modifiers) {
 
-		switch(keyCode) {
+		switch (keyCode) {
 
-			case KeyEvent.VK_ESCAPE:
-				escSymbol();
-				update();
-				break;
+		case KeyEvent.VK_ESCAPE:
+			escSymbol();
+			update();
+			break;
 
-			case KeyEvent.VK_HOME:
-				firstField();
-				update();
-				break;
-			case KeyEvent.VK_END:
-				lastField();
-				update();
-				break;
-			case KeyEvent.VK_LEFT:
-				prevCharacter();
-				update();
-				break;
-			case KeyEvent.VK_RIGHT:
-				nextCharacter();
-				update();
-				break;	
+		case KeyEvent.VK_HOME:
+			firstField();
+			update();
+			break;
+		case KeyEvent.VK_END:
+			lastField();
+			update();
+			break;
+		case KeyEvent.VK_LEFT:
+			prevCharacter();
+			update();
+			break;
+		case KeyEvent.VK_RIGHT:
+			nextCharacter();
+			update();
+		case KeyEvent.VK_UP:
+			upField();
+			update();
+		case KeyEvent.VK_DOWN:
+			downField();
+			update();
+			break;
+		case KeyEvent.VK_DELETE:
+			delCharacter();
+			update();
+		case KeyEvent.VK_BACK_SPACE:
+			bkspCharacter();
+			update();
 		}
 	}
-	
+
 	abstract public void update();
 }

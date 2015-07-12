@@ -34,9 +34,8 @@ public class MathFormula {
 	private int lastUsedID = 0;
 	private MetaModel metaModel;
 	private MathSequence rootContainer;
-	private MathModel model;
 	private boolean modified = false;
-	
+
 	public static MathFormula newFormula(MetaModel metaModel) {
 		MathFormula newFormula = new MathFormula(metaModel);
 		newFormula.setRootComponent(new MathSequence(newFormula));
@@ -47,17 +46,13 @@ public class MathFormula {
 	public MathFormula(MetaModel metaModel) {
 		this.metaModel = metaModel;
 	}
-	
+
 	public boolean isModified() {
 		return modified;
 	}
 
 	public void setModified(boolean modified) {
 		this.modified = modified;
-		// if modified; propagate to parent
-		if(modified && model!=null) {
-			model.setModified(true);
-		}
 	}
 
 	int newID() {
@@ -68,30 +63,6 @@ public class MathFormula {
 	/** MetaModel */
 	public MetaModel getMetaModel() {
 		return metaModel;
-	}
-
-	/** Sets math model for this formula. */
-	void setModel(MathModel container) {
-		this.model = container;
-	}
-
-	/** Gets math model for this formula. */
-	public MathModel getModel() {
-		return model;
-	}
-
-	/** Gets index of this formula within math model. */
-	public int getModelIndex() {
-		if(model==null) {
-			return 0;
-		}
-		for(int i=0;i<model.size();i++) {
-			if(model.getElement(i)==this) {
-				return i;
-			}
-		}
-		// this should not happen
-		return 0;
 	}
 
 	public MathSequence getRootComponent() {
@@ -105,4 +76,3 @@ public class MathFormula {
 	}
 
 }
-

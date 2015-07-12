@@ -27,25 +27,18 @@
  */
 package cz.natur.cuni.mirai.math.editor;
 
-import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
-
-import org.scilab.forge.jlatexmath.IconHelper;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
 
 import cz.natur.cuni.mirai.math.algebra.TeXSerializer;
 import cz.natur.cuni.mirai.math.controller.MathInputController;
+import cz.natur.cuni.mirai.math.event.ClickListener;
+import cz.natur.cuni.mirai.math.event.FocusListener;
+import cz.natur.cuni.mirai.math.event.KeyEvent;
+import cz.natur.cuni.mirai.math.event.KeyListener;
 import cz.natur.cuni.mirai.math.model.MathFormula;
 import cz.natur.cuni.mirai.math.model.MathSequence;
 
@@ -54,44 +47,47 @@ import cz.natur.cuni.mirai.math.model.MathSequence;
  * 
  * @author Bea Petrovicova
  */
-public class JMathField extends JLabel {
+public class MathFieldInternal {
 
 	private TeXIcon renderer;
 	private TeXSerializer serializer;
+	private MathField mathField;
 
-	FocusAdapter focusListener = new FocusAdapter() {
-		public void focusGained(FocusEvent e) {
+	FocusListener focusListener = new FocusListener() {
+
+		public void onFocusLost() {
 			controller.update();
 		}
 
-		public void focusLost(FocusEvent e) {
+		public void onFocusGained() {
 			update();
 		}
 	};
 
-	private MouseAdapter mouseListener = new MouseAdapter() {
-		public void mouseClicked(MouseEvent e) {
-			// System.out.println("requested");
-			requestFocus();
+	private ClickListener clickListener = new ClickListener() {
+
+		public void onClick() {
+			mathField.requestFocus();
+
 		}
 	};
 
-	private KeyAdapter keyListener = new KeyAdapter() {
-		public void keyPressed(KeyEvent e) {
+	private KeyListener keyListener = new KeyListener() {
+		public void onKeyPressed(KeyEvent e) {
 			int keyCode = e.getKeyCode();
-			int modifiers = e.getModifiersEx();
+			int modifiers = e.getKeyModifiers();
 			// System.out.println("key_released: "+keyCode+", "+modifiers);
 			controller.keyPressed(keyCode, modifiers);
 		}
 
-		public void keyReleased(KeyEvent e) {
+		public void onKeyReleased(KeyEvent e) {
 			// int keyCode = e.getKeyCode();
 			// int modifiers = e.getModifiersEx();
 			// System.out.println("key_released: "+keyCode+", "+modifiers);
 			// controller.keyReleased(keyCode,modifiers);
 		}
 
-		public void keyTyped(KeyEvent e) {
+		public void onKeyTyped(KeyEvent e) {
 			char ch = e.getKeyChar();
 			// System.out.println("key_typed: "+ch+", "+modifiers);
 			controller.keyTyped(ch);
@@ -101,20 +97,17 @@ public class JMathField extends JLabel {
 	private MathInputController controller = new MathInputController() {
 
 		public void update() {
-			JMathField.this.update(currentField, currentOffset);
+			MathFieldInternal.this.update(currentField, currentOffset);
 		}
 	};
 
-	public JMathField() {
-		setBackground(Color.white);
+	public MathFieldInternal() {
 		serializer = new TeXSerializer();
-		//renderer = new TeXIcon(TeXConstants.STYLE_DISPLAY, 18);
-		setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		addFocusListener(focusListener);
-		addMouseListener(mouseListener);
-		addKeyListener(keyListener);
-		setFocusTraversalKeysEnabled(false);
-		setFocusable(true);
+	}
+
+	public void setMathField(MathField mathField) {
+		this.mathField = mathField;
+		setupMathField();
 	}
 
 	public MathInputController getController() {
@@ -127,7 +120,13 @@ public class JMathField extends JLabel {
 
 	public void setFormula(MathFormula formula) {
 		controller.setFormula(formula);
-		setPreferredSize(getPreferredSize(null, 0));
+		getPreferredSize(null, 0);
+	}
+	
+	private void setupMathField() {
+		mathField.setFocusListener(focusListener);
+		mathField.setClickListener(clickListener);
+		mathField.setKeyListener(keyListener);
 	}
 
 	private Dimension getPreferredSize(MathSequence currentField,
@@ -136,34 +135,21 @@ public class JMathField extends JLabel {
 				controller.getFormula(), currentField, currentOffset);
 		// System.out.println("TeX> "+serializedFormula);
 		TeXFormula texFormula = new TeXFormula(serializedFormula);
-		renderer = texFormula.new TeXIconBuilder().setStyle(TeXConstants.STYLE_DISPLAY).setSize(18).build();
-		setIcon(IconHelper.createIcon(renderer));
+		renderer = texFormula.new TeXIconBuilder()
+				.setStyle(TeXConstants.STYLE_DISPLAY).setSize(18).build();
+		mathField.setTeXIcon(renderer);
 		return new Dimension(renderer.getIconWidth(), renderer.getIconHeight());
 	}
 
 	private void update(MathSequence currentField, int currentOffset) {
-		if (getParent() != null) {
-			Dimension dim = getPreferredSize(currentField, currentOffset);
-			setPreferredSize(dim);
-
-			if (getSize().width != dim.width || getSize().height != dim.height) {
-
-				setSize(dim.width, dim.height);
-				getParent().doLayout();
-				if (currentField != null) {
-					/*if (getParent() instanceof JMathWorkbook) {
-						((JMathWorkbook) getParent()).sizeContainer();
-					}*/
-				}
-			}
-			repaint();
+		if (mathField.hasParent()) {
+			getPreferredSize(currentField, currentOffset);
+			mathField.repaint();
 		}
 	}
 
 	public void update() {
 		update(null, 0);
 	}
-
-	private static final long serialVersionUID = 1L;
 
 }
