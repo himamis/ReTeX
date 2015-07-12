@@ -1,4 +1,8 @@
 subprojects {
+	repositories {
+	    mavenCentral()
+	}
+	
 	apply plugin: 'eclipse'
 
 	tasks.eclipse.dependsOn 'cleanEclipse'
