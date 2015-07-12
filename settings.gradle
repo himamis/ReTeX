@@ -1,1 +1,1 @@
-include 'renderer:share', 'renderer:desktop', 'renderer:android', 'renderer:gwt'
+include 'renderer:share', 'renderer:desktop', 'renderer:android', 'renderer:web'
