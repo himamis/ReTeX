@@ -1,8 +1,8 @@
 package org.scilab.forge.jlatexmath.parser;
 
-import org.scilab.forge.jlatexmath.platform.parser.Attr;
-import org.scilab.forge.jlatexmath.platform.parser.Element;
-import org.scilab.forge.jlatexmath.platform.parser.Node;
+import com.himamis.retex.renderer.share.platform.parser.Attr;
+import com.himamis.retex.renderer.share.platform.parser.Element;
+import com.himamis.retex.renderer.share.platform.parser.Node;
 
 public class NodeD implements Node {
 	

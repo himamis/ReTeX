@@ -1,10 +1,10 @@
 package org.scilab.forge.jlatexmath.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
-import org.scilab.forge.jlatexmath.platform.geom.Line2D;
-import org.scilab.forge.jlatexmath.platform.geom.Point2D;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D;
+import com.himamis.retex.renderer.share.platform.geom.GeomFactory;
+import com.himamis.retex.renderer.share.platform.geom.Line2D;
+import com.himamis.retex.renderer.share.platform.geom.Point2D;
+import com.himamis.retex.renderer.share.platform.geom.Rectangle2D;
+import com.himamis.retex.renderer.share.platform.geom.RoundRectangle2D;
 
 public class GeomFactoryDesktop extends GeomFactory {
 

@@ -8,22 +8,22 @@ import org.scilab.forge.jlatexmath.font.AsyncLoadedFont.FontLoadCallback;
 import org.scilab.forge.jlatexmath.font.DefaultFont;
 import org.scilab.forge.jlatexmath.font.FontW;
 import org.scilab.forge.jlatexmath.font.FontWrapper;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontLoader;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.geom.Line2D;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
-import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.CanvasElement;
+import com.himamis.retex.renderer.share.platform.font.Font;
+import com.himamis.retex.renderer.share.platform.font.FontLoader;
+import com.himamis.retex.renderer.share.platform.font.FontRenderContext;
+import com.himamis.retex.renderer.share.platform.geom.Line2D;
+import com.himamis.retex.renderer.share.platform.geom.Rectangle2D;
+import com.himamis.retex.renderer.share.platform.geom.RoundRectangle2D;
+import com.himamis.retex.renderer.share.platform.graphics.Color;
+import com.himamis.retex.renderer.share.platform.graphics.Graphics2DInterface;
+import com.himamis.retex.renderer.share.platform.graphics.Image;
+import com.himamis.retex.renderer.share.platform.graphics.Stroke;
+import com.himamis.retex.renderer.share.platform.graphics.Transform;
 
 public class Graphics2DW implements Graphics2DInterface {
 

@@ -1,7 +1,7 @@
 package org.scilab.forge.jlatexmath.font;
 
-import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
-import org.scilab.forge.jlatexmath.platform.font.TextAttributeProvider;
+import com.himamis.retex.renderer.share.platform.font.TextAttribute;
+import com.himamis.retex.renderer.share.platform.font.TextAttributeProvider;
 
 public class TextAttributeProviderD implements TextAttributeProvider {
 

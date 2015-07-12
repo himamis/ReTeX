@@ -1,6 +1,6 @@
 package org.scilab.forge.jlatexmath.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.Point2D;
+import com.himamis.retex.renderer.share.platform.geom.Point2D;
 
 public class Point2DW implements Point2D {
 

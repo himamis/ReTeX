@@ -2,8 +2,8 @@ package org.scilab.forge.jlatexmath.graphics;
 
 import java.awt.image.BufferedImage;
 
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
+import com.himamis.retex.renderer.share.platform.graphics.Graphics2DInterface;
+import com.himamis.retex.renderer.share.platform.graphics.Image;
 
 public class ImageD extends BufferedImage implements Image {
 	

@@ -6,9 +6,11 @@ import java.awt.Graphics2D;
 
 import org.scilab.forge.jlatexmath.graphics.ColorD;
 import org.scilab.forge.jlatexmath.graphics.Graphics2DD;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.HasForegroundColor;
-import org.scilab.forge.jlatexmath.platform.graphics.Icon;
+
+import com.himamis.retex.renderer.share.ColorUtil;
+import com.himamis.retex.renderer.share.platform.graphics.Color;
+import com.himamis.retex.renderer.share.platform.graphics.HasForegroundColor;
+import com.himamis.retex.renderer.share.platform.graphics.Icon;
 
 public class IconHelper {
 

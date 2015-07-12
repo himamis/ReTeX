@@ -1,7 +1,7 @@
 package org.scilab.forge.jlatexmath.parser;
 
-import org.scilab.forge.jlatexmath.platform.parser.Parser;
-import org.scilab.forge.jlatexmath.platform.parser.ParserFactory;
+import com.himamis.retex.renderer.share.platform.parser.Parser;
+import com.himamis.retex.renderer.share.platform.parser.ParserFactory;
 
 public class ParserFactoryDesktop extends ParserFactory {
 

@@ -2,8 +2,8 @@ package org.scilab.forge.jlatexmath.font;
 
 import java.util.Map;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
+import com.himamis.retex.renderer.share.platform.font.Font;
+import com.himamis.retex.renderer.share.platform.font.TextAttribute;
 
 public abstract class FontW implements AsyncLoadedFont {
 

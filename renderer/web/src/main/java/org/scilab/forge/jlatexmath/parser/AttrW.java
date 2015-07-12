@@ -1,6 +1,6 @@
 package org.scilab.forge.jlatexmath.parser;
 
-import org.scilab.forge.jlatexmath.platform.parser.Attr;
+import com.himamis.retex.renderer.share.platform.parser.Attr;
 
 public class AttrW extends NodeW implements Attr {
 

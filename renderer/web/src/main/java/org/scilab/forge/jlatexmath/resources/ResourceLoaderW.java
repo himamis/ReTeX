@@ -1,10 +1,11 @@
 package org.scilab.forge.jlatexmath.resources;
 
-import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
-import org.scilab.forge.jlatexmath.exception.ResourceParseException;
-import org.scilab.forge.jlatexmath.greek.GreekRegistration;
-import org.scilab.forge.jlatexmath.platform.resources.ResourceLoader;
 import org.scilab.forge.jlatexmath.resources.xml.XmlResources;
+
+import com.himamis.retex.renderer.share.cyrillic.CyrillicRegistration;
+import com.himamis.retex.renderer.share.exception.ResourceParseException;
+import com.himamis.retex.renderer.share.greek.GreekRegistration;
+import com.himamis.retex.renderer.share.platform.resources.ResourceLoader;
 
 public class ResourceLoaderW implements ResourceLoader {
 

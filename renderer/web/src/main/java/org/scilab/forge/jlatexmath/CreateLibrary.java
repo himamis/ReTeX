@@ -1,9 +1,9 @@
 package org.scilab.forge.jlatexmath;
 
 import org.scilab.forge.jlatexmath.font.opentype.Opentype;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.himamis.retex.renderer.share.platform.FactoryProvider;
 
 public class CreateLibrary implements EntryPoint {
 
@@ -22,15 +22,15 @@ public class CreateLibrary implements EntryPoint {
 		$wnd.jlmlib = {};
 
 		$wnd.jlmlib.initWith = $entry(function(str) {
-			library.@org.scilab.forge.jlatexmath.JlmLib::initWith(Ljava/lang/String;)(str);
+			library.@com.himamis.retex.renderer.share.JlmLib::initWith(Ljava/lang/String;)(str);
 		});
 
-		$wnd.jlmlib.SERIF = @org.scilab.forge.jlatexmath.TeXFormula::SERIF;
-		$wnd.jlmlib.SANSSERIF = @org.scilab.forge.jlatexmath.TeXFormula::SANSSERIF;
-		$wnd.jlmlib.BOLD = @org.scilab.forge.jlatexmath.TeXFormula::BOLD;
-		$wnd.jlmlib.ITALIC = @org.scilab.forge.jlatexmath.TeXFormula::ITALIC;
-		$wnd.jlmlib.ROMAN = @org.scilab.forge.jlatexmath.TeXFormula::ROMAN;
-		$wnd.jlmlib.TYPEWRITER = @org.scilab.forge.jlatexmath.TeXFormula::TYPEWRITER;
+		$wnd.jlmlib.SERIF = @com.himamis.retex.renderer.share.TeXFormula::SERIF;
+		$wnd.jlmlib.SANSSERIF = @com.himamis.retex.renderer.share.TeXFormula::SANSSERIF;
+		$wnd.jlmlib.BOLD = @com.himamis.retex.renderer.share.TeXFormula::BOLD;
+		$wnd.jlmlib.ITALIC = @com.himamis.retex.renderer.share.TeXFormula::ITALIC;
+		$wnd.jlmlib.ROMAN = @com.himamis.retex.renderer.share.TeXFormula::ROMAN;
+		$wnd.jlmlib.TYPEWRITER = @com.himamis.retex.renderer.share.TeXFormula::TYPEWRITER;
 
 		$wnd.jlmlib.drawLatex = $entry(function(opts) {
 			//ctx, latex, size, style, x, y, fgColor, bgColor, cb
@@ -61,11 +61,11 @@ public class CreateLibrary implements EntryPoint {
 			bgColor = opts.backgroundColor, // undefined === invisible
 			cb = opts.callback;
 
-			return library.@org.scilab.forge.jlatexmath.JlmLib::drawLatex(Lcom/google/gwt/canvas/dom/client/Context2d;Ljava/lang/String;FIIIIIIILjava/lang/String;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(ctx, latex, size, type, x, y, topInset, leftInset, bottomInset, rightInset, fgColor, bgColor, cb);
+			return library.@com.himamis.retex.renderer.share.JlmLib::drawLatex(Lcom/google/gwt/canvas/dom/client/Context2d;Ljava/lang/String;FIIIIIIILjava/lang/String;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(ctx, latex, size, type, x, y, topInset, leftInset, bottomInset, rightInset, fgColor, bgColor, cb);
 		});
 		
 		$wnd.jlmlib.setFontBaseUrl = $entry(function(url) {
-			opentype.@org.scilab.forge.jlatexmath.font.opentype.Opentype::setFontBaseUrl(Ljava/lang/String;)(url);
+			opentype.@com.himamis.retex.renderer.share.font.opentype.Opentype::setFontBaseUrl(Ljava/lang/String;)(url);
 		});
 	}-*/;
 

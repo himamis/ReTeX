@@ -2,7 +2,7 @@ package org.scilab.forge.jlatexmath.geom;
 
 import java.awt.geom.RoundRectangle2D;
 
-public class RoundRectangle2DD extends RoundRectangle2D.Float implements org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D {
+public class RoundRectangle2DD extends RoundRectangle2D.Float implements com.himamis.retex.renderer.share.platform.geom.RoundRectangle2D {
 
 	private static final long serialVersionUID = 1L;
 

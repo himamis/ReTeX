@@ -27,7 +27,7 @@ package org.scilab.forge.jlatexmath.graphics;
 
 import java.awt.geom.NoninvertibleTransformException;
 
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
+import com.himamis.retex.renderer.share.platform.graphics.Transform;
 
 public class TransformW implements Transform {
 

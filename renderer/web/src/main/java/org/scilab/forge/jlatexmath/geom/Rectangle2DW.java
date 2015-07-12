@@ -1,6 +1,6 @@
 package org.scilab.forge.jlatexmath.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
+import com.himamis.retex.renderer.share.platform.geom.Rectangle2D;
 
 public class Rectangle2DW implements Rectangle2D {
 

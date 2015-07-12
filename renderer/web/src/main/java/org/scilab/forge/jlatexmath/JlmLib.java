@@ -1,14 +1,18 @@
 package org.scilab.forge.jlatexmath;
 
 import org.scilab.forge.jlatexmath.graphics.Graphics2DW;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.HasForegroundColor;
-import org.scilab.forge.jlatexmath.platform.graphics.Insets;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
+import com.himamis.retex.renderer.share.ColorUtil;
+import com.himamis.retex.renderer.share.TeXConstants;
+import com.himamis.retex.renderer.share.TeXFormula;
+import com.himamis.retex.renderer.share.TeXIcon;
+import com.himamis.retex.renderer.share.platform.graphics.Color;
+import com.himamis.retex.renderer.share.platform.graphics.HasForegroundColor;
+import com.himamis.retex.renderer.share.platform.graphics.Insets;
 
 public class JlmLib {
 

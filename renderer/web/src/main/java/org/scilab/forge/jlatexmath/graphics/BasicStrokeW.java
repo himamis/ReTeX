@@ -1,9 +1,8 @@
 package org.scilab.forge.jlatexmath.graphics;
 
-import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
-
 import com.google.gwt.canvas.dom.client.Context2d.LineCap;
 import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
+import com.himamis.retex.renderer.share.platform.graphics.BasicStroke;
 
 public class BasicStrokeW implements BasicStroke {
 

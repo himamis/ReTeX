@@ -1,6 +1,6 @@
 package org.scilab.forge.jlatexmath.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D;
+import com.himamis.retex.renderer.share.platform.geom.RoundRectangle2D;
 
 public class RoundRectangle2DW implements RoundRectangle2D {
 

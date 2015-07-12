@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.scilab.forge.jlatexmath.font.FontW;
 import org.scilab.forge.jlatexmath.font.FontWrapper;
-import org.scilab.forge.jlatexmath.platform.font.Font;
 
 import com.google.gwt.core.shared.GWT;
+import com.himamis.retex.renderer.share.platform.font.Font;
 
 public class OpentypeFont extends FontW implements OpentypeFontStatusListener {
 

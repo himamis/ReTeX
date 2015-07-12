@@ -1,6 +1,6 @@
 package org.scilab.forge.jlatexmath.font;
 
-import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
+import com.himamis.retex.renderer.share.platform.font.TextAttribute;
 
 public class TextAttributeD implements TextAttribute {
 

@@ -4,9 +4,9 @@ import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.scilab.forge.jlatexmath.exception.ResourceParseException;
-import org.scilab.forge.jlatexmath.platform.parser.Document;
-import org.scilab.forge.jlatexmath.platform.parser.Parser;
+import com.himamis.retex.renderer.share.exception.ResourceParseException;
+import com.himamis.retex.renderer.share.platform.parser.Document;
+import com.himamis.retex.renderer.share.platform.parser.Parser;
 
 public class ParserD implements Parser {
 

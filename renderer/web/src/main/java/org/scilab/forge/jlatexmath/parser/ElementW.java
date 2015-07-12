@@ -1,8 +1,8 @@
 package org.scilab.forge.jlatexmath.parser;
 
-import org.scilab.forge.jlatexmath.platform.parser.Element;
-import org.scilab.forge.jlatexmath.platform.parser.NamedNodeMap;
-import org.scilab.forge.jlatexmath.platform.parser.NodeList;
+import com.himamis.retex.renderer.share.platform.parser.Element;
+import com.himamis.retex.renderer.share.platform.parser.NamedNodeMap;
+import com.himamis.retex.renderer.share.platform.parser.NodeList;
 
 public class ElementW extends NodeW implements Element {
 

@@ -4,13 +4,14 @@ import org.scilab.forge.jlatexmath.font.FontFactoryGWT;
 import org.scilab.forge.jlatexmath.geom.GeomFactoryGWT;
 import org.scilab.forge.jlatexmath.graphics.GraphicsFactoryGWT;
 import org.scilab.forge.jlatexmath.parser.ParserFactoryGWT;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.font.FontFactory;
-import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
-import org.scilab.forge.jlatexmath.platform.parser.ParserFactory;
-import org.scilab.forge.jlatexmath.platform.resources.ResourceLoaderFactory;
 import org.scilab.forge.jlatexmath.resources.ResourceLoaderFactoryGWT;
+
+import com.himamis.retex.renderer.share.platform.FactoryProvider;
+import com.himamis.retex.renderer.share.platform.font.FontFactory;
+import com.himamis.retex.renderer.share.platform.geom.GeomFactory;
+import com.himamis.retex.renderer.share.platform.graphics.GraphicsFactory;
+import com.himamis.retex.renderer.share.platform.parser.ParserFactory;
+import com.himamis.retex.renderer.share.platform.resources.ResourceLoaderFactory;
 
 public class FactoryProviderGWT extends FactoryProvider {
 

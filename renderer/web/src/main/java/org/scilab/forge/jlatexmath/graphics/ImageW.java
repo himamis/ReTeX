@@ -1,9 +1,8 @@
 package org.scilab.forge.jlatexmath.graphics;
 
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
-
 import com.google.gwt.canvas.client.Canvas;
+import com.himamis.retex.renderer.share.platform.graphics.Graphics2DInterface;
+import com.himamis.retex.renderer.share.platform.graphics.Image;
 
 public class ImageW implements Image {
 

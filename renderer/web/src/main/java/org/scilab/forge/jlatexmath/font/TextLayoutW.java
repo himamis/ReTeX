@@ -3,11 +3,12 @@ package org.scilab.forge.jlatexmath.font;
 import org.scilab.forge.jlatexmath.geom.Rectangle2DW;
 import org.scilab.forge.jlatexmath.graphics.FontRenderContextW;
 import org.scilab.forge.jlatexmath.graphics.Graphics2DW;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.font.TextLayout;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
+
+import com.himamis.retex.renderer.share.platform.font.Font;
+import com.himamis.retex.renderer.share.platform.font.FontRenderContext;
+import com.himamis.retex.renderer.share.platform.font.TextLayout;
+import com.himamis.retex.renderer.share.platform.geom.Rectangle2D;
+import com.himamis.retex.renderer.share.platform.graphics.Graphics2DInterface;
 
 public class TextLayoutW implements TextLayout {
 

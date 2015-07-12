@@ -1,7 +1,7 @@
 package org.scilab.forge.jlatexmath.parser;
 
-import org.scilab.forge.jlatexmath.platform.parser.Document;
-import org.scilab.forge.jlatexmath.platform.parser.Element;
+import com.himamis.retex.renderer.share.platform.parser.Document;
+import com.himamis.retex.renderer.share.platform.parser.Element;
 
 public class DocumentW implements Document {
 

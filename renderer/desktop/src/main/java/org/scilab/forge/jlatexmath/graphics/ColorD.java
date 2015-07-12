@@ -2,7 +2,7 @@ package org.scilab.forge.jlatexmath.graphics;
 
 import java.awt.Color;
 
-public class ColorD extends Color implements org.scilab.forge.jlatexmath.platform.graphics.Color {
+public class ColorD extends Color implements com.himamis.retex.renderer.share.platform.graphics.Color {
 
 	private static final long serialVersionUID = 1L;
 	

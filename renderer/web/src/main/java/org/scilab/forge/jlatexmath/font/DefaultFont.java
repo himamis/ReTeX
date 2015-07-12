@@ -1,8 +1,7 @@
 package org.scilab.forge.jlatexmath.font;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
-
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.himamis.retex.renderer.share.platform.font.Font;
 
 public class DefaultFont extends FontW implements FontWrapper {
 

@@ -1,8 +1,7 @@
 package org.scilab.forge.jlatexmath.graphics;
 
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-
 import com.google.gwt.canvas.dom.client.CssColor;
+import com.himamis.retex.renderer.share.platform.graphics.Color;
 
 public class ColorW implements Color {
 

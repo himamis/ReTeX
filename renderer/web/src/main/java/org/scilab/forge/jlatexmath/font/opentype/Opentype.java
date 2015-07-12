@@ -132,13 +132,13 @@ public class Opentype implements FontLoaderWrapper {
 	private native void nativeParseFont(String familyName) /*-{
 		var that = this;
 		var base64EncodedData = $wnd.__JLM_GWT_FONTS__[familyName];
-		var decodedArrayBuffer = that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::base64ToArrayBuffer(Ljava/lang/String;)(base64EncodedData)
+		var decodedArrayBuffer = that.@com.himamis.retex.renderer.share.font.opentype.Opentype::base64ToArrayBuffer(Ljava/lang/String;)(base64EncodedData)
 		var font = opentype.parse(decodedArrayBuffer);
 		if (!font.supported) {
-			that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::fireFontInactiveEvent(Ljava/lang/Object;Ljava/lang/String;)("Parse error: font not supported", familyName);
+			that.@com.himamis.retex.renderer.share.font.opentype.Opentype::fireFontInactiveEvent(Ljava/lang/Object;Ljava/lang/String;)("Parse error: font not supported", familyName);
 		} else {
-			that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::setFontIsLoaded(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(familyName, font);
-			that.@org.scilab.forge.jlatexmath.font.opentype.Opentype::fireFontActiveEvent(Ljava/lang/String;)(font.familyName);
+			that.@com.himamis.retex.renderer.share.font.opentype.Opentype::setFontIsLoaded(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(familyName, font);
+			that.@com.himamis.retex.renderer.share.font.opentype.Opentype::fireFontActiveEvent(Ljava/lang/String;)(font.familyName);
 
 		}
 	}-*/;

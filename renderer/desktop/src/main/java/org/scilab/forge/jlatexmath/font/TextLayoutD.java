@@ -2,9 +2,10 @@ package org.scilab.forge.jlatexmath.font;
 
 import org.scilab.forge.jlatexmath.geom.Rectangle2DD;
 import org.scilab.forge.jlatexmath.graphics.Graphics2DD;
-import org.scilab.forge.jlatexmath.platform.font.TextLayout;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
+
+import com.himamis.retex.renderer.share.platform.font.TextLayout;
+import com.himamis.retex.renderer.share.platform.geom.Rectangle2D;
+import com.himamis.retex.renderer.share.platform.graphics.Graphics2DInterface;
 
 public class TextLayoutD implements TextLayout {
 	

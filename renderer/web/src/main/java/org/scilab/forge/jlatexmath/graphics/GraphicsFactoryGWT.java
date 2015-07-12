@@ -1,10 +1,10 @@
 package org.scilab.forge.jlatexmath.graphics;
 
-import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
+import com.himamis.retex.renderer.share.platform.graphics.BasicStroke;
+import com.himamis.retex.renderer.share.platform.graphics.Color;
+import com.himamis.retex.renderer.share.platform.graphics.GraphicsFactory;
+import com.himamis.retex.renderer.share.platform.graphics.Image;
+import com.himamis.retex.renderer.share.platform.graphics.Transform;
 
 public class GraphicsFactoryGWT extends GraphicsFactory {
 

@@ -2,7 +2,7 @@ package org.scilab.forge.jlatexmath.graphics;
 
 import java.awt.Shape;
 
-import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
+import com.himamis.retex.renderer.share.platform.graphics.Stroke;
 
 public class StrokeD implements Stroke, java.awt.Stroke {
 

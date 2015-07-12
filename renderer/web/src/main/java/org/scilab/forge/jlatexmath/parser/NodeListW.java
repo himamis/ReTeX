@@ -1,7 +1,7 @@
 package org.scilab.forge.jlatexmath.parser;
 
-import org.scilab.forge.jlatexmath.platform.parser.Node;
-import org.scilab.forge.jlatexmath.platform.parser.NodeList;
+import com.himamis.retex.renderer.share.platform.parser.Node;
+import com.himamis.retex.renderer.share.platform.parser.NodeList;
 
 public class NodeListW implements NodeList {
 

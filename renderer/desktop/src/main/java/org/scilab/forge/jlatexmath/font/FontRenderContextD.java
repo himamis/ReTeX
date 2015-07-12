@@ -3,7 +3,7 @@ package org.scilab.forge.jlatexmath.font;
 import java.awt.font.FontRenderContext;
 
 public class FontRenderContextD implements
-		org.scilab.forge.jlatexmath.platform.font.FontRenderContext {
+		com.himamis.retex.renderer.share.platform.font.FontRenderContext {
 
 	public FontRenderContext impl;
 

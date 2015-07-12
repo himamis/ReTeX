@@ -1,12 +1,16 @@
 package org.scilab.forge.jlatexmath;
 
 import org.scilab.forge.jlatexmath.graphics.ImageW;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
-import org.scilab.forge.jlatexmath.platform.graphics.Insets;
 
 import com.google.gwt.junit.client.GWTTestCase;
+import com.himamis.retex.renderer.share.ColorUtil;
+import com.himamis.retex.renderer.share.TeXConstants;
+import com.himamis.retex.renderer.share.TeXFormula;
+import com.himamis.retex.renderer.share.TeXIcon;
+import com.himamis.retex.renderer.share.platform.FactoryProvider;
+import com.himamis.retex.renderer.share.platform.graphics.Graphics2DInterface;
+import com.himamis.retex.renderer.share.platform.graphics.Image;
+import com.himamis.retex.renderer.share.platform.graphics.Insets;
 
 public class GwtTestSimple extends GWTTestCase {
 

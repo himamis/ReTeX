@@ -20,7 +20,7 @@ public class OpentypeFontWrapper implements FontWrapper {
 
 	private native void drawGlyphNative(String c, int x, int y, int size, Context2d ctx) /*-{
 		var that = this;
-		var font = that.@org.scilab.forge.jlatexmath.font.opentype.OpentypeFontWrapper::impl;
+		var font = that.@com.himamis.retex.renderer.share.font.opentype.OpentypeFontWrapper::impl;
 		var path = font.getPath(c, x, y, size);
 
 		path.fill = ctx.fillStyle;

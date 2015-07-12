@@ -1,11 +1,11 @@
 package org.scilab.forge.jlatexmath.font;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontFactory;
-import org.scilab.forge.jlatexmath.platform.font.FontLoader;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.font.TextAttributeProvider;
-import org.scilab.forge.jlatexmath.platform.font.TextLayout;
+import com.himamis.retex.renderer.share.platform.font.Font;
+import com.himamis.retex.renderer.share.platform.font.FontFactory;
+import com.himamis.retex.renderer.share.platform.font.FontLoader;
+import com.himamis.retex.renderer.share.platform.font.FontRenderContext;
+import com.himamis.retex.renderer.share.platform.font.TextAttributeProvider;
+import com.himamis.retex.renderer.share.platform.font.TextLayout;
 
 public class FontFactoryDesktop extends FontFactory {
 

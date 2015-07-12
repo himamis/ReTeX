@@ -1,6 +1,6 @@
 package org.scilab.forge.jlatexmath.font;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
+import com.himamis.retex.renderer.share.platform.font.Font;
 
 public interface AsyncLoadedFont extends Font {
 

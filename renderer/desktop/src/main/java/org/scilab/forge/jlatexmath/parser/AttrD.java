@@ -1,7 +1,8 @@
 package org.scilab.forge.jlatexmath.parser;
 
-import org.scilab.forge.jlatexmath.platform.parser.Attr;
 import org.w3c.dom.Node;
+
+import com.himamis.retex.renderer.share.platform.parser.Attr;
 
 public class AttrD extends NodeD implements Attr {
 	

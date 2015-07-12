@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 
-import org.scilab.forge.jlatexmath.exception.ResourceParseException;
-import org.scilab.forge.jlatexmath.exception.XMLResourceParseException;
-import org.scilab.forge.jlatexmath.platform.Resource;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontLoader;
+import com.himamis.retex.renderer.share.exception.ResourceParseException;
+import com.himamis.retex.renderer.share.exception.XMLResourceParseException;
+import com.himamis.retex.renderer.share.platform.Resource;
+import com.himamis.retex.renderer.share.platform.font.Font;
+import com.himamis.retex.renderer.share.platform.font.FontLoader;
 
 public class FontLoaderD implements FontLoader {
 	
