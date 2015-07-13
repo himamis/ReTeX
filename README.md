@@ -1,7 +1,8 @@
 JLaTeXMath Multiplatform
 ========================
 
-This project is a fork of the original JLaTeXMath (http://forge.scilab.org/index.php/p/jlatexmath/), refactored to be used through different platforms, such as desktop, android and web (using GWT).
+This project is a fork of the original JLaTeXMath (http://forge.scilab.org/index.php/p/jlatexmath/), refactored to be used through different platforms, such as desktop, android and web (using GWT). </br></br>
+[![Build Status](https://travis-ci.org/himamis/jlatexmath-multiplatform.svg?branch=master)](https://travis-ci.org/himamis/jlatexmath-multiplatform)
 
 ##Include in your project
 ###Using gradle
