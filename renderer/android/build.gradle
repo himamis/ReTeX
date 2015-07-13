@@ -28,7 +28,6 @@ android {
 
     sourceSets.main {
         manifest.srcFile 'AndroidManifest.xml'
-        java.srcDirs 'src'
         assets.srcDirs 'assets'
     }
 }
