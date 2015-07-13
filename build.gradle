@@ -20,7 +20,7 @@ subprojects {
 
 	license {
 		header rootProject.file('HEADER')
-		skipExistingHeader true
+		skipExistingHeaders true
 	}
 }
 
