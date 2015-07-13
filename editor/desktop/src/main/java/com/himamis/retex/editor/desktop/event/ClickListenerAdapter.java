@@ -1,5 +1,7 @@
 package com.himamis.retex.editor.desktop.event;
 
+import com.himamis.retex.editor.share.event.ClickListener;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

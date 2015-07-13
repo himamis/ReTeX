@@ -1,5 +1,7 @@
 package com.himamis.retex.editor.desktop.event;
 
+import com.himamis.retex.editor.share.event.KeyListener;
+
 import java.awt.event.KeyEvent;
 
 public class KeyListenerAdapter implements java.awt.event.KeyListener {
@@ -25,11 +27,11 @@ public class KeyListenerAdapter implements java.awt.event.KeyListener {
 		keyListener.onKeyReleased(wrapEvent(e));
 	}
 	
-	private static com.himamis.retex.editor.desktop.event.KeyEvent wrapEvent(java.awt.event.KeyEvent event) {
+	private static com.himamis.retex.editor.share.event.KeyEvent wrapEvent(java.awt.event.KeyEvent event) {
 		int keyCode = event.getKeyCode();
 		int keyModifiers = event.getModifiers();
 		char charCode = event.getKeyChar();
-		return new com.himamis.retex.editor.desktop.event.KeyEvent(keyCode, keyModifiers, charCode);
+		return new com.himamis.retex.editor.share.event.KeyEvent(keyCode, keyModifiers, charCode);
 	}
 
 }

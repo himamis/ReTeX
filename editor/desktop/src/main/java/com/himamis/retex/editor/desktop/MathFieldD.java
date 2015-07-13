@@ -12,13 +12,13 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 import com.himamis.retex.editor.desktop.event.ClickListenerAdapter;
 import com.himamis.retex.editor.desktop.event.FocusListenerAdapter;
 import com.himamis.retex.editor.desktop.event.KeyListenerAdapter;
-import com.himamis.retex.editor.desktop.editor.MathField;
-import com.himamis.retex.editor.desktop.editor.MathFieldInternal;
-import com.himamis.retex.editor.desktop.event.ClickListener;
-import com.himamis.retex.editor.desktop.event.FocusListener;
-import com.himamis.retex.editor.desktop.event.KeyListener;
-import com.himamis.retex.editor.desktop.meta.MetaModel;
-import com.himamis.retex.editor.desktop.model.MathFormula;
+import com.himamis.retex.editor.share.editor.MathField;
+import com.himamis.retex.editor.share.editor.MathFieldInternal;
+import com.himamis.retex.editor.share.event.ClickListener;
+import com.himamis.retex.editor.share.event.FocusListener;
+import com.himamis.retex.editor.share.event.KeyListener;
+import com.himamis.retex.editor.share.meta.MetaModel;
+import com.himamis.retex.editor.share.model.MathFormula;
 
 public class MathFieldD extends JLabel implements MathField {
 	
