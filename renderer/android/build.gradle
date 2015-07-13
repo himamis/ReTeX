@@ -25,11 +25,6 @@ dependencies {
 android {
 	compileSdkVersion 21
     buildToolsVersion '21.1.2'
-
-    sourceSets.main {
-        manifest.srcFile 'AndroidManifest.xml'
-        assets.srcDirs 'assets'
-    }
 }
 
 eclipse.project.name = 'renderer-android'
