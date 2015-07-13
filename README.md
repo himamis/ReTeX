@@ -1,42 +1,41 @@
-JLaTeXMath Multiplatform
-========================
+ReTeX
+=====
 
-This project is a fork of the original JLaTeXMath (http://forge.scilab.org/index.php/p/jlatexmath/), refactored to be used through different platforms, such as desktop, android and web (using GWT). </br></br>
-[![Build Status](https://travis-ci.org/himamis/jlatexmath-multiplatform.svg?branch=master)](https://travis-ci.org/himamis/jlatexmath-multiplatform)
+This project is a fork of the original JLaTeXMath (http://forge.scilab.org/index.php/p/jlatexmath/), refactored to be used through different platforms, such as desktop, android and web (using GWT).
 
 ##Include in your project
 ###Using gradle
 ####Desktop
 ```groovy
 dependencies {
-    compile project(':jlatexmath-desktop) 
+    compile project(':renderer:desktop') 
 }
 ```
 ####Android
 ```groovy
 dependencies {
-    compile project(':jlatexmath-android) // for android API 7 and up
+    compile project(':renderer:android') // for android API 7 and up
 }
 ```
 ####GWT Web application
 ```groovy
 dependencies {
-    compile project(':jlatexmath-gwt'),
-        project(':jlatexmath-share'),
-        files(project(':jlatexmath-gwt').sourceSets.main.allSource.srcDirs),
-        files(project(':jlatexmath-share').sourceSets.main.java.srcDirs)
+    compile project(':renderer:web'),
+        project(':renderer:share'),
+        files(project(':renderer:web').sourceSets.main.allSource.srcDirs),
+        files(project(':renderer:share').sourceSets.main.java.srcDirs)
 }
 ```
 {AppName}.gwt.xml
 ```xml
 <module>
     ...
-    <inherits name='org.scilab.forge.JLaTeXMathGWT'/>
+    <inherits name='com.himamis.retex.renderer.web.JLaTeXMathGWT'/>
     ...
 </module>
 ```
 ####Web application
-Grab the folder from `jlatexmath-gwt/dist`. For examples please see `jlatexmath-gwt/war`
+Grab the folder from `renderer/web/dist`. For examples please see `renderer/web/war`
 ##Usage
 
 Before using the API, set the platform dependent factory instance.
@@ -64,7 +63,7 @@ For details of the original API please see http://forge.scilab.org/index.php/p/j
     jlmlib.drawLatex(options)
 ```
 
-For parameters, please see `jlatexmath-gwt/war/index.html`
+For parameters, please see `renderer/web/war/index.html`
 
 Screenshots
 -----------
