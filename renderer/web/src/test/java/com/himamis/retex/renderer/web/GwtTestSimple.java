@@ -1,4 +1,4 @@
-package org.scilab.forge.jlatexmath;
+package com.himamis.retex.renderer.web;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import com.himamis.retex.renderer.share.ColorUtil;
@@ -6,9 +6,9 @@ import com.himamis.retex.renderer.share.TeXConstants;
 import com.himamis.retex.renderer.share.TeXFormula;
 import com.himamis.retex.renderer.share.TeXIcon;
 import com.himamis.retex.renderer.share.platform.FactoryProvider;
-import com.himamis.retex.renderer.share.platform.graphics.Graphics2DInterface;
-import com.himamis.retex.renderer.share.platform.graphics.Image;
-import com.himamis.retex.renderer.share.platform.graphics.Insets;
+import com.himamis.retex.renderer.share.platform.Graphics.Graphics2DInterface;
+import com.himamis.retex.renderer.share.platform.Graphics.Image;
+import com.himamis.retex.renderer.share.platform.Graphics.Insets;
 import com.himamis.retex.renderer.web.FactoryProviderGWT;
 import com.himamis.retex.renderer.web.graphics.ImageW;
 
