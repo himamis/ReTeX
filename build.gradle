@@ -1,11 +1,27 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+    }
+}
+
 subprojects {
 	repositories {
 	    mavenCentral()
 	}
 	
 	apply plugin: 'eclipse'
+	apply plugin: 'license'
 
 	tasks.eclipse.dependsOn 'cleanEclipse'
+
+	license {
+		header rootProject.file('HEADER')
+		skipExistingHeader true
+	}
 }
 
 task wrapper(type: Wrapper) {
