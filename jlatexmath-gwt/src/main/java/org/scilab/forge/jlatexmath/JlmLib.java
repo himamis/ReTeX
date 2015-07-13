@@ -72,7 +72,7 @@ public class JlmLib {
 		}
 	}-*/;
 
-	private static TeXIcon createIcon(final String latex, final float size,
+	public static TeXIcon createIcon(final String latex, final float size,
 			final int type, Insets insets) {
 		TeXFormula formula = new TeXFormula(latex);
 		TeXIcon icon = formula.new TeXIconBuilder().setStyle(TeXConstants.STYLE_DISPLAY).setType(type)
