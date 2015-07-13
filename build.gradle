@@ -21,6 +21,7 @@ subprojects {
 	license {
 		header rootProject.file('HEADER')
 		skipExistingHeaders true
+		include '**/*.java'
 	}
 }
 
