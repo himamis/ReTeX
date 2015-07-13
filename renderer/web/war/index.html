@@ -6,40 +6,45 @@
     <script type="text/javascript" language="javascript" src="jlatexmath/jlatexmath.nocache.js"></script>
     <script>
         var drawLatex = function(id) {
+        var canvas;
+        if (id == 4) {
+        	canvas = document.createElement('canvas');
+        	document.body.appendChild(canvas);
+        } else {
+        	canvas = document.getElementById('latex'+id);
+        	}
         
-          var canvas = document.getElementById('latex'+id)
           var context = canvas.getContext('2d');
 
           // jlmlib.drawLatex(...) params
+          
           var opts = {
             context : canvas.getContext('2d'),
-            latex : "\\textcolor{blue}{HelloWorld}\\sqrt{"+id+"}",
-            size : 40,
+            latex : "\\sqrt{"+id+"}",
+            size : 14,
             x : 0,
             y : 0,
-            type : jlmlib.BOLD | jlmlib.ITALIC,
-            foregroundColor : '#FF0000',
-            backgroundColor : '#00FF00',
+            type : 0,
+            foregroundColor : '#000000',
+            backgroundColor : '#FF0000',
             callback : function() { console.log('callback') },
             insets : {
-              top : 20,
-              bottom : 5,
-              left : 10,
-              right : 7
+              top : 0,
+              bottom : 0,
+              left : 0,
+              right : 0
             }
           }
           
           var ret = jlmlib.drawLatex(opts);
           var bsline = ret.height * ret.baseline;
-          var width = ret.width,
-          	  height = ret.height;
-          
-          context.beginPath();
-		  context.moveTo(0, bsline);
-		  context.lineTo(300, bsline);
-		  context.strokeStyle = '#ff0000';
-		  context.stroke();
-          
+           //canvas.width = ret.width;
+      		//canvas.height = ret.height;
+      		//canvas.style.width=ret.width+"px";
+      		//canvas.style.height=ret.height+"px";
+			//canvas.style.width= "100px"
+			canvas.style.height= "100px"
+          canvas.style.width= "100px"
           console.log(ret);
         }
         
@@ -65,7 +70,6 @@
     <br>
     <canvas id="latex3" style="height: 500px; width: 500px" width="500px" height="500px"></canvas>
     <br>
-    <canvas id="latex4" style="height: 500px; width: 500px" width="500px" height="500px"></canvas>
-    <br>
+    
   </body>
 </html>
