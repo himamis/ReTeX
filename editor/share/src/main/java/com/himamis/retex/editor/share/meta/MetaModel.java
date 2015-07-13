@@ -27,11 +27,12 @@
  */
 package com.himamis.retex.editor.share.meta;
 
-import java.io.InputStream;
-import java.util.ArrayList;
+import com.himamis.retex.renderer.share.platform.ParserAdapter;
+import com.himamis.retex.renderer.share.platform.parser.Element;
+import com.himamis.retex.renderer.share.platform.parser.Node;
+import com.himamis.retex.renderer.share.platform.parser.NodeList;
 
-import org.jdom.Element;
-import org.jdom.input.SAXBuilder;
+import java.util.ArrayList;
 
 /**
  * 
@@ -47,6 +48,8 @@ import org.jdom.input.SAXBuilder;
  * 
  */
 public class MetaModel {
+
+	private ParserAdapter parserAdapter = new ParserAdapter();
 
 	/* Arrays and matrices. */
 	public static final String ARRAY = "Array";
@@ -101,9 +104,9 @@ public class MetaModel {
 	private int defaultMatrixColumns = 2;
 	private int defaultMatrixRows = 2;
 
-	public MetaModel(InputStream stream) {
+	public MetaModel(Object file) {
 		try {
-			Element root = new SAXBuilder().build(stream).getRootElement();
+			Element root = parserAdapter.createParserAndParseFile(file);
 			// keyboard input, characters and operators
 			parseComponents(root);
 		} catch (Exception e) {
@@ -442,8 +445,11 @@ public class MetaModel {
 	}
 
 	private void parseComponents(Element parent) throws Exception {
-		for (Object elements : parent.getChildren()) {
-			String groupName = ((Element) elements).getName(), group = groupName;
+		NodeList childNodes = parent.getChildNodes();
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node elementsNode = childNodes.item(i);
+			Element elements = elementsNode.castToElement();
+			String groupName = elements.getTagName(), group = groupName;
 			int columns = 0;
 			try {
 				groupName = getStringAttribute(NAME, (Element) elements);
@@ -458,8 +464,12 @@ public class MetaModel {
 			} catch (Exception e) {}
 
 			ArrayList<MetaComponent> arrayList = new ArrayList<MetaComponent>();
-			for (Object element : ((Element) elements).getChildren()) {
-				String name = ((Element) element).getName();
+			NodeList elementsChildNodes = elements.getChildNodes();
+			for (int j = 0; j < childNodes.getLength(); j++) {
+				// same with j
+			}
+			for (Object element : ((Element) elements).getChildNodes()) {
+				String name = ((Element) element).getTagName();
 				if (name.equals(OPEN) || name.equals(CLOSE) || 
 					name.equals(FIELD) || name.equals(ROW)) {
 					MetaComponent metaComponent = parseArrayElement((Element) element);
@@ -494,9 +504,9 @@ public class MetaModel {
 	}
 
 	private static String getStringAttribute(String attrName, Element element) throws Exception {
-		String attrValue = element.getAttributeValue(attrName);
+		String attrValue = element.getAttribute(attrName);
 		if (attrValue == null)
-			throw new Exception(element.getName() + " is null.");
+			throw new Exception(element.getTagName() + " is null.");
 		return attrValue;
 	}
 
@@ -506,7 +516,7 @@ public class MetaModel {
 		try {
 			res = Integer.parseInt(attrValue);
 		} catch (NumberFormatException e) {
-			throw new Exception(element.getName() + " has invalid value.");
+			throw new Exception(element.getTagName() + " has invalid value.");
 		}
 		return res;
 	}
@@ -517,7 +527,7 @@ public class MetaModel {
 		try {
 			res = attrValue.length() > 0 ? attrValue.charAt(0) : 0;
 		} catch (NumberFormatException e) {
-			throw new Exception(element.getName() + " has invalid value.");
+			throw new Exception(element.getTagName() + " has invalid value.");
 		}
 		return res;
 	}
