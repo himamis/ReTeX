@@ -27,8 +27,8 @@
  */
 package com.himamis.retex.editor.share.meta;
 
-import org.scilab.forge.jlatexmath.DefaultTeXFont;
-import org.scilab.forge.jlatexmath.platform.font.Font;
+import com.himamis.retex.renderer.share.DefaultTeXFont;
+import com.himamis.retex.renderer.share.platform.font.Font;
 
 /**
  * Meta Model for Greek Symbol.

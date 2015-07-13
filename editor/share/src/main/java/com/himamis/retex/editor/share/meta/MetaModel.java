@@ -27,6 +27,7 @@
  */
 package com.himamis.retex.editor.share.meta;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.jdom.Element;
@@ -100,16 +101,19 @@ public class MetaModel {
 	private int defaultMatrixColumns = 2;
 	private int defaultMatrixRows = 2;
 
-	public MetaModel(String filename) {
+	public MetaModel(InputStream stream) {
 		try {
-			Element root = new SAXBuilder().build(
-				MetaModel.class.getResourceAsStream(filename)).getRootElement();
+			Element root = new SAXBuilder().build(stream).getRootElement();
 			// keyboard input, characters and operators
 			parseComponents(root);
 		} catch (Exception e) {
-			System.out.println("parse failed: "+filename+"\n");
+			System.out.println("parse failed\n");
 			e.printStackTrace();
 		}
+	}
+
+	public MetaModel(String filename) {
+		this(MetaModel.class.getResourceAsStream(filename));
 	}
 
 	/** get array */

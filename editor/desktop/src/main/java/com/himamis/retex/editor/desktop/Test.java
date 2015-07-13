@@ -1,9 +1,9 @@
 package com.himamis.retex.editor.desktop;
 
-import javax.swing.JFrame;
+import com.himamis.retex.renderer.desktop.FactoryProviderDesktop;
+import com.himamis.retex.renderer.share.platform.FactoryProvider;
 
-import org.scilab.forge.jlatexmath.FactoryProviderDesktop;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import javax.swing.JFrame;
 
 public class Test {
 

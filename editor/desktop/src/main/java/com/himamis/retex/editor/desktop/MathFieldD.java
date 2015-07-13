@@ -6,8 +6,6 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 
-import org.scilab.forge.jlatexmath.IconHelper;
-import org.scilab.forge.jlatexmath.TeXIcon;
 
 import com.himamis.retex.editor.desktop.event.ClickListenerAdapter;
 import com.himamis.retex.editor.desktop.event.FocusListenerAdapter;
@@ -19,6 +17,8 @@ import com.himamis.retex.editor.share.event.FocusListener;
 import com.himamis.retex.editor.share.event.KeyListener;
 import com.himamis.retex.editor.share.meta.MetaModel;
 import com.himamis.retex.editor.share.model.MathFormula;
+import com.himamis.retex.renderer.desktop.IconHelper;
+import com.himamis.retex.renderer.share.TeXIcon;
 
 public class MathFieldD extends JLabel implements MathField {
 	

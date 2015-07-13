@@ -1,6 +1,3 @@
-<<<<<<< HEAD
+include ':myapplication'
 include 'renderer:share', 'renderer:desktop', 'renderer:android', 'renderer:web'
 include 'editor:share', 'editor:desktop', 'editor:android'
-=======
-include 'renderer:share', 'renderer:desktop', 'renderer:android', 'renderer:web'
->>>>>>> master

@@ -27,12 +27,6 @@
  */
 package com.himamis.retex.editor.share.editor;
 
-import java.awt.Dimension;
-
-import org.scilab.forge.jlatexmath.TeXConstants;
-import org.scilab.forge.jlatexmath.TeXFormula;
-import org.scilab.forge.jlatexmath.TeXIcon;
-
 import com.himamis.retex.editor.share.algebra.TeXSerializer;
 import com.himamis.retex.editor.share.controller.MathInputController;
 import com.himamis.retex.editor.share.event.ClickListener;
@@ -41,10 +35,13 @@ import com.himamis.retex.editor.share.event.KeyEvent;
 import com.himamis.retex.editor.share.event.KeyListener;
 import com.himamis.retex.editor.share.model.MathFormula;
 import com.himamis.retex.editor.share.model.MathSequence;
+import com.himamis.retex.renderer.share.TeXConstants;
+import com.himamis.retex.renderer.share.TeXFormula;
+import com.himamis.retex.renderer.share.TeXIcon;
 
 /**
  * This class is a Math Field. Displays and allows to edit single formula.
- * 
+ *
  * @author Bea Petrovicova
  */
 public class MathFieldInternal {
@@ -122,23 +119,22 @@ public class MathFieldInternal {
 		controller.setFormula(formula);
 		getPreferredSize(null, 0);
 	}
-	
+
 	private void setupMathField() {
 		mathField.setFocusListener(focusListener);
 		mathField.setClickListener(clickListener);
 		mathField.setKeyListener(keyListener);
 	}
 
-	private Dimension getPreferredSize(MathSequence currentField,
+	private void getPreferredSize(MathSequence currentField,
 			int currentOffset) {
 		String serializedFormula = serializer.serialize(
 				controller.getFormula(), currentField, currentOffset);
 		// System.out.println("TeX> "+serializedFormula);
 		TeXFormula texFormula = new TeXFormula(serializedFormula);
 		renderer = texFormula.new TeXIconBuilder()
-				.setStyle(TeXConstants.STYLE_DISPLAY).setSize(18).build();
+				.setStyle(TeXConstants.STYLE_DISPLAY).setSize(36).build();
 		mathField.setTeXIcon(renderer);
-		return new Dimension(renderer.getIconWidth(), renderer.getIconHeight());
 	}
 
 	private void update(MathSequence currentField, int currentOffset) {

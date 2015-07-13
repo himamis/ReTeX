@@ -6,22 +6,35 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
-import org.scilab.forge.jlatexmath.ColorUtil;
-import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.graphics.Graphics2DA;
-
 import com.himamis.retex.editor.android.event.ClickListenerAdapter;
 import com.himamis.retex.editor.android.event.FocusListenerAdapter;
 import com.himamis.retex.editor.android.event.KeyListenerAdapter;
+import com.himamis.retex.editor.share.editor.MathFieldInternal;
 import com.himamis.retex.editor.share.event.ClickListener;
 import com.himamis.retex.editor.share.event.FocusListener;
 import com.himamis.retex.editor.share.event.KeyListener;
 import com.himamis.retex.editor.share.editor.MathField;
+import com.himamis.retex.editor.share.meta.MetaModel;
+import com.himamis.retex.editor.share.model.MathFormula;
+import com.himamis.retex.renderer.android.graphics.Graphics2DA;
+import com.himamis.retex.renderer.share.ColorUtil;
+import com.himamis.retex.renderer.share.TeXIcon;
+import com.himamis.retex.renderer.share.platform.FactoryProvider;
+import com.himamis.retex.renderer.share.platform.Resource;
+
+import java.io.InputStream;
 
 public class FormulaEditor extends View implements MathField {
 
+    private static final MetaModel sMetaModel;
+
+    static {
+        sMetaModel = new MetaModel((InputStream) new Resource().loadResource("Octave.xml"));
+    }
+
     private TeXIcon mTeXIcon;
     private Graphics2DA mGraphics;
+    private MathFieldInternal mMathFieldInternal;
 
     public FormulaEditor(Context context) {
         super(context);
@@ -29,6 +42,15 @@ public class FormulaEditor extends View implements MathField {
 
     public FormulaEditor(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
+    }
+
+    private void init() {
+        setFocusable(true);
+        setFocusableInTouchMode(true);
+        mMathFieldInternal = new MathFieldInternal();
+        mMathFieldInternal.setMathField(this);
+        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel));
     }
 
     @Override
