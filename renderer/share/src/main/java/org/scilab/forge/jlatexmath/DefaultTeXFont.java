@@ -117,6 +117,12 @@ public class DefaultTeXFont implements TeXFont {
 	}
 
 	private final float size; // standard size
+	
+	public static Font getFont(int fontId) {
+		FontInfo info = fontInfo[fontId];
+		Font font = info.getFont();
+		return font;
+	}
 
 	public DefaultTeXFont(float pointSize) {
 		size = pointSize;

@@ -35,7 +35,7 @@ import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 
 /**
- * A box representing a rotated box.
+ * A box representing a framed box.
  */
 public class FramedBox extends Box {
 
