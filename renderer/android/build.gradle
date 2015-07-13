@@ -14,16 +14,15 @@ repositories {
     mavenCentral()
 }
 
-//apply plugin: 'android-sdk-manager'
-//apply plugin: 'com.android.library'
-apply plugin: 'java'
+apply plugin: 'android-sdk-manager'
+apply plugin: 'com.android.library'
 
 dependencies {
 	compile project(':renderer:share')
 	testCompile 'junit:junit:4.11'
 }
 
-/*android {
+android {
 	compileSdkVersion 21
     buildToolsVersion '21.1.2'
 
@@ -32,13 +31,4 @@ dependencies {
         java.srcDirs 'src'
         assets.srcDirs 'assets'
     }
-}*/
-
-eclipse.project {
-  	natures 'com.android.ide.eclipse.adt.AndroidNature'
-  	buildCommand 'com.android.ide.eclipse.adt.ApkBuilder'
-}
-
-eclipse.classpath {
-	containers 'com.android.ide.eclipse.adt.ANDROID_FRAMEWORK'
 }
