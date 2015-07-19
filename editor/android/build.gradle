@@ -28,4 +28,6 @@ android {
     buildToolsVersion '21.1.2'
 }
 
-eclipse.project.name = 'editor-android'
+def projectName = 'editor-android'
+eclipse.project.name = projectName
+idea.module.name = projectName

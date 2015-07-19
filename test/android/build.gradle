@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.+'
+
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'android-sdk-manager'
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "22.0.1"
+}
+
+dependencies {
+    compile project(':editor:android')
+}
