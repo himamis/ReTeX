@@ -293,16 +293,16 @@ public class MetaModel {
 	private MetaCharacter parseArrayElement(Element element) throws Exception {
 
 		String name = element.getTagName();
-		String cas = getStringAttribute(CAS, (Element) element);
+		String cas = getStringAttribute(CAS,  element);
 		String tex = cas;
 		char key = cas.length() > 0 ? cas.charAt(0) : 0;
 
 		try {
-			tex = getStringAttribute(TEX, (Element) element);
+			tex = getStringAttribute(TEX,  element);
 		} catch (Exception e) {}
 
 		try {
-			key = getCharAttribute(KEY, (Element) element);
+			key = getCharAttribute(KEY,  element);
 		} catch (Exception e) {}
 
 		MetaCharacter metaCharacter = new MetaCharacter(name, cas, tex, key, MetaCharacter.CHARACTER);
@@ -312,21 +312,21 @@ public class MetaModel {
 
 	private MetaCharacter parseCharacter(Element element) throws Exception {
 
-		String name = getStringAttribute(NAME, (Element) element);
+		String name = getStringAttribute(NAME,  element);
 		String cas = name;
 		String tex = name;
 		char key = name.length() > 0 ? name.charAt(0) : 0;
 
 		try {
-			cas = getStringAttribute(CAS, (Element) element);
+			cas = getStringAttribute(CAS,  element);
 		} catch (Exception e) {}
 
 		try {
-			tex = getStringAttribute(TEX, (Element) element);
+			tex = getStringAttribute(TEX,  element);
 		} catch (Exception e) {}
 
 		try {
-			key = getCharAttribute(KEY, (Element) element);
+			key = getCharAttribute(KEY,  element);
 		} catch (Exception e) {}
 
 		MetaCharacter metaCharacter = new MetaCharacter(name, cas, tex, key, MetaCharacter.CHARACTER);
@@ -338,32 +338,32 @@ public class MetaModel {
 		String elementName = element.getTagName();
 		int type = elementName.equals(OPERATOR) ? MetaCharacter.OPERATOR : MetaCharacter.SYMBOL; 
 
-		String name = getStringAttribute(NAME, (Element) element);
+		String name = getStringAttribute(NAME,  element);
 		String cas = name;
 		String tex = name;
 		char key = name.length() > 0 ? name.charAt(0) : 0;
 
 		try {
-			cas = getStringAttribute(CAS, (Element) element);
+			cas = getStringAttribute(CAS,  element);
 		} catch (Exception e) {
 		}
 
 		try {
-			tex = getStringAttribute(TEX, (Element) element);
+			tex = getStringAttribute(TEX,  element);
 		} catch (Exception e) {
 		}
 
 		try {
-			key = getCharAttribute(KEY, (Element) element);
+			key = getCharAttribute(KEY,  element);
 		} catch (Exception e) {
 		}
 
-		int code = getIntAttribute(CODE, (Element) element);
-		int fontId = getIntAttribute(FONTID, (Element) element);
+		int code = getIntAttribute(CODE,  element);
+		int fontId = getIntAttribute(FONTID,  element);
 		MetaSymbol metaSymbol = new MetaSymbol(name, cas, tex, key, (char) code, fontId, type);
 
 		try {
-			String img = getStringAttribute(IMG, (Element) element);
+			String img = getStringAttribute(IMG,  element);
 			metaSymbol.setIcon(img);
 		} catch (Exception e) {
 		}
@@ -372,21 +372,21 @@ public class MetaModel {
 	}
 
 	private MetaFunction parseFunction(Element element) throws Exception {
-		String name = getStringAttribute(NAME, (Element) element);
+		String name = getStringAttribute(NAME,  element);
 		String cas = name;
 		String tex = name;
 		char key = name.length() > 0 ? name.charAt(0) : 0;
 
 		try {
-			cas = getStringAttribute(CAS, (Element) element);
+			cas = getStringAttribute(CAS,  element);
 		} catch (Exception e) {}
 
 		try {
-			tex = getStringAttribute(TEX, (Element) element);
+			tex = getStringAttribute(TEX,  element);
 		} catch (Exception e) {}
 
 		try {
-			key = getCharAttribute(KEY, (Element) element);
+			key = getCharAttribute(KEY,  element);
 		} catch (Exception e) {}
 
 		ArrayList<MetaParameter> parameterArray = new ArrayList<MetaParameter>();
@@ -394,28 +394,28 @@ public class MetaModel {
 		for (int i = 0; i < elements.getLength(); i++) {
 			Node parameter = elements.item(i);
 			String paramName = getStringAttribute(NAME, parameter.castToElement());
-			int order = getIntAttribute("order", (Element) parameter);
+			int order = getIntAttribute("order",  parameter.castToElement());
 
 			MetaParameter metaParameter = new MetaParameter(paramName, order);
 			parameterArray.add(metaParameter);
 
 			try {
-				String type = getStringAttribute(TYPE, (Element) parameter);
+				String type = getStringAttribute(TYPE,  parameter.castToElement());
 				metaParameter.setType(type);
 			} catch (Exception e) {}
 
 			try {
-				String desc = getStringAttribute(DESC, (Element) parameter);
+				String desc = getStringAttribute(DESC,  parameter.castToElement());
 				metaParameter.setDescription(desc);
 			} catch (Exception e) {}
 
 			try {
-				int upIndex = getIntAttribute(UP, (Element) parameter);
+				int upIndex = getIntAttribute(UP,  parameter.castToElement());
 				metaParameter.setUpIndex(upIndex);
 			} catch (Exception e) {}
 
 			try {
-				int downIndex = getIntAttribute(DOWN, (Element) parameter);
+				int downIndex = getIntAttribute(DOWN,  parameter.castToElement());
 				metaParameter.setDownIndex(downIndex);
 			} catch (Exception e) {}
 
@@ -424,22 +424,22 @@ public class MetaModel {
 		MetaFunction metaFunction = new MetaFunction(name, cas, tex, key, parameters);
 
 		try {
-			String img = getStringAttribute(IMG, (Element) element);
+			String img = getStringAttribute(IMG,  element);
 			metaFunction.setIcon(img);
 		} catch (Exception e) {}
 
 		try {
-			String desc = getStringAttribute(DESC, (Element) element);
+			String desc = getStringAttribute(DESC,  element);
 			metaFunction.setDescription(desc);
 		} catch (Exception e) {}
 
 		try {
-			int initialIndex = getIntAttribute(INITIAL, (Element) element);
+			int initialIndex = getIntAttribute(INITIAL,  element);
 			metaFunction.setInitialIndex(initialIndex);
 		} catch (Exception e) {}
 
 		try {
-			int insertIndex = getIntAttribute(INSERT, (Element) element);
+			int insertIndex = getIntAttribute(INSERT,  element);
 			metaFunction.setInsertIndex(insertIndex);
 		} catch (Exception e) {}
 
@@ -447,49 +447,57 @@ public class MetaModel {
 	}
 
 	private void parseComponents(Element parent) throws Exception {
-		NodeList childNodes = parent.getChildNodes();
-		for (int i = 0; i < childNodes.getLength(); i++) {
-			Node elementsNode = childNodes.item(i);
-			Element elements = elementsNode.castToElement();
-			String groupName = elements.getTagName(), group = groupName;
+		NodeList rootChildNodes = parent.getChildNodes();
+		for (int i = 0; i < rootChildNodes.getLength(); i++) {
+			Node rootChildNode = rootChildNodes.item(i);
+			if (rootChildNode.getNodeType() != Node.ELEMENT_NODE) {
+				// exclude non-element nodes
+				continue;
+			}
+			Element rootChild = rootChildNode.castToElement();
+			String groupName = rootChild.getTagName(), group = groupName;
 			int columns = 0;
 			try {
-				groupName = getStringAttribute(NAME, (Element) elements);
+				groupName = getStringAttribute(NAME, rootChild);
 			} catch (Exception e) {}
 
 			try {
-				group = getStringAttribute(GROUP, (Element) elements);
+				group = getStringAttribute(GROUP, rootChild);
 			} catch (Exception e) {}
 
 			try {
-				columns = getIntAttribute(COLUMNS, (Element) elements);
+				columns = getIntAttribute(COLUMNS, rootChild);
 			} catch (Exception e) {}
 
 			ArrayList<MetaComponent> arrayList = new ArrayList<MetaComponent>();
-			NodeList elementsChildNodes = elements.getChildNodes();
+			NodeList elementsChildNodes = rootChild.getChildNodes();
 			for (int j = 0; j < elementsChildNodes.getLength(); j++) {
-				Node node = elementsChildNodes.item(j);
-				Element element = node.castToElement();
-				String name = element.getTagName();
+				Node elementChildNode = elementsChildNodes.item(j);
+				if (elementChildNode.getNodeType() != Node.ELEMENT_NODE) {
+					// exclude non-element nodes
+					continue;
+				}
+				Element elementChild = elementChildNode.castToElement();
+				String name = elementChild.getTagName();
 				if (name.equals(OPEN) || name.equals(CLOSE) || 
 					name.equals(FIELD) || name.equals(ROW)) {
-					MetaComponent metaComponent = parseArrayElement((Element) element);
+					MetaComponent metaComponent = parseArrayElement(elementChild);
 					arrayList.add(metaComponent);
 
 				} else if (name.equals(CHARACTER)) {
-					MetaCharacter metaCharacter = parseCharacter((Element) element);
+					MetaCharacter metaCharacter = parseCharacter(elementChild);
 					arrayList.add(metaCharacter);
 
 				} else if (name.equals(OPERATOR)) {
-					MetaSymbol metaOperator = parseSymbol((Element) element);
+					MetaSymbol metaOperator = parseSymbol(elementChild);
 					arrayList.add(metaOperator);
 
 				} else if (name.equals(SYMBOL)) {
-					MetaSymbol metaSymbol = parseSymbol((Element) element);
+					MetaSymbol metaSymbol = parseSymbol(elementChild);
 					arrayList.add(metaSymbol);
 
 				} else if (name.equals(FUNCTION)) {
-					MetaFunction metaFunction = parseFunction((Element) element);
+					MetaFunction metaFunction = parseFunction(elementChild);
 					arrayList.add(metaFunction);
 				}
 			}
@@ -506,7 +514,7 @@ public class MetaModel {
 
 	private static String getStringAttribute(String attrName, Element element) throws Exception {
 		String attrValue = element.getAttribute(attrName);
-		if (attrValue == null)
+		if (attrValue == null || attrValue.isEmpty())
 			throw new Exception(element.getTagName() + " is null.");
 		return attrValue;
 	}

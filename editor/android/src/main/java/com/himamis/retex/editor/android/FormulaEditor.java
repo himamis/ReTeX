@@ -3,8 +3,14 @@ package com.himamis.retex.editor.android;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.text.InputType;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.BaseInputConnection;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.InputMethodManager;
 
 import com.himamis.retex.editor.android.event.ClickListenerAdapter;
 import com.himamis.retex.editor.android.event.FocusListenerAdapter;
@@ -133,5 +139,31 @@ public class FormulaEditor extends View implements MathField {
         mGraphics.setCanvas(canvas);
         mTeXIcon.setForeground(ColorUtil.BLACK);
         mTeXIcon.paintIcon(null, mGraphics, 0, 0);
+    }
+
+    @Override
+    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+        BaseInputConnection fic = new BaseInputConnection(this, false);
+        outAttrs.actionLabel = null;
+        outAttrs.inputType = InputType.TYPE_NULL;
+        outAttrs.imeOptions = EditorInfo.IME_ACTION_NEXT;
+        return fic;
+    }
+
+    @Override
+    public boolean onCheckIsTextEditor() {
+        return true;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            // show the keyboard so we can enter text
+            InputMethodManager imm = (InputMethodManager) getContext()
+                    .getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(this, InputMethodManager.SHOW_FORCED);
+        }
+        return true;
     }
 }

@@ -29,10 +29,26 @@ public class KeyListenerAdapter implements View.OnKeyListener {
     }
 
     private static com.himamis.retex.editor.share.event.KeyEvent wrapEvent(KeyEvent keyEvent) {
-        int keyCode = keyEvent.getKeyCode();
+        int keyCode = getKeyCode(keyEvent.getKeyCode());
         char charCode = (char) keyEvent.getUnicodeChar();
         int modifiers = getModifiers(keyEvent);
         return new com.himamis.retex.editor.share.event.KeyEvent(keyCode, modifiers, charCode);
+    }
+
+    private static int getKeyCode(int nativeKeyCode) {
+        switch (nativeKeyCode) {
+            case KeyEvent.KEYCODE_DEL:
+                return com.himamis.retex.editor.share.event.KeyEvent.VK_BACK_SPACE;
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                return com.himamis.retex.editor.share.event.KeyEvent.VK_LEFT;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                return com.himamis.retex.editor.share.event.KeyEvent.VK_RIGHT;
+            case KeyEvent.KEYCODE_DPAD_UP:
+                return com.himamis.retex.editor.share.event.KeyEvent.VK_UP;
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                return com.himamis.retex.editor.share.event.KeyEvent.VK_DOWN;
+        }
+        return nativeKeyCode;
     }
 
     private static int getModifiers(KeyEvent keyEvent) {

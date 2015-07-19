@@ -6,18 +6,18 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.himamis.retex.renderer.android.LaTeXView
+   <!-- <com.himamis.retex.renderer.android.LaTeXView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:latexText="\\sqrt{x}+3"
         app:size="18" />
+-->
 
-    <!--
     <com.himamis.retex.editor.android.FormulaEditor
         android:id="@+id/formula_editor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
--->
+        android:layout_width="match_parent"
+        android:layout_height="72dp" />
+
     <Button
         android:id="@+id/push_button"
         android:text="Push me!"
