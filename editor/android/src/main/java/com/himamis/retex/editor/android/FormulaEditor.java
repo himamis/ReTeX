@@ -29,7 +29,7 @@ public class FormulaEditor extends View implements MathField {
     private static final MetaModel sMetaModel;
 
     static {
-        sMetaModel = new MetaModel((InputStream) new Resource().loadResource("Octave.xml"));
+        sMetaModel = new MetaModel(new Resource().loadResource("Octave.xml"));
     }
 
     private TeXIcon mTeXIcon;
