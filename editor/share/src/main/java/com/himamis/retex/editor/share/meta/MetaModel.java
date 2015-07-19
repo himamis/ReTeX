@@ -292,7 +292,7 @@ public class MetaModel {
 
 	private MetaCharacter parseArrayElement(Element element) throws Exception {
 
-		String name = ((Element) element).getName();
+		String name = element.getTagName();
 		String cas = getStringAttribute(CAS, (Element) element);
 		String tex = cas;
 		char key = cas.length() > 0 ? cas.charAt(0) : 0;
@@ -335,7 +335,7 @@ public class MetaModel {
 	}
 
 	private MetaSymbol parseSymbol(Element element) throws Exception {
-		String elementName = ((Element) element).getName();
+		String elementName = element.getTagName();
 		int type = elementName.equals(OPERATOR) ? MetaCharacter.OPERATOR : MetaCharacter.SYMBOL; 
 
 		String name = getStringAttribute(NAME, (Element) element);
@@ -390,8 +390,10 @@ public class MetaModel {
 		} catch (Exception e) {}
 
 		ArrayList<MetaParameter> parameterArray = new ArrayList<MetaParameter>();
-		for (Object parameter : ((Element) element).getChildren(PARAMETER)) {
-			String paramName = getStringAttribute(NAME, (Element) parameter);
+		NodeList elements = element.getElementsByTagName(PARAMETER);
+		for (int i = 0; i < elements.getLength(); i++) {
+			Node parameter = elements.item(i);
+			String paramName = getStringAttribute(NAME, parameter.castToElement());
 			int order = getIntAttribute("order", (Element) parameter);
 
 			MetaParameter metaParameter = new MetaParameter(paramName, order);
@@ -465,11 +467,10 @@ public class MetaModel {
 
 			ArrayList<MetaComponent> arrayList = new ArrayList<MetaComponent>();
 			NodeList elementsChildNodes = elements.getChildNodes();
-			for (int j = 0; j < childNodes.getLength(); j++) {
-				// same with j
-			}
-			for (Object element : ((Element) elements).getChildNodes()) {
-				String name = ((Element) element).getTagName();
+			for (int j = 0; j < elementsChildNodes.getLength(); j++) {
+				Node node = elementsChildNodes.item(j);
+				Element element = node.castToElement();
+				String name = element.getTagName();
 				if (name.equals(OPEN) || name.equals(CLOSE) || 
 					name.equals(FIELD) || name.equals(ROW)) {
 					MetaComponent metaComponent = parseArrayElement((Element) element);
