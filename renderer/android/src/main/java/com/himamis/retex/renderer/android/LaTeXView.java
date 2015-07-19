@@ -9,11 +9,11 @@ import android.view.View;
 
 import com.himamis.retex.renderer.android.graphics.ColorA;
 import com.himamis.retex.renderer.android.graphics.Graphics2DA;
-import com.himamis.retex.renderer.share.ColorUtil;
 import com.himamis.retex.renderer.share.TeXConstants;
 import com.himamis.retex.renderer.share.TeXFormula;
 import com.himamis.retex.renderer.share.TeXIcon;
 import com.himamis.retex.renderer.share.exception.ParseException;
+import com.himamis.retex.renderer.share.platform.FactoryProvider;
 import com.himamis.retex.renderer.share.platform.graphics.Color;
 import com.himamis.retex.renderer.share.platform.graphics.Insets;
 
@@ -28,8 +28,8 @@ public class LaTeXView extends View {
     private String mLatexText = "";
     private float mSize = 20;
     private int mStyle = TeXConstants.STYLE_DISPLAY;
-    private Color mForegroundColor = ColorUtil.BLACK;
-    private int mBackgroundColor = android.graphics.Color.WHITE;
+    private Color mForegroundColor = new ColorA(android.graphics.Color.BLACK);
+    private int mBackgroundColor = android.graphics.Color.TRANSPARENT;
     private int mType = TeXFormula.SERIF;
 
     private float mSizeScale;
@@ -37,19 +37,28 @@ public class LaTeXView extends View {
     public LaTeXView(Context context) {
         super(context);
         mSizeScale = context.getResources().getDisplayMetrics().scaledDensity;
+        initFactoryProvider();
         ensureTeXIconExists();
     }
 
     public LaTeXView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mSizeScale = context.getResources().getDisplayMetrics().scaledDensity;
+        initFactoryProvider();
         readAttributes(context, attrs, 0);
     }
 
     public LaTeXView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mSizeScale = context.getResources().getDisplayMetrics().scaledDensity;
+        initFactoryProvider();
         readAttributes(context, attrs, defStyleAttr);
+    }
+
+    private void initFactoryProvider() {
+        if (FactoryProvider.INSTANCE == null) {
+            FactoryProvider.INSTANCE = new FactoryProviderAndroid(getContext().getAssets());
+        }
     }
 
     private void readAttributes(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -63,7 +72,7 @@ public class LaTeXView extends View {
             mSize = a.getFloat(R.styleable.LaTeXView_size, 20);
             mStyle = a.getInteger(R.styleable.LaTeXView_style, 0);
             mType = a.getInteger(R.styleable.LaTeXView_type, TeXFormula.SERIF);
-            mBackgroundColor = a.getColor(R.styleable.LaTeXView_backgroundColor, android.graphics.Color.WHITE);
+            mBackgroundColor = a.getColor(R.styleable.LaTeXView_backgroundColor, android.graphics.Color.TRANSPARENT);
             mForegroundColor = new ColorA(a.getColor(R.styleable.LaTeXView_foregroundColor, android.graphics.Color.BLACK));
         } finally {
             a.recycle();
@@ -73,6 +82,7 @@ public class LaTeXView extends View {
 
     /**
      * Sets the LaTeX text of this view. Must be called from the UI thread.
+     *
      * @param latexText formula in LaTeX format
      */
     public void setLatexText(String latexText) {
@@ -87,6 +97,7 @@ public class LaTeXView extends View {
 
     /**
      * Sets the size of the text. Must be called from the UI thread.
+     *
      * @param size size
      */
     public void setSize(float size) {
@@ -101,6 +112,7 @@ public class LaTeXView extends View {
 
     /**
      * Sets the style of the LaTeX. Must be called from the UI thread.
+     *
      * @param style one of {@link TeXConstants#STYLE_TEXT} , {@link TeXConstants#STYLE_DISPLAY},
      *              {@link TeXConstants#STYLE_SCRIPT} or {@link TeXConstants#STYLE_SCRIPT_SCRIPT}
      */
@@ -116,6 +128,7 @@ public class LaTeXView extends View {
 
     /**
      * Sets the color of the text. Must be called from the UI thread.
+     *
      * @param foregroundColor color represented as packed ints
      */
     public void setForegroundColor(int foregroundColor) {
@@ -125,6 +138,7 @@ public class LaTeXView extends View {
 
     /**
      * Sets the color of the background. Must be called from the UI thread.
+     *
      * @param backgroundColor color represented as packed ints
      */
     public void setBackgroundColor(int backgroundColor) {
@@ -169,20 +183,35 @@ public class LaTeXView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        final int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
-        final int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        final int desiredWidth = mTexIcon.getIconWidth();
+        final int desiredHeight = mTexIcon.getIconHeight();
 
-        int measuredWidth = getMeasuredWidth();
-        int measuredHeight = getMeasuredHeight();
+        final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        if (widthSpecMode == MeasureSpec.UNSPECIFIED) {
-            measuredWidth = mTexIcon.getIconWidth();
+        int width;
+        int height;
+
+        if (widthMode == MeasureSpec.EXACTLY) {
+            width = widthSize;
+        } else if (widthMode == MeasureSpec.AT_MOST) {
+            width = Math.min(desiredWidth, widthSize);
+        } else {
+            width = desiredWidth;
         }
-        if (heightSpecMode == MeasureSpec.UNSPECIFIED) {
-            measuredHeight = mTexIcon.getIconHeight();
+
+        if (heightMode == MeasureSpec.EXACTLY) {
+            height = heightSize;
+        } else if (heightMode == MeasureSpec.AT_MOST) {
+            height = Math.min(desiredHeight, heightSize);
+        } else {
+            height = desiredHeight;
         }
-        setMeasuredDimension(measuredWidth, measuredHeight);
+
+        //MUST CALL THIS
+        setMeasuredDimension(width, height);
     }
 
     @Override

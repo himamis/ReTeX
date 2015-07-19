@@ -16,6 +16,7 @@ import com.himamis.retex.editor.share.event.KeyListener;
 import com.himamis.retex.editor.share.editor.MathField;
 import com.himamis.retex.editor.share.meta.MetaModel;
 import com.himamis.retex.editor.share.model.MathFormula;
+import com.himamis.retex.renderer.android.FactoryProviderAndroid;
 import com.himamis.retex.renderer.android.graphics.Graphics2DA;
 import com.himamis.retex.renderer.share.ColorUtil;
 import com.himamis.retex.renderer.share.TeXIcon;
@@ -26,11 +27,7 @@ import java.io.InputStream;
 
 public class FormulaEditor extends View implements MathField {
 
-    private static final MetaModel sMetaModel;
-
-    static {
-        sMetaModel = new MetaModel(new Resource().loadResource("Octave.xml"));
-    }
+    private static MetaModel sMetaModel;
 
     private TeXIcon mTeXIcon;
     private Graphics2DA mGraphics;
@@ -38,6 +35,7 @@ public class FormulaEditor extends View implements MathField {
 
     public FormulaEditor(Context context) {
         super(context);
+        init();
     }
 
     public FormulaEditor(Context context, AttributeSet attrs) {
@@ -46,11 +44,25 @@ public class FormulaEditor extends View implements MathField {
     }
 
     private void init() {
+        initFactoryProvider();
+        initMetaModel();
         setFocusable(true);
         setFocusableInTouchMode(true);
         mMathFieldInternal = new MathFieldInternal();
         mMathFieldInternal.setMathField(this);
         mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel));
+    }
+
+    private void initFactoryProvider() {
+        if (FactoryProvider.INSTANCE == null) {
+            FactoryProvider.INSTANCE = new FactoryProviderAndroid(getContext().getAssets());
+        }
+    }
+
+    private void initMetaModel() {
+        if (sMetaModel == null) {
+            sMetaModel = new MetaModel(new Resource().loadResource("Octave.xml"));
+        }
     }
 
     @Override

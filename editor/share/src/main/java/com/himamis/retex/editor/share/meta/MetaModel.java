@@ -106,7 +106,7 @@ public class MetaModel {
 
 	public MetaModel(Object file) {
 		try {
-			Element root = parserAdapter.createParserAndParseFile(file);
+			Element root = parserAdapter.createParserAndParseFile(file, true, true);
 			// keyboard input, characters and operators
 			parseComponents(root);
 		} catch (Exception e) {
