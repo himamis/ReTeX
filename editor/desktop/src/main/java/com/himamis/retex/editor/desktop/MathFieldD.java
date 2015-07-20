@@ -101,4 +101,9 @@ public class MathFieldD extends JLabel implements MathField {
 	public void requestViewFocus() {
 		requestFocus();
 	}
+
+	@Override
+	public void requestLayout() {
+		invalidate();
+	}
 }

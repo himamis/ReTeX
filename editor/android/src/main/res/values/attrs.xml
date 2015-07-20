@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FormulaEditor">
+        <attr name="fe_size" format="float"/>
+        <attr name="fe_foregroundColor" format="color"/>
+        <attr name="fe_backgroundColor" format="color"/>
+    </declare-styleable>
+</resources>

@@ -43,6 +43,8 @@ public interface MathField {
 	void setKeyListener(KeyListener keyListener);
 	
 	void repaint();
+
+	void requestLayout();
 	
 	boolean hasParent();
 }

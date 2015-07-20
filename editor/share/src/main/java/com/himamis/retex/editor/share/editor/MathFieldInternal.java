@@ -38,6 +38,7 @@ import com.himamis.retex.editor.share.model.MathSequence;
 import com.himamis.retex.renderer.share.TeXConstants;
 import com.himamis.retex.renderer.share.TeXFormula;
 import com.himamis.retex.renderer.share.TeXIcon;
+import com.himamis.retex.renderer.share.platform.graphics.Color;
 
 /**
  * This class is a Math Field. Displays and allows to edit single formula.
@@ -46,106 +47,110 @@ import com.himamis.retex.renderer.share.TeXIcon;
  */
 public class MathFieldInternal {
 
-	private TeXIcon renderer;
-	private TeXSerializer serializer;
-	private MathField mathField;
+    private TeXIcon renderer;
+    private TeXSerializer serializer;
+    private MathField mathField;
+    private ClickListener clickListener = new ClickListener() {
 
-	FocusListener focusListener = new FocusListener() {
+        public void onClick() {
+            mathField.requestViewFocus();
 
-		public void onFocusLost() {
-			controller.update();
-		}
+        }
+    };
+    private MathInputController controller = new MathInputController() {
 
-		public void onFocusGained() {
-			update();
-		}
-	};
+        public void update() {
+            MathFieldInternal.this.update(currentField, currentOffset);
+        }
+    };
+    FocusListener focusListener = new FocusListener() {
 
-	private ClickListener clickListener = new ClickListener() {
+        public void onFocusLost() {
+            controller.update();
+        }
 
-		public void onClick() {
-			mathField.requestViewFocus();
+        public void onFocusGained() {
+            update();
+        }
+    };
+    private KeyListener keyListener = new KeyListener() {
+        public void onKeyPressed(KeyEvent e) {
+            int keyCode = e.getKeyCode();
+            int modifiers = e.getKeyModifiers();
+            // System.out.println("key_released: "+keyCode+", "+modifiers);
+            controller.keyPressed(keyCode, modifiers);
+        }
 
-		}
-	};
+        public void onKeyReleased(KeyEvent e) {
+            // int keyCode = e.getKeyCode();
+            // int modifiers = e.getModifiersEx();
+            // System.out.println("key_released: "+keyCode+", "+modifiers);
+            // controller.keyReleased(keyCode,modifiers);
+        }
 
-	private KeyListener keyListener = new KeyListener() {
-		public void onKeyPressed(KeyEvent e) {
-			int keyCode = e.getKeyCode();
-			int modifiers = e.getKeyModifiers();
-			// System.out.println("key_released: "+keyCode+", "+modifiers);
-			controller.keyPressed(keyCode, modifiers);
-		}
+        public void onKeyTyped(KeyEvent e) {
+            char ch = e.getUnicodeKeyChar();
+            // System.out.println("key_typed: "+ch+", "+modifiers);
+            controller.keyTyped(ch);
+        }
+    };
 
-		public void onKeyReleased(KeyEvent e) {
-			// int keyCode = e.getKeyCode();
-			// int modifiers = e.getModifiersEx();
-			// System.out.println("key_released: "+keyCode+", "+modifiers);
-			// controller.keyReleased(keyCode,modifiers);
-		}
+    private float size;
 
-		public void onKeyTyped(KeyEvent e) {
-			char ch = e.getUnicodeKeyChar();
-			// System.out.println("key_typed: "+ch+", "+modifiers);
-			controller.keyTyped(ch);
-		}
-	};
+    public MathFieldInternal() {
+        serializer = new TeXSerializer();
+    }
 
-	private MathInputController controller = new MathInputController() {
+    public void setMathField(MathField mathField) {
+        this.mathField = mathField;
+        setupMathField();
+    }
 
-		public void update() {
-			MathFieldInternal.this.update(currentField, currentOffset);
-		}
-	};
+    public void setSize(float size) {
+        this.size = size;
+    }
 
-	public MathFieldInternal() {
-		serializer = new TeXSerializer();
-	}
+    public MathInputController getController() {
+        return controller;
+    }
 
-	public void setMathField(MathField mathField) {
-		this.mathField = mathField;
-		setupMathField();
-	}
+    public MathFormula getFormula() {
+        return controller.getFormula();
+    }
 
-	public MathInputController getController() {
-		return controller;
-	}
+    public void setFormula(MathFormula formula) {
+        controller.setFormula(formula);
+        updateFormula(null, 0);
+    }
 
-	public MathFormula getFormula() {
-		return controller.getFormula();
-	}
+    private void setupMathField() {
+        mathField.setFocusListener(focusListener);
+        mathField.setClickListener(clickListener);
+        mathField.setKeyListener(keyListener);
+    }
 
-	public void setFormula(MathFormula formula) {
-		controller.setFormula(formula);
-		getPreferredSize(null, 0);
-	}
+    private void updateFormula(MathSequence currentField,
+                               int currentOffset) {
+        String serializedFormula = serializer.serialize(
+                controller.getFormula(), currentField, currentOffset);
 
-	private void setupMathField() {
-		mathField.setFocusListener(focusListener);
-		mathField.setClickListener(clickListener);
-		mathField.setKeyListener(keyListener);
-	}
+        TeXFormula texFormula = new TeXFormula(serializedFormula);
+        renderer = texFormula.new TeXIconBuilder()
+                .setStyle(TeXConstants.STYLE_DISPLAY).setSize(size).build();
+        mathField.setTeXIcon(renderer);
+    }
 
-	private void getPreferredSize(MathSequence currentField,
-			int currentOffset) {
-		String serializedFormula = serializer.serialize(
-				controller.getFormula(), currentField, currentOffset);
-		// System.out.println("TeX> "+serializedFormula);
-		TeXFormula texFormula = new TeXFormula(serializedFormula);
-		renderer = texFormula.new TeXIconBuilder()
-				.setStyle(TeXConstants.STYLE_DISPLAY).setSize(36).build();
-		mathField.setTeXIcon(renderer);
-	}
+    private void update(MathSequence currentField, int currentOffset) {
+        if (mathField.hasParent()) {
+            updateFormula(currentField, currentOffset);
+            mathField.requestLayout();
+            mathField.repaint();
 
-	private void update(MathSequence currentField, int currentOffset) {
-		if (mathField.hasParent()) {
-			getPreferredSize(currentField, currentOffset);
-			mathField.repaint();
-		}
-	}
+        }
+    }
 
-	public void update() {
-		update(null, 0);
-	}
+    public void update() {
+        update(null, 0);
+    }
 
 }

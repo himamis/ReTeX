@@ -68,12 +68,12 @@ public class LaTeXView extends View {
                 defStyleAttr, 0);
 
         try {
-            mLatexText = a.getString(R.styleable.LaTeXView_latexText);
-            mSize = a.getFloat(R.styleable.LaTeXView_size, 20);
-            mStyle = a.getInteger(R.styleable.LaTeXView_style, 0);
-            mType = a.getInteger(R.styleable.LaTeXView_type, TeXFormula.SERIF);
-            mBackgroundColor = a.getColor(R.styleable.LaTeXView_backgroundColor, android.graphics.Color.TRANSPARENT);
-            mForegroundColor = new ColorA(a.getColor(R.styleable.LaTeXView_foregroundColor, android.graphics.Color.BLACK));
+            mLatexText = a.getString(R.styleable.LaTeXView_lv_latexText);
+            mSize = a.getFloat(R.styleable.LaTeXView_lv_size, 20);
+            mStyle = a.getInteger(R.styleable.LaTeXView_lv_style, 0);
+            mType = a.getInteger(R.styleable.LaTeXView_lv_type, TeXFormula.SERIF);
+            mBackgroundColor = a.getColor(R.styleable.LaTeXView_lv_backgroundColor, android.graphics.Color.TRANSPARENT);
+            mForegroundColor = new ColorA(a.getColor(R.styleable.LaTeXView_lv_foregroundColor, android.graphics.Color.BLACK));
         } finally {
             a.recycle();
         }

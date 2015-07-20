@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#abaaee"
     tools:context=".MainActivity">
 
    <!-- <com.himamis.retex.renderer.android.LaTeXView
@@ -16,12 +17,13 @@
     <com.himamis.retex.editor.android.FormulaEditor
         android:id="@+id/formula_editor"
         android:layout_width="match_parent"
-        android:layout_height="72dp" />
+        android:layout_height="wrap_content"
+        app:fe_size="16"
+        app:fe_backgroundColor="#1E90FF"/>
 
-    <Button
-        android:id="@+id/push_button"
-        android:text="Push me!"
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
 
 </LinearLayout>
