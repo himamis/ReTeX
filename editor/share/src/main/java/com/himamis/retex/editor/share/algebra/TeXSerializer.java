@@ -126,14 +126,14 @@ public class TeXSerializer {
 
 	private void serialize(MathBraces braces, StringBuffer buffer) {
 		if (braces.getClassif() == MathBraces.REGULAR) {
-			buffer.append('(');
+			buffer.append("\\left(");
 			serialize(braces.getArgument(0), buffer);
-			buffer.append(')');
+			buffer.append("\\right)");
 
 		} else if (braces.getClassif() == MathBraces.SQUARE) {
-			buffer.append('[');
+			buffer.append("\\left[");
 			serialize(braces.getArgument(0), buffer);
-			buffer.append(']');
+			buffer.append("\\right]");
 
 		} else if (braces.getClassif() == MathBraces.CURLY) {
 			buffer.append("\\lbrace");

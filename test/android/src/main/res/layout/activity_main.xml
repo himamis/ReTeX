@@ -7,18 +7,18 @@
     android:background="#abaaee"
     tools:context=".MainActivity">
 
-   <!-- <com.himamis.retex.renderer.android.LaTeXView
+   <com.himamis.retex.renderer.android.LaTeXView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:latexText="\\sqrt{x}+3"
-        app:size="18" />
--->
+        app:lv_latexText="\\left[\\frac{x}{2}\\right]"
+        app:lv_size="18" />
+
 
     <com.himamis.retex.editor.android.FormulaEditor
         android:id="@+id/formula_editor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:fe_size="16"
+        app:fe_size="18"
         app:fe_backgroundColor="#1E90FF"/>
 
     <EditText

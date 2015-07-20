@@ -166,7 +166,7 @@ public class FormulaEditor extends View implements MathField {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         final int desiredWidth = mTeXIcon.getIconWidth();
-        final int desiredHeight = (int) (Math.max(sMinHeight * mScale, mTeXIcon.getIconHeight()) + 0.5);
+        final int desiredHeight = (int) (Math.max(mSize * mScale, mTeXIcon.getIconHeight()) + 0.5);
 
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         final int widthSize = MeasureSpec.getSize(widthMeasureSpec);

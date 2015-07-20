@@ -54,6 +54,7 @@ public abstract class MathController extends MathContext {
 
 	private final char functionOpenKey = '('; // probably universal
 	private final char functionCloseKey = ')';
+	private final char squareBracketOpenKey = '[';
 	private final char delimiterKey = ';';
 	private final char apostropheKey = '"';
 
@@ -133,6 +134,9 @@ public abstract class MathController extends MathContext {
 			int classif = MathBraces.REGULAR;
 			if(ch==apostropheKey) {
 				classif = MathBraces.APOSTROPHES;
+			}
+			if (ch == squareBracketOpenKey) {
+				classif = MathBraces.SQUARE;
 			}
 
 			// add braces
@@ -666,7 +670,7 @@ public abstract class MathController extends MathContext {
 			endField(ch);
 			update();
 
-		} else if(ch==functionOpenKey || ch==apostropheKey) {
+		} else if(ch==functionOpenKey || ch==apostropheKey || ch == squareBracketOpenKey) {
 			newBraces(ch);
 			update();
 
