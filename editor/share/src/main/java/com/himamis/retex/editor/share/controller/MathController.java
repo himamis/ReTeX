@@ -154,13 +154,13 @@ public abstract class MathController extends MathContext {
 	}
 
 	/** Insert function by name.
-	 * @param type function */
+	 * @param name function */
 	public void newFunction(String name) {
 		newFunction(name, 0);
 	}
 
 	/** Insert function by name.
-	 * @param type function */
+	 * @param name function */
 	public void newFunction(String name, int initial) {
 
 		// add extra braces for sqrt, nthroot and fraction

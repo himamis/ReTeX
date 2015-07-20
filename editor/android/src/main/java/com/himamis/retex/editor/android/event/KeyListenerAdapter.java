@@ -48,7 +48,7 @@ public class KeyListenerAdapter implements View.OnKeyListener {
             case KeyEvent.KEYCODE_DPAD_DOWN:
                 return com.himamis.retex.editor.share.event.KeyEvent.VK_DOWN;
         }
-        return nativeKeyCode;
+        return 0;
     }
 
     private static int getModifiers(KeyEvent keyEvent) {
