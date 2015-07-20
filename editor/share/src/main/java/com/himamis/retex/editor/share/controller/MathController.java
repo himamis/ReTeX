@@ -257,14 +257,14 @@ public abstract class MathController extends MathContext {
 
 	/** Insert operator. */
 	public void newOperator(char op) {
-		MetaCharacter meta = formula.getMetaModel().getOperator(""+op);
+		MetaCharacter meta = formula.getMetaModel().getOperator("" + op);
 		currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
 		currentOffset++;
 	}
 
 	/** Insert character. */
 	public void newCharacter(char ch) {
-		MetaCharacter meta = formula.getMetaModel().getCharacter(""+ch);
+		MetaCharacter meta = formula.getMetaModel().getCharacter("" + ch);
 		currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
 		currentOffset++;
 	}
@@ -702,7 +702,8 @@ public abstract class MathController extends MathContext {
 			newOperator(ch);
 			update();
 
-		} else if (formula.getMetaModel().isCharacter(""+ch)) {
+		} else { //if (formula.getMetaModel().isCharacter(""+ch)) {
+			// allow all characters
 			newCharacter(ch);
 			update();
 		}

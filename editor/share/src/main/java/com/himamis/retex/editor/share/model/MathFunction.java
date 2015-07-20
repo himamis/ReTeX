@@ -31,82 +31,102 @@ import com.himamis.retex.editor.share.meta.MetaFunction;
 
 /**
  * Function. This class is part of model.
- * 
+ * <p/>
  * function(arguments)
- * 
+ *
  * @author Bea Petrovicova
  */
 public class MathFunction extends MathContainer {
 
-	private MetaFunction meta;
+    private MetaFunction meta;
 
-	/** Use MathFormula.newFunction(...) */
-	public MathFunction(MathFormula formula, MetaFunction meta) {
-		super(formula, meta.size());
-		this.meta = meta;
-	}
+    /**
+     * Use MathFormula.newFunction(...)
+     */
+    public MathFunction(MathFormula formula, MetaFunction meta) {
+        super(formula, meta.size());
+        this.meta = meta;
+    }
 
-	/** Gets parent of this component. */
-	public MathSequence getParent() {
-		return (MathSequence)super.getParent();
-	}
+    /**
+     * Gets parent of this component.
+     */
+    public MathSequence getParent() {
+        return (MathSequence) super.getParent();
+    }
 
-	public MathSequence getArgument(int i) {
-		return (MathSequence)super.getArgument(i);
-	}
+    public MathSequence getArgument(int i) {
+        return (MathSequence) super.getArgument(i);
+    }
 
-	public void setArgument(int i, MathSequence argument) {
-		super.setArgument(i, argument);
-	}
+    public void setArgument(int i, MathSequence argument) {
+        super.setArgument(i, argument);
+    }
 
-	/** Uid name. */
-	public String getName() {
-		return meta.getName();
-	}
+    /**
+     * Uid name.
+     */
+    public String getName() {
+        return meta.getName();
+    }
 
-	/** Cas name. */
-	public String getCasName() {
-		return meta.getCasName();
-	}
+    /**
+     * Cas name.
+     */
+    public String getCasName() {
+        return meta.getCasName();
+    }
 
-	/** TeX name. */
-	public String getTexName() {
-		return meta.getTexName();
-	}
+    /**
+     * TeX name.
+     */
+    public String getTexName() {
+        return meta.getTexName();
+    }
 
-	/** Insert Index */
-	public int getInsertIndex() {
-		return meta.getInsertIndex();
-	}
+    /**
+     * Insert Index
+     */
+    public int getInsertIndex() {
+        return meta.getInsertIndex();
+    }
 
-	/** Initial Index */
-	public int getInitialIndex() {
-		return meta.getInitialIndex();
-	}
+    /**
+     * Initial Index
+     */
+    public int getInitialIndex() {
+        return meta.getInitialIndex();
+    }
 
-	/** Up Index for n-th argument */
-	public int getUpIndex(int n) {
-		return meta.getUpIndex(n);
-	}
+    /**
+     * Up Index for n-th argument
+     */
+    public int getUpIndex(int n) {
+        return meta.getUpIndex(n);
+    }
 
-	/** Down Index for n-th argument */
-	public int getDownIndex(int n) {
-		return meta.getDownIndex(n);
-	}
+    /**
+     * Down Index for n-th argument
+     */
+    public int getDownIndex(int n) {
+        return meta.getDownIndex(n);
+    }
 
-	/** Argument type for n-th argument */
-	public String getArgumentType(int n) {
-		return meta.getParameter(n).getType();
-	}
+    /**
+     * Argument type for n-th argument
+     */
+    public String getArgumentType(int n) {
+        return meta.getParameter(n).getType();
+    }
 
-	public MathContainer clone(MathFormula formula) {
-		MathFunction function = new MathFunction(formula, meta);
-		for(int i=0; i<arguments.size(); i++) {
-			MathContainer component = (MathContainer)getArgument(i);
-			component = component.clone(formula);
-			function.setArgument(i,component);
-		}
-		return function;
-	}
+    public MathContainer clone(MathFormula formula) {
+        MathFunction function = new MathFunction(formula, meta);
+        for (int i = 0; i < arguments.size(); i++) {
+            MathContainer component = (MathContainer) getArgument(i);
+            component = component.clone(formula);
+            function.setArgument(i, component);
+        }
+        return function;
+    }
 
 }

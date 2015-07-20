@@ -29,92 +29,114 @@ package com.himamis.retex.editor.share.meta;
 
 /**
  * MetaFunction Component.
- * 
+ *
  * @author Bea Petrovicova
  */
 public class MetaFunction extends MetaComponent {
 
-	private final int order[];
-	private int insertIndex, initialIndex;
-	private MetaParameter arguments[];
-	private String desc, sign;
+    private final int order[];
+    private int insertIndex, initialIndex;
+    private MetaParameter arguments[];
+    private String desc, sign;
 
-	MetaFunction(String name, String casName, String texName, char key, MetaParameter parameters[]) {
-		super(name, casName, texName, key);
-		this.arguments = parameters!=null?parameters:new MetaParameter[0];
-		insertIndex = 0;
-		initialIndex = 0;
+    MetaFunction(String name, String casName, String texName, char key, MetaParameter parameters[]) {
+        super(name, casName, texName, key);
+        this.arguments = parameters != null ? parameters : new MetaParameter[0];
+        insertIndex = 0;
+        initialIndex = 0;
 
-		order = new int[parameters!=null?parameters.length:0];
-		for(int inputOrder=0;inputOrder<order.length;inputOrder++) {
-			order[arguments[inputOrder].getOrder()] = inputOrder;
-		}
-		StringBuffer sb = new StringBuffer();
-		sb.append(getName()+"(");
-		for(int inputOrder=0;inputOrder<order.length;inputOrder++) {
-			sb.append(arguments[inputOrder].getName()+(((inputOrder+1)<order.length)?", ":""));
-		}
-		sb.append(")");
-		sign = sb.toString();
-	}
+        order = new int[parameters != null ? parameters.length : 0];
+        for (int inputOrder = 0; inputOrder < order.length; inputOrder++) {
+            order[arguments[inputOrder].getOrder()] = inputOrder;
+        }
+        StringBuffer sb = new StringBuffer();
+        sb.append(getName() + "(");
+        for (int inputOrder = 0; inputOrder < order.length; inputOrder++) {
+            sb.append(arguments[inputOrder].getName() + (((inputOrder + 1) < order.length) ? ", " : ""));
+        }
+        sb.append(")");
+        sign = sb.toString();
+    }
 
-	/** Description. */
-	public void setDescription(String desc) {
-		this.desc = desc;
-	}
+    /**
+     * Description.
+     */
+    public String getDescription() {
+        return desc;
+    }
 
-	/** Description. */
-	public String getDescription() {
-		return desc;
-	}
+    /**
+     * Description.
+     */
+    public void setDescription(String desc) {
+        this.desc = desc;
+    }
 
-	/** Signature. */
-	public String getSignature() {
-		return sign;
-	}
+    /**
+     * Signature.
+     */
+    public String getSignature() {
+        return sign;
+    }
 
-	/** Parameter */
-	public MetaParameter getParameter(int casOrder) {
-		return arguments[casOrder];
-	}
+    /**
+     * Parameter
+     */
+    public MetaParameter getParameter(int casOrder) {
+        return arguments[casOrder];
+    }
 
-	/** Number of arguments. */
-	public int size() {
-		return arguments.length;
-	}
+    /**
+     * Number of arguments.
+     */
+    public int size() {
+        return arguments.length;
+    }
 
-	/** Insert Index */
-	void setInsertIndex(int insertIndex) {
-		this.insertIndex = insertIndex;
-	}
+    /**
+     * Insert Index
+     */
+    public int getInsertIndex() {
+        return insertIndex;
+    }
 
-	/** Insert Index */
-	public int getInsertIndex() {
-		return insertIndex;
-	}
+    /**
+     * Insert Index
+     */
+    void setInsertIndex(int insertIndex) {
+        this.insertIndex = insertIndex;
+    }
 
-	/** Initial Index */
-	void setInitialIndex(int initialIndex) {
-		this.initialIndex = initialIndex;
-	}
+    /**
+     * Initial Index
+     */
+    public int getInitialIndex() {
+        return initialIndex;
+    }
 
-	/** Initial Index */
-	public int getInitialIndex() {
-		return initialIndex;
-	}
+    /**
+     * Initial Index
+     */
+    void setInitialIndex(int initialIndex) {
+        this.initialIndex = initialIndex;
+    }
 
-	/** Up Index for n-th argument */
-	public int getUpIndex(int n) {
-		return arguments[n].getUpIndex();
-	}
+    /**
+     * Up Index for n-th argument
+     */
+    public int getUpIndex(int n) {
+        return arguments[n].getUpIndex();
+    }
 
-	/** Down Index for n-th argument */
-	public int getDownIndex(int n) {
-		return arguments[n].getDownIndex();
-	}
+    /**
+     * Down Index for n-th argument
+     */
+    public int getDownIndex(int n) {
+        return arguments[n].getDownIndex();
+    }
 
 	/* Translate CAS argument order into input argument order. *
-	public int getArgumentInputIndex(int casOrder) {
+    public int getArgumentInputIndex(int casOrder) {
 		return order[casOrder];
 	} */
 

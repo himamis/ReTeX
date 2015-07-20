@@ -27,60 +27,76 @@
  */
 package com.himamis.retex.editor.share.model;
 
+import com.himamis.retex.editor.share.algebra.Serializer;
 import com.himamis.retex.editor.share.meta.MetaCharacter;
 
 /**
  * Character. This class is part of model.
- * 
+ * <p/>
  * x^2
  * x_j
- * 
+ *
  * @author Bea Petrovicova
  */
 public class MathCharacter extends MathComponent {
 
-	private MetaCharacter meta;
+    private MetaCharacter meta;
 
-	/** Use MathFormula.newCharacter(...) */
-	public MathCharacter(MathFormula formula, MetaCharacter meta) {
-		super(formula);
-		this.meta = meta;
-	}
+    /**
+     * Use MathFormula.newCharacter(...)
+     */
+    public MathCharacter(MathFormula formula, MetaCharacter meta) {
+        super(formula);
+        this.meta = meta;
+    }
 
-	/** Gets parent of this component. */
-	public MathSequence getParent() {
-		return (MathSequence)super.getParent();
-	}
+    /**
+     * Gets parent of this component.
+     */
+    public MathSequence getParent() {
+        return (MathSequence) super.getParent();
+    }
 
-	public MathComponent clone(MathFormula formula) {
-		MathCharacter symbol = new MathCharacter(formula, meta);
-		return symbol;
-	}
-	
-	public String getName() {
-		return meta.getName();
-	}
+    public MathComponent clone(MathFormula formula) {
+        MathCharacter symbol = new MathCharacter(formula, meta);
+        return symbol;
+    }
 
-	public String getCasName() {
-		return meta.getCasName();
-	}
+    public String getName() {
+        return meta.getName();
+    }
 
-	public String getTexName() {
-		return meta.getTexName();
-	}
+    public String getCasName() {
+        return meta.getCasName();
+    }
 
-	/** Is Character. */
-	public boolean isCharacter() {
-		return meta.getType() == MetaCharacter.CHARACTER;
-	}
+    public String getTexName() {
+        return meta.getTexName();
+    }
 
-	/** Is Operator. */
-	public boolean isOperator() {
-		return meta.getType() == MetaCharacter.OPERATOR;
-	}
+    /**
+     * Is Character.
+     */
+    public boolean isCharacter() {
+        return meta.getType() == MetaCharacter.CHARACTER;
+    }
 
-	/** Is Symbol. */
-	public boolean isSymbol() {
-		return meta.getType() == MetaCharacter.SYMBOL;
-	}
+    /**
+     * Is Operator.
+     */
+    public boolean isOperator() {
+        return meta.getType() == MetaCharacter.OPERATOR;
+    }
+
+    /**
+     * Is Symbol.
+     */
+    public boolean isSymbol() {
+        return meta.getType() == MetaCharacter.SYMBOL;
+    }
+
+    @Override
+    public void serialize(Serializer serializer, StringBuilder stringBuilder) {
+        serializer.serialize(this, stringBuilder);
+    }
 }

@@ -29,59 +29,71 @@ package com.himamis.retex.editor.share.meta;
 
 public class MetaParameter {
 
-	private String name, type=null, desc=null;
-	private int order;
-	private int up = -1, down = -1;
-	
-	MetaParameter(String name, int order) {
-		this.name = name;
-		this.order = order;
-	}
+    private String name, type = null, desc = null;
+    private int order;
+    private int up = -1, down = -1;
 
-	/** Parameter name */
-	public String getName() {
-		return name;
-	}
+    MetaParameter(String name, int order) {
+        this.name = name;
+        this.order = order;
+    }
 
-	/** Parameter type */
-	public void setType(String type) {
-		this.type = type;
-	}
+    /**
+     * Parameter name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/** Parameter type */
-	public String getType() {
-		return type;
-	}
+    /**
+     * Parameter type
+     */
+    public String getType() {
+        return type;
+    }
 
-	/** Description. */
-	public void setDescription(String desc) {
-		this.desc = desc;
-	}
+    /**
+     * Parameter type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	/** Description. */
-	public String getDescription() {
-		return desc;
-	}
+    /**
+     * Description.
+     */
+    public String getDescription() {
+        return desc;
+    }
 
-	/** CAS order */
-	int getOrder() {
-		return order;
-	}
-	
-	public int getUpIndex() {
-		return up;
-	}
-	
-	void setUpIndex(int up) {
-		this.up = up;
-	}
+    /**
+     * Description.
+     */
+    public void setDescription(String desc) {
+        this.desc = desc;
+    }
 
-	public int getDownIndex() {
-		return down;
-	}
+    /**
+     * CAS order
+     */
+    int getOrder() {
+        return order;
+    }
 
-	void setDownIndex(int down) {
-		this.down = down;
-	}
+    public int getUpIndex() {
+        return up;
+    }
+
+    void setUpIndex(int up) {
+        this.up = up;
+    }
+
+    public int getDownIndex() {
+        return down;
+    }
+
+    void setDownIndex(int down) {
+        this.down = down;
+    }
 
 }

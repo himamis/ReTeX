@@ -29,95 +29,106 @@ package com.himamis.retex.editor.share.model;
 
 public class MathSequence extends MathContainer {
 
-	MathSequence(MathFormula formula, int i) {
-		super(formula, i);
-		ensureArguments(i);
-	}
+    MathSequence(MathFormula formula, int i) {
+        super(formula, i);
+        ensureArguments(i);
+    }
 
-	/** Use MathFormula.newSequence(...) */
-	public MathSequence(MathFormula formula, String text) {
-		this(formula, text.length());
-		for(int i=0;i<text.length();i++) {
-			setArgument(i,new MathCharacter(formula, formula.getMetaModel().getCharacter(""+text.charAt(i))));
-		}
-	}
+    /**
+     * Use MathFormula.newSequence(...)
+     */
+    public MathSequence(MathFormula formula, String text) {
+        this(formula, text.length());
+        for (int i = 0; i < text.length(); i++) {
+            setArgument(i, new MathCharacter(formula, formula.getMetaModel().getCharacter("" + text.charAt(i))));
+        }
+    }
 
-	/** Use MathFormula.newSequence(...) */
-	public MathSequence(MathFormula formula) {
-		super(formula, 0);
-		ensureArguments(0);
-	}
+    /**
+     * Use MathFormula.newSequence(...)
+     */
+    public MathSequence(MathFormula formula) {
+        super(formula, 0);
+        ensureArguments(0);
+    }
 
-	public void addArgument(MathComponent argument) {
-		if(argument!=null) {
-			argument.setParent(this);
-		}
-		arguments.add(argument);
-		formula.setModified(true);
-	}
+    public void addArgument(MathComponent argument) {
+        if (argument != null) {
+            argument.setParent(this);
+        }
+        arguments.add(argument);
+    }
 
-	public void addArgument(int i, MathComponent argument) {
-		if(argument!=null) {
-			argument.setParent(this);
-		}
-		arguments.add(i, argument);
-		formula.setModified(true);
-	}
+    public void addArgument(int i, MathComponent argument) {
+        if (argument != null) {
+            argument.setParent(this);
+        }
+        arguments.add(i, argument);
+    }
 
-	public void delArgument(int i) {
-		arguments.remove(i);
-		formula.setModified(true);
-	}
+    public void delArgument(int i) {
+        arguments.remove(i);
+    }
 
-	public MathContainer clone(MathFormula formula) {
-		MathSequence sequence = new MathSequence(formula);
-		for(int i=0; i<arguments.size(); i++) {
-			MathComponent component = getArgument(i);
-			MathComponent newComponent = component.clone(formula);
-			sequence.addArgument(i,newComponent);
-		}
-		return sequence;
-	}
+    public MathContainer clone(MathFormula formula) {
+        MathSequence sequence = new MathSequence(formula);
+        for (int i = 0; i < arguments.size(); i++) {
+            MathComponent component = getArgument(i);
+            MathComponent newComponent = component.clone(formula);
+            sequence.addArgument(i, newComponent);
+        }
+        return sequence;
+    }
 
-	/** has operator (including power). */
-	public boolean hasOperator() {
-		for(int i=0;i<size();i++) {
-			if(isOperator(i)) {
-				return true;
-			} else if(getArgument(i) instanceof MathFunction &&
-					("^".equals(((MathFunction)getArgument(i)).getName()) )) {
-				return true;
-			}
-		}
-		return false;		
-	}
+    /**
+     * has operator (including power).
+     */
+    public boolean hasOperator() {
+        for (int i = 0; i < size(); i++) {
+            if (isOperator(i)) {
+                return true;
+            } else if (getArgument(i) instanceof MathFunction &&
+                    ("^".equals(((MathFunction) getArgument(i)).getName()))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/** Is i'th argument script. */
-	public boolean isScript(int i) {
-		return i>=0 && i<size() && getArgument(i) instanceof MathFunction &&
-		("^".equals(((MathFunction)getArgument(i)).getName()) ||
-		 "_".equals(((MathFunction)getArgument(i)).getName()) );
-	}
+    /**
+     * Is i'th argument script.
+     */
+    public boolean isScript(int i) {
+        return i >= 0 && i < size() && getArgument(i) instanceof MathFunction &&
+                ("^".equals(((MathFunction) getArgument(i)).getName()) ||
+                        "_".equals(((MathFunction) getArgument(i)).getName()));
+    }
 
-	/** Is i'th argument character. */
-	public boolean isCharacter(int i) {
-		return i>=0 && i<size() &&
-		getArgument(i) instanceof MathCharacter &&
-		((MathCharacter)getArgument(i)).isCharacter();		
-	}
+    /**
+     * Is i'th argument character.
+     */
+    public boolean isCharacter(int i) {
+        return i >= 0 && i < size() &&
+                getArgument(i) instanceof MathCharacter &&
+                ((MathCharacter) getArgument(i)).isCharacter();
+    }
 
-	/** Is i'th argument operator. */
-	public boolean isOperator(int i) {
-		return i>=0 && i<size() &&
-		getArgument(i) instanceof MathCharacter &&
-		((MathCharacter)getArgument(i)).isOperator();		
-	}
+    /**
+     * Is i'th argument operator.
+     */
+    public boolean isOperator(int i) {
+        return i >= 0 && i < size() &&
+                getArgument(i) instanceof MathCharacter &&
+                ((MathCharacter) getArgument(i)).isOperator();
+    }
 
-	/** Is i'th argument symbol. */
-	public boolean isSymbol(int i) {
-		return i>=0 && i<size() &&
-		getArgument(i) instanceof MathCharacter &&
-		((MathCharacter)getArgument(i)).isSymbol();		
-	}
+    /**
+     * Is i'th argument symbol.
+     */
+    public boolean isSymbol(int i) {
+        return i >= 0 && i < size() &&
+                getArgument(i) instanceof MathCharacter &&
+                ((MathCharacter) getArgument(i)).isSymbol();
+    }
 
 }

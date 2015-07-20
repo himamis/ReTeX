@@ -1,6 +1,7 @@
 package com.himamis.retex.editor.android.event;
 
 import android.os.Build;
+import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -22,15 +23,18 @@ public class KeyListenerAdapter implements View.OnKeyListener {
                 break;
             case KeyEvent.ACTION_UP:
             case KeyEvent.ACTION_MULTIPLE:
-                mKeyListener.onKeyReleased(wrapEvent(event));
-                mKeyListener.onKeyTyped(wrapEvent(event));
+                com.himamis.retex.editor.share.event.KeyEvent wrappedEvent = wrapEvent(event);
+                mKeyListener.onKeyReleased(wrappedEvent);
+                if (wrappedEvent.getUnicodeKeyChar() != '\0') {
+                    mKeyListener.onKeyTyped(wrappedEvent);
+                }
         }
         return true;
     }
 
     private static com.himamis.retex.editor.share.event.KeyEvent wrapEvent(KeyEvent keyEvent) {
         int keyCode = getKeyCode(keyEvent.getKeyCode());
-        char charCode = (char) keyEvent.getUnicodeChar();
+        char charCode = getCharCode(keyEvent);
         int modifiers = getModifiers(keyEvent);
         return new com.himamis.retex.editor.share.event.KeyEvent(keyCode, modifiers, charCode);
     }
@@ -58,5 +62,17 @@ public class KeyListenerAdapter implements View.OnKeyListener {
         }
         // TODO ?
         return 0;
+    }
+
+    private static char getCharCode(KeyEvent keyEvent) {
+        int unicodeChar = keyEvent.getUnicodeChar();
+        if (keyEvent.getAction() == KeyEvent.ACTION_MULTIPLE && keyEvent.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN) {
+            // return the first character
+            return keyEvent.getCharacters().charAt(0);
+        } else if ((unicodeChar & KeyCharacterMap.COMBINING_ACCENT) != 0 || (unicodeChar == 0)) {
+            return '\0';
+        } else {
+            return (char) unicodeChar;
+        }
     }
 }

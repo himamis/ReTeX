@@ -27,139 +27,153 @@
  */
 package com.himamis.retex.editor.share.model;
 
-import java.util.ArrayList;
+import com.himamis.retex.editor.share.algebra.Serializer;
 
-import com.himamis.retex.editor.share.algebra.TeXSerializer;
+import java.util.ArrayList;
 
 /**
  * This class represents abstract model element.
- * 
+ *
  * @author Bea Petrovicova
  */
 abstract public class MathContainer extends MathComponent {
 
-	protected ArrayList<MathComponent> arguments = null;
+    protected ArrayList<MathComponent> arguments = null;
 
-	protected void ensureArguments(int size) {
-		if(arguments==null) {
-			arguments = new ArrayList<MathComponent>(size);			
-		} else {
-			arguments.ensureCapacity(size);
-		}
-		while(arguments.size()<size) {
-			arguments.add(null);
-		}
-	}
-	
-	MathContainer(MathFormula formula, int size) {
-		super(formula);
-		if(size>0) {
-			ensureArguments(size);
-		}
-	}
+    MathContainer(MathFormula formula, int size) {
+        super(formula);
+        if (size > 0) {
+            ensureArguments(size);
+        }
+    }
 
-	/** Returns i'th argument . */
-	public MathComponent getArgument(int i) {
-		return (arguments!=null ? arguments.get(i) : null);
-	}
+    protected void ensureArguments(int size) {
+        if (arguments == null) {
+            arguments = new ArrayList<MathComponent>(size);
+        } else {
+            arguments.ensureCapacity(size);
+        }
+        while (arguments.size() < size) {
+            arguments.add(null);
+        }
+    }
 
-	/** Sets i'th argument. */
-	public void setArgument(int i, MathComponent argument) {
-		if(arguments==null) {
-			arguments = new ArrayList<MathComponent>(i+1);
-		}
-		if(argument!=null) {
-			argument.setParent(this);
-		}
-		arguments.set(i, argument);
-		formula.setModified(true);
-	}
+    /**
+     * Returns i'th argument.
+     */
+    public MathComponent getArgument(int i) {
+        return (arguments != null ? arguments.get(i) : null);
+    }
 
-	/** Returns number of arguments. */
-	public int size() {
-		return arguments!=null?arguments.size():0;
-	}
+    /**
+     * Sets i'th argument.
+     */
+    public void setArgument(int i, MathComponent argument) {
+        if (arguments == null) {
+            arguments = new ArrayList<MathComponent>(i + 1);
+        }
+        if (argument != null) {
+            argument.setParent(this);
+        }
+        arguments.set(i, argument);
+    }
 
-	/** Get index of first argument. */
-	public int first() {
-		// strange but correct
-		return next(-1);
-	}
+    /**
+     * Returns number of arguments.
+     */
+    public int size() {
+        return arguments != null ? arguments.size() : 0;
+    }
 
-	/** Get index of last argument. */
-	public int last() {
-		return prev(arguments!=null?arguments.size():0); 
-	}
+    /**
+     * Get index of first argument.
+     */
+    public int first() {
+        // strange but correct
+        return next(-1);
+    }
 
-	/** Is there a next argument? */
-	public boolean hasNext(int current) {
-		for(int i=current+1;i<(arguments!=null?arguments.size():0);i++) {
-			if(getArgument(i) instanceof MathContainer) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Get index of last argument.
+     */
+    public int last() {
+        return prev(arguments != null ? arguments.size() : 0);
+    }
 
-	/** Get index of next argument. */
-	public int next(int current) {
-		for(int i=current+1;i<(arguments!=null?arguments.size():0);i++) {
-			if(getArgument(i) instanceof MathContainer) {
-				return i;
-			}
-		}		
-		throw new ArrayIndexOutOfBoundsException(
-			"Index out of array bounds.");
-	}
+    /**
+     * Is there a next argument?
+     */
+    public boolean hasNext(int current) {
+        for (int i = current + 1; i < (arguments != null ? arguments.size() : 0); i++) {
+            if (getArgument(i) instanceof MathContainer) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/** Is there previous argument? */
-	public boolean hasPrev(int current) {
-		for(int i=current-1;i>=0;i--) {
-			if(getArgument(i) instanceof MathContainer) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Get index of next argument.
+     */
+    public int next(int current) {
+        for (int i = current + 1; i < (arguments != null ? arguments.size() : 0); i++) {
+            if (getArgument(i) instanceof MathContainer) {
+                return i;
+            }
+        }
+        throw new ArrayIndexOutOfBoundsException(
+                "Index out of array bounds.");
+    }
 
-	/** Get index of previous argument. */
-	public int prev(int current) {
-		for(int i=current-1;i>=0;i--) {
-			if(getArgument(i) instanceof MathContainer) {
-				return i;
-			}
-		}
-		throw new ArrayIndexOutOfBoundsException(
-			"Index out of array bounds.");
-	}
+    /**
+     * Is there previous argument?
+     */
+    public boolean hasPrev(int current) {
+        for (int i = current - 1; i >= 0; i--) {
+            if (getArgument(i) instanceof MathContainer) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/** Are there any arguments? */
-	public boolean hasChildren() {
-		for(int i=0;i<(arguments!=null?arguments.size():0);i++) {
-			if(getArgument(i) instanceof MathContainer) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Get index of previous argument.
+     */
+    public int prev(int current) {
+        for (int i = current - 1; i >= 0; i--) {
+            if (getArgument(i) instanceof MathContainer) {
+                return i;
+            }
+        }
+        throw new ArrayIndexOutOfBoundsException(
+                "Index out of array bounds.");
+    }
 
-	abstract public MathContainer clone(MathFormula formula);
+    /**
+     * Are there any arguments?
+     */
+    public boolean hasChildren() {
+        for (int i = 0; i < (arguments != null ? arguments.size() : 0); i++) {
+            if (getArgument(i) instanceof MathContainer) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public int getInsertIndex() {
-		return 0;
-	}
+    abstract public MathContainer clone(MathFormula formula);
 
-	public int getInitialIndex() {
-		return 0;
-	}
+    public int getInsertIndex() {
+        return 0;
+    }
 
-	/* Translates CAS argument order into input argument order. *
-	int getArgumentInputIndex(int casOrder) {
-		return casOrder;			
-	} */
+    public int getInitialIndex() {
+        return 0;
+    }
 
-	public String toString() {
-		TeXSerializer serializer = new TeXSerializer();
-		return serializer.serialize(this,null,0);
-	}
+    @Override
+    public void serialize(Serializer serializer, StringBuilder stringBuilder) {
+
+    }
 }

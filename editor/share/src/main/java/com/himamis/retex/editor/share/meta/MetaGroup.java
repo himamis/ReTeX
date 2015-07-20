@@ -27,46 +27,49 @@
  */
 package com.himamis.retex.editor.share.meta;
 
+import java.util.List;
+
 /**
  * Group of abstract Meta Model Components.
- * 
+ *
  * @author Bea Petrovicova
  */
 public class MetaGroup {
 
-	private MetaComponent components[];
-	private String name, group;
-	private int columns = 0;
+    private List<MetaComponent> components;
+    private String name, group;
+    private int columns = 0;
 
-	MetaGroup(String name, String group, MetaComponent components[], int columns) {
-		this.name = name;
-		this.group = group;
-		this.components = components;
-		this.columns = columns;
-	}
-	public MetaComponent getComponent(String name) {
-		for(int i=0;i<components.length;i++) {
-			if(components[i].getName().equals(name)) {
-				return components[i];
-			}
-		}
-		return null;
-	}
+    MetaGroup(String name, String group, List<MetaComponent> components, int columns) {
+        this.name = name;
+        this.group = group;
+        this.components = components;
+        this.columns = columns;
+    }
 
-	public MetaComponent[] getComponents() {
-		return components;
-	}
-	
-	public String getName() {
-		return name;
-	}
+    public MetaComponent getComponent(String name) {
+        for (MetaComponent component : components) {
+            if (component.getName().equals(name)) {
+                return component;
+            }
+        }
+        return null;
+    }
 
-	public String getGroup() {
-		return group;
-	}
+    public List<MetaComponent> getComponents() {
+        return components;
+    }
 
-	public int getColumns() {
-		return columns;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
 
 }

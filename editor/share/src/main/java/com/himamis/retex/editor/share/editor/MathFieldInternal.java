@@ -66,11 +66,11 @@ public class MathFieldInternal {
     FocusListener focusListener = new FocusListener() {
 
         public void onFocusLost() {
-            controller.update();
+            update();
         }
 
         public void onFocusGained() {
-            update();
+            controller.update();
         }
     };
     private KeyListener keyListener = new KeyListener() {

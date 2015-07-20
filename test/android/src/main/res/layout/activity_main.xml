@@ -10,7 +10,7 @@
    <com.himamis.retex.renderer.android.LaTeXView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lv_latexText="\\left[\\frac{x}{2}\\right]"
+        app:lv_latexText="öámétécsőúű"
         app:lv_size="18" />
 
 

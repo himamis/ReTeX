@@ -27,42 +27,44 @@
  */
 package com.himamis.retex.editor.share.meta;
 
+import java.util.List;
+
 public class MetaArray extends MetaGroup {
 
-	MetaArray(String name, String tab, MetaComponent[] components) {
-		super(name, tab, components, 0);		
-	}
+    MetaArray(String name, String tab, List<MetaComponent> components) {
+        super(name, tab, components, 0);
+    }
 
-	public MetaComponent getOpen() {
-		return getComponent(MetaModel.OPEN);
-	}
+    public MetaComponent getOpen() {
+        return getComponent(MetaModel.OPEN);
+    }
 
-	public char getOpenKey() {
-		return getOpen().getKey();
-	}
+    public char getOpenKey() {
+        return getOpen().getKey();
+    }
 
-	public MetaComponent getClose() {
-		return getComponent(MetaModel.CLOSE);
-	}
+    public MetaComponent getClose() {
+        return getComponent(MetaModel.CLOSE);
+    }
 
-	public char getCloseKey() {
-		return getClose().getKey();
-	}
+    public char getCloseKey() {
+        return getClose().getKey();
+    }
 
-	public MetaComponent getField() {
-		return getComponent(MetaModel.FIELD);
-	}
+    public MetaComponent getField() {
+        return getComponent(MetaModel.FIELD);
+    }
 
-	public char getFieldKey() {
-		return getField().getKey();
-	}
+    public char getFieldKey() {
+        return getField().getKey();
+    }
 
-	public MetaComponent getRow() {
-		return getComponent(MetaModel.ROW);
-	}
+    public MetaComponent getRow() {
+        return getComponent(MetaModel.ROW);
+    }
 
-	public char getRowKey() {
-		return getRow().getKey();
-	}
+    public char getRowKey() {
+        return getRow().getKey();
+    }
 
 }

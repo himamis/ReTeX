@@ -28,54 +28,58 @@
 package com.himamis.retex.editor.share.model;
 
 
+import com.himamis.retex.editor.share.algebra.Serializer;
+
 /**
  * This class represents abstract model element.
- * 
+ *
  * @author Bea Petrovicova
  */
 abstract public class MathComponent {
 
-	protected MathFormula formula;
-	private MathContainer parent;
-	private int id;
-	
-	MathComponent(MathFormula formula) {
-		this.formula = formula;
-		this.id = formula.newID();
-	}
-	
-	public MathFormula getFormula() {
-		return formula;
-	}
-	
-	/** Sets parent of this component. */
-	void setParent(MathContainer container) {
-		this.parent = container;
-	}
+    protected MathFormula formula;
+    private MathContainer parent;
 
-	/** Gets parent of this component. */
-	public MathContainer getParent() {
-		return parent;
-	}
-	/** Gets index of this comonent within its parent component. */
-	public int getParentIndex() {
-		if(parent==null) {
-			return 0;
-		}
-		for(int i=0;i<parent.size();i++) {
-			if(parent.getArgument(i)==this) {
-				return i;
-			}
-		}
-		// this should not happen
-		return 0;
-	}
+    MathComponent(MathFormula formula) {
+        this.formula = formula;
+    }
 
-	abstract public MathComponent clone(MathFormula formula);
+    public MathFormula getFormula() {
+        return formula;
+    }
 
-	/** Returns unique component id */
-	public int getID() {
-		return id;
-	}
+    /**
+     * Gets parent of this component.
+     */
+    public MathContainer getParent() {
+        return parent;
+    }
+
+    /**
+     * Sets parent of this component.
+     */
+    void setParent(MathContainer container) {
+        this.parent = container;
+    }
+
+    /**
+     * Gets index of this component within its parent component.
+     */
+    public int getParentIndex() {
+        if (parent == null) {
+            return 0;
+        }
+        for (int i = 0; i < parent.size(); i++) {
+            if (parent.getArgument(i) == this) {
+                return i;
+            }
+        }
+        // this should not happen
+        return 0;
+    }
+
+    abstract public MathComponent clone(MathFormula formula);
+
+    abstract public void serialize(Serializer serializer, StringBuilder stringBuilder);
 
 }

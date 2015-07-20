@@ -32,40 +32,46 @@ import com.himamis.retex.renderer.share.platform.font.Font;
 
 /**
  * Meta Model for Greek Symbol.
- * 
+ *
  * @author Bea Petrovicova
  */
 public class MetaSymbol extends MetaCharacter {
 
-	private String description;
-	private char code;
-	private Font font;
+    private String description;
+    private char code;
+    private Font font;
 
-	MetaSymbol(String name, String casName, String texName, char key, char code, int fontId, int type) {
-		this(name, casName, texName, key, code, DefaultTeXFont.getFont(fontId), type);
-	}
+    MetaSymbol(String name, String casName, String texName, char key, char code, int fontId, int type) {
+        this(name, casName, texName, key, code, DefaultTeXFont.getFont(fontId), type);
+    }
 
-	MetaSymbol(String name, String casName, String texName, char key, char code, Font font, int type) {
-		super(name, casName, texName, key, type);
-		this.code = code;
-		this.font = font;
-		this.description = casName;
-		setIcon(("NaN".equals(casName)?"_":"")+name+".png");
-	}
-	
-	/** Abstract font. */
-	public Font getFont() {
-		return font;
-	}
+    MetaSymbol(String name, String casName, String texName, char key, char code, Font font, int type) {
+        super(name, casName, texName, key, type);
+        this.code = code;
+        this.font = font;
+        this.description = casName;
+        setIcon(("NaN".equals(casName) ? "_" : "") + name + ".png");
+    }
 
-	/** ASCII code for symbol. */
-	public char getCode() {
-		return code;
-	}
+    /**
+     * Abstract font.
+     */
+    public Font getFont() {
+        return font;
+    }
 
-	/** Description. */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * ASCII code for symbol.
+     */
+    public char getCode() {
+        return code;
+    }
+
+    /**
+     * Description.
+     */
+    public String getDescription() {
+        return description;
+    }
 
 }

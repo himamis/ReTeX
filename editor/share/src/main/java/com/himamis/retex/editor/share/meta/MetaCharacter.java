@@ -29,19 +29,19 @@ package com.himamis.retex.editor.share.meta;
 
 public class MetaCharacter extends MetaComponent {
 
-	public static final int CHARACTER = 1;
-	public static final int OPERATOR = 2;
-	public static final int SYMBOL = 3;	
+    public static final int CHARACTER = 1;
+    public static final int OPERATOR = 2;
+    public static final int SYMBOL = 3;
 
-	private int type;
-	
-	MetaCharacter(String name, String casName, String texName, char key, int type) {
-		super(name, casName, texName, key);
-		this.type = type;
-	}
-	
-	public int getType() {
-		return type;
-	}
-	
+    private int type;
+
+    MetaCharacter(String name, String casName, String texName, char key, int type) {
+        super(name, casName, texName, key);
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
 }

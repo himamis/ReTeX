@@ -27,48 +27,56 @@
  */
 package com.himamis.retex.editor.share.model;
 
+import com.himamis.retex.editor.share.algebra.Serializer;
+
 /**
  * Braces. This class is part of model.
- * 
+ *
  * @author Bea Petrovicova
  */
 public class MathBraces extends MathContainer {
 
-	public static final int REGULAR = 1;
-	public static final int SQUARE = 2;
-	public static final int CURLY = 3;
-	public static final int APOSTROPHES = 4;
+    public static final int REGULAR = 1;
+    public static final int SQUARE = 2;
+    public static final int CURLY = 3;
+    public static final int APOSTROPHES = 4;
 
-	private int classif;
+    private int classif;
 
-	public MathBraces(MathFormula formula, int classif) {
-		super(formula, 1);
-		this.classif = classif;
-	}
+    public MathBraces(MathFormula formula, int classif) {
+        super(formula, 1);
+        this.classif = classif;
+    }
 
-	/** Gets parent of this component. */
-	public MathSequence getParent() {
-		return (MathSequence)super.getParent();
-	}
+    /**
+     * Gets parent of this component.
+     */
+    public MathSequence getParent() {
+        return (MathSequence) super.getParent();
+    }
 
-	public MathSequence getArgument(int i) {
-		return (MathSequence)super.getArgument(i);
-	}
+    public MathSequence getArgument(int i) {
+        return (MathSequence) super.getArgument(i);
+    }
 
-	public void setArgument(int i, MathSequence argument) {
-		super.setArgument(i, argument);
-	}
+    public void setArgument(int i, MathSequence argument) {
+        super.setArgument(i, argument);
+    }
 
-	public MathContainer clone(MathFormula formula) {
-		MathBraces braces = new MathBraces(formula, classif);
-		MathComponent component = getArgument(0);
-		MathComponent newComponent = component.clone(formula);
-		braces.setArgument(0,newComponent);
-		return braces;
-	}
+    public MathContainer clone(MathFormula formula) {
+        MathBraces braces = new MathBraces(formula, classif);
+        MathComponent component = getArgument(0);
+        MathComponent newComponent = component.clone(formula);
+        braces.setArgument(0, newComponent);
+        return braces;
+    }
 
-	public int getClassif() {
-		return classif;
-	}
+    public int getClassif() {
+        return classif;
+    }
 
+    @Override
+    public void serialize(Serializer serializer, StringBuffer stringBuffer) {
+        serializer.serialize(this, stringBuffer);
+    }
 }

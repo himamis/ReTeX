@@ -31,48 +31,33 @@ import com.himamis.retex.editor.share.meta.MetaModel;
 
 public class MathFormula {
 
-	private int lastUsedID = 0;
-	private MetaModel metaModel;
-	private MathSequence rootContainer;
-	private boolean modified = false;
+    private MetaModel metaModel;
+    private MathSequence rootContainer;
 
-	public static MathFormula newFormula(MetaModel metaModel) {
-		MathFormula newFormula = new MathFormula(metaModel);
-		newFormula.setRootComponent(new MathSequence(newFormula));
-		newFormula.modified = true;
-		return newFormula;
-	}
+    public MathFormula(MetaModel metaModel) {
+        this.metaModel = metaModel;
+    }
 
-	public MathFormula(MetaModel metaModel) {
-		this.metaModel = metaModel;
-	}
+    public static MathFormula newFormula(MetaModel metaModel) {
+        MathFormula newFormula = new MathFormula(metaModel);
+        newFormula.setRootComponent(new MathSequence(newFormula));
+        return newFormula;
+    }
 
-	public boolean isModified() {
-		return modified;
-	}
+    /**
+     * MetaModel
+     */
+    public MetaModel getMetaModel() {
+        return metaModel;
+    }
 
-	public void setModified(boolean modified) {
-		this.modified = modified;
-	}
+    public MathSequence getRootComponent() {
+        return rootContainer;
+    }
 
-	int newID() {
-		lastUsedID++;
-		return lastUsedID;
-	}
-
-	/** MetaModel */
-	public MetaModel getMetaModel() {
-		return metaModel;
-	}
-
-	public MathSequence getRootComponent() {
-		return rootContainer;
-	}
-
-	public void setRootComponent(MathSequence rootContainer) {
-		this.rootContainer = rootContainer;
-		rootContainer.setParent(null);
-		setModified(true);
-	}
+    public void setRootComponent(MathSequence rootContainer) {
+        this.rootContainer = rootContainer;
+        rootContainer.setParent(null);
+    }
 
 }

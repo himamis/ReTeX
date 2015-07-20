@@ -29,62 +29,76 @@ package com.himamis.retex.editor.share.meta;
 
 /**
  * Meta Model of Math Component.
- * 
+ *
  * @author Bea Petrovicova
  */
 public class MetaComponent {
 
-	private String name, casName, texName;
-	private String icon;
-	private char key;
+    private String name, casName, texName;
+    private String icon;
+    private char key;
 
-	MetaComponent(String name, String casName, String texName, char key) {
-		this.name = name;
-		this.casName = casName;
-		this.texName = texName;
-		this.key = key;
-	}
+    MetaComponent(String name, String casName, String texName, char key) {
+        this.name = name;
+        this.casName = casName;
+        this.texName = texName;
+        this.key = key;
+    }
 
-	/** Uid name. */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Uid name.
+     */
+    public String getName() {
+        return name;
+    }
 
-	/** Cas name. */
-	public String getCasName() {
-		return casName;
-	}
+    /**
+     * Cas name.
+     */
+    public String getCasName() {
+        return casName;
+    }
 
-	/** TeX name. */
-	public String getTexName() {
-		return texName;
-	}
+    /**
+     * TeX name.
+     */
+    public String getTexName() {
+        return texName;
+    }
 
-	/** Icon Name */
-	void setIcon(String icon) {
-		this.icon = icon;
-	}
+    /**
+     * Icon Name
+     */
+    public String getIcon() {
+        return icon;
+    }
 
-	/** Icon Name */
-	public String getIcon() {
-		return icon;
-	}
+    /**
+     * Icon Name
+     */
+    void setIcon(String icon) {
+        this.icon = icon;
+    }
 
-	/** Input Key. */
-	public char getKey() {
-		return key;
-	}
+    /**
+     * Input Key.
+     */
+    public char getKey() {
+        return key;
+    }
 
-	/** Signature. */
-	public String getTip() {
-		if(getName().length()>1) {
-			if(this instanceof MetaFunction) {
-				return getName()+"(";
-			} else {
-				return getName()+" [Esc]";
-			}
-		} else {
-			return "a"+getName()+"b";
-		}
-	}
+    /**
+     * Signature.
+     */
+    public String getTip() {
+        if (getName().length() > 1) {
+            if (this instanceof MetaFunction) {
+                return getName() + "(";
+            } else {
+                return getName() + " [Esc]";
+            }
+        } else {
+            return "a" + getName() + "b";
+        }
+    }
 }
