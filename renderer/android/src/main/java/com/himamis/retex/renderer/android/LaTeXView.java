@@ -210,7 +210,6 @@ public class LaTeXView extends View {
             height = desiredHeight;
         }
 
-        //MUST CALL THIS
         setMeasuredDimension(width, height);
     }
 
