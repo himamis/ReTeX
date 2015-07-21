@@ -13,13 +13,13 @@ public interface Serializer {
 
     void serialize(MathCharacter mathCharacter, StringBuilder buffer);
 
-    void serialize(MathSequence sequence, StringBuffer buffer);
+    void serialize(MathSequence sequence, StringBuilder buffer);
 
-    void serialize(MathSequence sequence, StringBuffer buffer, int from, int to);
+    void serialize(MathSequence sequence, StringBuilder buffer, int from, int to);
 
-    void serialize(MathFunction function, StringBuffer buffer);
+    void serialize(MathFunction function, StringBuilder buffer);
 
-    void serialize(MathBraces braces, StringBuffer buffer);
+    void serialize(MathBraces braces, StringBuilder buffer);
 
-    void serialize(MathArray array, StringBuffer buffer);
+    void serialize(MathArray array, StringBuilder buffer);
 }

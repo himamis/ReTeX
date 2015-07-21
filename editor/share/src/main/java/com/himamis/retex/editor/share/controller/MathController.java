@@ -702,8 +702,7 @@ public abstract class MathController extends MathContext {
 			newOperator(ch);
 			update();
 
-		} else { //if (formula.getMetaModel().isCharacter(""+ch)) {
-			// allow all characters
+		} else if (formula.getMetaModel().isCharacter(""+ch)) {
 			newCharacter(ch);
 			update();
 		}

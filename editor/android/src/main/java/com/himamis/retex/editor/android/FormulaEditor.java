@@ -36,9 +36,6 @@ import java.io.InputStream;
 
 public class FormulaEditor extends View implements MathField {
 
-    // don't let the view collapse
-    private static final float sMinHeight = 48.0f;
-
     private static MetaModel sMetaModel;
 
     private TeXIcon mTeXIcon;

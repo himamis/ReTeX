@@ -29,7 +29,7 @@ package com.himamis.retex.editor.share.meta;
 
 import java.util.List;
 
-public class MetaArray extends MetaGroup {
+public class MetaArray extends ListMetaGroup {
 
     MetaArray(String name, String tab, List<MetaComponent> components) {
         super(name, tab, components, 0);

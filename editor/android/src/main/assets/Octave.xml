@@ -43,6 +43,76 @@
 		<Row cas=";" tex=" \\ " />
 	</Matrix>
 
+	<Characters>
+		<Character name="a" />
+		<Character name="b" />
+		<Character name="c" />
+		<Character name="d" />
+		<Character name="e" />
+		<Character name="f" />
+		<Character name="g" />
+		<Character name="h" />
+		<Character name="i" />
+		<Character name="j" />
+		<Character name="k" />
+		<Character name="l" />
+		<Character name="m" />
+		<Character name="n" />
+		<Character name="o" />
+		<Character name="p" />
+		<Character name="q" />
+		<Character name="r" />
+		<Character name="s" />
+		<Character name="t" />
+		<Character name="u" />
+		<Character name="v" />
+		<Character name="w" />
+		<Character name="x" />
+		<Character name="y" />
+		<Character name="z" />
+		<Character name="A" />
+		<Character name="B" />
+		<Character name="C" />
+		<Character name="D" />
+		<Character name="E" />
+		<Character name="F" />
+		<Character name="G" />
+		<Character name="H" />
+		<Character name="I" />
+		<Character name="J" />
+		<Character name="K" />
+		<Character name="L" />
+		<Character name="M" />
+		<Character name="N" />
+		<Character name="O" />
+		<Character name="P" />
+		<Character name="Q" />
+		<Character name="R" />
+		<Character name="S" />
+		<Character name="T" />
+		<Character name="U" />
+		<Character name="V" />
+		<Character name="W" />
+		<Character name="X" />
+		<Character name="Y" />
+		<Character name="Z" />
+		<Character name="0" />
+		<Character name="1" />
+		<Character name="2" />
+		<Character name="3" />
+		<Character name="4" />
+		<Character name="5" />
+		<Character name="6" />
+		<Character name="7" />
+		<Character name="8" />
+		<Character name="9" />
+		<Character name=":" />
+		<!-- command delimiter ';' is not regular character 
+			for more details see MathController.endField(ch) -->
+		<Character name=";" /> 
+		<Character name="." />
+		<Character name=" " />
+	</Characters>
 
 	<Functions name="CustomFunctions" group="General">
 		<Function name="_" cas="_" tex="_" key="_" img="sub.png" desc="subscript" >
@@ -325,7 +395,7 @@
 
 	<!-- Miscellaneous Functions -->
 
-		<Function name="mod" cas="mod" tex="mod" desc="modulo" >
+		<Function name="mod" cas="mod" tex="mod" desc="modulo">
 			<Parameter name="n" type="integer" order="0" />
 			<Parameter name="m" type="integer" order="1" />
 		</Function>

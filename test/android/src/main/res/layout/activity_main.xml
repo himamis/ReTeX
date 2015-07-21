@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#abaaee"
     tools:context=".MainActivity">
 
    <com.himamis.retex.renderer.android.LaTeXView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lv_latexText="öámétécsőúű"
+        app:lv_latexText="a|b"
         app:lv_size="18" />
 
 

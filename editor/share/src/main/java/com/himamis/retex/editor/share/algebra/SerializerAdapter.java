@@ -13,17 +13,15 @@ public class SerializerAdapter {
     private int currentOffset = 0;
 
     public String serialize(Serializer serializer, MathFormula formula) {
-        return serialize(serializer, formula, null, 0);
+        return serialize(serializer, formula.getRootComponent(), null, 0);
     }
 
     public String serialize(Serializer serializer, MathContainer container, MathSequence currentField,
                             int currentOffset) {
         this.currentField = currentField;
         this.currentOffset = currentOffset;
-        StringBuffer buffer = new StringBuffer();
-        serializer.serialize(container, buffer);
+        StringBuilder buffer = new StringBuilder();
+        container.serialize(serializer, buffer);
         return buffer.toString();
     }
-
-    public void serialize(MathCon)
 }

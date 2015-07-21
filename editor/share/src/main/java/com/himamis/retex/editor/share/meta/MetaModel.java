@@ -167,19 +167,7 @@ public class MetaModel {
      * get character
      */
     public MetaCharacter getCharacter(String name) {
-        try {
-            return (MetaCharacter) getComponent(CHARACTERS, name);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            if (name == null || name.length() != 1) {
-                throw e;
-            }
-            // extend the character group
-            MetaGroup group = getGroup(CHARACTERS);
-            MetaCharacter newCharacter = new MetaCharacter(name, name, name, name.length() > 0 ? name.charAt(0) : 0,
-                    MetaCharacter.CHARACTER);
-            group.getComponents().add(newCharacter);
-            return newCharacter;
-        }
+        return (MetaCharacter) getComponent(CHARACTERS, name);
     }
 
     /**
@@ -221,13 +209,6 @@ public class MetaModel {
     }
 
     /**
-     * get symbols
-     */
-    public List<MetaComponent> getSymbols() {
-        return getComponents(SYMBOLS);
-    }
-
-    /**
      * Custom Function.
      */
     public boolean isGeneral(String name) {
@@ -266,13 +247,6 @@ public class MetaModel {
     }
 
     /**
-     * get functions
-     */
-    public List<MetaComponent> getFunctions() {
-        return getComponents(FUNCTIONS);
-    }
-
-    /**
      * get component
      */
     public MetaComponent getComponent(String tabName, String name) {
@@ -289,14 +263,6 @@ public class MetaModel {
     }
 
     /**
-     * get components
-     */
-    public List<MetaComponent> getComponents(String groupName) {
-        MetaGroup group = getGroup(groupName);
-        return group.getComponents();
-    }
-
-    /**
      * get group
      */
     public MetaGroup getGroup(String groupName) {
@@ -306,7 +272,7 @@ public class MetaModel {
             }
         }
 
-        throw new ArrayIndexOutOfBoundsException("MetaGroup Not found "
+        throw new ArrayIndexOutOfBoundsException("ListMetaGroup Not found "
                 + groupName);
     }
 
@@ -568,10 +534,6 @@ public class MetaModel {
                     MetaComponent metaComponent = parseArrayElement(elementChild);
                     metas.add(metaComponent);
 
-                } else if (name.equals(CHARACTER)) {
-                    MetaCharacter metaCharacter = parseCharacter(elementChild);
-                    metas.add(metaCharacter);
-
                 } else if (name.equals(OPERATOR)) {
                     MetaSymbol metaOperator = parseSymbol(elementChild);
                     metas.add(metaOperator);
@@ -589,8 +551,13 @@ public class MetaModel {
             if (groupName.equals(ARRAY) || groupName.equals(MATRIX)) {
                 groups.add(new MetaArray(groupName, group, metas));
             } else {
-                groups.add(new MetaGroup(groupName, group, metas, columns));
+                groups.add(new ListMetaGroup(groupName, group, metas, columns));
             }
         }
+        addCharacterGroup();
+    }
+
+    private void addCharacterGroup() {
+        groups.add(new CharacterGroup());
     }
 }
