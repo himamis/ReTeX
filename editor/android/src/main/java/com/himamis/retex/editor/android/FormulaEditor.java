@@ -1,6 +1,7 @@
 package com.himamis.retex.editor.android;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import com.himamis.retex.renderer.android.FactoryProviderAndroid;
 import com.himamis.retex.renderer.android.graphics.ColorA;
 import com.himamis.retex.renderer.android.graphics.Graphics2DA;
 import com.himamis.retex.renderer.share.ColorUtil;
+import com.himamis.retex.renderer.share.TeXConstants;
 import com.himamis.retex.renderer.share.TeXFormula;
 import com.himamis.retex.renderer.share.TeXIcon;
 import com.himamis.retex.renderer.share.platform.FactoryProvider;
@@ -47,6 +49,8 @@ public class FormulaEditor extends View implements MathField {
     private ColorA mForegroundColor = new ColorA(android.graphics.Color.BLACK);
 
     private float mScale;
+
+    private float mMinHeight;
 
     public FormulaEditor(Context context) {
         super(context);
@@ -92,6 +96,14 @@ public class FormulaEditor extends View implements MathField {
         mMathFieldInternal.setSize(mSize * mScale);
         mMathFieldInternal.setMathField(this);
         mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel));
+    }
+
+    private float getMinHeigth() {
+        if (mMinHeight == 0) {
+            mMinHeight = new TeXFormula("|").new TeXIconBuilder().setSize(mSize * mScale)
+                    .setStyle(TeXConstants.STYLE_DISPLAY).build().getIconHeight();
+        }
+        return mMinHeight;
     }
 
     private void initFactoryProvider() {
@@ -161,9 +173,19 @@ public class FormulaEditor extends View implements MathField {
     }
 
     @Override
+    protected void onConfigurationChanged(Configuration newConfig) {
+        float newFontScale = newConfig.fontScale;
+        if (Math.abs(mScale - newFontScale) > 0.001) {
+            mScale = newConfig.fontScale;
+            mMinHeight = 0;
+            mMathFieldInternal.update();
+        }
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         final int desiredWidth = mTeXIcon.getIconWidth();
-        final int desiredHeight = (int) (Math.max(mSize * mScale, mTeXIcon.getIconHeight()) + 0.5);
+        final int desiredHeight = (int) (Math.max(getMinHeigth(), mTeXIcon.getIconHeight()) + 0.5);
 
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
