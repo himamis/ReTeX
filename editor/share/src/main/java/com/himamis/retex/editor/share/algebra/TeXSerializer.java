@@ -21,7 +21,17 @@ public class TeXSerializer extends SerializerAdapter {
 
     @Override
     public void serialize(MathCharacter mathCharacter, StringBuilder buffer) {
+        // jmathtex v0.7: incompatibility
+        if (" ".equals(mathCharacter.getName())) {
+            buffer.append((jmathtex ? "\\nbsp" : "\\ ") + " ");
+        } else {
+            buffer.append(mathCharacter.getTexName());
+        }
 
+        // safety space after operator / symbol
+        if (mathCharacter.isOperator() || mathCharacter.isSymbol()) {
+            buffer.append(' ');
+        }
     }
 
     @Override
@@ -76,25 +86,7 @@ public class TeXSerializer extends SerializerAdapter {
     @Override
     public void serialize(MathSequence sequence, StringBuilder buffer, int from, int to) {
         for (int i = from; i < to; i++) {
-            if (sequence.getArgument(i) instanceof MathCharacter) {
-
-                // jmathtex v0.7: incompatibility
-                if (" ".equals(((MathCharacter) sequence.getArgument(i))
-                        .getName())) {
-                    buffer.append((jmathtex ? "\\nbsp" : "\\ ") + " ");
-                } else {
-                    buffer.append(((MathCharacter) sequence.getArgument(i))
-                            .getTexName());
-                }
-
-                // safety space after operator / symbol
-                if (((MathCharacter) sequence.getArgument(i)).isOperator()
-                        || ((MathCharacter) sequence.getArgument(i)).isSymbol()) {
-                    buffer.append(' ');
-                }
-            } else {
-                serialize(sequence.getArgument(i), buffer);
-            }
+            serialize(sequence.getArgument(i), buffer);
         }
     }
 
