@@ -95,8 +95,4 @@ public class MathCharacter extends MathComponent {
         return meta.getType() == MetaCharacter.SYMBOL;
     }
 
-    @Override
-    public void serialize(Serializer serializer, StringBuilder stringBuilder) {
-        serializer.serialize(this, stringBuilder);
-    }
 }

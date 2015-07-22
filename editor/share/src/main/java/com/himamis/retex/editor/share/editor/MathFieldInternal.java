@@ -38,7 +38,6 @@ import com.himamis.retex.editor.share.model.MathSequence;
 import com.himamis.retex.renderer.share.TeXConstants;
 import com.himamis.retex.renderer.share.TeXFormula;
 import com.himamis.retex.renderer.share.TeXIcon;
-import com.himamis.retex.renderer.share.platform.graphics.Color;
 
 /**
  * This class is a Math Field. Displays and allows to edit single formula.

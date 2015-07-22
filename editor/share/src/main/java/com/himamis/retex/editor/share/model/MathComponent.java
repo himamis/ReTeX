@@ -80,6 +80,4 @@ abstract public class MathComponent {
 
     abstract public MathComponent clone(MathFormula formula);
 
-    abstract public void serialize(Serializer serializer, StringBuilder stringBuilder);
-
 }

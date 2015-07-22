@@ -171,9 +171,4 @@ abstract public class MathContainer extends MathComponent {
     public int getInitialIndex() {
         return 0;
     }
-
-    @Override
-    public void serialize(Serializer serializer, StringBuilder stringBuilder) {
-
-    }
 }

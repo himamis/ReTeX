@@ -75,8 +75,4 @@ public class MathBraces extends MathContainer {
         return classif;
     }
 
-    @Override
-    public void serialize(Serializer serializer, StringBuilder stringBuffer) {
-        serializer.serialize(this, stringBuffer);
-    }
 }

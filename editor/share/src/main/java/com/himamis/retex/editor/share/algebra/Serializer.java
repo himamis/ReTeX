@@ -3,6 +3,7 @@ package com.himamis.retex.editor.share.algebra;
 import com.himamis.retex.editor.share.model.MathArray;
 import com.himamis.retex.editor.share.model.MathBraces;
 import com.himamis.retex.editor.share.model.MathCharacter;
+import com.himamis.retex.editor.share.model.MathComponent;
 import com.himamis.retex.editor.share.model.MathFunction;
 import com.himamis.retex.editor.share.model.MathSequence;
 
@@ -22,4 +23,6 @@ public interface Serializer {
     void serialize(MathBraces braces, StringBuilder buffer);
 
     void serialize(MathArray array, StringBuilder buffer);
+
+    void serialize(MathComponent component, StringBuilder buffer);
 }
