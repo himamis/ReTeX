@@ -47,6 +47,7 @@ public class FormulaEditor extends View implements MathField {
     private float mSize = 20;
     private int mBackgroundColor = Color.TRANSPARENT;
     private ColorA mForegroundColor = new ColorA(android.graphics.Color.BLACK);
+    private int mType = TeXFormula.SERIF;
     private String mText;
 
     private float mScale;
@@ -81,6 +82,7 @@ public class FormulaEditor extends View implements MathField {
             mBackgroundColor = a.getColor(R.styleable.FormulaEditor_fe_backgroundColor, android.graphics.Color.TRANSPARENT);
             mForegroundColor = new ColorA(a.getColor(R.styleable.FormulaEditor_fe_foregroundColor, android.graphics.Color.BLACK));
             mText = a.getString(R.styleable.FormulaEditor_fe_text);
+            mType = a.getInteger(R.styleable.FormulaEditor_fe_type, TeXFormula.SERIF);
         } finally {
             a.recycle();
         }
@@ -96,6 +98,7 @@ public class FormulaEditor extends View implements MathField {
 
         mMathFieldInternal = new MathFieldInternal();
         mMathFieldInternal.setSize(mSize * mScale);
+        mMathFieldInternal.setType(mType);
         mMathFieldInternal.setMathField(this);
         mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, mText));
     }
@@ -146,6 +149,7 @@ public class FormulaEditor extends View implements MathField {
      */
     public void setText(String text) {
         mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, text));
+        requestLayout();
     }
 
     @Override
@@ -259,13 +263,18 @@ public class FormulaEditor extends View implements MathField {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        super.onTouchEvent(event);
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            // show the keyboard so we can enter text
-            InputMethodManager imm = (InputMethodManager) getContext()
-                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(this, InputMethodManager.SHOW_FORCED);
+        if (onCheckIsTextEditor()) {
+            super.onTouchEvent(event);
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                // show the keyboard so we can enter text
+                InputMethodManager imm = (InputMethodManager) getContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(this, InputMethodManager.SHOW_FORCED);
+            }
+            return true;
+        } else {
+            // default behaviour
+            return super.onTouchEvent(event);
         }
-        return true;
     }
 }

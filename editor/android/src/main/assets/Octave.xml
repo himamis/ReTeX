@@ -247,7 +247,8 @@
 	</Operators>
 
 	<Symbols columns="12">
- 		<Symbol name="inf" cas="inf" tex="\infty" key="" code="49"  fontId="3" /> 	
+		<Symbol name="inf" cas="inf" tex="\infty" key="" code="49"  fontId="3" />
+		<Symbol name="∞" cas="inf" tex="\infty" key="" code="49"  fontId="3" />
 		<Symbol name="ii" cas="i" tex="\mathrm{i}" key="i" code="105" fontId="1" />
 		<Symbol name="jj" cas="j" tex="\mathrm{j}" key="j" code="106" fontId="1" />
 
