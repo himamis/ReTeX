@@ -94,7 +94,8 @@ public class MathFieldInternal {
         }
     };
 
-    private float size;
+    private float size = 16;
+    private int type = TeXFormula.SERIF;
 
     public MathFieldInternal() {
         serializer = new TeXSerializer();
@@ -107,6 +108,10 @@ public class MathFieldInternal {
 
     public void setSize(float size) {
         this.size = size;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public MathInputController getController() {
@@ -135,7 +140,7 @@ public class MathFieldInternal {
 
         TeXFormula texFormula = new TeXFormula(serializedFormula);
         renderer = texFormula.new TeXIconBuilder()
-                .setStyle(TeXConstants.STYLE_DISPLAY).setSize(size).build();
+                .setStyle(TeXConstants.STYLE_DISPLAY).setSize(size).setType(type).build();
         mathField.setTeXIcon(renderer);
     }
 
