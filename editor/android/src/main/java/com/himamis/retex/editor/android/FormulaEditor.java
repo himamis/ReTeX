@@ -226,10 +226,11 @@ public class FormulaEditor extends View implements MathField {
         // draw background
         canvas.drawColor(mBackgroundColor);
 
+        int x = Math.round((getMeasuredHeight() - mTeXIcon.getIconHeight()) / 2.0f);
         // draw latex
         mGraphics.setCanvas(canvas);
         mTeXIcon.setForeground(mForegroundColor);
-        mTeXIcon.paintIcon(null, mGraphics, 0, 0);
+        mTeXIcon.paintIcon(null, mGraphics, 0, x);
     }
 
     @Override
