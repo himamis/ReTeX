@@ -27,9 +27,12 @@
  */
 package com.himamis.retex.editor.share.model;
 
+import com.himamis.retex.editor.share.algebra.TextParser;
 import com.himamis.retex.editor.share.meta.MetaModel;
 
 public class MathFormula {
+
+    private static final TextParser PARSER = new TextParser();
 
     private MetaModel metaModel;
     private MathSequence rootContainer;
@@ -42,6 +45,13 @@ public class MathFormula {
         MathFormula newFormula = new MathFormula(metaModel);
         newFormula.setRootComponent(new MathSequence(newFormula));
         return newFormula;
+    }
+
+    public static MathFormula newFormula(MetaModel metaModel, String text) {
+        if (text == null) {
+            return newFormula(metaModel);
+        }
+        return PARSER.parseText(metaModel, text);
     }
 
     /**

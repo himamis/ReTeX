@@ -47,6 +47,7 @@ public class FormulaEditor extends View implements MathField {
     private float mSize = 20;
     private int mBackgroundColor = Color.TRANSPARENT;
     private ColorA mForegroundColor = new ColorA(android.graphics.Color.BLACK);
+    private String mText;
 
     private float mScale;
 
@@ -79,6 +80,7 @@ public class FormulaEditor extends View implements MathField {
             mSize = a.getFloat(R.styleable.FormulaEditor_fe_size, 20);
             mBackgroundColor = a.getColor(R.styleable.FormulaEditor_fe_backgroundColor, android.graphics.Color.TRANSPARENT);
             mForegroundColor = new ColorA(a.getColor(R.styleable.FormulaEditor_fe_foregroundColor, android.graphics.Color.BLACK));
+            mText = a.getString(R.styleable.FormulaEditor_fe_text);
         } finally {
             a.recycle();
         }
@@ -95,7 +97,7 @@ public class FormulaEditor extends View implements MathField {
         mMathFieldInternal = new MathFieldInternal();
         mMathFieldInternal.setSize(mSize * mScale);
         mMathFieldInternal.setMathField(this);
-        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel));
+        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, mText));
     }
 
     private float getMinHeigth() {
@@ -136,6 +138,14 @@ public class FormulaEditor extends View implements MathField {
     public void setBackgroundColor(int backgroundColor) {
         mBackgroundColor = backgroundColor;
         invalidate();
+    }
+
+    /**
+     * Sets the text of the view. Must be called from the UI thread.
+     * @param text e.g. x^2
+     */
+    public void setText(String text) {
+        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, text));
     }
 
     @Override
