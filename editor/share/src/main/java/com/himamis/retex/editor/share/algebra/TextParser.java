@@ -17,6 +17,7 @@ public class TextParser {
                 // noop
             }
         };
+        controller.setFormula(formula);
 
         for (int i = 0; i < text.length(); i++) {
             char character = text.charAt(i);
