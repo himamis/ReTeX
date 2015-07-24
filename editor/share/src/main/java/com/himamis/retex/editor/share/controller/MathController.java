@@ -262,6 +262,13 @@ public abstract class MathController extends MathContext {
 		currentOffset++;
 	}
 
+	/** Insert symbol. */
+	public void newSymbol(char sy) {
+		MetaCharacter meta = formula.getMetaModel().getSymbol("" + sy);
+		currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
+		currentOffset++;
+	}
+
 	/** Insert character. */
 	public void newCharacter(char ch) {
 		MetaCharacter meta = formula.getMetaModel().getCharacter("" + ch);
@@ -701,7 +708,9 @@ public abstract class MathController extends MathContext {
 		} else if(formula.getMetaModel().isOperator(""+ch)) {
 			newOperator(ch);
 			update();
-
+		} else if (formula.getMetaModel().isSymbol("" + ch)) {
+			newSymbol(ch);
+			update();
 		} else if (formula.getMetaModel().isCharacter(""+ch)) {
 			newCharacter(ch);
 			update();

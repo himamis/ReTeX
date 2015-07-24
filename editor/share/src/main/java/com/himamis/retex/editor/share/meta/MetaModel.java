@@ -394,8 +394,17 @@ public class MetaModel {
         } catch (Exception e) {
         }
 
-        int code = getIntAttribute(CODE, element);
-        int fontId = getIntAttribute(FONTID, element);
+        int code = 0;
+        try {
+            code = getIntAttribute(CODE, element);
+        } catch (Exception e) {
+        }
+
+        int fontId = 0;
+        try {
+            fontId = getIntAttribute(FONTID, element);
+        } catch (Exception e) {
+        }
         MetaSymbol metaSymbol = new MetaSymbol(name, cas, tex, key, (char) code, fontId, type);
 
         try {

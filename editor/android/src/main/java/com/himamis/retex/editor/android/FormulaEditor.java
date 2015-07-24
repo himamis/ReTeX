@@ -40,9 +40,10 @@ public class FormulaEditor extends View implements MathField {
 
     private static MetaModel sMetaModel;
 
+    protected MathFieldInternal mMathFieldInternal;
+
     private TeXIcon mTeXIcon;
     private Graphics2DA mGraphics;
-    private MathFieldInternal mMathFieldInternal;
 
     private float mSize = 20;
     private int mBackgroundColor = Color.TRANSPARENT;

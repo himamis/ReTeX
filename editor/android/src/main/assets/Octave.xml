@@ -299,6 +299,10 @@
 		<Symbol name="hbar" tex="\hbar" key="" code="104"  fontId="0" img="hbar.png" /> 
  		<Symbol name="ddagger" cas="ddagger" tex="\ddagger" key="" code="122"  fontId="3" img="ddagger.png" /> 
 		<Symbol name="paragraph" cas="paragraph" tex="\paragraph" key="" code="120" fontId="3" img="paragraph.png" />
+
+		<!-- One character symbols -->
+		<Symbol name="⊗" tex="\otimes" fontId="0" />
+		<Symbol name="°" tex="\degree" />
 	</Symbols>
 
 	<Functions columns="6">
@@ -356,7 +360,11 @@
 
 		<Function name="log10" cas="log10" tex="log_{10}" desc="base 10 logarithm">
 			<Parameter name="x" type="number" order="0" />
-		</Function> 
+		</Function>
+
+		<Function name="log" cas="log" tex="log" desc="base 10 logarithm">
+			<Parameter name="x" type="number" order="0" />
+		</Function>
 
 		<Function name="exp" cas="exp" tex="exp" key="e" desc="exponential">
 			<Parameter name="x" type="number" order="0" />
