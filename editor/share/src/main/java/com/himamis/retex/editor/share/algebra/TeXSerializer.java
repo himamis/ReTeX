@@ -292,7 +292,6 @@ public class TeXSerializer extends SerializerAdapter {
             buffer.append("\\rbrace");
 
         } else if (braces.getClassif() == MathBraces.APOSTROPHES) {
-            // jmathtex v0.7: incompatibility
             buffer.append("\"");
             serialize(braces.getArgument(0), buffer);
             buffer.append("\"");
