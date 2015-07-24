@@ -372,14 +372,19 @@ public abstract class MathController extends MathContext {
 
 				currentOffset = parent.getParentIndex()+1;
 				currentField = (MathSequence)parent.getParent();
+			} else {
+				if (ch == nextFieldKey) {
+					newCharacter(ch);
+					//update();
+				}
 			}
 
 		// topmost container last ...
 		} else {
 			// if ';' typed and at the top level ... insert delimiter char
-			if(ch== delimiterKey) {
+			if(ch== delimiterKey || ch == nextFieldKey) {
 				newCharacter(ch);
-				update();
+				//update();
 			}
 		}
 	}

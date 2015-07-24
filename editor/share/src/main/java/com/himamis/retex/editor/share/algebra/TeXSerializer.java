@@ -125,9 +125,9 @@ public class TeXSerializer extends SerializerAdapter {
             } else if ("nthroot".equals(function.getName())) {
                 buffer.append(function.getTexName());
                 buffer.append('[');
-                serialize(function.getArgument(1), buffer);
-                buffer.append("]{");
                 serialize(function.getArgument(0), buffer);
+                buffer.append("]{");
+                serialize(function.getArgument(1), buffer);
                 buffer.append('}');
 
             } else if ("sum".equals(function.getName())

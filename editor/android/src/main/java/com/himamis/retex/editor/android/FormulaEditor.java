@@ -272,7 +272,7 @@ public class FormulaEditor extends View implements MathField {
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(this, InputMethodManager.SHOW_FORCED);
             }
-            return true;
+            return false;
         } else {
             // default behaviour
             return super.onTouchEvent(event);

@@ -554,6 +554,9 @@ public class MetaModel {
                 } else if (name.equals(FUNCTION)) {
                     MetaFunction metaFunction = parseFunction(elementChild);
                     metas.add(metaFunction);
+                } else if (name.equals(CHARACTER)) {
+                    MetaCharacter metaCharacter = parseCharacter(elementChild);
+                    metas.add(metaCharacter);
                 }
             }
 

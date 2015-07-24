@@ -112,6 +112,7 @@
 		<Character name=";" /> 
 		<Character name="." />
 		<Character name=" " />
+		<Character name="," />
 	</Characters>
 
 	<Functions name="CustomFunctions" group="General">
@@ -133,8 +134,8 @@
 		</Function>
 
 		<Function name="nthroot" cas="nthroot" tex="\sqrt" key="r" img="nroot.png" insert="1" desc="nth root" >
-			<Parameter name="x" type="number" order="0" up="1" />
-			<Parameter name="n" type="number" order="1" down="0" />
+			<Parameter name="n" type="number" order="0" down="0" />
+			<Parameter name="x" type="number" order="1" up="1" />
 		</Function>
 
 		<!-- not yet implemented -
@@ -248,7 +249,6 @@
 
 	<Symbols columns="12">
 		<Symbol name="inf" cas="inf" tex="\infty" key="" code="49"  fontId="3" />
-		<Symbol name="∞" cas="inf" tex="\infty" key="" code="49"  fontId="3" />
 		<Symbol name="ii" cas="i" tex="\mathrm{i}" key="i" code="105" fontId="1" />
 		<Symbol name="jj" cas="j" tex="\mathrm{j}" key="j" code="106" fontId="1" />
 
@@ -301,6 +301,7 @@
 		<Symbol name="paragraph" cas="paragraph" tex="\paragraph" key="" code="120" fontId="3" img="paragraph.png" />
 
 		<!-- One character symbols -->
+		<Symbol name="∞" cas="inf" tex="\infty" key="" code="49"  fontId="3" />
 		<Symbol name="⊗" tex="\otimes" fontId="0" />
 		<Symbol name="°" tex="\degree" />
 	</Symbols>
