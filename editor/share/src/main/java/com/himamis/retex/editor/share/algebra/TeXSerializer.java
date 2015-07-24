@@ -293,9 +293,9 @@ public class TeXSerializer extends SerializerAdapter {
 
         } else if (braces.getClassif() == MathBraces.APOSTROPHES) {
             // jmathtex v0.7: incompatibility
-            buffer.append("\\ddot" + (jmathtex ? " " : "{\\ }"));
+            buffer.append("\"");
             serialize(braces.getArgument(0), buffer);
-            buffer.append("\\ddot" + (jmathtex ? " " : "{\\ }"));
+            buffer.append("\"");
 
         } else {
             throw new ArrayIndexOutOfBoundsException("Unsupported function "
