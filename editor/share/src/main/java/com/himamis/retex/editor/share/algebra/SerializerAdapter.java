@@ -9,7 +9,7 @@ import com.himamis.retex.editor.share.model.MathFormula;
 import com.himamis.retex.editor.share.model.MathFunction;
 import com.himamis.retex.editor.share.model.MathSequence;
 
-public abstract class SerializerAdapter implements Serializer{
+public abstract class SerializerAdapter implements Serializer {
 
     protected MathSequence currentField = null;
     protected int currentOffset = 0;
@@ -38,7 +38,6 @@ public abstract class SerializerAdapter implements Serializer{
         return buffer.toString();
     }
 
-    @Override
     public void serialize(MathComponent container, StringBuilder buffer) {
         if (container instanceof MathCharacter) {
             serialize((MathCharacter) container, buffer);
@@ -56,4 +55,16 @@ public abstract class SerializerAdapter implements Serializer{
             serialize((MathFunction) container, buffer);
         }
     }
+
+    abstract void serialize(MathCharacter mathCharacter, StringBuilder buffer);
+
+    abstract void serialize(MathSequence sequence, StringBuilder buffer);
+
+    abstract void serialize(MathSequence sequence, StringBuilder buffer, int from, int to);
+
+    abstract void serialize(MathFunction function, StringBuilder buffer);
+
+    abstract void serialize(MathBraces braces, StringBuilder buffer);
+
+    abstract void serialize(MathArray array, StringBuilder buffer);
 }
