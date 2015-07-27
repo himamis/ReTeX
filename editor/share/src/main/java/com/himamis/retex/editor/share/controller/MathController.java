@@ -722,6 +722,10 @@ public abstract class MathController extends MathContext {
 		}
 	}
 
-	abstract public void update();
+	public void update() {
+		update(false);
+	}
+
+	abstract public void update(boolean focusEvent);
 
 }

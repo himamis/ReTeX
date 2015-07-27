@@ -193,7 +193,7 @@ public class FormulaEditor extends View implements MathField {
         if (Math.abs(mScale - newFontScale) > 0.001) {
             mScale = newConfig.fontScale;
             mMinHeight = 0;
-            mMathFieldInternal.update();
+            mMathFieldInternal.update(false);
         }
     }
 

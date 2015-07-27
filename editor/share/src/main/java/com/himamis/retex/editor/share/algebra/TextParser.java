@@ -13,7 +13,7 @@ public class TextParser {
         MathFormula formula = MathFormula.newFormula(model);
         MathController controller = new MathController() {
             @Override
-            public void update() {
+            public void update(boolean fe) {
                 // noop
             }
         };

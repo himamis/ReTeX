@@ -88,9 +88,11 @@ abstract public class MathInputController extends MathController {
 		case KeyEvent.VK_RIGHT:
 			nextCharacter();
 			update();
+			break;
 		case KeyEvent.VK_UP:
 			upField();
 			update();
+			break;
 		case KeyEvent.VK_DOWN:
 			downField();
 			update();
@@ -98,11 +100,13 @@ abstract public class MathInputController extends MathController {
 		case KeyEvent.VK_DELETE:
 			delCharacter();
 			update();
+			break;
 		case KeyEvent.VK_BACK_SPACE:
 			bkspCharacter();
 			update();
+			break;
 		}
 	}
 
-	abstract public void update();
+	abstract public void update(boolean focusEvent);
 }

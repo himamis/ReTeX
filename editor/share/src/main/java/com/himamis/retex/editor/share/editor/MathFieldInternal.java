@@ -58,18 +58,18 @@ public class MathFieldInternal {
     };
     private MathInputController controller = new MathInputController() {
 
-        public void update() {
-            MathFieldInternal.this.update(currentField, currentOffset);
+        public void update(boolean focusEvent) {
+            MathFieldInternal.this.update(focusEvent, currentField, currentOffset);
         }
     };
     FocusListener focusListener = new FocusListener() {
 
         public void onFocusLost() {
-            update();
+            update(true);
         }
 
         public void onFocusGained() {
-            controller.update();
+            controller.update(true);
         }
     };
     private KeyListener keyListener = new KeyListener() {
@@ -144,17 +144,20 @@ public class MathFieldInternal {
         mathField.setTeXIcon(renderer);
     }
 
-    private void update(MathSequence currentField, int currentOffset) {
+    private void update(boolean focusEvent, MathSequence currentField, int currentOffset) {
         if (mathField.hasParent()) {
             updateFormula(currentField, currentOffset);
-            mathField.requestLayout();
+            if (!focusEvent) {
+                // prevent infinite focusChanged <-> requestLayout event cycle
+                mathField.requestLayout();
+            }
             mathField.repaint();
 
         }
     }
 
-    public void update() {
-        update(null, 0);
+    public void update(boolean focusEvent) {
+        update(focusEvent, null, 0);
     }
 
 }

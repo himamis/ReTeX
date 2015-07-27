@@ -11,14 +11,17 @@ public class FontA implements Font {
 	
 	private Typeface mTypeface;
 	private int mSize;
+	private String mName;
 	
-	public FontA(Typeface typeface, int size) {
+	public FontA(String name, Typeface typeface, int size) {
+		mName = name;
 		mTypeface = typeface;
 		mSize = size;
 	}
 	
 	public FontA(String name, int style, int size) {
 		mTypeface = Typeface.create(name, getTypefaceStyle(style));
+		mName = name;
 		mSize = size;
 	}
 
