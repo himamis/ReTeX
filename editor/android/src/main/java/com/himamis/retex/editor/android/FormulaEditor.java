@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.himamis.retex.editor.android.event.ClickListenerAdapter;
 import com.himamis.retex.editor.android.event.FocusListenerAdapter;
 import com.himamis.retex.editor.android.event.KeyListenerAdapter;
+import com.himamis.retex.editor.share.algebra.Parser;
 import com.himamis.retex.editor.share.editor.MathFieldInternal;
 import com.himamis.retex.editor.share.event.ClickListener;
 import com.himamis.retex.editor.share.event.FocusListener;
@@ -101,7 +102,7 @@ public class FormulaEditor extends View implements MathField {
         mMathFieldInternal.setSize(mSize * mScale);
         mMathFieldInternal.setType(mType);
         mMathFieldInternal.setMathField(this);
-        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, mText));
+        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel));
     }
 
     private float getMinHeigth() {
@@ -148,8 +149,8 @@ public class FormulaEditor extends View implements MathField {
      * Sets the text of the view. Must be called from the UI thread.
      * @param text e.g. x^2
      */
-    public void setText(String text) {
-        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, text));
+    public void setText(Parser parser, String text) {
+        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, parser, text));
         requestLayout();
     }
 

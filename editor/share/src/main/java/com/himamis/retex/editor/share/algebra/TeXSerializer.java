@@ -8,7 +8,7 @@ import com.himamis.retex.editor.share.model.MathFunction;
 import com.himamis.retex.editor.share.model.MathSequence;
 
 /**
- * Created by Balazs on 7/22/2015.
+ * Serializes internal format into TeX format.
  */
 public class TeXSerializer extends SerializerAdapter {
 

@@ -8,7 +8,7 @@ import com.himamis.retex.editor.share.model.MathFunction;
 import com.himamis.retex.editor.share.model.MathSequence;
 
 /**
- * Created by Balazs on 7/20/2015.
+ * Serializes the internal format into String format. See also {@link SerializerAdapter}.
  */
 public interface Serializer {
 

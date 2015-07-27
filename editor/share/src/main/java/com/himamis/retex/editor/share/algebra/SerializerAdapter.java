@@ -9,9 +9,6 @@ import com.himamis.retex.editor.share.model.MathFormula;
 import com.himamis.retex.editor.share.model.MathFunction;
 import com.himamis.retex.editor.share.model.MathSequence;
 
-/**
- * Created by Balazs on 7/20/2015.
- */
 public abstract class SerializerAdapter implements Serializer{
 
     protected MathSequence currentField = null;
