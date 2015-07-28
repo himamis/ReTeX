@@ -41,16 +41,15 @@ public class MetaSymbol extends MetaCharacter {
     private char code;
     private Font font;
 
-    MetaSymbol(String name, String casName, String texName, char key, char code, int fontId, int type) {
-        this(name, casName, texName, key, code, DefaultTeXFont.getFont(fontId), type);
+    MetaSymbol(String name, String casName, String texName, char key, char code, char unicode, int fontId, int type) {
+        this(name, casName, texName, key, code, unicode, DefaultTeXFont.getFont(fontId), type);
     }
 
-    MetaSymbol(String name, String casName, String texName, char key, char code, Font font, int type) {
-        super(name, casName, texName, key, type);
+    MetaSymbol(String name, String casName, String texName, char key, char code, char unicode, Font font, int type) {
+        super(name, casName, texName, key, unicode, type);
         this.code = code;
         this.font = font;
         this.description = casName;
-        setIcon(("NaN".equals(casName) ? "_" : "") + name + ".png");
     }
 
     /**

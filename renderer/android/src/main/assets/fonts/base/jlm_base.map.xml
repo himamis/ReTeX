@@ -150,7 +150,7 @@
   <SymbolMapping name="Upsilon" ch="168" fontId="jlm_cmr10"/>
   <SymbolMapping name="Phi" ch="169" fontId="jlm_cmr10"/>
   <SymbolMapping name="Psi" ch="170" fontId="jlm_cmr10"/>
-  <SymbolMapping name="Omega" ch="173" fontId="jlm_cmr10"/>
+  <SymbolMapping name="Omega" ch="172" fontId="jlm_cmr10"/>
   <SymbolMapping name="varGamma" ch="161" fontId="jlm_cmmi10"/>
   <SymbolMapping name="varDelta" ch="162" fontId="jlm_cmmi10"/>
   <SymbolMapping name="varTheta" ch="163" fontId="jlm_cmmi10"/>
@@ -161,7 +161,7 @@
   <SymbolMapping name="varUpsilon" ch="168" fontId="jlm_cmmi10"/>
   <SymbolMapping name="varPhi" ch="169" fontId="jlm_cmmi10"/>
   <SymbolMapping name="varPsi" ch="170" fontId="jlm_cmmi10"/>
-  <SymbolMapping name="varOmega" ch="173" fontId="jlm_cmmi10"/>
+  <SymbolMapping name="varOmega" ch="172" fontId="jlm_cmmi10"/>
 
   <!-- miscellaneous symbols of type "ord" -->
 
@@ -252,7 +252,7 @@
   <SymbolMapping name="land" ch="94" fontId="jlm_cmsy10"/>
   <SymbolMapping name="oplus" ch="169" fontId="jlm_cmsy10"/>
   <SymbolMapping name="ominus" ch="170" fontId="jlm_cmsy10"/>
-  <SymbolMapping name="otimes" ch="173" fontId="jlm_cmsy10"/>
+  <SymbolMapping name="otimes" ch="172" fontId="jlm_cmsy10"/>
   <SymbolMapping name="oslash" ch="174" fontId="jlm_cmsy10"/>
   <SymbolMapping name="odot" ch="175" fontId="jlm_cmsy10"/>
   <SymbolMapping name="dagger" ch="121" fontId="jlm_cmsy10"/>

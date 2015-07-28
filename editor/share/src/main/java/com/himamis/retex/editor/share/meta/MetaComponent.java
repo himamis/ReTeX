@@ -35,14 +35,14 @@ package com.himamis.retex.editor.share.meta;
 public class MetaComponent {
 
     private String name, casName, texName;
-    private String icon;
-    private char key;
+    private char key, unicode;
 
-    MetaComponent(String name, String casName, String texName, char key) {
+    MetaComponent(String name, String casName, String texName, char key, char unicode) {
         this.name = name;
         this.casName = casName;
         this.texName = texName;
         this.key = key;
+        this.unicode = unicode;
     }
 
     /**
@@ -67,20 +67,6 @@ public class MetaComponent {
     }
 
     /**
-     * Icon Name
-     */
-    public String getIcon() {
-        return icon;
-    }
-
-    /**
-     * Icon Name
-     */
-    void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    /**
      * Input Key.
      */
     public char getKey() {
@@ -88,17 +74,9 @@ public class MetaComponent {
     }
 
     /**
-     * Signature.
+     * Unicode char.
      */
-    public String getTip() {
-        if (getName().length() > 1) {
-            if (this instanceof MetaFunction) {
-                return getName() + "(";
-            } else {
-                return getName() + " [Esc]";
-            }
-        } else {
-            return "a" + getName() + "b";
-        }
+    public char getUnicode() {
+        return unicode;
     }
 }

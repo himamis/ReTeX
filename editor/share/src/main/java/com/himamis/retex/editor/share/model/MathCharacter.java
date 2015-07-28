@@ -27,7 +27,6 @@
  */
 package com.himamis.retex.editor.share.model;
 
-import com.himamis.retex.editor.share.algebra.Serializer;
 import com.himamis.retex.editor.share.meta.MetaCharacter;
 
 /**
@@ -72,6 +71,10 @@ public class MathCharacter extends MathComponent {
 
     public String getTexName() {
         return meta.getTexName();
+    }
+
+    public char getUnicode() {
+        return meta.getUnicode();
     }
 
     /**

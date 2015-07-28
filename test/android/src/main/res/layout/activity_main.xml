@@ -1,12 +1,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root_panel"
     tools:context=".MainActivity">
 
     <keyboard.ReTeXInput_
+        android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <com.himamis.retex.renderer.android.LaTeXView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input"
+        app:lv_latexText="\\otimes\\Sigma\\Omega\\varOmega" />
 
 </RelativeLayout>

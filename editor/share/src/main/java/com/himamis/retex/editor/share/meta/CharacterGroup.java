@@ -30,7 +30,8 @@ public class CharacterGroup implements MetaGroup {
 
         MetaCharacter character = characters.get(name);
         if (character == null) {
-            character = new MetaCharacter(name, name, name, name.length() > 0 ? name.charAt(0) : 0,
+            char code = name.length() > 0 ? name.charAt(0) : 0;
+            character = new MetaCharacter(name, name, name, code, code,
                     MetaCharacter.CHARACTER);
             characters.put(name, character);
         }

@@ -116,78 +116,78 @@
 	</Characters>
 
 	<Functions name="CustomFunctions" group="General">
-		<Function name="_" cas="_" tex="_" key="_" img="sub.png" desc="subscript" >
+		<Function name="_" cas="_" tex="_" key="_" desc="subscript" >
 			<Parameter name="i" type="number" order="0" />
 		</Function>
 
-		<Function name="^" cas="^" tex="^" key="^" img="power.png" desc="power" >
+		<Function name="^" cas="^" tex="^" key="^" desc="power" >
 			<Parameter name="n" type="number" order="0" />
 		</Function>
 
-		<Function name="frac" cas="/" tex="\frac" key="\" img="frac.png" initial="1" desc="fraction" >
+		<Function name="frac" cas="/" tex="\frac" key="\" initial="1" desc="fraction" >
 			<Parameter name="x" type="number" order="0" down="1" />
 			<Parameter name="y" type="number" order="1" up="0" />
 		</Function>
 
-		<Function name="sqrt" cas="sqrt" tex="\sqrt" key="q" img="sqrt.png" desc="square root" >
+		<Function name="sqrt" cas="sqrt" tex="\sqrt" key="q" desc="square root" >
 			<Parameter name="x" type="number" order="0" />
 		</Function>
 
-		<Function name="nthroot" cas="nthroot" tex="\sqrt" key="r" img="nroot.png" insert="1" desc="nth root" >
+		<Function name="nthroot" cas="nthroot" tex="\sqrt" key="r" insert="1" desc="nth root" >
 			<Parameter name="n" type="number" order="0" down="0" />
 			<Parameter name="x" type="number" order="1" up="1" />
 		</Function>
 
 		<!-- not yet implemented -
-		<Function name="nsum" cas="nsum" tex="\nsum" key="" img="nsum.png" desc="sum" >
+		<Function name="nsum" cas="nsum" tex="\nsum" key="" desc="sum" >
 			<Parameter name="v" type="string" order="0" />
 			<Parameter name="on" type="string" order="1" />
 			<Parameter name="x" type="number" order="2" />
 		</Function> -->
 
-		<Function name="sum" cas="sum" tex="\sum" key="s" img="sum.png" insert="3" desc="sum" >
+		<Function name="sum" cas="sum" tex="\sum" key="s" insert="3" desc="sum" >
 			<Parameter name="v" type="string" order="0" up="2" />
 			<Parameter name="fm" type="number" order="1" up="2" />
 			<Parameter name="to" type="number" order="2" down="0" />
 			<Parameter name="x" type="number" order="3" />
 		</Function> 
 
-		<Function name="prod" cas="prod" tex="\prod" key="p" img="prod.png" insert="3" desc="product" >
+		<Function name="prod" cas="prod" tex="\prod" key="p" insert="3" desc="product" >
 			<Parameter name="v" type="string" order="0" up="2" />
 			<Parameter name="fm" type="number" order="1" up="2"/>
 			<Parameter name="to" type="number" order="2" down="0" />
 			<Parameter name="x" type="number" order="3" />
 		</Function> 
 
-		<Function name="factorial" cas="factorial" tex="!" key="!" img="factorial.png" desc="n factorial" >
+		<Function name="factorial" cas="factorial" tex="!" key="!" desc="n factorial" >
 			<Parameter name="x" type="number" order="0" />
 		</Function>
 	</Functions> 
 	<Functions name="CustomFunctions2" group="General">
 		<!-- not yet implemented - 
-		<Function name="d" cas="d" tex="'" key="d" img="diff.png" desc="differentiate" >
+		<Function name="d" cas="d" tex="'" key="d" desc="differentiate" >
 			<Parameter name="x" type="number" order="0" />
 		</Function> -->
 
-		<Function name="nint" cas="NaN" tex="\int" key="i" img="_nint.png" desc="integrate" >
+		<Function name="nint" cas="NaN" tex="\int" key="i" desc="integrate" >
 			<Parameter name="x" type="number" order="0" />
 			<Parameter name="v" type="string" order="1" />
 		</Function>
 
-		<Function name="int" cas="quad" tex="\int" img="int.png" insert="2" desc="integrate" >
+		<Function name="int" cas="quad" tex="\int" insert="2" desc="integrate" >
 			<Parameter name="fm" type="number" order="0" up="1" />
 			<Parameter name="to" type="number" order="1" down="0" />
 			<Parameter name="x" type="number" order="2" />
 			<Parameter name="v" type="string" order="3" />
 		</Function>
 
-		<Function name="lim" cas="NaN" tex="lim" key="l" img="_lim.png" insert="2" desc="limit" >
+		<Function name="lim" cas="NaN" tex="lim" key="l" insert="2" desc="limit" >
 			<Parameter name="v" type="string" order="0" />
 			<Parameter name="to" type="number" order="1" />
 			<Parameter name="x" type="number" order="2" />
 		</Function>
 
-		<Function name="function" cas="function" key="f" img="function.png" insert="2" desc="user defined function" >
+		<Function name="function" cas="function" key="f" insert="2" desc="user defined function" >
 			<Parameter name="name" type="string" order="0" />
 			<Parameter name="v" type="string" order="1" />
 			<Parameter name="x" type="number" order="2" />
@@ -210,41 +210,41 @@
 		<Operator name="wedge" unicode="∨" cas="&amp;" tex="\wedge" key="" code="94" fontId="3" />
 
 
-		<Operator name="&lt;" unicode="<" cas="&lt;" code="60" fontId="0" />
-		<Operator name="&gt;" unicode=">" cas="&gt;" code="62" fontId="0" />
+		<Operator name="&lt;" unicode="&lt;" cas="&lt;" code="60" fontId="0" />
+		<Operator name="&gt;" unicode="&gt;" cas="&gt;" code="62" fontId="0" />
 		<Operator name="leq" unicode="≤" cas="&lt;=" tex="\leq" key="" code="183" fontId="3" />
 		<Operator name="geq" unicode="≥" cas="&gt;=" tex="\geq" key="" code="184" fontId="3" />
 		<Operator name="ll" unicode="≪" cas="NaN" tex="\ll" key="" code="191" fontId="3" />
 		<Operator name="gg" unicode="≫" cas="NaN" tex="\gg" key="" code="192" fontId="3" />
 
-		<Operator name="sim" cas="NaN" tex="\sim" key="" code="187" fontId="3" />
-		<Operator name="approx" cas="NaN" tex="\approx" key="" code="188" fontId="3" />
-		<Operator name="simeq" cas="NaN" tex="\simeq" key="" code="39" fontId="3" />
-		<Operator name="propto" cas="NaN" tex="\propto" key="" code="47" fontId="3" />
+		<Operator name="sim" unicode="∼" cas="NaN" tex="\sim" key="" code="187" fontId="3" />
+		<Operator name="approx" unicode="≈" cas="NaN" tex="\approx" key="" code="188" fontId="3" />
+		<Operator name="simeq" unicode="≃" cas="NaN" tex="\simeq" key="" code="39" fontId="3" />
+		<Operator name="propto" unicode="∝" cas="NaN" tex="\propto" key="" code="47" fontId="3" />
 
-		<Operator name="forall" cas="NaN" tex="\forall" key="" code="56" fontId="3" />
-		<Operator name="exists" cas="NaN" tex="\exists" key="" code="57" fontId="3" />
+		<Operator name="forall" unicode="∀" cas="NaN" tex="\forall" key="" code="56" fontId="3" />
+		<Operator name="exists" unicode="∃" cas="NaN" tex="\exists" key="" code="57" fontId="3" />
 
 
-		<Operator name="subset" cas="NaN" tex="\subset" key="" code="189" fontId="3" />
-		<Operator name="supset" cas="NaN" tex="\supset" key="" code="190" fontId="3" />
-		<Operator name="subseteq" cas="NaN" tex="\subseteq" key="" code="181" fontId="3" />
-		<Operator name="supseteq" cas="NaN" tex="\supseteq" key="" code="182" fontId="3" />
-		<Operator name="cup" cas="NaN" tex="\cup" key="" code="91" fontId="3" />
-		<Operator name="cap" cas="NaN" tex="\cap" key="" code="92" fontId="3" />
-		<Operator name="in" cas="NaN" tex="\in" key="" code="50" fontId="3" />
-		<Operator name="empty" cas="NaN" tex="\emptyset" key="" code="59" fontId="3" />
+		<Operator name="subset" unicode="⊂" cas="NaN" tex="\subset" key="" code="189" fontId="3" />
+		<Operator name="supset" unicode="⊃" cas="NaN" tex="\supset" key="" code="190" fontId="3" />
+		<Operator name="subseteq" unicode="⊆" cas="NaN" tex="\subseteq" key="" code="181" fontId="3" />
+		<Operator name="supseteq" unicode="⊇" cas="NaN" tex="\supseteq" key="" code="182" fontId="3" />
+		<Operator name="cup" unicode="∪" cas="NaN" tex="\cup" key="" code="91" fontId="3" />
+		<Operator name="cap" unicode="∩" cas="NaN" tex="\cap" key="" code="92" fontId="3" />
+		<Operator name="in" unicode="∈" cas="NaN" tex="\in" key="" code="50" fontId="3" />
+		<Operator name="empty" unicode="∅" cas="NaN" tex="\emptyset" key="" code="59" fontId="3" />
 
- 		<Operator name="pm" cas="NaN" tex="\pm" key="" code="167" fontId="3" />
-		<Operator name="prime" cas="NaN" tex="\prime" key="" code="48" fontId="3" />
-		<Operator name="circ" cas="NaN" tex="\circ" key="" code="177" fontId="3" />
-		<Operator name="partial" cas="NaN" tex="\partial" key="" code="64" fontId="0" />
+ 		<Operator name="pm" unicode="±" cas="NaN" tex="\pm" key="" code="167" fontId="3" />
+		<Operator name="prime" unicode="′" cas="NaN" tex="\prime" key="" code="48" fontId="3" />
+		<Operator name="circ" unicode="∘" cas="NaN" tex="\circ" key="" code="177" fontId="3" />
+		<Operator name="partial" unicode="∂" cas="NaN" tex="\partial" key="" code="64" fontId="0" />
 
-		<Operator name="leftarrow" cas="NaN" tex="\leftarrow" key="" code="195" fontId="3" />
-		<Operator name="rightarrow" cas="NaN" tex="\rightarrow" key="" code="33" fontId="3" />
-		<Operator name="leftrightarrow" cas="NaN" tex="\leftrightarrow" key="" code="36" fontId="3" />
-		<Operator name="notrightarrow" cas="NaN" tex="\not\rightarrow" key="" code="33" fontId="3" />
-		<Operator name="notleftrightarrow" cas="NaN" tex="\not\leftrightarrow" key="" code="36" fontId="3" />
+		<Operator name="leftarrow" unicode="←" cas="NaN" tex="\leftarrow" key="" code="195" fontId="3" />
+		<Operator name="rightarrow" unicode="→" cas="NaN" tex="\rightarrow" key="" code="33" fontId="3" />
+		<Operator name="leftrightarrow" unicode="↔" cas="NaN" tex="\leftrightarrow" key="" code="36" fontId="3" />
+		<Operator name="notrightarrow" unicode="↛" cas="NaN" tex="\not\rightarrow" key="" code="33" fontId="3" />
+		<Operator name="notleftrightarrow" unicode="↮" cas="NaN" tex="\not\leftrightarrow" key="" code="36" fontId="3" />
 	</Operators>
 
 	<Symbols columns="12">
@@ -283,22 +283,22 @@
 		<Symbol name="psi" tex="\psi" key="y" code="195" fontId="0" />
 		<Symbol name="omega" tex="\omega" key="o" code="33"  fontId="0" />
  
-		<Symbol name="Gamma" tex="\Gamma" key="G" code="161" fontId="1" img="_Gamma.png" />
-		<Symbol name="Delta" tex="\Delta" key="D" code="162" fontId="1" img="_Delta.png" />
-		<Symbol name="Theta" tex="\Theta" key="Q" code="163" fontId="1" img="_Theta.png" />
-		<Symbol name="Lambda" tex="\Lambda" key="L" code="164" fontId="1" img="_Lambda.png" />
-		<Symbol name="Xi" tex="\Xi" key="X" code="165" fontId="1" img="_Xi.png" />
-		<Symbol name="Pi" tex="\Pi" key="P" code="166" fontId="1" img="_Pi.png" />
-		<Symbol name="Sigma" tex="\Sigma"  key="S" code="167" fontId="1" img="_Sigma.png" />
-		<Symbol name="Upsilon" tex="\Upsilon" key="U" code="168" fontId="1" img="_Upsilon.png" />
-		<Symbol name="Phi" tex="\Phi" key="F" code="169" fontId="1" img="_Phi.png" />
-		<Symbol name="Psi" tex="\Psi" key="Y" code="170" fontId="1" img="_Psi.png" />
-		<Symbol name="Omega" tex="\Omega" key="O" code="173" fontId="1" img="_Omega.png" />
+		<Symbol name="Gamma" tex="\Gamma" key="G" code="161" fontId="1" />
+		<Symbol name="Delta" tex="\Delta" key="D" code="162" fontId="1" />
+		<Symbol name="Theta" tex="\Theta" key="Q" code="163" fontId="1" />
+		<Symbol name="Lambda" tex="\Lambda" key="L" code="164" fontId="1" />
+		<Symbol name="Xi" tex="\Xi" key="X" code="165" fontId="1" />
+		<Symbol name="Pi" tex="\Pi" key="P" code="166" fontId="1" />
+		<Symbol name="Sigma" tex="\Sigma"  key="S" code="167" fontId="1" />
+		<Symbol name="Upsilon" tex="\Upsilon" key="U" code="168" fontId="1" />
+		<Symbol name="Phi" tex="\Phi" key="F" code="169" fontId="1" />
+		<Symbol name="Psi" tex="\Psi" key="Y" code="170" fontId="1" />
+		<Symbol name="Omega" tex="\Omega" key="O" code="173" fontId="1" />
 
-		<Symbol name="nabla" cas="nabla" tex="\nabla" key="" code="114" fontId="3" img="nabla.png" />		
-		<Symbol name="hbar" tex="\hbar" key="" code="104"  fontId="0" img="hbar.png" /> 
- 		<Symbol name="ddagger" cas="ddagger" tex="\ddagger" key="" code="122"  fontId="3" img="ddagger.png" /> 
-		<Symbol name="paragraph" cas="paragraph" tex="\paragraph" key="" code="120" fontId="3" img="paragraph.png" />
+		<Symbol name="nabla" cas="nabla" tex="\nabla" key="" code="114" fontId="3" />		
+		<Symbol name="hbar" tex="\hbar" key="" code="104"  fontId="0" /> 
+ 		<Symbol name="ddagger" cas="ddagger" tex="\ddagger" key="" code="122"  fontId="3" /> 
+		<Symbol name="paragraph" cas="paragraph" tex="\paragraph" key="" code="120" fontId="3" />
 
 		<!-- One character symbols -->
 		<Symbol name="∞" cas="inf" tex="\infty" key="" code="49"  fontId="3" />

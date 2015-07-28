@@ -252,7 +252,7 @@
   <SymbolMapping name="land" ch="94" fontId="jlm_cmsy10"/>
   <SymbolMapping name="oplus" ch="169" fontId="jlm_cmsy10"/>
   <SymbolMapping name="ominus" ch="170" fontId="jlm_cmsy10"/>
-  <SymbolMapping name="otimes" ch="173" fontId="jlm_cmsy10"/>
+  <SymbolMapping name="otimes" ch="172" fontId="jlm_cmsy10"/>
   <SymbolMapping name="oslash" ch="174" fontId="jlm_cmsy10"/>
   <SymbolMapping name="odot" ch="175" fontId="jlm_cmsy10"/>
   <SymbolMapping name="dagger" ch="121" fontId="jlm_cmsy10"/>

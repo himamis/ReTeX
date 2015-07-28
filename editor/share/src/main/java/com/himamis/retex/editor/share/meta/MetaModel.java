@@ -78,6 +78,7 @@ public class MetaModel {
     private static final String CAS = "cas";
     private static final String TEX = "tex";
     private static final String KEY = "key";
+    private static final String UNICODE = "unicode";
     private static final String IMG = "img";
     private static final String UP = "up";
     private static final String DOWN = "down";
@@ -338,7 +339,7 @@ public class MetaModel {
         } catch (Exception e) {
         }
 
-        MetaCharacter metaCharacter = new MetaCharacter(name, cas, tex, key, MetaCharacter.CHARACTER);
+        MetaCharacter metaCharacter = new MetaCharacter(name, cas, tex, key, key, MetaCharacter.CHARACTER);
 
         return metaCharacter;
     }
@@ -349,6 +350,7 @@ public class MetaModel {
         String cas = name;
         String tex = name;
         char key = name.length() > 0 ? name.charAt(0) : 0;
+        char unicode = key;
 
         try {
             cas = getStringAttribute(CAS, element);
@@ -365,7 +367,13 @@ public class MetaModel {
         } catch (Exception e) {
         }
 
-        MetaCharacter metaCharacter = new MetaCharacter(name, cas, tex, key, MetaCharacter.CHARACTER);
+        try {
+            unicode = getCharAttribute(UNICODE, element);
+        } catch (Exception e) {
+
+        }
+
+        MetaCharacter metaCharacter = new MetaCharacter(name, cas, tex, key, unicode, MetaCharacter.CHARACTER);
 
         return metaCharacter;
     }
@@ -378,6 +386,7 @@ public class MetaModel {
         String cas = name;
         String tex = name;
         char key = name.length() > 0 ? name.charAt(0) : 0;
+        char unicode = key;
 
         try {
             cas = getStringAttribute(CAS, element);
@@ -405,13 +414,12 @@ public class MetaModel {
             fontId = getIntAttribute(FONTID, element);
         } catch (Exception e) {
         }
-        MetaSymbol metaSymbol = new MetaSymbol(name, cas, tex, key, (char) code, fontId, type);
-
         try {
-            String img = getStringAttribute(IMG, element);
-            metaSymbol.setIcon(img);
+            unicode = getCharAttribute(UNICODE, element);
         } catch (Exception e) {
         }
+
+        MetaSymbol metaSymbol = new MetaSymbol(name, cas, tex, key, (char) code, unicode, fontId, type);
 
         return metaSymbol;
     }
@@ -477,7 +485,6 @@ public class MetaModel {
 
         try {
             String img = getStringAttribute(IMG, element);
-            metaFunction.setIcon(img);
         } catch (Exception e) {
         }
 

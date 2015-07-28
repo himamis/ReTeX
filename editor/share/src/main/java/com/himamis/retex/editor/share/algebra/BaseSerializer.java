@@ -4,7 +4,6 @@ import com.himamis.retex.editor.share.meta.MetaModel;
 import com.himamis.retex.editor.share.model.MathArray;
 import com.himamis.retex.editor.share.model.MathBraces;
 import com.himamis.retex.editor.share.model.MathCharacter;
-import com.himamis.retex.editor.share.model.MathComponent;
 import com.himamis.retex.editor.share.model.MathFunction;
 import com.himamis.retex.editor.share.model.MathSequence;
 
@@ -22,12 +21,7 @@ public class BaseSerializer extends SerializerAdapter {
 
     @Override
     public void serialize(MathCharacter mathCharacter, StringBuilder buffer) {
-        buffer.append(mathCharacter.getName());
-
-        // safety space after operator / symbol
-        if (mathCharacter.isOperator() || mathCharacter.isSymbol()) {
-            buffer.append(' ');
-        }
+        buffer.append(mathCharacter.getUnicode());
     }
 
     @Override
@@ -42,40 +36,28 @@ public class BaseSerializer extends SerializerAdapter {
 
         if (addBraces) {
             // when necessary add curly braces
-            buffer.append('{');
+            buffer.append('(');
         }
 
         if (sequence.size() == 0) {
-            if (sequence == currentField) {
-                buffer.append('|');
+
+            if (sequence.getParent() == null
+                    || /* symbol.getParent() instanceof MathOperator || */
+                    (sequence.getParent() instanceof MathFunction && sequence
+                            .getParentIndex() == sequence.getParent()
+                            .getInsertIndex())) {
+                buffer.append("\\triangleleft");
             } else {
-                if (sequence.getParent() == null
-                        || /* symbol.getParent() instanceof MathOperator || */
-                        (sequence.getParent() instanceof MathFunction && sequence
-                                .getParentIndex() == sequence.getParent()
-                                .getInsertIndex())) {
-                    buffer.append("\\triangleleft");
-                } else {
-                    buffer.append("\\triangleright");
-                }
+                buffer.append("\\triangleright");
             }
+
         } else {
-            if (sequence == currentField) {
-                if (currentOffset > 0) {
-                    serialize(sequence, buffer, 0, currentOffset);
-                }
-                buffer.append('|');
-                if (currentOffset < sequence.size()) {
-                    serialize(sequence, buffer, currentOffset, sequence.size());
-                }
-            } else {
-                serialize(sequence, buffer, 0, sequence.size());
-            }
+            serialize(sequence, buffer, 0, sequence.size());
         }
 
         if (addBraces) {
             // when necessary add curly braces
-            buffer.append('}');
+            buffer.append(')');
         }
     }
 
@@ -273,19 +255,18 @@ public class BaseSerializer extends SerializerAdapter {
     @Override
     public void serialize(MathBraces braces, StringBuilder buffer) {
         if (braces.getClassif() == MathBraces.REGULAR) {
-            buffer.append("\\left(");
+            buffer.append("(");
             serialize(braces.getArgument(0), buffer);
-            buffer.append("\\right)");
-
+            buffer.append(")");
         } else if (braces.getClassif() == MathBraces.SQUARE) {
-            buffer.append("\\left[");
+            buffer.append("[");
             serialize(braces.getArgument(0), buffer);
-            buffer.append("\\right]");
+            buffer.append("]");
 
         } else if (braces.getClassif() == MathBraces.CURLY) {
-            buffer.append("\\lbrace");
+            buffer.append("{");
             serialize(braces.getArgument(0), buffer);
-            buffer.append("\\rbrace");
+            buffer.append("}");
 
         } else if (braces.getClassif() == MathBraces.APOSTROPHES) {
             buffer.append("\"");
