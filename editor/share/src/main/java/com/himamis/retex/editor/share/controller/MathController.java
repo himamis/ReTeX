@@ -672,7 +672,8 @@ public abstract class MathController extends MathContext {
 		}
 	}
 
-	public void keyTyped(char ch) {
+	public boolean keyTyped(char ch) {
+		boolean handled = false;
 		if(ch==nextFieldKey || ch==nextRowKey ||
 		   ch==arrayCloseKey || ch==matrixCloseKey ||
 		   ch==functionCloseKey || ch==delimiterKey ||
@@ -681,45 +682,49 @@ public abstract class MathController extends MathContext {
 			((MathBraces)currentField.getParent()).getClassif() == MathBraces.APOSTROPHES)) {
 			endField(ch);
 			update();
-
+			handled = true;
 		} else if(ch==functionOpenKey || ch==apostropheKey || ch == squareBracketOpenKey) {
 			newBraces(ch);
 			update();
-
+			handled = true;
 		} else if(ch=='!') {
 			newFunction("factorial");
 			update();
-
+			handled = true;
 		} else if(ch=='^') {
 			newScript("^");
 			update();
-
+			handled = true;
 		} else if(ch=='_') {
 			newScript("_");
 			update();
-
+			handled = true;
 		} else if(ch=='\\') {
 			newFunction("frac", 1);
 			update();
-
+			handled = true;
 		} else if(ch==arrayOpenKey) {
 			newArray(1);
 			update();
-
+			handled = true;
 		} else if(ch==matrixOpenKey) {
 			newMatrix(1, 1);
 			update();
-
+			handled = true;
 		} else if(formula.getMetaModel().isOperator(""+ch)) {
 			newOperator(ch);
 			update();
+			handled = true;
 		} else if (formula.getMetaModel().isSymbol("" + ch)) {
 			newSymbol(ch);
 			update();
+			handled = true;
 		} else if (formula.getMetaModel().isCharacter(""+ch)) {
 			newCharacter(ch);
 			update();
+			handled = true;
 		}
+		return handled;
 	}
 
 	public void update() {

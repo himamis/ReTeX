@@ -64,47 +64,49 @@ abstract public class MathInputController extends MathController {
 		update();
 	}
 
-	public void keyPressed(int keyCode, int modifiers) {
+	public boolean keyPressed(int keyCode, int modifiers) {
 
 		switch (keyCode) {
 
 		case KeyEvent.VK_ESCAPE:
 			escSymbol();
 			update();
-			break;
+			return true;
 
 		case KeyEvent.VK_HOME:
 			firstField();
 			update();
-			break;
+			return true;
 		case KeyEvent.VK_END:
 			lastField();
 			update();
-			break;
+			return true;
 		case KeyEvent.VK_LEFT:
 			prevCharacter();
 			update();
-			break;
+			return true;
 		case KeyEvent.VK_RIGHT:
 			nextCharacter();
 			update();
-			break;
+			return true;
 		case KeyEvent.VK_UP:
 			upField();
 			update();
-			break;
+			return true;
 		case KeyEvent.VK_DOWN:
 			downField();
 			update();
-			break;
+			return true;
 		case KeyEvent.VK_DELETE:
 			delCharacter();
 			update();
-			break;
+			return true;
 		case KeyEvent.VK_BACK_SPACE:
 			bkspCharacter();
 			update();
-			break;
+			return true;
+		default:
+			return false;
 		}
 	}
 
