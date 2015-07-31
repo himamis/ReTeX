@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -56,8 +55,6 @@ public class FormulaEditor extends View implements MathField {
     private float mMinHeight;
 
     private Parser mParser;
-    private String mTextInternal;
-    private String mLatexInternal;
 
     public FormulaEditor(Context context) {
         super(context);
@@ -161,32 +158,13 @@ public class FormulaEditor extends View implements MathField {
      */
     public void setText(Parser parser, String text) {
         mParser = parser;
-        mTextInternal = text;
-        mLatexInternal = null;
+        mText = text;
         createTeXFormula();
         requestLayout();
     }
 
-    public void setText(Parser parser, String text, String latex) {
-        mParser = parser;
-        mTextInternal = mText;
-        mLatexInternal = latex;
-        if (hasFocus()) {
-            createTeXFormula();
-        } else {
-            createTeXIcon();
-        }
-        requestLayout();
-    }
-
-    private void createTeXIcon() {
-        mTeXIcon = new TeXFormula(mLatexInternal).new TeXIconBuilder().setSize(mSize * mScale).setType(mType)
-                .setStyle(TeXConstants.STYLE_DISPLAY).build();
-        mTeXIcon.setInsets(createInsetsFromPadding());
-    }
-
     private void createTeXFormula() {
-        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, mParser, mTextInternal));
+        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, mParser, mText));
     }
 
     private Insets createInsetsFromPadding() {
@@ -324,15 +302,5 @@ public class FormulaEditor extends View implements MathField {
             // default behaviour
             return super.onTouchEvent(event);
         }
-    }
-
-    @Override
-    protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect) {
-        if (gainFocus || mLatexInternal == null) {
-            mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, mParser, mTextInternal));
-        } else {
-            createTeXIcon();
-        }
-        super.onFocusChanged(gainFocus, direction, previouslyFocusedRect);
     }
 }
