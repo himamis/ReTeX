@@ -1,0 +1,25 @@
+apply plugin: 'java'
+
+configurations {
+	resources
+}
+
+task jarFonts(type: Jar) {
+	// create jar with Fonts included
+}
+
+task jarXml(type: Jar) {
+	// create jar with xmls
+}
+
+task jarXmlMinified(type: Jar) {
+	// create jar with minified xmls
+}
+
+task jarFontsJs(type: Jar) {
+	// create jar with javascript font file
+}
+
+artifacts {
+	arhives jarFonts, jarXmlMinified, jarFontsJs
+}
