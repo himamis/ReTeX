@@ -125,7 +125,11 @@ public class MathFieldInternal {
 
     public void setFormula(MathFormula formula) {
         controller.setFormula(formula);
-        updateFormula(null, 0);
+        if (mathField.hasFocus()) {
+            controller.update(false);
+        } else {
+            update(false);
+        }
     }
 
     private void setupMathField() {
@@ -146,8 +150,8 @@ public class MathFieldInternal {
     }
 
     private void update(boolean focusEvent, MathSequence currentField, int currentOffset) {
+        updateFormula(currentField, currentOffset);
         if (mathField.hasParent()) {
-            updateFormula(currentField, currentOffset);
             if (!focusEvent) {
                 // prevent infinite focusChanged <-> requestLayout event cycle
                 mathField.requestLayout();

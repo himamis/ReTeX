@@ -47,4 +47,6 @@ public interface MathField {
 	void requestLayout();
 	
 	boolean hasParent();
+
+	boolean hasFocus();
 }
