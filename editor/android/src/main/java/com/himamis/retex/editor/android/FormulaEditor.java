@@ -18,28 +18,26 @@ import com.himamis.retex.editor.android.event.ClickListenerAdapter;
 import com.himamis.retex.editor.android.event.FocusListenerAdapter;
 import com.himamis.retex.editor.android.event.KeyListenerAdapter;
 import com.himamis.retex.editor.share.algebra.Parser;
+import com.himamis.retex.editor.share.editor.MathField;
 import com.himamis.retex.editor.share.editor.MathFieldInternal;
 import com.himamis.retex.editor.share.event.ClickListener;
 import com.himamis.retex.editor.share.event.FocusListener;
 import com.himamis.retex.editor.share.event.KeyListener;
-import com.himamis.retex.editor.share.editor.MathField;
 import com.himamis.retex.editor.share.meta.MetaModel;
 import com.himamis.retex.editor.share.model.MathFormula;
 import com.himamis.retex.renderer.android.FactoryProviderAndroid;
 import com.himamis.retex.renderer.android.graphics.ColorA;
 import com.himamis.retex.renderer.android.graphics.Graphics2DA;
-import com.himamis.retex.renderer.share.ColorUtil;
 import com.himamis.retex.renderer.share.TeXConstants;
 import com.himamis.retex.renderer.share.TeXFormula;
 import com.himamis.retex.renderer.share.TeXIcon;
 import com.himamis.retex.renderer.share.platform.FactoryProvider;
 import com.himamis.retex.renderer.share.platform.Resource;
-
-import java.io.InputStream;
+import com.himamis.retex.renderer.share.platform.graphics.Insets;
 
 public class FormulaEditor extends View implements MathField {
 
-    private static MetaModel sMetaModel;
+    protected static MetaModel sMetaModel;
 
     protected MathFieldInternal mMathFieldInternal;
 
@@ -55,6 +53,8 @@ public class FormulaEditor extends View implements MathField {
     private float mScale;
 
     private float mMinHeight;
+
+    private Parser mParser;
 
     public FormulaEditor(Context context) {
         super(context);
@@ -102,13 +102,17 @@ public class FormulaEditor extends View implements MathField {
         mMathFieldInternal.setSize(mSize * mScale);
         mMathFieldInternal.setType(mType);
         mMathFieldInternal.setMathField(this);
-        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel));
+        if (!isInEditMode()) {
+            mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel));
+        }
     }
 
     private float getMinHeigth() {
         if (mMinHeight == 0) {
-            mMinHeight = new TeXFormula("|").new TeXIconBuilder().setSize(mSize * mScale)
-                    .setStyle(TeXConstants.STYLE_DISPLAY).build().getIconHeight();
+            TeXIcon tempIcon = new TeXFormula("|").new TeXIconBuilder().setSize(mSize * mScale)
+                    .setStyle(TeXConstants.STYLE_DISPLAY).build();
+            tempIcon.setInsets(createInsetsFromPadding());
+            mMinHeight = tempIcon.getIconHeight();
         }
         return mMinHeight;
     }
@@ -120,8 +124,10 @@ public class FormulaEditor extends View implements MathField {
     }
 
     private void initMetaModel() {
-        if (sMetaModel == null) {
-            sMetaModel = new MetaModel(new Resource().loadResource("Octave.xml"));
+        if (!isInEditMode()) {
+            if (sMetaModel == null) {
+                sMetaModel = new MetaModel(new Resource().loadResource("Octave.xml"));
+            }
         }
     }
 
@@ -147,16 +153,33 @@ public class FormulaEditor extends View implements MathField {
 
     /**
      * Sets the text of the view. Must be called from the UI thread.
+     *
      * @param text e.g. x^2
      */
     public void setText(Parser parser, String text) {
-        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, parser, text));
+        mParser = parser;
+        mText = text;
+        createTeXFormula();
         requestLayout();
+    }
+
+    private void createTeXFormula() {
+        mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel, mParser, mText));
+    }
+
+    private Insets createInsetsFromPadding() {
+        return new Insets(
+                getPaddingTop(),
+                getPaddingLeft(),
+                getPaddingBottom(),
+                getPaddingRight()
+        );
     }
 
     @Override
     public void setTeXIcon(TeXIcon icon) {
         mTeXIcon = icon;
+        mTeXIcon.setInsets(createInsetsFromPadding());
     }
 
     @Override
@@ -239,6 +262,7 @@ public class FormulaEditor extends View implements MathField {
         if (mGraphics == null) {
             mGraphics = new Graphics2DA();
         }
+
         // draw background
         canvas.drawColor(mBackgroundColor);
 

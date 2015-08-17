@@ -19,17 +19,18 @@ public class KeyListenerAdapter implements View.OnKeyListener {
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         switch (event.getAction()) {
             case KeyEvent.ACTION_DOWN:
-                mKeyListener.onKeyPressed(wrapEvent(event));
-                break;
+                return mKeyListener.onKeyPressed(wrapEvent(event));
             case KeyEvent.ACTION_UP:
             case KeyEvent.ACTION_MULTIPLE:
                 com.himamis.retex.editor.share.event.KeyEvent wrappedEvent = wrapEvent(event);
-                mKeyListener.onKeyReleased(wrappedEvent);
+                boolean ret = mKeyListener.onKeyReleased(wrappedEvent);
                 if (wrappedEvent.getUnicodeKeyChar() != '\0') {
-                    mKeyListener.onKeyTyped(wrappedEvent);
+                    ret |= mKeyListener.onKeyTyped(wrappedEvent);
                 }
+                return ret;
+            default:
+                return false;
         }
-        return true;
     }
 
     private static com.himamis.retex.editor.share.event.KeyEvent wrapEvent(KeyEvent keyEvent) {

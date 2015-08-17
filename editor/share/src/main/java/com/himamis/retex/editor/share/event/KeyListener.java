@@ -27,9 +27,9 @@ package com.himamis.retex.editor.share.event;
 
 public interface KeyListener {
 
-	void onKeyPressed(KeyEvent keyEvent);
+	boolean onKeyPressed(KeyEvent keyEvent);
 	
-	void onKeyReleased(KeyEvent keyEvent);
+	boolean onKeyReleased(KeyEvent keyEvent);
 	
-	void onKeyTyped(KeyEvent keyEvent);
+	boolean onKeyTyped(KeyEvent keyEvent);
 }

@@ -73,24 +73,25 @@ public class MathFieldInternal {
         }
     };
     private KeyListener keyListener = new KeyListener() {
-        public void onKeyPressed(KeyEvent e) {
+        public boolean onKeyPressed(KeyEvent e) {
             int keyCode = e.getKeyCode();
             int modifiers = e.getKeyModifiers();
             // System.out.println("key_released: "+keyCode+", "+modifiers);
-            controller.keyPressed(keyCode, modifiers);
+            return controller.keyPressed(keyCode, modifiers);
         }
 
-        public void onKeyReleased(KeyEvent e) {
+        public boolean onKeyReleased(KeyEvent e) {
             // int keyCode = e.getKeyCode();
             // int modifiers = e.getModifiersEx();
             // System.out.println("key_released: "+keyCode+", "+modifiers);
             // controller.keyReleased(keyCode,modifiers);
+            return false;
         }
 
-        public void onKeyTyped(KeyEvent e) {
+        public boolean onKeyTyped(KeyEvent e) {
             char ch = e.getUnicodeKeyChar();
             // System.out.println("key_typed: "+ch+", "+modifiers);
-            controller.keyTyped(ch);
+            return controller.keyTyped(ch);
         }
     };
 
