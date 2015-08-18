@@ -18,6 +18,7 @@ public class TeXSerializer extends SerializerAdapter {
             "ker", "deg", "gcd", "det", "hom", "arg", "dim", "sum", "prod",
             "int", "pmod"};
     private boolean jmathtex = true;
+    private static final String characterMissing = "\\nbsp ";
 
     @Override
     public void serialize(MathCharacter mathCharacter, StringBuilder buffer) {
@@ -58,9 +59,9 @@ public class TeXSerializer extends SerializerAdapter {
                         (sequence.getParent() instanceof MathFunction && sequence
                                 .getParentIndex() == sequence.getParent()
                                 .getInsertIndex())) {
-                    buffer.append("\\triangleleft");
+                    buffer.append(characterMissing);
                 } else {
-                    buffer.append("\\triangleright");
+                    buffer.append(characterMissing);
                 }
             }
         } else {
@@ -102,7 +103,7 @@ public class TeXSerializer extends SerializerAdapter {
                         || (index > 0
                         && parent.getArgument(index - 1) instanceof MathCharacter && ((MathCharacter) parent
                         .getArgument(index - 1)).isOperator())) {
-                    buffer.append("{\\triangleleft}");
+                    buffer.append(characterMissing);
                 }
                 buffer.append(function.getName() + '{');
                 serialize(function.getArgument(0), buffer);

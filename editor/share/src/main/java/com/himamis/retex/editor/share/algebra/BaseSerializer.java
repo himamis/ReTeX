@@ -17,6 +17,9 @@ public class BaseSerializer extends SerializerAdapter {
             "limsup", "liminf", "min", "max", "sup", "exp", "ln", "lg", "log",
             "ker", "deg", "gcd", "det", "hom", "arg", "dim", "sum", "prod",
             "int", "pmod"};
+
+    private static final String characterMissing = "\\textcolor{red}{?}";
+
     private boolean jmathtex = true;
 
     @Override
@@ -46,9 +49,9 @@ public class BaseSerializer extends SerializerAdapter {
                     (sequence.getParent() instanceof MathFunction && sequence
                             .getParentIndex() == sequence.getParent()
                             .getInsertIndex())) {
-                buffer.append("\\triangleleft");
+                buffer.append(characterMissing);
             } else {
-                buffer.append("\\triangleright");
+                buffer.append(characterMissing);
             }
 
         } else {
@@ -80,7 +83,7 @@ public class BaseSerializer extends SerializerAdapter {
                         || (index > 0
                         && parent.getArgument(index - 1) instanceof MathCharacter && ((MathCharacter) parent
                         .getArgument(index - 1)).isOperator())) {
-                    buffer.append("{\\triangleleft}");
+                    buffer.append(characterMissing);
                 }
                 buffer.append(function.getName() + '{');
                 serialize(function.getArgument(0), buffer);
