@@ -12,13 +12,15 @@ import com.himamis.retex.editor.share.model.MathSequence;
  */
 public class TeXSerializer extends SerializerAdapter {
 
+    private static final String cursor = "\\textcolor{red}{|}";
+
     private static final String latexFunctions[] = {"sin", "cos", "tan",
             "sec", "csc", "cot", "sinh", "cosh", "tanh", "coth", "lim",
             "limsup", "liminf", "min", "max", "sup", "exp", "ln", "lg", "log",
             "ker", "deg", "gcd", "det", "hom", "arg", "dim", "sum", "prod",
             "int", "pmod"};
-    private boolean jmathtex = true;
     private static final String characterMissing = "\\nbsp ";
+    private boolean jmathtex = true;
 
     @Override
     public void serialize(MathCharacter mathCharacter, StringBuilder buffer) {
@@ -52,7 +54,7 @@ public class TeXSerializer extends SerializerAdapter {
 
         if (sequence.size() == 0) {
             if (sequence == currentField) {
-                buffer.append('|');
+                buffer.append(cursor);
             } else {
                 if (sequence.getParent() == null
                         || /* symbol.getParent() instanceof MathOperator || */
@@ -69,7 +71,7 @@ public class TeXSerializer extends SerializerAdapter {
                 if (currentOffset > 0) {
                     serialize(sequence, buffer, 0, currentOffset);
                 }
-                buffer.append('|');
+                buffer.append(cursor);
                 if (currentOffset < sequence.size()) {
                     serialize(sequence, buffer, currentOffset, sequence.size());
                 }
