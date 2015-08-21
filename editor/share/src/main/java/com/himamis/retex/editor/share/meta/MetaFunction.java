@@ -39,7 +39,7 @@ public class MetaFunction extends MetaComponent {
     private MetaParameter arguments[];
     private String desc;
 
-    MetaFunction(String name, String casName, String texName, char key, MetaParameter parameters[]) {
+    public MetaFunction(String name, String casName, String texName, char key, MetaParameter parameters[]) {
         super(name, casName, texName, key, key);
         this.arguments = parameters != null ? parameters : new MetaParameter[0];
         insertIndex = 0;
@@ -126,4 +126,11 @@ public class MetaFunction extends MetaComponent {
 		return order[casOrder];
 	} */
 
+    public String getOpeningBracket() {
+        return "(";
+    }
+
+    public String getClosingBracket() {
+        return ")";
+    }
 }

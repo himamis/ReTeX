@@ -456,12 +456,6 @@ public class MetaModel {
             parameterArray.add(metaParameter);
 
             try {
-                String type = getStringAttribute(TYPE, parameter.castToElement());
-                metaParameter.setType(type);
-            } catch (Exception e) {
-            }
-
-            try {
                 String desc = getStringAttribute(DESC, parameter.castToElement());
                 metaParameter.setDescription(desc);
             } catch (Exception e) {

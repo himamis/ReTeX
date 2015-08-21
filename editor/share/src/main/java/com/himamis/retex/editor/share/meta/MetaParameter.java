@@ -29,11 +29,11 @@ package com.himamis.retex.editor.share.meta;
 
 public class MetaParameter {
 
-    private String name, type = null, desc = null;
+    private String name, desc = null;
     private int order;
     private int up = -1, down = -1;
 
-    MetaParameter(String name, int order) {
+    public MetaParameter(String name, int order) {
         this.name = name;
         this.order = order;
     }
@@ -43,20 +43,6 @@ public class MetaParameter {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Parameter type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Parameter type
-     */
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**

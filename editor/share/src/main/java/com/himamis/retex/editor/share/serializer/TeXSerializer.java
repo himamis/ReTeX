@@ -268,9 +268,9 @@ public class TeXSerializer extends SerializerAdapter {
             }
         } else {
             if (!jmathtex && isLatexFunction(function.getTexName())) {
-                stringBuilder.append("{\\" + function.getTexName() + "(");
+                stringBuilder.append("{\\" + function.getTexName() + function.getOpeningBracket());
             } else {
-                stringBuilder.append("{\\mathrm{" + function.getTexName() + "}(");
+                stringBuilder.append("{\\mathrm{" + function.getTexName() + "}" + function.getOpeningBracket());
             }
             for (int i = 0; i < function.size(); i++) {
                 serialize(function.getArgument(i), stringBuilder);
@@ -278,7 +278,7 @@ public class TeXSerializer extends SerializerAdapter {
                     stringBuilder.append(",");
                 }
             }
-            stringBuilder.append(")}");
+            stringBuilder.append(function.getClosingBracket() + "}");
         }
     }
 

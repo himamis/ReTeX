@@ -112,13 +112,6 @@ public class MathFunction extends MathContainer {
         return meta.getDownIndex(n);
     }
 
-    /**
-     * Argument type for n-th argument
-     */
-    public String getArgumentType(int n) {
-        return meta.getParameter(n).getType();
-    }
-
     public MathFunction copy() {
         MathFunction function = new MathFunction(meta);
         for (int i = 0; i < arguments.size(); i++) {
@@ -129,4 +122,11 @@ public class MathFunction extends MathContainer {
         return function;
     }
 
+    public String getOpeningBracket() {
+        return meta.getOpeningBracket();
+    }
+
+    public String getClosingBracket() {
+        return meta.getClosingBracket();
+    }
 }

@@ -77,6 +77,16 @@ abstract public class MathContainer extends MathComponent {
         arguments.set(i, argument);
     }
 
+    public void addArgument(MathComponent argument) {
+        if (arguments == null) {
+            arguments = new ArrayList<MathComponent>(1);
+        }
+        if (argument != null) {
+            argument.setParent(this);
+        }
+        arguments.add(argument);
+    }
+
     /**
      * Returns number of arguments.
      */
