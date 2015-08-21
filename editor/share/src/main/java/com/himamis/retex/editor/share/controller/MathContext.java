@@ -72,7 +72,7 @@ abstract class MathContext {
 
 	public void paste(MathFormula formula) {		
 		// clone first
-		MathSequence rootComponent = (MathSequence)formula.getRootComponent().clone(this.formula);
+		MathSequence rootComponent = (MathSequence)formula.getRootComponent().copy();
 
 		// insert then
 		int size = rootComponent.size();
