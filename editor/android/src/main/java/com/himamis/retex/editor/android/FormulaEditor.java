@@ -17,7 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.himamis.retex.editor.android.event.ClickListenerAdapter;
 import com.himamis.retex.editor.android.event.FocusListenerAdapter;
 import com.himamis.retex.editor.android.event.KeyListenerAdapter;
-import com.himamis.retex.editor.share.algebra.Parser;
+import com.himamis.retex.editor.share.parser.Parser;
 import com.himamis.retex.editor.share.editor.MathField;
 import com.himamis.retex.editor.share.editor.MathFieldInternal;
 import com.himamis.retex.editor.share.event.ClickListener;
@@ -302,5 +302,10 @@ public class FormulaEditor extends View implements MathField {
             // default behaviour
             return super.onTouchEvent(event);
         }
+    }
+
+    @Override
+    public MetaModel getMetaModel() {
+        return sMetaModel;
     }
 }

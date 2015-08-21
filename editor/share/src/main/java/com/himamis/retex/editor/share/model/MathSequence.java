@@ -29,26 +29,26 @@ package com.himamis.retex.editor.share.model;
 
 public class MathSequence extends MathContainer {
 
-    MathSequence(MathFormula formula, int i) {
-        super(formula, i);
+    MathSequence(int i) {
+        super(i);
         ensureArguments(i);
     }
 
     /**
      * Use MathFormula.newSequence(...)
      */
-    public MathSequence(MathFormula formula, String text) {
-        this(formula, text.length());
+    /*public MathSequence(MathFormula formula, String text) {
+        this(text.length());
         for (int i = 0; i < text.length(); i++) {
             setArgument(i, new MathCharacter(formula, formula.getMetaModel().getCharacter("" + text.charAt(i))));
         }
-    }
+    }*/
 
     /**
      * Use MathFormula.newSequence(...)
      */
-    public MathSequence(MathFormula formula) {
-        super(formula, 0);
+    public MathSequence() {
+        super(0);
         ensureArguments(0);
     }
 
@@ -70,11 +70,11 @@ public class MathSequence extends MathContainer {
         arguments.remove(i);
     }
 
-    public MathContainer clone(MathFormula formula) {
-        MathSequence sequence = new MathSequence(formula);
+    public MathSequence copy() {
+        MathSequence sequence = new MathSequence();
         for (int i = 0; i < arguments.size(); i++) {
             MathComponent component = getArgument(i);
-            MathComponent newComponent = component.clone(formula);
+            MathComponent newComponent = component.copy();
             sequence.addArgument(i, newComponent);
         }
         return sequence;

@@ -40,8 +40,7 @@ abstract public class MathContainer extends MathComponent {
 
     protected ArrayList<MathComponent> arguments = null;
 
-    MathContainer(MathFormula formula, int size) {
-        super(formula);
+    MathContainer(int size) {
         if (size > 0) {
             ensureArguments(size);
         }
@@ -162,8 +161,6 @@ abstract public class MathContainer extends MathComponent {
         return false;
     }
 
-    abstract public MathContainer clone(MathFormula formula);
-
     public int getInsertIndex() {
         return 0;
     }
@@ -183,4 +180,7 @@ abstract public class MathContainer extends MathComponent {
         }
         return this;
     }
+
+    public abstract MathContainer copy();
+
 }

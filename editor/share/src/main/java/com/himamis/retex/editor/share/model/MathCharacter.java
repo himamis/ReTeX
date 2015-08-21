@@ -45,8 +45,7 @@ public class MathCharacter extends MathComponent {
     /**
      * Use MathFormula.newCharacter(...)
      */
-    public MathCharacter(MathFormula formula, MetaCharacter meta) {
-        super(formula);
+    public MathCharacter(MetaCharacter meta) {
         this.meta = meta;
     }
 
@@ -57,17 +56,12 @@ public class MathCharacter extends MathComponent {
         return (MathSequence) super.getParent();
     }
 
-    public MathComponent clone(MathFormula formula) {
-        MathCharacter symbol = new MathCharacter(formula, meta);
-        return symbol;
+    public MathCharacter copy() {
+        return new MathCharacter(meta);
     }
 
     public String getName() {
         return meta.getName();
-    }
-
-    public String getCasName() {
-        return meta.getCasName();
     }
 
     public String getTexName() {

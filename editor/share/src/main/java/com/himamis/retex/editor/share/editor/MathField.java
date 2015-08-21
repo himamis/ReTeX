@@ -28,6 +28,7 @@ package com.himamis.retex.editor.share.editor;
 import com.himamis.retex.editor.share.event.ClickListener;
 import com.himamis.retex.editor.share.event.FocusListener;
 import com.himamis.retex.editor.share.event.KeyListener;
+import com.himamis.retex.editor.share.meta.MetaModel;
 import com.himamis.retex.renderer.share.TeXIcon;
 
 public interface MathField {
@@ -49,4 +50,6 @@ public interface MathField {
 	boolean hasParent();
 
 	boolean hasFocus();
+
+	MetaModel getMetaModel();
 }

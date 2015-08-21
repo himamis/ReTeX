@@ -37,7 +37,7 @@ public class MetaFunction extends MetaComponent {
     private final int order[];
     private int insertIndex, initialIndex;
     private MetaParameter arguments[];
-    private String desc, sign;
+    private String desc;
 
     MetaFunction(String name, String casName, String texName, char key, MetaParameter parameters[]) {
         super(name, casName, texName, key, key);
@@ -49,13 +49,6 @@ public class MetaFunction extends MetaComponent {
         for (int inputOrder = 0; inputOrder < order.length; inputOrder++) {
             order[arguments[inputOrder].getOrder()] = inputOrder;
         }
-        StringBuffer sb = new StringBuffer();
-        sb.append(getName() + "(");
-        for (int inputOrder = 0; inputOrder < order.length; inputOrder++) {
-            sb.append(arguments[inputOrder].getName() + (((inputOrder + 1) < order.length) ? ", " : ""));
-        }
-        sb.append(")");
-        sign = sb.toString();
     }
 
     /**
@@ -70,13 +63,6 @@ public class MetaFunction extends MetaComponent {
      */
     public void setDescription(String desc) {
         this.desc = desc;
-    }
-
-    /**
-     * Signature.
-     */
-    public String getSignature() {
-        return sign;
     }
 
     /**

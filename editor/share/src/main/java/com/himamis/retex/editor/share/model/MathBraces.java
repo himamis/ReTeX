@@ -27,8 +27,6 @@
  */
 package com.himamis.retex.editor.share.model;
 
-import com.himamis.retex.editor.share.algebra.Serializer;
-
 /**
  * Braces. This class is part of model.
  *
@@ -43,8 +41,8 @@ public class MathBraces extends MathContainer {
 
     private int classif;
 
-    public MathBraces(MathFormula formula, int classif) {
-        super(formula, 1);
+    public MathBraces(int classif) {
+        super(1);
         this.classif = classif;
     }
 
@@ -63,10 +61,10 @@ public class MathBraces extends MathContainer {
         super.setArgument(i, argument);
     }
 
-    public MathContainer clone(MathFormula formula) {
-        MathBraces braces = new MathBraces(formula, classif);
+    public MathBraces copy() {
+        MathBraces braces = new MathBraces(classif);
         MathComponent component = getArgument(0);
-        MathComponent newComponent = component.clone(formula);
+        MathComponent newComponent = component.copy();
         braces.setArgument(0, newComponent);
         return braces;
     }

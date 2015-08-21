@@ -43,8 +43,8 @@ public class MathFunction extends MathContainer {
     /**
      * Use MathFormula.newFunction(...)
      */
-    public MathFunction(MathFormula formula, MetaFunction meta) {
-        super(formula, meta.size());
+    public MathFunction(MetaFunction meta) {
+        super(meta.size());
         this.meta = meta;
     }
 
@@ -119,11 +119,11 @@ public class MathFunction extends MathContainer {
         return meta.getParameter(n).getType();
     }
 
-    public MathContainer clone(MathFormula formula) {
-        MathFunction function = new MathFunction(formula, meta);
+    public MathFunction copy() {
+        MathFunction function = new MathFunction(meta);
         for (int i = 0; i < arguments.size(); i++) {
-            MathContainer component = (MathContainer) getArgument(i);
-            component = component.clone(formula);
+            MathContainer component = getArgument(i);
+            component = component.copy();
             function.setArgument(i, component);
         }
         return function;

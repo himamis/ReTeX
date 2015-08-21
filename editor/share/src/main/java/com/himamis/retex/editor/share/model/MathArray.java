@@ -30,7 +30,6 @@ package com.himamis.retex.editor.share.model;
 import com.himamis.retex.editor.share.meta.MetaArray;
 import com.himamis.retex.editor.share.meta.MetaComponent;
 import com.himamis.retex.editor.share.meta.MetaModel;
-import com.himamis.retex.editor.share.model.traverse.Traversable;
 
 /**
  * Array/array. This class is part of model.
@@ -43,18 +42,19 @@ import com.himamis.retex.editor.share.model.traverse.Traversable;
  * @author Bea Petrovicova
  */
 public class MathArray extends MathContainer {
+
     private int columns, rows;
     private MetaArray meta;
 
-    public MathArray(MathFormula formula, MetaArray meta, int columns) {
-        super(formula, columns);
+    public MathArray(MetaArray meta, int columns) {
+        super(columns);
         this.meta = meta;
         this.columns = columns;
         this.rows = 1;
     }
 
-    public MathArray(MathFormula formula, MetaArray meta, int columns, int rows) {
-        super(formula, columns * rows);
+    public MathArray(MetaArray meta, int columns, int rows) {
+        super(columns * rows);
         this.meta = meta;
         this.columns = columns;
         this.rows = rows;
@@ -62,7 +62,7 @@ public class MathArray extends MathContainer {
 
     public void addRow() {
         for (int i = 0; i < columns; i++) {
-            MathSequence argument = new MathSequence(formula);
+            MathSequence argument = new MathSequence();
             argument.setParent(this);
             arguments.add(argument);
         }
@@ -78,7 +78,7 @@ public class MathArray extends MathContainer {
     }
 
     public void addArgument() {
-        MathSequence argument = new MathSequence(formula);
+        MathSequence argument = new MathSequence();
         argument.setParent(this);
         arguments.add(argument);
         columns += 1;
@@ -174,8 +174,8 @@ public class MathArray extends MathContainer {
         return MetaModel.MATRIX.equals(getName());
     }
 
-    public MathContainer clone(MathFormula formula) {
-        MathArray array = new MathArray(formula, meta, columns, rows);
+    public MathArray copy() {
+        MathArray array = new MathArray(meta, columns, rows);
         array.copy(0, 0, this);
         return array;
     }
@@ -190,7 +190,7 @@ public class MathArray extends MathContainer {
         for (int i = 0; (i < (rows + joffset) || i < array.rows); i++) {
             for (int j = 0; (j < (columns + ioffset) || j < array.columns); j++) {
                 MathSequence component = array.getArgument(i, j);
-                component = (MathSequence) component.clone(formula);
+                component = component.copy();
                 setArgument(i + ioffset, j + joffset, component);
             }
         }

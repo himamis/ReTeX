@@ -27,8 +27,6 @@
  */
 package com.himamis.retex.editor.share.model;
 
-
-import com.himamis.retex.editor.share.algebra.Serializer;
 import com.himamis.retex.editor.share.model.traverse.Traversable;
 
 /**
@@ -38,16 +36,7 @@ import com.himamis.retex.editor.share.model.traverse.Traversable;
  */
 abstract public class MathComponent implements Traversable {
 
-    protected MathFormula formula;
     private MathContainer parent;
-
-    MathComponent(MathFormula formula) {
-        this.formula = formula;
-    }
-
-    public MathFormula getFormula() {
-        return formula;
-    }
 
     /**
      * Gets parent of this component.
@@ -75,10 +64,15 @@ abstract public class MathComponent implements Traversable {
                 return i;
             }
         }
-        // this should not happen
-        return 0;
+
+        throw new RuntimeException("Parent reference is not set correctly");
     }
 
-    abstract public MathComponent clone(MathFormula formula);
+    /**
+     * Creates a deep copy of the object.
+     *
+     * @return copy
+     */
+    abstract public MathComponent copy();
 
 }

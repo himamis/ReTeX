@@ -27,7 +27,7 @@
  */
 package com.himamis.retex.editor.share.editor;
 
-import com.himamis.retex.editor.share.algebra.TeXSerializer;
+import com.himamis.retex.editor.share.serializer.TeXSerializer;
 import com.himamis.retex.editor.share.controller.MathInputController;
 import com.himamis.retex.editor.share.event.ClickListener;
 import com.himamis.retex.editor.share.event.FocusListener;
@@ -46,7 +46,6 @@ import com.himamis.retex.renderer.share.TeXIcon;
  */
 public class MathFieldInternal {
 
-    private TeXIcon renderer;
     private TeXSerializer serializer;
     private MathField mathField;
     private ClickListener clickListener = new ClickListener() {
@@ -99,7 +98,7 @@ public class MathFieldInternal {
     private int type = TeXFormula.SERIF;
 
     public MathFieldInternal() {
-        serializer = new TeXSerializer();
+        serializer = new TeXSerializer(mathField.getMetaModel());
     }
 
     public void setMathField(MathField mathField) {
@@ -144,7 +143,7 @@ public class MathFieldInternal {
                 controller.getFormula(), currentField, currentOffset);
 
         TeXFormula texFormula = new TeXFormula(serializedFormula);
-        renderer = texFormula.new TeXIconBuilder()
+        TeXIcon renderer = texFormula.new TeXIconBuilder()
                 .setStyle(TeXConstants.STYLE_DISPLAY).setSize(size).setType(type).build();
         mathField.setTeXIcon(renderer);
     }
