@@ -49,8 +49,7 @@ abstract public class MathInputController extends MathController {
 
 	public void toolbarInput(MetaComponent meta) {
 		if (meta instanceof MetaCharacter) {
-			currentField.addArgument(currentOffset, new MathCharacter(formula,
-					(MetaCharacter) meta));
+			currentField.addArgument(currentOffset, new MathCharacter((MetaCharacter) meta));
 			currentOffset++;
 		} else if (meta instanceof MetaFunction) {
 			if ("^".equals(meta.getName()) || "_".equals(meta.getName())) {
