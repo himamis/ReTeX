@@ -97,11 +97,12 @@ public class MathFieldInternal {
     private float size = 16;
     private int type = TeXFormula.SERIF;
 
-    public MathFieldInternal() {
+    public MathFieldInternal(MathField mathField) {
+        setMathField(mathField);
         serializer = new TeXSerializer(mathField.getMetaModel());
     }
 
-    public void setMathField(MathField mathField) {
+    private void setMathField(MathField mathField) {
         this.mathField = mathField;
         setupMathField();
     }

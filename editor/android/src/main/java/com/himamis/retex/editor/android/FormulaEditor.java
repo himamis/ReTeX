@@ -98,10 +98,9 @@ public class FormulaEditor extends View implements MathField {
 
         mScale = getResources().getDisplayMetrics().scaledDensity;
 
-        mMathFieldInternal = new MathFieldInternal();
+        mMathFieldInternal = new MathFieldInternal(this);
         mMathFieldInternal.setSize(mSize * mScale);
         mMathFieldInternal.setType(mType);
-        mMathFieldInternal.setMathField(this);
         if (!isInEditMode()) {
             mMathFieldInternal.setFormula(MathFormula.newFormula(sMetaModel));
         }
