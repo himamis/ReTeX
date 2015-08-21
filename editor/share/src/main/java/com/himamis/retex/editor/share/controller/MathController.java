@@ -81,16 +81,16 @@ public abstract class MathController extends MathContext {
 	public void newArray(int size) {
 		// add braces
 		MetaArray meta = formula.getMetaModel().getArray();
-		MathArray array = new MathArray(formula, meta, size);
+		MathArray array = new MathArray(meta, size);
 		currentField.addArgument(currentOffset, array);
 
 		// add sequence
-		MathSequence field = new MathSequence(formula);
+		MathSequence field = new MathSequence();
 		array.setArgument(0, field);
 
 		for(int i=1;i<size;i++) {
 			// add sequence
-			array.setArgument(i, new MathSequence(formula));
+			array.setArgument(i, new MathSequence());
 		}
 
 		// set current
@@ -102,16 +102,16 @@ public abstract class MathController extends MathContext {
 	public void newMatrix(int columns, int rows) {
 		// add braces
 		MetaArray meta = formula.getMetaModel().getMatrix();
-		MathArray matrix = new MathArray(formula, meta, columns, rows);
+		MathArray matrix = new MathArray(meta, columns, rows);
 		currentField.addArgument(currentOffset, matrix);
 
 		// add sequence
-		MathSequence field = new MathSequence(formula);
+		MathSequence field = new MathSequence();
 		matrix.setArgument(0, field);
 
 		for(int i=1;i<matrix.size();i++) {
 			// add sequence
-			matrix.setArgument(i, new MathSequence(formula));
+			matrix.setArgument(i, new MathSequence());
 		}
 
 		// set current
@@ -140,11 +140,11 @@ public abstract class MathController extends MathContext {
 			}
 
 			// add braces
-			MathBraces braces = new MathBraces(formula, classif);
+			MathBraces braces = new MathBraces(classif);
 			currentField.addArgument(currentOffset, braces);
 
 			// add sequence
-			MathSequence field = new MathSequence(formula);
+			MathSequence field = new MathSequence();
 			braces.setArgument(0, field);
 
 			// set current
@@ -173,10 +173,10 @@ public abstract class MathController extends MathContext {
 
 					currentField.delArgument(currentOffset-1);
 					// add braces
-					MathBraces braces = new MathBraces(formula, MathBraces.REGULAR);
+					MathBraces braces = new MathBraces(MathBraces.REGULAR);
 					currentField.addArgument(currentOffset-1, braces);
 					// add sequence
-					MathSequence field = new MathSequence(formula);
+					MathSequence field = new MathSequence();
 					braces.setArgument(0, field);
 					field.addArgument(0, function);
 				}
@@ -187,16 +187,16 @@ public abstract class MathController extends MathContext {
 		MathFunction function;
 		if(formula.getMetaModel().isGeneral(name)) {
 			MetaFunction meta = formula.getMetaModel().getGeneral(name);
-			function = new MathFunction(formula, meta);
+			function = new MathFunction(meta);
 
 		} else {
 			MetaFunction meta = formula.getMetaModel().getFunction(name);
-			function = new MathFunction(formula, meta);
+			function = new MathFunction(meta);
 		}
 
 		// add sequences
 		for(int i=0;i<function.size();i++) {
-			MathSequence field = new MathSequence(formula);
+			MathSequence field = new MathSequence();
 			function.setArgument(i, field);
 		}
 
@@ -258,27 +258,27 @@ public abstract class MathController extends MathContext {
 	/** Insert operator. */
 	public void newOperator(char op) {
 		MetaCharacter meta = formula.getMetaModel().getOperator("" + op);
-		currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
+		currentField.addArgument(currentOffset, new MathCharacter(meta));
 		currentOffset++;
 	}
 
 	/** Insert symbol. */
 	public void newSymbol(char sy) {
 		MetaCharacter meta = formula.getMetaModel().getSymbol("" + sy);
-		currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
+		currentField.addArgument(currentOffset, new MathCharacter(meta));
 		currentOffset++;
 	}
 
 	/** Insert character. */
 	public void newCharacter(char ch) {
 		MetaCharacter meta = formula.getMetaModel().getCharacter("" + ch);
-		currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
+		currentField.addArgument(currentOffset, new MathCharacter(meta));
 		currentOffset++;
 	}
 
 	/** Insert character. */
 	public void newCharacter(MetaCharacter meta) {
-		currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
+		currentField.addArgument(currentOffset, new MathCharacter(meta));
 		currentOffset++;
 	}
 
@@ -293,7 +293,7 @@ public abstract class MathController extends MathContext {
 			if(ch == nextFieldKey && (parent.is1DArray() || parent.isVector())) {
 
 				int index = currentField.getParentIndex();
-				MathSequence field = new MathSequence(formula);
+				MathSequence field = new MathSequence();
 				parent.addArgument(index+1, field);
 				while(currentField.size()>currentOffset) {
 					MathComponent component = currentField.getArgument(currentOffset);
@@ -396,14 +396,14 @@ public abstract class MathController extends MathContext {
 			if(formula.getMetaModel().isSymbol(name)) {
 				delCharacters(name.length());
 				MetaCharacter meta = formula.getMetaModel().getSymbol(name);
-				currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
+				currentField.addArgument(currentOffset, new MathCharacter(meta));
 				currentOffset++;
 				break;
 
 			} else if(formula.getMetaModel().isOperator(name)) {
 				delCharacters(name.length());
 				MetaCharacter meta = formula.getMetaModel().getOperator(name);
-				currentField.addArgument(currentOffset, new MathCharacter(formula, meta));
+				currentField.addArgument(currentOffset, new MathCharacter(meta));
 				currentOffset++;
 				break;
 
