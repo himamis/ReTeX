@@ -30,6 +30,7 @@ package com.himamis.retex.editor.share.model;
 import com.himamis.retex.editor.share.meta.MetaArray;
 import com.himamis.retex.editor.share.meta.MetaComponent;
 import com.himamis.retex.editor.share.meta.MetaModel;
+import com.himamis.retex.editor.share.model.traverse.Traversable;
 
 /**
  * Array/array. This class is part of model.

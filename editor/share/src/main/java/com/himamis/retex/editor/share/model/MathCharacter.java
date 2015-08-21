@@ -28,6 +28,7 @@
 package com.himamis.retex.editor.share.model;
 
 import com.himamis.retex.editor.share.meta.MetaCharacter;
+import com.himamis.retex.editor.share.model.traverse.Traversing;
 
 /**
  * Character. This class is part of model.
@@ -98,4 +99,7 @@ public class MathCharacter extends MathComponent {
         return meta.getType() == MetaCharacter.SYMBOL;
     }
 
+    public MathComponent traverse(Traversing traversing) {
+        return traversing.process(this);
+    }
 }

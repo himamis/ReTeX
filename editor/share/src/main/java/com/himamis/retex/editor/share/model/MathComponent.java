@@ -29,13 +29,14 @@ package com.himamis.retex.editor.share.model;
 
 
 import com.himamis.retex.editor.share.algebra.Serializer;
+import com.himamis.retex.editor.share.model.traverse.Traversable;
 
 /**
  * This class represents abstract model element.
  *
  * @author Bea Petrovicova
  */
-abstract public class MathComponent {
+abstract public class MathComponent implements Traversable {
 
     protected MathFormula formula;
     private MathContainer parent;

@@ -27,7 +27,7 @@
  */
 package com.himamis.retex.editor.share.model;
 
-import com.himamis.retex.editor.share.algebra.Serializer;
+import com.himamis.retex.editor.share.model.traverse.Traversing;
 
 import java.util.ArrayList;
 
@@ -170,5 +170,17 @@ abstract public class MathContainer extends MathComponent {
 
     public int getInitialIndex() {
         return 0;
+    }
+
+    public MathComponent traverse(Traversing traversing) {
+        MathComponent component = traversing.process(this);
+        if (component != this) {
+            return component;
+        }
+        for (int i = 0; i < size(); i++) {
+            MathComponent argument = getArgument(i);
+            setArgument(i, argument.traverse(traversing));
+        }
+        return this;
     }
 }
