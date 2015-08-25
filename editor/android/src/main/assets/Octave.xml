@@ -162,6 +162,10 @@
 		<Function name="factorial" cas="factorial" tex="!" key="!" desc="n factorial" >
 			<Parameter name="x" type="number" order="0" />
 		</Function>
+
+		<Function name="abs" cas="abs"  >
+			<Parameter name="a" order="0" />
+		</Function>
 	</Functions> 
 	<Functions name="CustomFunctions2" group="General">
 		<!-- not yet implemented - 
@@ -199,6 +203,7 @@
 		<Operator name="+" code="43" fontId="1" unicode="+" />
 		<Operator name="*" tex="\cdot" code="162" fontId="3" unicode="*"/>
 		<Operator name="/" code="54" fontId="3" unicode="/" />
+		<Operator name="\" unicode="\" />
 		<Operator name="times" unicode="*" tex="\times" code="163" fontId="3" />
 		<Operator name="div" unicode="/" tex="\div" code="165" fontId="3" />
 		<Operator name="=" code="61" fontId="1" />
@@ -208,7 +213,7 @@
 		<Operator name="neg" unicode="!" cas="!" tex="\neg" key="" code="58" fontId="3" />
 		<Operator name="vee" unicode="∧" cas="|" tex="\vee" key="" code="95" fontId="3" />
 		<Operator name="wedge" unicode="∨" cas="&amp;" tex="\wedge" key="" code="94" fontId="3" />
-
+		<Operator name="implication" unicode="⇒" cas="" tex="\implies" key="" />
 
 		<Operator name="&lt;" unicode="&lt;" cas="&lt;" code="60" fontId="0" />
 		<Operator name="&gt;" unicode="&gt;" cas="&gt;" code="62" fontId="0" />
@@ -224,6 +229,9 @@
 
 		<Operator name="forall" unicode="∀" cas="NaN" tex="\forall" key="" code="56" fontId="3" />
 		<Operator name="exists" unicode="∃" cas="NaN" tex="\exists" key="" code="57" fontId="3" />
+
+		<Operator name="perpendicular" unicode="⟂" tex="\perp" />
+		<Operator name="parallel" unicode="∥" tex="\parallel" />
 
 
 		<Operator name="subset" unicode="⊂" cas="NaN" tex="\subset" key="" code="189" fontId="3" />
@@ -245,65 +253,64 @@
 		<Operator name="leftrightarrow" unicode="↔" cas="NaN" tex="\leftrightarrow" key="" code="36" fontId="3" />
 		<Operator name="notrightarrow" unicode="↛" cas="NaN" tex="\not\rightarrow" key="" code="33" fontId="3" />
 		<Operator name="notleftrightarrow" unicode="↮" cas="NaN" tex="\not\leftrightarrow" key="" code="36" fontId="3" />
+
+		<Operator name="vectorprod" unicode="⨯" tex="\times" />
+
 	</Operators>
 
 	<Symbols columns="12">
-		<Symbol name="inf" cas="inf" tex="\infty" key="" code="49"  fontId="3" />
-		<Symbol name="ii" cas="i" tex="\mathrm{i}" key="i" code="105" fontId="1" />
-		<Symbol name="jj" cas="j" tex="\mathrm{j}" key="j" code="106" fontId="1" />
+		<Symbol name="inf" cas="inf" unicode="∞" tex="\infty" key="" code="49"  fontId="3" />
 
-		<Symbol name="alpha" tex="\alpha" key="a" code="174" fontId="0" />
-		<Symbol name="beta" tex="\beta" key="b" code="175" fontId="0" />
-		<Symbol name="gamma" tex="\gamma" key="g" code="176" fontId="0" />
-		<Symbol name="delta" tex="\delta" key="d" code="177" fontId="0" />
-		<Symbol name="epsilon" tex="\epsilon" key="e" code="178" fontId="0" />
-		<Symbol name="vareps" tex="\varepsilon" key="" code="34" fontId="0" />
-		<Symbol name="zeta" tex="\zeta" key="z" code="179" fontId="0" />
-		<Symbol name="eta" tex="\eta" key="e" code="180" fontId="0" />
-		<Symbol name="theta" tex="\theta" key="t" code="181" fontId="0" />
-		<Symbol name="varth" tex="\vartheta" key="" code="35"  fontId="0" />
-		<Symbol name="iota" tex="\iota" key="i" code="182" fontId="0" />
-		<Symbol name="kappa" tex="\kappa" key="k" code="183" fontId="0" />
-		<Symbol name="lambda" tex="\lambda" key="l" code="184" fontId="0" />
-		<Symbol name="mu" tex="\mu" key="m" code="185" fontId="0" />
-		<Symbol name="nu" tex="\nu" key="n" code="186" fontId="0" />
-		<Symbol name="xi" tex="\xi" key="x" code="187" fontId="0" />
-		<Symbol name="omicron" tex="\omicron" key="" code="111" fontId="0" />
-		<Symbol name="pi" tex="\pi" key="p" code="188" fontId="0" />
-		<Symbol name="varpi" tex="\varpi" key="" code="36"  fontId="0" />
-		<Symbol name="rho" tex="\rho" key="r" code="189" fontId="0" />
-		<Symbol name="varrho" tex="\varrho" key="" code="37"  fontId="0" />
-		<Symbol name="sigma" tex="\sigma" key="s" code="190" fontId="0" />
-		<Symbol name="varsigma" tex="\varsigma" key="" code="38"  fontId="0" />
-		<Symbol name="tau" tex="\tau" key="t" code="191" fontId="0" />
-		<Symbol name="upsilon" tex="\upsilon" key="u" code="192" fontId="0" />
-		<Symbol name="phi" tex="\phi" key="f" code="193" fontId="0" />
-		<Symbol name="varphi" tex="\varphi" key="j" code="39"  fontId="0" />
-		<Symbol name="chi" tex="\chi" key="c" code="194" fontId="0" />
-		<Symbol name="psi" tex="\psi" key="y" code="195" fontId="0" />
-		<Symbol name="omega" tex="\omega" key="o" code="33"  fontId="0" />
+		<Symbol name="alpha" tex="\alpha" unicode="α" key="a" code="174" fontId="0" />
+		<Symbol name="beta" tex="\beta" unicode="β" key="b" code="175" fontId="0" />
+		<Symbol name="gamma" tex="\gamma" unicode="γ" key="g" code="176" fontId="0" />
+		<Symbol name="delta" tex="\delta" unicode="δ" key="d" code="177" fontId="0" />
+		<Symbol name="epsilon" tex="\epsilon" unicode="ε" key="e" code="178" fontId="0" />
+		<Symbol name="vareps" tex="\varepsilon" unicode="ϵ" key="" code="34" fontId="0" />
+		<Symbol name="zeta" tex="\zeta" unicode="ζ" key="z" code="179" fontId="0" />
+		<Symbol name="eta" tex="\eta" unicode="η" key="e" code="180" fontId="0" />
+		<Symbol name="theta" tex="\theta" unicode="θ" key="t" code="181" fontId="0" />
+		<Symbol name="varth" tex="\vartheta" unicode="θ" key="" code="35"  fontId="0" />
+		<Symbol name="iota" tex="\iota" unicode="ι" key="i" code="182" fontId="0" />
+		<Symbol name="kappa" tex="\kappa" unicode="κ" key="k" code="183" fontId="0" />
+		<Symbol name="lambda" tex="\lambda" unicode="λ" key="l" code="184" fontId="0" />
+		<Symbol name="mu" tex="\mu" unicode="μ" key="m" code="185" fontId="0" />
+		<Symbol name="nu" tex="\nu" unicode="ν" key="n" code="186" fontId="0" />
+		<Symbol name="xi" tex="\xi" unicode="ξ" key="x" code="187" fontId="0" />
+		<Symbol name="omicron" tex="\omicron" unicode="ο" key="" code="111" fontId="0" />
+		<Symbol name="pi" tex="\pi" unicode="π" key="p" code="188" fontId="0" />
+		<Symbol name="varpi" tex="\varpi" unicode="π" key="" code="36"  fontId="0" />
+		<Symbol name="rho" tex="\rho" unicode="ρ" key="r" code="189" fontId="0" />
+		<Symbol name="varrho" tex="\varrho" unicode="ρ" key="" code="37"  fontId="0" />
+		<Symbol name="sigma" tex="\sigma" unicode="σ" key="s" code="190" fontId="0" />
+		<Symbol name="varsigma" tex="\varsigma" unicode="ς" key="" code="38"  fontId="0" />
+		<Symbol name="tau" tex="\tau" unicode="τ" key="t" code="191" fontId="0" />
+		<Symbol name="upsilon" tex="\upsilon" unicode="υ" key="u" code="192" fontId="0" />
+		<Symbol name="phi" tex="\phi" unicode="φ" key="f" code="193" fontId="0" />
+		<Symbol name="varphi" tex="\varphi" unicode="φ" key="j" code="39"  fontId="0" />
+		<Symbol name="chi" tex="\chi" unicode="χ" key="c" code="194" fontId="0" />
+		<Symbol name="psi" tex="\psi" unicode="ψ" key="y" code="195" fontId="0" />
+		<Symbol name="omega" tex="\omega" unicode="ω" key="o" code="33"  fontId="0" />
  
-		<Symbol name="Gamma" tex="\Gamma" key="G" code="161" fontId="1" />
-		<Symbol name="Delta" tex="\Delta" key="D" code="162" fontId="1" />
-		<Symbol name="Theta" tex="\Theta" key="Q" code="163" fontId="1" />
-		<Symbol name="Lambda" tex="\Lambda" key="L" code="164" fontId="1" />
-		<Symbol name="Xi" tex="\Xi" key="X" code="165" fontId="1" />
-		<Symbol name="Pi" tex="\Pi" key="P" code="166" fontId="1" />
-		<Symbol name="Sigma" tex="\Sigma"  key="S" code="167" fontId="1" />
-		<Symbol name="Upsilon" tex="\Upsilon" key="U" code="168" fontId="1" />
-		<Symbol name="Phi" tex="\Phi" key="F" code="169" fontId="1" />
-		<Symbol name="Psi" tex="\Psi" key="Y" code="170" fontId="1" />
-		<Symbol name="Omega" tex="\Omega" key="O" code="173" fontId="1" />
+		<Symbol name="Gamma" tex="\Gamma" unicode="Γ" key="G" code="161" fontId="1" />
+		<Symbol name="Delta" tex="\Delta" unicode="Δ" key="D" code="162" fontId="1" />
+		<Symbol name="Theta" tex="\Theta" unicode="Θ" key="Q" code="163" fontId="1" />
+		<Symbol name="Lambda" tex="\Lambda" unicode="Λ" key="L" code="164" fontId="1" />
+		<Symbol name="Xi" tex="\Xi" unicode="Ξ" key="X" code="165" fontId="1" />
+		<Symbol name="Pi" tex="\Pi" unicode="Π" key="P" code="166" fontId="1" />
+		<Symbol name="Sigma" tex="\Sigma"  unicode="Σ" key="S" code="167" fontId="1" />
+		<Symbol name="Upsilon" tex="\Upsilon" unicode="Υ" key="U" code="168" fontId="1" />
+		<Symbol name="Phi" tex="\Phi" unicode="Φ" key="F" code="169" fontId="1" />
+		<Symbol name="Psi" tex="\Psi" unicode="Ψ" key="Y" code="170" fontId="1" />
+		<Symbol name="Omega" tex="\Omega" unicode="Ω" key="O" code="173" fontId="1" />
 
-		<Symbol name="nabla" cas="nabla" tex="\nabla" key="" code="114" fontId="3" />		
-		<Symbol name="hbar" tex="\hbar" key="" code="104"  fontId="0" /> 
- 		<Symbol name="ddagger" cas="ddagger" tex="\ddagger" key="" code="122"  fontId="3" /> 
+		<Symbol name="nabla" cas="nabla" tex="\nabla" unicode="∇" key="" code="114" fontId="3" />
+		<Symbol name="hbar" tex="\hbar" unicode="ħ" key="" code="104"  fontId="0" />
+ 		<Symbol name="ddagger" cas="ddagger" tex="\ddagger" unicode="‡" key="" code="122"  fontId="3" />
 		<Symbol name="paragraph" cas="paragraph" tex="\paragraph" key="" code="120" fontId="3" />
 
-		<!-- One character symbols -->
-		<Symbol name="∞" cas="inf" tex="\infty" key="" code="49"  fontId="3" />
-		<Symbol name="⊗" tex="\otimes" fontId="0" />
-		<Symbol name="°" tex="\degree" />
+		<Symbol name="otimes" unicode="⊗" tex="\otimes"/>
+		<Symbol name="degree" unicode="°" tex="\degree" />
 	</Symbols>
 
 	<Functions columns="6">
