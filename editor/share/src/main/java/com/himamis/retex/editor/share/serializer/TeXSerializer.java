@@ -246,7 +246,13 @@ public class TeXSerializer extends SerializerAdapter {
                     stringBuilder.append(')');
                 }
                 stringBuilder.append(function.getTexName());
-
+            } else if ("'".equals(function.getName())){
+                serialize(function.getArgument(0), stringBuilder);
+                stringBuilder.append("'");
+            } else if ("abs".equals(function.getName())) {
+                stringBuilder.append("\\left|");
+                serialize(function.getArgument(0), stringBuilder);
+                stringBuilder.append("\\right|");
             } else if ("function".equals(function.getName())) {
                 stringBuilder.append("\\mathrm{" + function.getTexName() + "} ");
                 // jmathtex v0.7: incompatibility

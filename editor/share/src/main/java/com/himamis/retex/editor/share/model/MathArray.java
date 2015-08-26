@@ -79,23 +79,16 @@ public class MathArray extends MathContainer {
 
     public void addArgument() {
         MathSequence argument = new MathSequence();
-        argument.setParent(this);
-        arguments.add(argument);
+        super.addArgument(argument);
         columns += 1;
     }
 
     public void addArgument(MathSequence argument) {
-        if (argument != null) {
-            argument.setParent(this);
-        }
-        arguments.add(argument);
+        super.addArgument(argument);
         columns += 1;
     }
 
     public void addArgument(int i, MathSequence argument) {
-        if (argument != null) {
-            argument.setParent(this);
-        }
         arguments.add(i, argument);
         columns += 1;
     }
