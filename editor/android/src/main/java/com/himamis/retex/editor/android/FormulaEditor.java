@@ -17,14 +17,15 @@ import android.view.inputmethod.InputMethodManager;
 import com.himamis.retex.editor.android.event.ClickListenerAdapter;
 import com.himamis.retex.editor.android.event.FocusListenerAdapter;
 import com.himamis.retex.editor.android.event.KeyListenerAdapter;
-import com.himamis.retex.editor.share.parser.Parser;
 import com.himamis.retex.editor.share.editor.MathField;
 import com.himamis.retex.editor.share.editor.MathFieldInternal;
 import com.himamis.retex.editor.share.event.ClickListener;
 import com.himamis.retex.editor.share.event.FocusListener;
 import com.himamis.retex.editor.share.event.KeyListener;
 import com.himamis.retex.editor.share.meta.MetaModel;
+import com.himamis.retex.editor.share.meta.MetaModelParser;
 import com.himamis.retex.editor.share.model.MathFormula;
+import com.himamis.retex.editor.share.parser.Parser;
 import com.himamis.retex.renderer.android.FactoryProviderAndroid;
 import com.himamis.retex.renderer.android.graphics.ColorA;
 import com.himamis.retex.renderer.android.graphics.Graphics2DA;
@@ -125,7 +126,7 @@ public class FormulaEditor extends View implements MathField {
     private void initMetaModel() {
         if (!isInEditMode()) {
             if (sMetaModel == null) {
-                sMetaModel = new MetaModel(new Resource().loadResource("Octave.xml"));
+                sMetaModel = new MetaModelParser().parse(new Resource().loadResource("Octave.xml"));
             }
         }
     }
