@@ -17,6 +17,7 @@ public class MetaModelParser {
     private static final String SYMBOL = "Symbol";
     private static final String FUNCTION = "Function";
     private static final String PARAMETER = "Parameter";
+    private static final String ARRAY = "Array";
     /* Category attributes. */
     private static final String GROUP = "group";
     private static final String COLUMNS = "columns";
@@ -96,6 +97,27 @@ public class MetaModelParser {
         MetaCharacter metaCharacter = new MetaCharacter(name, cas, tex, key, key, MetaCharacter.CHARACTER);
 
         return metaCharacter;
+    }
+
+    private MetaArray parseArray(Element element) throws Exception {
+        String tagName = element.getTagName();
+        String name = getStringAttribute(NAME, element);
+
+        ArrayList<MetaComponent> components = new ArrayList<MetaComponent>();
+        NodeList elements = element.getChildNodes();
+        for (int i = 0; i < elements.getLength(); i++) {
+            Node component = elements.item(i);
+            if (component.getNodeType() != Node.ELEMENT_NODE) {
+                // exclude non-element nodes
+                continue;
+            }
+            Element childElement = component.castToElement();
+            MetaCharacter metaComponent = parseArrayElement(childElement);
+            components.add(metaComponent);
+        }
+        MetaArray metaArray = new MetaArray(tagName, name, components);
+
+        return metaArray;
     }
 
     private MetaCharacter parseCharacter(Element element) throws Exception {
@@ -294,11 +316,13 @@ public class MetaModelParser {
                 }
                 Element elementChild = elementChildNode.castToElement();
                 String name = elementChild.getTagName();
-                if (name.equals(MetaModel.OPEN) || name.equals(MetaModel.CLOSE) ||
+                /*if (name.equals(MetaModel.OPEN) || name.equals(MetaModel.CLOSE) ||
                         name.equals(MetaModel.FIELD) || name.equals(MetaModel.ROW)) {
                     MetaComponent metaComponent = parseArrayElement(elementChild);
-                    metas.add(metaComponent);
-
+                    metas.add(metaComponent);*/
+                if (name.equals(ARRAY)) {
+                    MetaArray metaArray = parseArray(elementChild);
+                    metas.add(metaArray);
                 } else if (name.equals(OPERATOR)) {
                     MetaSymbol metaOperator = parseSymbol(elementChild);
                     metas.add(metaOperator);
@@ -316,11 +340,12 @@ public class MetaModelParser {
                 }
             }
 
-            if (groupName.equals(MetaModel.ARRAY) || groupName.equals(MetaModel.MATRIX)) {
+            // TODO fix matrix
+            /*if (groupName.equals(MetaModel.MATRIX)) {
                 metaModel.addGroup(new MetaArray(groupName, group, metas));
-            } else {
-                metaModel.addGroup(new ListMetaGroup(groupName, group, metas, columns));
-            }
+            } else {*/
+            metaModel.addGroup(new ListMetaGroup(groupName, group, metas, columns));
+            //}
         }
         return metaModel;
     }

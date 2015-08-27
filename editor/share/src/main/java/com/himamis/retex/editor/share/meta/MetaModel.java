@@ -43,7 +43,7 @@ import java.util.ArrayList;
 public class MetaModel {
 
     /* Arrays and matrices. */
-    public static final String ARRAY = "Array";
+    public static final String ARRAYS = "Arrays";
     public static final String MATRIX = "Matrix";
     /* Categories. */
     public static final String CHARACTERS = "Characters";
@@ -71,8 +71,20 @@ public class MetaModel {
     /**
      * get array
      */
-    public MetaArray getArray() {
-        return (MetaArray) getGroup(ARRAY);
+    public MetaArray getArray(String name) {
+        return (MetaArray) getComponent(ARRAYS, name);
+    }
+
+    public MetaArray getArray(char arrayOpenKey) {
+        ListMetaGroup listMetaGroup = (ListMetaGroup) getGroup(ARRAYS);
+        for (MetaComponent component : listMetaGroup.getComponents()) {
+            MetaArray metaArray = (MetaArray) component;
+            if (metaArray.getOpenKey() == arrayOpenKey) {
+                return metaArray;
+            }
+        }
+        throw new ArrayIndexOutOfBoundsException(
+                "Component Not found " + arrayOpenKey);
     }
 
     /**
@@ -254,5 +266,37 @@ public class MetaModel {
 
     public void addGroup(ListMetaGroup metaGroup) {
         groups.add(metaGroup);
+    }
+
+    public boolean isArrayOpenKey(char key) {
+        MetaGroup metaGroup = getGroup(ARRAYS);
+        boolean isArrayOpenKey = false;
+        isArrayOpenKey |= getMetaArray(metaGroup, MetaArray.REGULAR).getOpenKey() == key;
+        isArrayOpenKey |= getMetaArray(metaGroup, MetaArray.SQUARE).getOpenKey() == key;
+        isArrayOpenKey |= getMetaArray(metaGroup, MetaArray.CURLY).getOpenKey() == key;
+        isArrayOpenKey |= getMetaArray(metaGroup, MetaArray.APOSTROPHES).getOpenKey() == key;
+        return isArrayOpenKey;
+    }
+
+    public boolean isFunctionOpenKey(char key) {
+        MetaGroup metaGroup = getGroup(ARRAYS);
+        boolean isFunctionOpenKey = false;
+        isFunctionOpenKey |= getMetaArray(metaGroup, MetaArray.REGULAR).getOpenKey() == key;
+        isFunctionOpenKey |= getMetaArray(metaGroup, MetaArray.SQUARE).getOpenKey() == key;
+        return isFunctionOpenKey;
+    }
+
+    private MetaArray getMetaArray(MetaGroup metaGroup, String name) {
+        return (MetaArray) metaGroup.getComponent(name);
+    }
+
+    public boolean isArrayCloseKey(char key) {
+        MetaGroup metaGroup = getGroup(ARRAYS);
+        boolean isArrayCloseKey = false;
+        isArrayCloseKey |= getMetaArray(metaGroup, MetaArray.REGULAR).getCloseKey() == key;
+        isArrayCloseKey |= getMetaArray(metaGroup, MetaArray.SQUARE).getCloseKey() == key;
+        isArrayCloseKey |= getMetaArray(metaGroup, MetaArray.CURLY).getCloseKey() == key;
+        isArrayCloseKey |= getMetaArray(metaGroup, MetaArray.APOSTROPHES).getCloseKey() == key;
+        return isArrayCloseKey;
     }
 }

@@ -29,7 +29,6 @@ package com.himamis.retex.editor.share.model;
 
 import com.himamis.retex.editor.share.meta.MetaArray;
 import com.himamis.retex.editor.share.meta.MetaComponent;
-import com.himamis.retex.editor.share.meta.MetaModel;
 
 /**
  * Array/array. This class is part of model.
@@ -152,19 +151,19 @@ public class MathArray extends MathContainer {
     }
 
     public boolean is1DArray() {
-        return rows() == 1 && MetaModel.ARRAY.equals(getName());
+        return rows() == 1 && meta.isArray();
     }
 
     public boolean isArray() {
-        return MetaModel.ARRAY.equals(getName());
+        return meta.isArray();
     }
 
     public boolean isVector() {
-        return rows() == 1 && MetaModel.MATRIX.equals(getName());
+        return rows() == 1 && meta.isMatrix();
     }
 
     public boolean isMatrix() {
-        return MetaModel.MATRIX.equals(getName());
+        return meta.isMatrix();
     }
 
     public MathArray copy() {

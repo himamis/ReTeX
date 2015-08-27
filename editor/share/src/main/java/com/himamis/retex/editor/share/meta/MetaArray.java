@@ -29,42 +29,80 @@ package com.himamis.retex.editor.share.meta;
 
 import java.util.List;
 
-public class MetaArray extends ListMetaGroup {
+public class MetaArray extends MetaComponent {
 
-    MetaArray(String name, String tab, List<MetaComponent> components) {
-        super(name, tab, components, 0);
+    public static final String CURLY = "curly";
+    public static final String REGULAR = "regular";
+    public static final String SQUARE = "square";
+    public static final String APOSTROPHES = "apostrophes";
+
+    private MetaComponent open, close, field, row;
+    private String tagName;
+
+    MetaArray(String tagName, String name, List<MetaComponent> metaComponents) {
+        super(name, name, name, (char) 0, (char) 0);
+        this.tagName = tagName;
+        setupComponents(metaComponents);
+    }
+
+    private void setupComponents(List<MetaComponent> metaComponents) {
+        open = getComponent(metaComponents, MetaModel.OPEN);
+        close = getComponent(metaComponents, MetaModel.CLOSE);
+        field = getComponent(metaComponents, MetaModel.FIELD);
+        row = getComponent(metaComponents, MetaModel.ROW);
+    }
+
+    private MetaComponent getComponent(List<MetaComponent> metaComponents, String name) {
+        for (MetaComponent metaComponent : metaComponents) {
+            if (metaComponent.getName().equals(name)) {
+                return metaComponent;
+            }
+        }
+        throw new RuntimeException("Component does not exist");
     }
 
     public MetaComponent getOpen() {
-        return getComponent(MetaModel.OPEN);
+        return open;
     }
 
     public char getOpenKey() {
-        return getOpen().getKey();
+        return open.getKey();
     }
 
     public MetaComponent getClose() {
-        return getComponent(MetaModel.CLOSE);
+        return close;
     }
 
     public char getCloseKey() {
-        return getClose().getKey();
+        return close.getKey();
     }
 
     public MetaComponent getField() {
-        return getComponent(MetaModel.FIELD);
+        return field;
     }
 
     public char getFieldKey() {
-        return getField().getKey();
+        return field.getKey();
     }
 
     public MetaComponent getRow() {
-        return getComponent(MetaModel.ROW);
+        return row;
     }
 
     public char getRowKey() {
-        return getRow().getKey();
+        return row.getKey();
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public boolean isArray() {
+        return tagName.equals("Array");
+    }
+
+    public boolean isMatrix() {
+        return tagName.equals("Matrix");
     }
 
 }

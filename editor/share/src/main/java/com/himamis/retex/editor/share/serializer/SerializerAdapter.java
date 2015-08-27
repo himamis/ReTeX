@@ -1,7 +1,6 @@
 package com.himamis.retex.editor.share.serializer;
 
 import com.himamis.retex.editor.share.model.MathArray;
-import com.himamis.retex.editor.share.model.MathBraces;
 import com.himamis.retex.editor.share.model.MathCharacter;
 import com.himamis.retex.editor.share.model.MathComponent;
 import com.himamis.retex.editor.share.model.MathContainer;
@@ -48,9 +47,6 @@ public abstract class SerializerAdapter implements Serializer {
         } else if (container instanceof MathArray) {
             serialize((MathArray) container, stringBuilder);
 
-        } else if (container instanceof MathBraces) {
-            serialize((MathBraces) container, stringBuilder);
-
         } else if (container instanceof MathFunction) {
             serialize((MathFunction) container, stringBuilder);
         }
@@ -63,8 +59,6 @@ public abstract class SerializerAdapter implements Serializer {
     abstract void serialize(MathSequence sequence, StringBuilder stringBuilder, int from, int to);
 
     abstract void serialize(MathFunction function, StringBuilder stringBuilder);
-
-    abstract void serialize(MathBraces braces, StringBuilder stringBuilder);
 
     abstract void serialize(MathArray array, StringBuilder stringBuilder);
 }

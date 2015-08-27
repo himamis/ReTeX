@@ -1,9 +1,20 @@
 package com.himamis.retex.editor.share.meta;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class CharacterGroup implements MetaGroup {
+
+    private static final Set<Character> extraChars = new HashSet<Character>();
+
+    static {
+        extraChars.add('.');
+        extraChars.add(' ');
+        extraChars.add(';');
+        extraChars.add(',');
+    }
 
     private Map<String, MetaCharacter> characters = new HashMap<String, MetaCharacter>();
 
@@ -24,7 +35,7 @@ public class CharacterGroup implements MetaGroup {
         }
 
         char ch = name.charAt(0);
-        if (!Character.isLetter(ch) && !Character.isDigit(ch)) {
+        if (!Character.isLetter(ch) && !Character.isDigit(ch) && !extraChars.contains(ch)) {
             return null;
         }
 

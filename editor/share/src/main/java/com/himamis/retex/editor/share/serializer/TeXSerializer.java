@@ -2,7 +2,6 @@ package com.himamis.retex.editor.share.serializer;
 
 import com.himamis.retex.editor.share.meta.MetaModel;
 import com.himamis.retex.editor.share.model.MathArray;
-import com.himamis.retex.editor.share.model.MathBraces;
 import com.himamis.retex.editor.share.model.MathCharacter;
 import com.himamis.retex.editor.share.model.MathFunction;
 import com.himamis.retex.editor.share.model.MathSequence;
@@ -285,34 +284,6 @@ public class TeXSerializer extends SerializerAdapter {
                 }
             }
             stringBuilder.append(function.getClosingBracket() + "}");
-        }
-    }
-
-    @Override
-    public void serialize(MathBraces braces, StringBuilder stringBuilder) {
-        if (braces.getClassif() == MathBraces.REGULAR) {
-            stringBuilder.append("\\left(");
-            serialize(braces.getArgument(0), stringBuilder);
-            stringBuilder.append("\\right)");
-
-        } else if (braces.getClassif() == MathBraces.SQUARE) {
-            stringBuilder.append("\\left[");
-            serialize(braces.getArgument(0), stringBuilder);
-            stringBuilder.append("\\right]");
-
-        } else if (braces.getClassif() == MathBraces.CURLY) {
-            stringBuilder.append("\\lbrace");
-            serialize(braces.getArgument(0), stringBuilder);
-            stringBuilder.append("\\rbrace");
-
-        } else if (braces.getClassif() == MathBraces.APOSTROPHES) {
-            stringBuilder.append("\"");
-            serialize(braces.getArgument(0), stringBuilder);
-            stringBuilder.append("\"");
-
-        } else {
-            throw new ArrayIndexOutOfBoundsException("Unsupported function "
-                    + braces.getClassif());
         }
     }
 

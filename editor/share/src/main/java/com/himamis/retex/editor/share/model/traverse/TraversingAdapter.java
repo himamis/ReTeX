@@ -1,7 +1,6 @@
 package com.himamis.retex.editor.share.model.traverse;
 
 import com.himamis.retex.editor.share.model.MathArray;
-import com.himamis.retex.editor.share.model.MathBraces;
 import com.himamis.retex.editor.share.model.MathCharacter;
 import com.himamis.retex.editor.share.model.MathComponent;
 import com.himamis.retex.editor.share.model.MathContainer;
@@ -24,9 +23,7 @@ public abstract class TraversingAdapter implements Traversing {
     }
 
     public MathComponent processMathContainer(MathContainer mathContainer) {
-        if (mathContainer instanceof MathBraces) {
-            return processMathBraces((MathBraces) mathContainer);
-        } else if (mathContainer instanceof MathFunction) {
+        if (mathContainer instanceof MathFunction) {
             return processMathFunction((MathFunction) mathContainer);
         } else if (mathContainer instanceof MathArray) {
             return processMathArray((MathArray) mathContainer);
@@ -44,6 +41,4 @@ public abstract class TraversingAdapter implements Traversing {
     protected abstract MathComponent processMathSequence(MathSequence mathSequence);
 
     protected abstract MathComponent processMathCharacter(MathCharacter mathCharacter);
-
-    protected abstract MathComponent processMathBraces(MathBraces mathBraces);
 }
