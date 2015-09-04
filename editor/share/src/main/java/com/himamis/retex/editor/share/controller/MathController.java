@@ -151,7 +151,7 @@ public abstract class MathController extends MathContext {
             if (currentField.getArgument(currentOffset - 1) instanceof MathFunction) {
                 MathFunction function = (MathFunction) currentField.getArgument(currentOffset - 1);
                 if ("sqrt".equals(function.getName()) ||
-                        "nthroot".equals(function.getName()) ||
+                        "nroot".equals(function.getName()) ||
                         "frac".equals(function.getName())) {
 
                     currentField.delArgument(currentOffset - 1);

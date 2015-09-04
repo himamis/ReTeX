@@ -129,7 +129,7 @@ public class TeXSerializer extends SerializerAdapter {
                 serialize(function.getArgument(0), stringBuilder);
                 stringBuilder.append("}");
 
-            } else if ("nthroot".equals(function.getName())) {
+            } else if ("nroot".equals(function.getName())) {
                 stringBuilder.append(function.getTexName());
                 stringBuilder.append('[');
                 serialize(function.getArgument(0), stringBuilder);
