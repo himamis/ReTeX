@@ -184,7 +184,7 @@ public abstract class MathController extends MathContext {
         }
 
         // pass characters for fraction and factorial only
-        if ("frac".equals(name) || "factorial".equals(name)) {
+        if ("frac".equals(name) /*|| "factorial".equals(name)*/) {
             passArgument(function);
         }
         currentField.addArgument(currentOffset, function);
@@ -648,11 +648,11 @@ public abstract class MathController extends MathContext {
             newBraces(ch);
             update();
             handled = true;
-        } else if (ch == '!') {
+        } /*else if (ch == '!') {
             newFunction("factorial");
             update();
             handled = true;
-        } else if (ch == '^') {
+        }*/ else if (ch == '^') {
             newScript("^");
             update();
             handled = true;

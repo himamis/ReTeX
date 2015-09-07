@@ -269,13 +269,14 @@ public class MetaModel {
     }
 
     public boolean isArrayOpenKey(char key) {
-        MetaGroup metaGroup = getGroup(ARRAYS);
-        boolean isArrayOpenKey = false;
-        isArrayOpenKey |= getMetaArray(metaGroup, MetaArray.REGULAR).getOpenKey() == key;
-        isArrayOpenKey |= getMetaArray(metaGroup, MetaArray.SQUARE).getOpenKey() == key;
-        isArrayOpenKey |= getMetaArray(metaGroup, MetaArray.CURLY).getOpenKey() == key;
-        isArrayOpenKey |= getMetaArray(metaGroup, MetaArray.APOSTROPHES).getOpenKey() == key;
-        return isArrayOpenKey;
+        ListMetaGroup metaGroup = (ListMetaGroup) getGroup(ARRAYS);
+        for (MetaComponent metaComponent : metaGroup.getComponents()) {
+            MetaArray metaArray = (MetaArray) metaComponent;
+            if (metaArray.getOpenKey() == key) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isFunctionOpenKey(char key) {
@@ -296,7 +297,6 @@ public class MetaModel {
         isArrayCloseKey |= getMetaArray(metaGroup, MetaArray.REGULAR).getCloseKey() == key;
         isArrayCloseKey |= getMetaArray(metaGroup, MetaArray.SQUARE).getCloseKey() == key;
         isArrayCloseKey |= getMetaArray(metaGroup, MetaArray.CURLY).getCloseKey() == key;
-        isArrayCloseKey |= getMetaArray(metaGroup, MetaArray.APOSTROPHES).getCloseKey() == key;
         return isArrayCloseKey;
     }
 }

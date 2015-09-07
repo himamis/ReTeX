@@ -54,6 +54,12 @@
             <Field cas="," />
             <Row cas=";" />
         </Array>
+        <Array name="line">
+            <Open cas="|" tex="|" />
+            <Close cas="|" tex="|" />
+            <Field cas="," />
+            <Row cas=";" />
+        </Array>
     </Arrays>
 
     <Functions group="General">
@@ -100,10 +106,11 @@
             <Parameter name="x" order="3" type="number" />
         </Function>
 
+        <!--
         <Function name="factorial" cas="factorial" tex="!">
             <Parameter name="x" order="0" type="number" />
         </Function>
-
+        -->
         <Function name="abs" cas="abs">
             <Parameter name="a" order="0" />
         </Function>
@@ -155,6 +162,18 @@
         </Function>
 
         <Function name="atan" cas="atan" tex="tan^{-1}">
+            <Parameter name="x" order="0" type="number" />
+        </Function>
+
+        <Function name="arcsin" cas="asin" tex="sin^{-1}">
+            <Parameter name="x" order="0" type="number" />
+        </Function>
+
+        <Function name="arccos" cas="acos" tex="cos^{-1}">
+            <Parameter name="x" order="0" type="number" />
+        </Function>
+
+        <Function name="arctan" cas="atan" tex="tan^{-1}">
             <Parameter name="x" order="0" type="number" />
         </Function>
 
@@ -264,6 +283,7 @@
         </Function>
 
         <Function name="rand"></Function>
+        <Function name="random"></Function>
 
         <!-- Matrix Operations -->
 
@@ -325,6 +345,11 @@
         <Operator name="*" tex="\cdot" unicode="*" />
         <Operator name="/" unicode="/" />
         <Operator name="\" unicode="\" />
+        <Operator name="'" unicode="'" />
+        <Operator name="!" unicode="!" />
+        <Operator name=":" unicode=":" />
+        <Operator name="percent" unicode="%" tex="\%"/>
+        <Operator name="dollar" unicode="$" tex="\$"/>
         <Operator name="times" tex="\times" unicode="*" />
         <Operator name="div" tex="\div" unicode="/" />
         <Operator name="=" />
