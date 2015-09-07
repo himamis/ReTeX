@@ -161,7 +161,7 @@ public class MetaModelParser {
         String name = getStringAttribute(NAME, element);
         String cas = name;
         String tex = name;
-        char key = name.length() > 0 ? name.charAt(0) : 0;
+        char key = name.length() == 1 ? name.charAt(0) : 0;
         char unicode = key;
 
         try {
