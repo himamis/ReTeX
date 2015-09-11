@@ -348,6 +348,7 @@
         <Operator name="'" unicode="'" />
         <Operator name="!" unicode="!" />
         <Operator name=":" unicode=":" />
+        <Operator name="≔" unicode="≔" />
         <Operator name="percent" unicode="%" tex="\%"/>
         <Operator name="dollar" unicode="$" tex="\$"/>
         <Operator name="times" tex="\times" unicode="*" />
