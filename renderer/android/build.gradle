@@ -24,7 +24,7 @@ dependencies {
 
 android {
 	compileSdkVersion 21
-    buildToolsVersion '21.1.2'
+    buildToolsVersion rootProject.buildToolsVersion
 }
 
 eclipse.project.name = 'renderer-android'
