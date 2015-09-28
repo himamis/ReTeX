@@ -257,33 +257,37 @@ public class TeXSerializer extends SerializerAdapter {
                 // jmathtex v0.7: incompatibility
                 stringBuilder.append((jmathtex ? "\\nbsp" : "\\ ") + " ");
                 serialize(function.getArgument(0), stringBuilder);
-                stringBuilder.append('(');
+                stringBuilder.append("\\left(");
                 serialize(function.getArgument(1), stringBuilder);
-                stringBuilder.append(")=");
+                stringBuilder.append("\\right)=");
                 boolean addBraces = currentBraces
                         || (function.getArgument(2).hasOperator() && function
                         .getParent().hasOperator());
                 if (addBraces) {
-                    stringBuilder.append('(');
+                    stringBuilder.append("\\left(");
                 }
                 serialize(function.getArgument(2), stringBuilder);
                 if (addBraces) {
-                    stringBuilder.append(')');
+                    stringBuilder.append("\\right)");
                 }
             }
         } else {
             if (!jmathtex && isLatexFunction(function.getTexName())) {
-                stringBuilder.append("{\\" + function.getTexName() + function.getOpeningBracket());
+                stringBuilder.append("{\\" + function.getTexName());
             } else {
-                stringBuilder.append("{\\mathrm{" + function.getTexName() + "}" + function.getOpeningBracket());
+                stringBuilder.append("{\\mathrm{" + function.getTexName() + "}");
             }
+            stringBuilder.append("\\left");
+            stringBuilder.append(function.getOpeningBracket());
             for (int i = 0; i < function.size(); i++) {
                 serialize(function.getArgument(i), stringBuilder);
                 if (i + 1 < function.size()) {
                     stringBuilder.append(",");
                 }
             }
-            stringBuilder.append(function.getClosingBracket() + "}");
+            stringBuilder.append("\\right");
+            stringBuilder.append(function.getClosingBracket());
+            stringBuilder.append("}");
         }
     }
 
