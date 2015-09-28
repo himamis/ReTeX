@@ -23,7 +23,7 @@ dependencies {
 }
 
 android {
-	compileSdkVersion 21
+	compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 }
 
