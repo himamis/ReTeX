@@ -461,6 +461,7 @@
 
         <Symbol name="otimes" tex="\otimes" unicode="⊗" />
         <Symbol name="degree" tex="\degree" unicode="°" />
+        <Symbol name="quotes" tex="&quot;" unicode="&quot;" />
     </Symbols>
 
 </Serializer>
