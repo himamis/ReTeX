@@ -37,11 +37,8 @@ import com.himamis.retex.editor.share.model.MathSequence;
  * Controller context.
  * 
  * Handles caret position on container, and letters offset.
- * 
- * beforeField indicates caret before formula.
- * afterField indicates caret after formula.
- * 
- * @author Bea Petrovicova
+ *
+ * @author Bea Petrovicova, Bencze Balazs
  */
 abstract class MathContext {
 
@@ -72,7 +69,7 @@ abstract class MathContext {
 
 	public void paste(MathFormula formula) {		
 		// clone first
-		MathSequence rootComponent = (MathSequence)formula.getRootComponent().copy();
+		MathSequence rootComponent = formula.getRootComponent().copy();
 
 		// insert then
 		int size = rootComponent.size();
