@@ -9,6 +9,6 @@ public interface Traversing {
      * @param mathComponent value
      * @return
      */
-    MathComponent process(final MathComponent mathComponent);
+    MathComponent process(MathComponent mathComponent);
 
 }

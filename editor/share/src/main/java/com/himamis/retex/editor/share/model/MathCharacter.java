@@ -28,6 +28,7 @@
 package com.himamis.retex.editor.share.model;
 
 import com.himamis.retex.editor.share.meta.MetaCharacter;
+import com.himamis.retex.editor.share.model.inspect.Inspecting;
 import com.himamis.retex.editor.share.model.traverse.Traversing;
 
 /**
@@ -95,5 +96,10 @@ public class MathCharacter extends MathComponent {
 
     public MathComponent traverse(Traversing traversing) {
         return traversing.process(this);
+    }
+
+    @Override
+    public boolean inspect(Inspecting inspecting) {
+        return inspecting.check(this);
     }
 }

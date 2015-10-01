@@ -27,6 +27,7 @@
  */
 package com.himamis.retex.editor.share.model;
 
+import com.himamis.retex.editor.share.model.inspect.Inspecting;
 import com.himamis.retex.editor.share.model.traverse.Traversing;
 
 import java.util.ArrayList;
@@ -199,6 +200,20 @@ abstract public class MathContainer extends MathComponent {
             setArgument(i, argument.traverse(traversing));
         }
         return this;
+    }
+
+    @Override
+    public boolean inspect(Inspecting inspecting) {
+        if (inspecting.check(this)) {
+            return true;
+        }
+        for (int i = 0; i < size(); i++) {
+            MathComponent argument = getArgument(i);
+            if (inspecting.check(argument)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public abstract MathContainer copy();

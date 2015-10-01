@@ -27,8 +27,8 @@
  */
 package com.himamis.retex.editor.share.model;
 
-import com.himamis.retex.editor.share.parser.Parser;
 import com.himamis.retex.editor.share.meta.MetaModel;
+import com.himamis.retex.editor.share.parser.Parser;
 
 public class MathFormula {
 
