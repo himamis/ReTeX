@@ -48,15 +48,13 @@ import com.himamis.retex.editor.share.model.MathSequence;
  * c) Symbol toolbar = Greek letters
  * d) Function toolbar = functions
  *
- * @author Bea Petrovicova
+ * @author Bea Petrovicova, Bencze Balazs
  */
 public abstract class MathController extends MathContext {
 
     private final char functionOpenKey = '('; // probably universal
     private final char functionCloseKey = ')';
-    private final char squareBracketOpenKey = '[';
     private final char delimiterKey = ';';
-    private final char apostropheKey = '"';
 
     private MetaModel metaModel;
 
@@ -191,7 +189,7 @@ public abstract class MathController extends MathContext {
 
         if (function.hasChildren()) {
             // set current sequence
-            firstField((MathContainer) function.getArgument(initial));
+            firstField(function.getArgument(initial));
             currentOffset = currentField.size();
         } else {
             currentOffset++;
@@ -301,7 +299,7 @@ public abstract class MathController extends MathContext {
                     parent.size() > currentField.getParentIndex() + 1 &&
                     (currentField.getParentIndex() + 1) % parent.columns() != 0) {
 
-                currentField = (MathSequence) parent.getArgument(currentField.getParentIndex() + 1);
+                currentField = parent.getArgument(currentField.getParentIndex() + 1);
                 currentOffset = 0;
 
                 // if ';' typed at the end of last field ... add new row
@@ -316,7 +314,7 @@ public abstract class MathController extends MathContext {
             } else if (ch == parent.getRowKey() && currentOffset == currentField.size() &&
                     (currentField.getParentIndex() + 1) % parent.columns() == 0) {
 
-                currentField = (MathSequence) parent.getArgument(currentField.getParentIndex() + 1);
+                currentField = parent.getArgument(currentField.getParentIndex() + 1);
                 currentOffset = 0;
 
                 // if ']' '}' typed at the end of last field ... move out of array
