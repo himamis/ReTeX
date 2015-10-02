@@ -550,8 +550,9 @@ public class InputController {
                 break;
             }
             currentField.delArgument(currentOffset - 1);
-            editorState.decCurrentOffset();
+            currentOffset--;
             length--;
         }
+        editorState.setCurrentOffset(currentOffset);
     }
 }
