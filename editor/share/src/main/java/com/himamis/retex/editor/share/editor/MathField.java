@@ -32,24 +32,24 @@ import com.himamis.retex.editor.share.meta.MetaModel;
 import com.himamis.retex.renderer.share.TeXIcon;
 
 public interface MathField {
-	
-	void setTeXIcon(TeXIcon icon);
 
-	void requestViewFocus();
-	
-	void setFocusListener(FocusListener focusListener);
-	
-	void setClickListener(ClickListener clickListener);
-	
-	void setKeyListener(KeyListener keyListener);
-	
-	void repaint();
+    void setTeXIcon(TeXIcon icon);
 
-	void requestLayout();
-	
-	boolean hasParent();
+    void requestViewFocus();
 
-	boolean hasFocus();
+    void setFocusListener(FocusListener focusListener);
 
-	MetaModel getMetaModel();
+    void setClickListener(ClickListener clickListener);
+
+    void setKeyListener(KeyListener keyListener);
+
+    void repaint();
+
+    void requestLayout();
+
+    boolean hasParent();
+
+    boolean hasFocus();
+
+    MetaModel getMetaModel();
 }

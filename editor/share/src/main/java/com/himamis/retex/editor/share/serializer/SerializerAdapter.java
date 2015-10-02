@@ -32,6 +32,7 @@ public abstract class SerializerAdapter implements Serializer {
                             int currentOffset) {
         this.currentField = currentField;
         this.currentOffset = currentOffset;
+        currentBraces = currentField != null;
         StringBuilder stringBuilder = new StringBuilder();
         serialize(container, stringBuilder);
         return stringBuilder.toString();
