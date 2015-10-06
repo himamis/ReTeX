@@ -111,10 +111,6 @@
             <Parameter name="x" order="0" type="number" />
         </Function>
         -->
-        <Function name="abs" cas="abs">
-            <Parameter name="a" order="0" />
-        </Function>
-
         <Function name="nint" cas="NaN" tex="\int">
             <Parameter name="x" order="0" type="number" />
             <Parameter name="v" order="1" type="string" />
@@ -137,6 +133,10 @@
             <Parameter name="name" order="0" type="string" />
             <Parameter name="v" order="1" type="string" />
             <Parameter name="x" order="2" type="number" />
+        </Function>
+
+        <Function name="abs" cas="abs" tex="abs">
+            <Parameter name="x" order="0" type="number" />
         </Function>
     </Functions>
 
@@ -261,10 +261,6 @@
         </Function>
 
         <Function name="ceil" cas="ceil" tex="ceil">
-            <Parameter name="x" order="0" type="number" />
-        </Function>
-
-        <Function name="abs" cas="abs" tex="abs">
             <Parameter name="x" order="0" type="number" />
         </Function>
 
