@@ -49,8 +49,8 @@
             <Row cas=";" />
         </Array>
         <Array name="apostrophes">
-            <Open cas="&quot;" tex="&quot; " />
-            <Close cas="&quot;" tex="&quot; " />
+            <Open cas="&quot;" tex=" \text{&quot;" />
+            <Close cas="&quot;" tex="&quot;} " />
             <Field cas="," />
             <Row cas=";" />
         </Array>
@@ -345,8 +345,8 @@
         <Operator name="!" unicode="!" />
         <Operator name=":" unicode=":" />
         <Operator name="≔" unicode="≔" />
-        <Operator name="percent" unicode="%" tex="\%"/>
-        <Operator name="dollar" unicode="$" tex="\$"/>
+        <Operator name="percent" tex="\%" unicode="%" />
+        <Operator name="dollar" tex="\$" unicode="$" />
         <Operator name="times" tex="\times" unicode="*" />
         <Operator name="div" tex="\div" unicode="/" />
         <Operator name="=" />

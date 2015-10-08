@@ -5,6 +5,7 @@ import com.himamis.retex.editor.share.model.MathArray;
 import com.himamis.retex.editor.share.model.MathCharacter;
 import com.himamis.retex.editor.share.model.MathFunction;
 import com.himamis.retex.editor.share.model.MathSequence;
+import com.himamis.retex.renderer.share.util.LaTeXUtil;
 
 /**
  * Serializes internal format into TeX format.
@@ -18,6 +19,7 @@ public class TeXSerializer extends SerializerAdapter {
             "limsup", "liminf", "min", "max", "sup", "exp", "ln", "lg", "log",
             "ker", "deg", "gcd", "det", "hom", "arg", "dim", "sum", "prod",
             "int", "pmod"};
+
     private static final String characterMissing = "\\nbsp ";
     private boolean jmathtex = true;
     private MetaModel metaModel;
@@ -29,10 +31,20 @@ public class TeXSerializer extends SerializerAdapter {
     @Override
     public void serialize(MathCharacter mathCharacter, StringBuilder stringBuilder) {
         // jmathtex v0.7: incompatibility
+
         if (" ".equals(mathCharacter.getName())) {
             stringBuilder.append((jmathtex ? "\\nbsp" : "\\ ") + " ");
         } else {
-            stringBuilder.append(mathCharacter.getTexName());
+            String texName = mathCharacter.getTexName();
+            if (LaTeXUtil.isSymbolEscapeable(texName)) {
+                // escape special symbols
+                stringBuilder.append('\\');
+                stringBuilder.append(texName);
+            } else if (LaTeXUtil.isReplaceableSymbol(texName)) {
+                stringBuilder.append(LaTeXUtil.replaceSymbol(texName));
+            } else {
+                stringBuilder.append(texName);
+            }
         }
 
         // safety space after operator / symbol
@@ -245,7 +257,7 @@ public class TeXSerializer extends SerializerAdapter {
                     stringBuilder.append(')');
                 }
                 stringBuilder.append(function.getTexName());
-            } else if ("'".equals(function.getName())){
+            } else if ("'".equals(function.getName())) {
                 serialize(function.getArgument(0), stringBuilder);
                 stringBuilder.append("'");
             } else if ("abs".equals(function.getName())) {
