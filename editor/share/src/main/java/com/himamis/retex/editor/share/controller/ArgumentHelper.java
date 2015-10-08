@@ -21,6 +21,7 @@ public class ArgumentHelper {
             currentOffset--;
             field.addArgument(0, character);
         }
+        editorState.setCurrentOffset(currentOffset);
 
         if (currentOffset > 0) {
             // if previous sequence argument are braces pass their content
