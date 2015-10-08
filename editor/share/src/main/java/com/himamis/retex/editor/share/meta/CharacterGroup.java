@@ -35,9 +35,9 @@ public class CharacterGroup implements MetaGroup {
         }
 
         char ch = name.charAt(0);
-        if (!Character.isLetter(ch) && !Character.isDigit(ch) && !extraChars.contains(ch)) {
+        /*if (!Character.isLetter(ch) && !Character.isDigit(ch) && !extraChars.contains(ch)) {
             return null;
-        }
+        }*/
 
         MetaCharacter character = characters.get(name);
         if (character == null) {
