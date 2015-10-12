@@ -3,7 +3,7 @@ package com.himamis.retex.renderer.share.util;
 public class LaTeXUtil {
 
     private static final String escapeableSymbols[] = {"%", "$", "#", "&", "{", "}", "_"};
-    private static final String replaceableSymbols[][] = {{"~", "^", "\\"}, {"\\u223C ",
+    private static final String replaceableSymbols[][] = {{"~", "^", "\\"}, {"\u223C ",
             "\\^{\\ } ", "\\backslash "}};
 
 
