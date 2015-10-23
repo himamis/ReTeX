@@ -10,5 +10,3 @@ targetCompatibility = 1.6
 dependencies {
 	compile project(':renderer:share')
 }
-
-eclipse.project.name = 'editor-share'

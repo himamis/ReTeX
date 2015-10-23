@@ -7,5 +7,3 @@ task jarSources(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
     from sourceSets.main.allSource 
 }
-
-eclipse.project.name = 'renderer-share'

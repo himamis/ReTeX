@@ -27,7 +27,3 @@ android {
 	compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 }
-
-def projectName = 'editor-android'
-eclipse.project.name = projectName
-idea.module.name = projectName

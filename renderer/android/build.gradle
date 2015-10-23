@@ -26,5 +26,3 @@ android {
 	compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 }
-
-eclipse.project.name = 'renderer-android'
