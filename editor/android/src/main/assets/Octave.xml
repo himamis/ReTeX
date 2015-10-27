@@ -51,8 +51,8 @@
         <Array name="apostrophes">
             <Open cas="&quot;" tex=" \text{&quot;" />
             <Close cas="&quot;" tex="&quot;} " />
-            <Field cas="," />
-            <Row cas=";" />
+            <Field cas="&#x0;" />
+            <Row cas="&#x0;" />
         </Array>
         <Array name="line">
             <Open cas="|" tex="|" />

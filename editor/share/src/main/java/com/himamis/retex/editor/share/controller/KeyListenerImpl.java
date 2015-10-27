@@ -3,6 +3,8 @@ package com.himamis.retex.editor.share.controller;
 import com.himamis.retex.editor.share.event.KeyEvent;
 import com.himamis.retex.editor.share.event.KeyListener;
 import com.himamis.retex.editor.share.meta.MetaModel;
+import com.himamis.retex.editor.share.model.MathArray;
+import com.himamis.retex.editor.share.model.MathContainer;
 
 public class KeyListenerImpl implements KeyListener {
 
@@ -65,9 +67,7 @@ public class KeyListenerImpl implements KeyListener {
         MetaModel metaModel = editorState.getMetaModel();
         boolean handled = false;
 
-        if (ch == ',' || ch == ';' || metaModel.isArrayCloseKey(ch) ||
-                ch == InputController.FUNCTION_CLOSE_KEY ||
-                ch == InputController.DELIMITER_KEY) {
+        if (isArrayCloseKey(ch) || ch == InputController.FUNCTION_CLOSE_KEY) {
             inputController.endField(editorState, ch);
             handled = true;
         } else if (metaModel.isFunctionOpenKey(ch)) {
@@ -96,5 +96,14 @@ public class KeyListenerImpl implements KeyListener {
             handled = true;
         }
         return handled;
+    }
+
+    private boolean isArrayCloseKey(char key) {
+        MathContainer parent = editorState.getCurrentField().getParent();
+        if (parent != null && parent instanceof MathArray) {
+            MathArray array = (MathArray) parent;
+            return array.getCloseKey() == key;
+        }
+        return false;
     }
 }
