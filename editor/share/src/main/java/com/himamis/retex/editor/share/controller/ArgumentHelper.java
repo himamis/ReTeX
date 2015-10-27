@@ -73,4 +73,20 @@ public class ArgumentHelper {
         }
         editorState.setCurrentOffset(currentOffset);
     }
+
+    public String readCharacters(EditorState editorState) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int offset = editorState.getCurrentOffset();
+        MathSequence currentField = editorState.getCurrentField();
+        while (offset > 0 && currentField.getArgument(offset - 1) instanceof MathCharacter) {
+
+            MathCharacter character = (MathCharacter) currentField.getArgument(offset - 1);
+            if (character.isOperator() || character.isSymbol()) {
+                break;
+            }
+            offset--;
+            stringBuilder.insert(0, character.getName());
+        }
+        return stringBuilder.toString();
+    }
 }

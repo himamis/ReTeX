@@ -79,7 +79,7 @@ public class InputController {
      * Insert braces (), [], {}, "".
      */
     public void newBraces(EditorState editorState, char ch) {
-        String casName = readCharacters(editorState);
+        String casName = argumentHelper.readCharacters(editorState);
         if (ch == FUNCTION_OPEN_KEY && metaModel.isGeneral(casName)) {
             delCharacters(editorState, casName.length());
             newFunction(editorState, casName);
@@ -343,7 +343,7 @@ public class InputController {
      * Insert symbol.
      */
     public void escSymbol(EditorState editorState) {
-        String name = readCharacters(editorState);
+        String name = argumentHelper.readCharacters(editorState);
         while (name.length() > 0) {
             if (metaModel.isSymbol(name)) {
                 delCharacters(editorState, name.length());
@@ -522,22 +522,6 @@ public class InputController {
             editorState.setCurrentField(parent);
             editorState.setCurrentOffset(offset);
         }
-    }
-
-    private String readCharacters(EditorState editorState) {
-        StringBuilder stringBuilder = new StringBuilder();
-        int offset = editorState.getCurrentOffset();
-        MathSequence currentField = editorState.getCurrentField();
-        while (offset > 0 && currentField.getArgument(offset - 1) instanceof MathCharacter) {
-
-            MathCharacter character = (MathCharacter) currentField.getArgument(offset - 1);
-            if (character.isOperator() || character.isSymbol()) {
-                break;
-            }
-            offset--;
-            stringBuilder.insert(0, character.getName());
-        }
-        return stringBuilder.toString();
     }
 
     private void delCharacters(EditorState editorState, int length) {
