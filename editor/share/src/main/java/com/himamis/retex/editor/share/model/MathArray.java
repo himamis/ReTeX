@@ -82,12 +82,15 @@ public class MathArray extends MathContainer {
         columns += 1;
     }
 
-    public void addArgument(MathSequence argument) {
+
+    @Override
+    public void addArgument(MathComponent argument) {
         super.addArgument(argument);
         columns += 1;
     }
 
-    public void addArgument(int i, MathSequence argument) {
+    @Override
+    public void addArgument(int i, MathComponent argument) {
         arguments.add(i, argument);
         columns += 1;
     }
