@@ -1,3 +1,2 @@
 include 'renderer:share', 'renderer:desktop', 'renderer:android', 'renderer:web'
 include 'editor:share', 'editor:desktop', 'editor:android'
-// include 'test:android' // only for local testing
