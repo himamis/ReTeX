@@ -20,7 +20,7 @@ public class ImageA implements Image {
 	}
 
 	public int getHeight() {
-		return mBitmap.getWidth();
+		return mBitmap.getHeight();
 	}
 
 	public Graphics2DInterface createGraphics2D() {
