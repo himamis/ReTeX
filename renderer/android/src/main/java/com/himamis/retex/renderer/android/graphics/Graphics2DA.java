@@ -25,6 +25,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.View;
 
@@ -130,8 +131,11 @@ public class Graphics2DA implements Graphics2DInterface {
 	public void fillRect(int x, int y, int width, int height) {
 		beforeFill();
 
-		mCanvas.drawRect(mScaleStack.scaleX(x), mScaleStack.scaleY(y), mScaleStack.scaleX(x + width),
-				mScaleStack.scaleY(y + height), mDrawPaint);
+		RectF rectF = new RectF(x, y, x + width, y + height);
+		RectF scaled = mScaleStack.scaleRectF(rectF);
+		RectF amended = AmendRect.amendRectF(scaled);
+
+		mCanvas.drawRect(amended, mDrawPaint);
 
 		afterFill();
 	}
@@ -147,8 +151,10 @@ public class Graphics2DA implements Graphics2DInterface {
 	public void draw(Rectangle2D rectangle) {
 		RectF rect = ((Rectangle2DA) rectangle).getRectF();
 		RectF copy = new RectF(rect);
+		RectF scaled = mScaleStack.scaleRectF(copy);
+		RectF amended = AmendRect.amendRectF(scaled);
 
-		mCanvas.drawRect(mScaleStack.scaleRectF(copy), mDrawPaint);
+		mCanvas.drawRect(amended, mDrawPaint);
 	}
 
 	public void draw(RoundRectangle2D rectangle) {
