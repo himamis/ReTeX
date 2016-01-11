@@ -15,17 +15,19 @@ subprojects {
 	
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
-	apply plugin: 'license'
+	//apply plugin: 'license'
 
 	tasks.eclipse.dependsOn 'cleanEclipse'
 
-	license {
-		header rootProject.file('HEADER')
-		skipExistingHeaders true
-		include '**/*.java'
-	}
+	//license {
+	//	header rootProject.file('HEADER')
+	//	skipExistingHeaders true
+	//	include '**/*.java'
+	//}
 }
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.5'
 }
+
+apply from: 'ext.gradle'
