@@ -1,0 +1,18 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '8.0'
+# Uncomment this line if you're using Swift
+# use_frameworks!
+
+
+# J2ObjC Gradle Plugin - PodMethods - DO NOT MODIFY START - can be moved as a block
+def j2objc_share
+    pod 'j2objc-share-debug', :configuration => ['Debug'], :path => '../share/build/j2objcOutputs'
+    pod 'j2objc-share-release', :configuration => ['Release'], :path => '../share/build/j2objcOutputs'
+end
+# J2ObjC Gradle Plugin - PodMethods - DO NOT MODIFY END
+
+target 'LatexRenderer' do
+    platform :ios, '8.3'
+    j2objc_share
+
+end

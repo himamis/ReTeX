@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'com.github.j2objccontrib.j2objcgradle'
 
 sourceCompatibility = 1.5
 targetCompatibility = 1.5
@@ -6,4 +7,27 @@ targetCompatibility = 1.5
 task jarSources(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
     from sourceSets.main.allSource 
+}
+
+j2objcConfig {
+	autoConfigureDeps true
+
+	extraObjcCompilerArgs '-fobjc-arc'
+	translateArgs '-use-arc'
+
+	xcodeProjectDir '../ios'
+	xcodeTargetsIos 'LatexRenderer'
+
+	// TODO add Unit tests
+	testMinExpectedTests 0
+
+	translateArgs '--prefixes', 'share.properties'
+
+	finalConfigure()
+}
+
+binaries.all {
+	if (toolChain in Clang) {
+		objcCompiler.args.remove("-Werror")
+	}
 }
