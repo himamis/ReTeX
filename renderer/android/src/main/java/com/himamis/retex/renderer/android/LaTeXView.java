@@ -32,10 +32,12 @@ public class LaTeXView extends View {
     private int mBackgroundColor = android.graphics.Color.TRANSPARENT;
     private int mType = TeXFormula.SERIF;
 
+    private float mScreenDensity;
     private float mSizeScale;
 
     public LaTeXView(Context context) {
         super(context);
+        mScreenDensity = context.getResources().getDisplayMetrics().density;
         mSizeScale = context.getResources().getDisplayMetrics().scaledDensity;
         initFactoryProvider();
         ensureTeXIconExists();
@@ -43,6 +45,7 @@ public class LaTeXView extends View {
 
     public LaTeXView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mScreenDensity = context.getResources().getDisplayMetrics().density;
         mSizeScale = context.getResources().getDisplayMetrics().scaledDensity;
         initFactoryProvider();
         readAttributes(context, attrs, 0);
@@ -50,6 +53,7 @@ public class LaTeXView extends View {
 
     public LaTeXView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mScreenDensity = context.getResources().getDisplayMetrics().density;
         mSizeScale = context.getResources().getDisplayMetrics().scaledDensity;
         initFactoryProvider();
         readAttributes(context, attrs, defStyleAttr);
@@ -148,9 +152,9 @@ public class LaTeXView extends View {
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
-        float newFontScale = newConfig.fontScale;
-        if (Math.abs(mSizeScale - newFontScale) > 0.001) {
-            mSizeScale = newConfig.fontScale;
+        float newSizeScale = mScreenDensity * newConfig.fontScale;
+        if (Math.abs(mSizeScale - newSizeScale) > 0.001) {
+            mSizeScale = newSizeScale;
             mTexIcon = null;
             ensureTeXIconExists();
             invalidate();
