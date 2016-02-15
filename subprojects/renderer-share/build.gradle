@@ -2,7 +2,6 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 
 group 'com.himamis.retex'
-name 'editor-share'
 version '0.1'
 
 publishing {
@@ -18,8 +17,4 @@ targetCompatibility = 1.5
 task jarSources(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
     from sourceSets.main.allSource 
-}
-
-jar {
-    baseName 'renderer'
 }

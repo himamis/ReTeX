@@ -29,8 +29,8 @@ gwt {
 
 
 dependencies {
-	compile project(':renderer:share')
-	compile files(project(':renderer:share').sourceSets.main.java.srcDirs)
+	compile project(':renderer-share')
+	compile files(project(':renderer-share').sourceSets.main.java.srcDirs)
 	compile 'com.google.gwt:gwt-dev:2.7.0'
 	compile 'com.google.gwt:gwt-user:2.7.0'
 	testCompile 'com.google.gwt:gwt-user:2.7.0'
@@ -57,8 +57,8 @@ task jarAll(type: Jar) {
 	classifier = 'all'
 	from project.sourceSets.main.java
 	from project.sourceSets.main.output
-	from project(':renderer:share').sourceSets.main.java
-	from project(':renderer:share').sourceSets.main.output
+	from project(':renderer-share').sourceSets.main.java
+	from project(':renderer-share').sourceSets.main.output
 }
 
 task jarSources(type: Jar, dependsOn: classes) {
@@ -72,8 +72,6 @@ eclipse.classpath.file {
 		classpath.entries.find { entry -> entry.kind == 'src' && entry.path == 'src/main/resources' }.excludes = ['**/*.java']
 	}
 }
-
-eclipse.project.name = 'renderer-web'
 
 task cleanDist(type: Delete) {
 	delete 'dist'

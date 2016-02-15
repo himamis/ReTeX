@@ -5,10 +5,8 @@ sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
 dependencies {
-	compile project(':renderer:desktop')
-	compile project(':editor:share')
+	compile project(':renderer-desktop')
+	compile project(':editor-share')
 }
 
 mainClassName = 'cz.natur.cuni.mirai.math.desktop.Test'
-
-eclipse.project.name = 'editor-desktop'

@@ -1,2 +1,14 @@
-include 'renderer:share', 'renderer:desktop', 'renderer:android', 'renderer:web'
-include 'editor:share', /*'editor:desktop', */'editor:android'
+include 'renderer-share'
+include 'renderer-desktop'
+include 'renderer-android'
+include 'renderer-web'
+include 'editor-share'
+include 'editor-android'
+
+rootProject.name = 'retex'
+rootProject.children.each { project ->
+    String projectName = project.name
+    String projectDirName = "subprojects/$projectName"
+    project.projectDir = new File(settingsDir, projectDirName)
+    assert project.projectDir.isDirectory()
+}
