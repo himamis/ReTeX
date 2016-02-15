@@ -1,4 +1,17 @@
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group 'com.himamis.retex'
+name 'editor-share'
+version '0.1'
+
+publishing {
+	publications {
+		library(MavenPublication) {
+			from components.java
+		}
+	}
+}
 
 repositories {
     mavenCentral()
