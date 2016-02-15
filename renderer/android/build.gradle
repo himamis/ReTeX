@@ -16,6 +16,19 @@ repositories {
 
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+group 'com.himamis.retex'
+name 'renderer-android'
+version '0.1'
+
+publishing {
+    publications {
+        library(MavenPublication) {
+            from file('build/outputs/aar/android-release')
+        }
+    }
+}
 
 dependencies {
 	compile project(':renderer:share')
