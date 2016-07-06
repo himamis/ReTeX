@@ -72,3 +72,7 @@ Screenshots
 ![Alt text](/../others/screenshots/example2.PNG?raw=true "Example 2")
 
 ![Alt text](/../others/screenshots/example3.png?raw=true "Example 3")
+
+FAQ
+-----------
+Regarding JLaTeXMath’s Classpath Exception and JavaScript: If you use the Google Web Toolkit (GWT) to compile JLaTeXMath to an “executable” (in JavaScript) you can then include/link this “executable” JavaScript library on a website or inside another program. In this case the rest of the website/program need not be licensed under the GPL.
