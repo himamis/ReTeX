@@ -1,3 +1,8 @@
+Development discontinued here
+=============================
+The project is maintained actively at the following repository.
+https://github.com/geogebra/geogebra/tree/master/retex
+
 ReTeX
 =====
 
